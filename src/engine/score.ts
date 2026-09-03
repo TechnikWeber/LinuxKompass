@@ -82,6 +82,9 @@ export function buildProfile(mode: Mode, answers: Answers): Profile {
   };
 
   const visible = visibleQuestions(mode, answers);
+  // Erst am Ende anwenden: Die aufhebende Antwort kann in einer späteren
+  // Frage stehen als die, die den Hinweis gesetzt hat.
+  const suppressed = new Set<string>();
 
   for (const question of visible) {
     const chosen = answers[question.id] ?? [];
@@ -125,11 +128,16 @@ export function buildProfile(mode: Mode, answers: Answers): Profile {
       for (const flag of effect.flags ?? []) {
         profile.flags.add(flag);
       }
+      for (const flag of effect.suppressFlags ?? []) {
+        suppressed.add(flag);
+      }
     }
 
     if (allNeutral) profile.unansweredCount += 1;
     else profile.answeredCount += 1;
   }
+
+  for (const flag of suppressed) profile.flags.delete(flag);
 
   return profile;
 }

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { distros } from '../data/distros';
-import { allQuestions, questionsForMode, visibleQuestions, type Answers } from '../data/questions';
+import { allQuestions, baseQuestionCount, questionsForMode, visibleQuestions, type Answers } from '../data/questions';
 import { requirements } from './requirements';
 import { buildProfile, scoreAll } from './score';
 import { flagById } from '../data/flags';
@@ -414,5 +414,56 @@ describe('Beschriftungen', () => {
       expect(releaseModelShort[d.releaseModel], d.id).toBeDefined();
       expect(installerShort[d.installer], d.id).toBeDefined();
     }
+  });
+});
+
+describe('Nachfragen zu Hindernissen', () => {
+  it('zeigt die Nachfrage nur, wenn das Programm genannt wurde', () => {
+    expect(visibleQuestions('beginner', {}).some((q) => q.id === 'adobe-alternative')).toBe(false);
+    expect(
+      visibleQuestions('beginner', { blockers: ['adobe'] }).some((q) => q.id === 'adobe-alternative'),
+    ).toBe(true);
+    // Für Spiele mit Anti-Cheat und Branchensoftware gibt es bewusst keine.
+    const withGames = visibleQuestions('beginner', { blockers: ['anticheat', 'industry'] });
+    expect(withGames.some((q) => q.id.endsWith('-alternative'))).toBe(false);
+  });
+
+  it('hebt die Warnung auf, wenn eine Alternative in Ordnung wäre', () => {
+    const strict = buildProfile('beginner', { blockers: ['adobe'] });
+    expect(strict.flags.has('adobe')).toBe(true);
+    expect(strict.flags.has('adobe-open')).toBe(false);
+
+    const open = buildProfile('beginner', { blockers: ['adobe'], 'adobe-alternative': ['yes'] });
+    expect(open.flags.has('adobe')).toBe(false);
+    expect(open.flags.has('adobe-open')).toBe(true);
+  });
+
+  it('behält die Warnung, wenn genau dieses Programm gebraucht wird', () => {
+    const profile = buildProfile('beginner', { blockers: ['ms-office'], 'ms-office-alternative': ['no'] });
+    expect(profile.flags.has('ms-office')).toBe(true);
+    expect(profile.flags.has('ms-office-open')).toBe(false);
+  });
+
+  it('behält bei Adobe die Warnung, wenn nur eigene Projekte übertragbar wären', () => {
+    const profile = buildProfile('beginner', { blockers: ['adobe'], 'adobe-alternative': ['partly'] });
+    expect(profile.flags.has('adobe')).toBe(true);
+  });
+
+  it('kennt zu jedem gesetzten und aufgehobenen Hinweis einen Text', () => {
+    const referenced = new Set<string>();
+    for (const q of allQuestions) {
+      for (const o of q.options) {
+        for (const id of [...(o.effect.flags ?? []), ...(o.effect.suppressFlags ?? [])]) referenced.add(id);
+      }
+    }
+    for (const id of referenced) {
+      expect(flagById.has(id), id).toBe(true);
+    }
+  });
+
+  it('gibt die Zahl der immer gestellten Fragen an, nicht die Höchstzahl', () => {
+    expect(baseQuestionCount('beginner')).toBe(12);
+    expect(baseQuestionCount('beginner')).toBeLessThan(questionsForMode('beginner').length);
+    expect(baseQuestionCount('expert')).toBeGreaterThan(baseQuestionCount('advanced'));
   });
 });

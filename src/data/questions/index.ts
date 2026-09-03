@@ -28,4 +28,15 @@ export function visibleQuestions(mode: Mode, answers: Answers): Question[] {
   });
 }
 
+/**
+ * Zahl der Fragen, die in einem Modus immer gestellt werden.
+ *
+ * Bedingte Nachfragen bleiben außen vor: Sie erscheinen nur, wenn eine
+ * frühere Antwort sie auslöst. „12 Fragen" zu versprechen und dann 17 zu
+ * stellen wäre irreführend, „ab 12" ist die ehrliche Angabe.
+ */
+export function baseQuestionCount(mode: Mode): number {
+  return questionsForMode(mode).filter((q) => !q.showIf).length;
+}
+
 export const questionById = new Map(allQuestions.map((q) => [q.id, q]));

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MAX_TRIAGE_SCORE, questionsForMode, suggestMode, triageQuestions, type Mode } from '../data/questions';
+import { MAX_TRIAGE_SCORE, baseQuestionCount, suggestMode, triageQuestions, type Mode } from '../data/questions';
 import { useI18n } from '../i18n';
 import { useApp } from '../state/app';
 
@@ -84,7 +84,7 @@ export function TriagePage() {
                       </span>
                     )}
                   </span>
-                  <span className="answer__hint">{t('modeQuestionCount', { n: questionsForMode(m).length })}</span>
+                  <span className="answer__hint">{t('modeQuestionCount', { n: baseQuestionCount(m) })}</span>
                   <span className="answer__hint">{modeInfo[m].desc}</span>
                 </button>
               ))}

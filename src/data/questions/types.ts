@@ -38,6 +38,12 @@ export interface AnswerEffect {
   boostAudiences?: Partial<Record<Audience, number>>;
   /** Verweist auf einen Hinweistext im Stolperfallen-Katalog. */
   flags?: string[];
+  /**
+   * Hebt einen zuvor gesetzten Hinweis wieder auf. Damit kann eine
+   * Nachfrage eine Warnung entschärfen: Wer Adobe braucht, aber mit GIMP
+   * und Darktable arbeiten würde, hat kein Ausschlusskriterium mehr.
+   */
+  suppressFlags?: string[];
 }
 
 export interface AnswerOption {

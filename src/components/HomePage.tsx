@@ -1,5 +1,5 @@
 import { distros } from '../data/distros';
-import { allQuestions, questionsForMode } from '../data/questions';
+import { allQuestions, baseQuestionCount } from '../data/questions';
 import { useI18n } from '../i18n';
 import { Link } from './common';
 
@@ -82,7 +82,7 @@ export function HomePage() {
             ).map(([mode, title, desc]) => (
               <article key={mode} className="card">
                 <h3 style={{ fontSize: 'var(--step-1)' }}>{title}</h3>
-                <p className="chip">{t('modeQuestionCount', { n: questionsForMode(mode).length })}</p>
+                <p className="chip">{t('modeQuestionCount', { n: baseQuestionCount(mode) })}</p>
                 <p style={{ color: 'var(--ink-muted)', marginTop: '0.75rem', marginBottom: 0 }}>{desc}</p>
               </article>
             ))}

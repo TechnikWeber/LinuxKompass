@@ -190,6 +190,112 @@ export const flags: Flag[] = [
     },
   },
   {
+    id: 'ms-office-open',
+    severity: 'info',
+    title: { de: 'Office-Alternative: das solltest du wissen', en: 'Office alternative: what to expect' },
+    message: {
+      de: 'Da du mit einer Alternative arbeiten würdest, fällt Microsoft Office als Hindernis weg. LibreOffice und OnlyOffice öffnen und speichern .docx, .xlsx und .pptx zuverlässig – für Briefe, Tabellen und Präsentationen im Alltag reicht das vollständig aus.',
+      en: 'Since you would work with an alternative, Microsoft Office stops being an obstacle. LibreOffice and OnlyOffice open and save .docx, .xlsx and .pptx reliably — for everyday letters, spreadsheets and presentations that is entirely sufficient.',
+    },
+    advice: {
+      de: [
+        'OnlyOffice sieht Microsoft Office ähnlicher und ist bei komplexem Layout meist formattreuer – gute Wahl, wenn du Dateien mit Windows-Nutzern austauschst.',
+        'LibreOffice kann mehr und ist verbreiteter, sieht aber anders aus und braucht ein paar Tage Umgewöhnung.',
+        'Nicht übertragbar: VBA-Makros. Wenn in deinen Excel-Dateien Makros stecken, laufen sie in keiner Alternative zuverlässig.',
+        'Ebenfalls anders: Serienbriefe, Pivot-Tabellen und sehr verschachtelte Formeln funktionieren, aber nicht immer über denselben Weg.',
+        'Für gemeinsames Bearbeiten in Echtzeit ist Microsoft 365 im Browser oft der pragmatischste Weg – das läuft unter Linux vollständig.',
+      ],
+      en: [
+        'OnlyOffice looks closer to Microsoft Office and usually keeps complex layouts more faithfully — a good choice if you exchange files with Windows users.',
+        'LibreOffice can do more and is more widespread, but looks different and takes a few days to get used to.',
+        'Does not carry over: VBA macros. If your Excel files contain macros, they will not run reliably in any alternative.',
+        'Also different: mail merge, pivot tables and deeply nested formulas all work, but not always the same way.',
+        'For real-time co-authoring, Microsoft 365 in the browser is often the pragmatic route — that runs fully on Linux.',
+      ],
+    },
+    links: [{ label: 'LibreOffice', url: 'https://de.libreoffice.org' }, { label: 'OnlyOffice', url: 'https://www.onlyoffice.com' }],
+  },
+  {
+    id: 'adobe-open',
+    severity: 'info',
+    title: { de: 'Kreativ-Alternativen: das solltest du wissen', en: 'Creative alternatives: what to expect' },
+    message: {
+      de: 'Da du mit anderen Programmen arbeiten würdest, ist Adobe kein Ausschlusskriterium mehr. Für jede Adobe-Anwendung gibt es unter Linux eine ernstzunehmende Entsprechung – sie funktionieren gut, aber anders.',
+      en: 'Since you would work with other programs, Adobe stops being a deal-breaker. Every Adobe application has a serious counterpart on Linux — they work well, but differently.',
+    },
+    advice: {
+      de: [
+        'Photoshop → GIMP für Fotobearbeitung, Krita für Malerei und Illustration. Krita ist bei Pinseln und Zeichentabletts sogar überlegen.',
+        'Lightroom → Darktable oder RawTherapee. Beide entwickeln RAW-Dateien hervorragend, arbeiten aber mit anderen Reglern und einem anderen Katalogkonzept.',
+        'Premiere → DaVinci Resolve läuft offiziell unter Linux, auch kostenlos, und ist im Profibereich verbreitet. Kdenlive ist die freie, leichter zugängliche Alternative.',
+        'Illustrator → Inkscape. InDesign → Scribus, das ist der spürbarste Rückschritt der Reihe.',
+        'Nicht übertragbar: PSD-Dateien mit Smart-Objekten und Ebeneneffekten öffnen nur eingeschränkt, und Projektdateien lassen sich nicht mit Adobe-Nutzern austauschen. Wer im Team an denselben Dateien arbeitet, sollte das vorher klären.',
+      ],
+      en: [
+        'Photoshop → GIMP for photo editing, Krita for painting and illustration. Krita is arguably better for brushes and drawing tablets.',
+        'Lightroom → Darktable or RawTherapee. Both develop RAW files excellently but use different controls and a different catalogue concept.',
+        'Premiere → DaVinci Resolve runs officially on Linux, including the free edition, and is common in professional work. Kdenlive is the free, more approachable alternative.',
+        'Illustrator → Inkscape. InDesign → Scribus, the most noticeable step down of the set.',
+        'Does not carry over: PSD files with smart objects and layer effects open only partially, and project files cannot be exchanged with Adobe users. If you work on shared files in a team, settle that first.',
+      ],
+    },
+    links: [
+      { label: 'Krita', url: 'https://krita.org' },
+      { label: 'Darktable', url: 'https://www.darktable.org' },
+      { label: 'DaVinci Resolve', url: 'https://www.blackmagicdesign.com/products/davinciresolve' },
+    ],
+  },
+  {
+    id: 'cad-open',
+    severity: 'info',
+    title: { de: 'CAD-Alternativen: das solltest du wissen', en: 'CAD alternatives: what to expect' },
+    message: {
+      de: 'Da du mit einer anderen Software arbeiten würdest, ist CAD kein Ausschlusskriterium mehr. Für Eigenkonstruktion, 3D-Druck und Elektronik gibt es unter Linux ausgereifte Werkzeuge.',
+      en: 'Since you would work with different software, CAD stops being a deal-breaker. For your own designs, 3D printing and electronics, Linux has mature tools.',
+    },
+    advice: {
+      de: [
+        'FreeCAD ist parametrisch wie Fusion 360 und für Eigenkonstruktion und 3D-Druck vollständig ausreichend. Die Bedienung ist eigen und braucht Einarbeitung.',
+        'KiCad für Leiterplatten ist kein Kompromiss, sondern Industriestandard – auch Firmen setzen es ein.',
+        'Onshape läuft komplett im Browser und ist damit unabhängig vom Betriebssystem.',
+        'Nicht übertragbar: native Dateien wie .dwg, .sldprt oder .ipt lassen sich nur eingeschränkt austauschen. Für den Austausch mit Kunden oder Fertigern sind STEP und STL der verlässliche Weg.',
+        'Große Baugruppen und Simulation sind in FreeCAD deutlich schwächer als in kommerziellen Paketen.',
+      ],
+      en: [
+        'FreeCAD is parametric like Fusion 360 and entirely sufficient for your own designs and 3D printing. Its interaction model is idiosyncratic and takes learning.',
+        'KiCad for circuit boards is not a compromise but an industry standard — companies use it too.',
+        'Onshape runs entirely in the browser and is therefore independent of the operating system.',
+        'Does not carry over: native files such as .dwg, .sldprt or .ipt exchange only partially. For clients and manufacturers, STEP and STL are the dependable route.',
+        'Large assemblies and simulation are considerably weaker in FreeCAD than in commercial packages.',
+      ],
+    },
+    links: [{ label: 'FreeCAD', url: 'https://www.freecad.org' }, { label: 'KiCad', url: 'https://www.kicad.org' }],
+  },
+  {
+    id: 'tax-open',
+    severity: 'info',
+    title: { de: 'Steuererklärung ohne Windows-Programm', en: 'Tax returns without a Windows program' },
+    message: {
+      de: 'Da du auch anders arbeiten würdest, fällt die Steuersoftware als Hindernis weg. Für die meisten privaten Steuererklärungen braucht es unter Linux gar kein installiertes Programm.',
+      en: 'Since you would work another way, tax software stops being an obstacle. Most private tax returns need no installed program on Linux at all.',
+    },
+    advice: {
+      de: [
+        'ELSTER läuft vollständig im Browser, ist kostenlos und deckt den Normalfall ab.',
+        'Mehrere kommerzielle Anbieter haben Browser-Versionen, die unter Linux funktionieren – meist im Abo statt als Kauf.',
+        'Für die Buchhaltung: GnuCash als freie Alternative oder ein browserbasierter Dienst.',
+        'Wenn du auf ein bestimmtes Programm angewiesen bleibst, genügt eine Windows-Installation in einer virtuellen Maschine für die paar Stunden im Jahr.',
+      ],
+      en: [
+        'The German tax portal ELSTER runs entirely in the browser, is free and covers the normal case.',
+        'Several commercial vendors offer browser versions that work on Linux — usually by subscription rather than purchase.',
+        'For bookkeeping: GnuCash as a free alternative, or a browser-based service.',
+        'If you still depend on one specific program, a Windows install in a virtual machine is enough for those few hours a year.',
+      ],
+    },
+    links: [{ label: 'ELSTER', url: 'https://www.elster.de' }],
+  },
+  {
     id: 'nvidia',
     severity: 'info',
     title: { de: 'NVIDIA-Grafik braucht einen zusätzlichen Treiber', en: 'NVIDIA graphics needs an additional driver' },

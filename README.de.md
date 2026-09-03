@@ -11,10 +11,17 @@ eine Zahl auszugeben.
 
 ## Was es kann
 
-- **Drei Tiefen.** Drei kurze Fragen schätzen ein, ob der Einsteigerpfad mit 12
-  Fragen, der Fortgeschrittenenpfad mit 23 oder der Profipfad mit 37 Fragen
-  passt. Der Vorschlag ist nur ein Vorschlag – du kannst den Modus jederzeit
-  wechseln, auch mitten im Fragebogen, ohne Antworten zu verlieren.
+- **Drei Tiefen.** Drei kurze Fragen schätzen ein, ob der Einsteigerpfad (12
+  Fragen), der Fortgeschrittenenpfad (22) oder der Profipfad (36) passt. Der
+  Vorschlag ist nur ein Vorschlag – du kannst den Modus jederzeit wechseln, auch
+  mitten im Fragebogen, ohne Antworten zu verlieren.
+- **Nachfragen, wo es zählt.** Wer Adobe, Microsoft Office oder CAD-Software als
+  Hindernis nennt, bekommt eine gezielte Nachfrage: Käme eine Alternative für
+  dich überhaupt infrage? Ein Ja hebt das Hindernis auf und ersetzt die Warnung
+  durch eine konkrete Aufstellung, was GIMP, Darktable, LibreOffice oder FreeCAD
+  gut können – und was nicht übertragbar ist (VBA-Makros, PSD-Smart-Objekte,
+  native CAD-Dateien). Keine Nachfrage bei Spielen mit Anti-Cheat und bei
+  Branchensoftware: Dort gibt es keine ehrliche Alternative vorzuschlagen.
 - **55 recherchierte Distributionen** mit je rund 45 Merkmalen: Release-Modell,
   Init-System, C-Bibliothek, Paketverwaltung, Secure Boot, NVIDIA-Handhabung,
   Wayland/X11-Stand, Systemschnappschüsse, Mindest-RAM, Architekturen,

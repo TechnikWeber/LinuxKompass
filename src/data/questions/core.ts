@@ -307,4 +307,178 @@ export const coreQuestions: Question[] = [
       { id: 'versioned', label: { de: 'Automatisch, versioniert und getestet', en: 'Automatically, versioned and tested' }, effect: { ratings: { stability: -1 } } },
     ],
   },
+
+  // --- Nachfragen zu den genannten Hindernissen ---------------------------
+  // Sie erscheinen nur, wenn das jeweilige Programm angekreuzt wurde. Ohne
+  // diese Nachfrage würde ein „ich brauche Adobe" den Umstieg scheinbar
+  // ausschließen, obwohl viele mit GIMP und Darktable bestens zurechtkämen.
+  // Für Spiele mit Anti-Cheat und für Branchensoftware gibt es bewusst keine
+  // Nachfrage: Dort gibt es keine sinnvolle Alternative vorzuschlagen.
+
+  {
+    id: 'ms-office-alternative',
+    section: 'software',
+    modes: ['beginner', 'advanced', 'expert'],
+    type: 'single',
+    weight: 2,
+    showIf: { questionId: 'blockers', anyOf: ['ms-office'] },
+    title: { de: 'Käme statt Microsoft Office auch ein anderes Office-Paket infrage?', en: 'Would a different office suite work instead of Microsoft Office?' },
+    description: {
+      de: 'LibreOffice und OnlyOffice öffnen und speichern Word-, Excel- und PowerPoint-Dateien. Das ist kein Notbehelf – aber es sieht anders aus und kann bei sehr komplexen Dokumenten verrutschen.',
+      en: 'LibreOffice and OnlyOffice open and save Word, Excel and PowerPoint files. That is not a stopgap — but it looks different and can shift very complex layouts.',
+    },
+    help: {
+      de: 'Konkret: Briefe, Tabellen, Präsentationen und der Austausch von .docx und .xlsx funktionieren im Alltag zuverlässig. Nicht übertragbar sind VBA-Makros. Bei streng formatierten Vorlagen, die exakt so bei anderen ankommen müssen, kann es haken – dort ist Microsoft 365 im Browser der sichere Weg, und der läuft unter Linux vollständig.',
+      en: 'Concretely: letters, spreadsheets, presentations and exchanging .docx and .xlsx work reliably day to day. VBA macros do not carry over. Strictly formatted templates that must arrive at others exactly as designed can be a problem — there, Microsoft 365 in the browser is the safe route, and it runs fully on Linux.',
+    },
+    options: [
+      {
+        id: 'yes',
+        label: { de: 'Ja, damit käme ich zurecht', en: 'Yes, I would get along with that' },
+        effect: { suppressFlags: ['ms-office'], flags: ['ms-office-open'], ratings: { softwareAvailability: 1 } },
+      },
+      {
+        id: 'browser',
+        label: { de: 'Ich würde Microsoft 365 im Browser nutzen', en: 'I would use Microsoft 365 in the browser' },
+        hint: { de: 'Läuft unter Linux vollständig, inklusive gemeinsamer Bearbeitung.', en: 'Runs fully on Linux, including co-authoring.' },
+        effect: { suppressFlags: ['ms-office'], flags: ['ms-office-open'] },
+      },
+      {
+        id: 'no',
+        label: { de: 'Nein, es muss die installierte Version von Microsoft Office sein', en: 'No, it has to be the installed version of Microsoft Office' },
+        hint: { de: 'Etwa wegen VBA-Makros oder streng formatierter Vorlagen.', en: 'Because of VBA macros or strictly formatted templates, for instance.' },
+        effect: {},
+      },
+    ],
+  },
+
+  {
+    id: 'adobe-alternative',
+    section: 'software',
+    modes: ['beginner', 'advanced', 'expert'],
+    type: 'single',
+    weight: 2,
+    showIf: { questionId: 'blockers', anyOf: ['adobe'] },
+    title: { de: 'Käme statt der Adobe-Programme auch etwas anderes infrage?', en: 'Would something other than the Adobe programs work?' },
+    description: {
+      de: 'Für jedes Adobe-Programm gibt es unter Linux eine ernstzunehmende Entsprechung: GIMP und Krita statt Photoshop, Darktable statt Lightroom, DaVinci Resolve oder Kdenlive statt Premiere, Inkscape statt Illustrator.',
+      en: 'Every Adobe program has a serious counterpart on Linux: GIMP and Krita instead of Photoshop, Darktable instead of Lightroom, DaVinci Resolve or Kdenlive instead of Premiere, Inkscape instead of Illustrator.',
+    },
+    help: {
+      de: 'Sie sind keine abgespeckten Nachbauten – Krita ist beim Zeichnen mit Grafiktablett sogar stärker als Photoshop, und DaVinci Resolve wird professionell eingesetzt. Anders sind sie trotzdem: Die Bedienung muss neu gelernt werden, PSD-Dateien mit Smart-Objekten öffnen nur eingeschränkt, und Projektdateien lassen sich nicht mit Adobe-Nutzern austauschen.',
+      en: 'They are not stripped-down imitations — Krita beats Photoshop for drawing with a tablet, and DaVinci Resolve is used professionally. They are still different: the interaction has to be relearned, PSD files with smart objects open only partially, and project files cannot be exchanged with Adobe users.',
+    },
+    options: [
+      {
+        id: 'yes',
+        label: { de: 'Ja, ich würde mich darauf einlassen', en: 'Yes, I would give that a go' },
+        effect: { suppressFlags: ['adobe'], flags: ['adobe-open'], ratings: { creativeWork: 3 } },
+      },
+      {
+        id: 'partly',
+        label: { de: 'Für eigene Projekte ja, für Kundendateien nicht', en: 'For my own projects yes, for client files no' },
+        hint: { de: 'Dann bleibt für den Austausch ein Windows-Gerät nötig.', en: 'A Windows device stays necessary for exchanging files.' },
+        effect: { ratings: { creativeWork: 2 } },
+      },
+      {
+        id: 'no',
+        label: { de: 'Nein, es müssen die Adobe-Programme sein', en: 'No, it has to be the Adobe programs' },
+        effect: {},
+      },
+    ],
+  },
+
+  {
+    id: 'cad-alternative',
+    section: 'software',
+    modes: ['beginner', 'advanced', 'expert'],
+    type: 'single',
+    weight: 2,
+    showIf: { questionId: 'blockers', anyOf: ['cad'] },
+    title: { de: 'Käme statt deiner CAD-Software auch eine andere infrage?', en: 'Would different CAD software work instead of yours?' },
+    description: {
+      de: 'FreeCAD arbeitet parametrisch wie Fusion 360, KiCad ist bei Leiterplatten Industriestandard, und Onshape läuft komplett im Browser.',
+      en: 'FreeCAD works parametrically like Fusion 360, KiCad is an industry standard for circuit boards, and Onshape runs entirely in the browser.',
+    },
+    help: {
+      de: 'Für Eigenkonstruktion, 3D-Druck und Elektronik reicht das vollständig aus. Grenzen: Große Baugruppen und Simulation sind schwächer als in kommerziellen Paketen, und native Dateien wie .dwg oder .sldprt lassen sich nur eingeschränkt austauschen – für Kunden und Fertiger sind STEP und STL der verlässliche Weg.',
+      en: 'For your own designs, 3D printing and electronics that is entirely sufficient. Limits: large assemblies and simulation are weaker than in commercial packages, and native files such as .dwg or .sldprt exchange only partially — for clients and manufacturers, STEP and STL are the dependable route.',
+    },
+    options: [
+      {
+        id: 'yes',
+        label: { de: 'Ja, ich konstruiere für mich selbst', en: 'Yes, I design for myself' },
+        effect: { suppressFlags: ['cad'], flags: ['cad-open'] },
+      },
+      {
+        id: 'browser',
+        label: { de: 'Ich würde auf ein Browser-CAD wie Onshape wechseln', en: 'I would move to browser CAD such as Onshape' },
+        effect: { suppressFlags: ['cad'], flags: ['cad-open'] },
+      },
+      {
+        id: 'no',
+        label: { de: 'Nein, ich brauche genau diese Software', en: 'No, I need exactly this software' },
+        hint: { de: 'Etwa wegen Kundendateien, Fertigung oder Zertifizierung.', en: 'Because of client files, manufacturing or certification, for instance.' },
+        effect: {},
+      },
+    ],
+  },
+
+  {
+    id: 'tax-alternative',
+    section: 'software',
+    modes: ['beginner', 'advanced', 'expert'],
+    type: 'single',
+    weight: 1,
+    showIf: { questionId: 'blockers', anyOf: ['tax'] },
+    title: { de: 'Käme für die Steuer auch ein anderer Weg infrage?', en: 'Would another route work for your tax return?' },
+    description: {
+      de: 'ELSTER läuft kostenlos im Browser und deckt den Normalfall ab. Mehrere kommerzielle Anbieter haben inzwischen Browser-Versionen.',
+      en: 'The German tax portal ELSTER runs in the browser for free and covers the normal case. Several commercial vendors now offer browser versions.',
+    },
+    options: [
+      {
+        id: 'yes',
+        label: { de: 'Ja, Browser oder ELSTER wäre in Ordnung', en: 'Yes, the browser or ELSTER would be fine' },
+        effect: { suppressFlags: ['tax-software'], flags: ['tax-open'] },
+      },
+      {
+        id: 'vm',
+        label: { de: 'Ich würde dafür Windows in einer virtuellen Maschine behalten', en: 'I would keep Windows in a virtual machine for that' },
+        hint: { de: 'Für ein paar Stunden im Jahr ein gangbarer Kompromiss.', en: 'A workable compromise for a few hours a year.' },
+        effect: { suppressFlags: ['tax-software'], flags: ['tax-open'] },
+      },
+      {
+        id: 'no',
+        label: { de: 'Nein, ich brauche genau dieses Programm installiert', en: 'No, I need exactly this program installed' },
+        effect: {},
+      },
+    ],
+  },
+
+  {
+    id: 'banking-alternative',
+    section: 'software',
+    modes: ['beginner', 'advanced', 'expert'],
+    type: 'single',
+    weight: 1,
+    showIf: { questionId: 'blockers', anyOf: ['banking'] },
+    title: { de: 'Reicht dir Online-Banking im Browser?', en: 'Is online banking in the browser enough for you?' },
+    description: {
+      de: 'Banking im Browser funktioniert unter Linux überall. Schwierig wird es nur bei spezieller Software für Kartenleser oder Signaturkarten.',
+      en: 'Browser banking works everywhere on Linux. It only gets difficult with special software for card readers or signature cards.',
+    },
+    options: [
+      {
+        id: 'yes',
+        label: { de: 'Ja, ich mache alles im Browser oder per App', en: 'Yes, I do everything in the browser or by app' },
+        effect: { suppressFlags: ['banking'] },
+      },
+      {
+        id: 'no',
+        label: { de: 'Nein, ich nutze ein Kartenlesegerät oder eine Signaturkarte', en: 'No, I use a card reader or signature card' },
+        effect: {},
+      },
+    ],
+  },
 ];

@@ -10,10 +10,17 @@ then explains every recommendation instead of just printing a number.
 
 ## What it does
 
-- **Three depths.** Three short questions estimate whether you want the
-  12-question beginner path, the 23-question advanced path or the 37-question
-  expert path. The suggestion is only a suggestion — you can switch modes at any
-  point, including mid-questionnaire, without losing your answers.
+- **Three depths.** Three short questions estimate whether you want the beginner
+  path (12 questions), the advanced path (22) or the expert path (36). The
+  suggestion is only a suggestion — you can switch modes at any point, including
+  mid-questionnaire, without losing your answers.
+- **Follow-ups where it counts.** Naming Adobe, Microsoft Office or CAD software
+  as a blocker triggers a targeted follow-up: would an alternative actually work
+  for you? Answering yes clears the blocker and replaces the warning with a
+  concrete account of what GIMP, Darktable, LibreOffice or FreeCAD do well — and
+  what does not carry over (VBA macros, PSD smart objects, native CAD files). No
+  follow-up for anti-cheat games or line-of-business software: there is no
+  honest alternative to suggest there.
 - **55 researched distributions**, each with ~45 attributes: release model, init
   system, libc, package manager, Secure Boot, NVIDIA handling, Wayland/X11
   status, snapshot support, minimum RAM, architectures, governance, telemetry

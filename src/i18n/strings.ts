@@ -34,6 +34,10 @@ export const ui = {
   heroBrowse: { de: 'Erst mal stöbern', en: 'Browse first' },
   heroStatDistros: { de: 'geprüfte Distributionen', en: 'researched distributions' },
   heroStatQuestions: { de: 'Fragen in drei Tiefen', en: 'questions across three depths' },
+  followUpNote: {
+    de: 'Nennst du ein Programm, das dich bisher hält, fragen wir gezielt nach, ob eine Alternative für dich infrage käme – und was dabei anders wäre.',
+    en: 'If you name a program that is holding you back, we ask specifically whether an alternative would work for you — and what would be different about it.',
+  },
   heroStatAttributes: { de: 'Merkmale je Distribution', en: 'attributes per distribution' },
   heroCheckedNote: { de: 'Datenstand', en: 'Data as of' },
 
@@ -88,7 +92,7 @@ export const ui = {
     de: 'Alles: Release-Modell, Init-System, Dateisystem, Härtung, Trägerschaft, Architekturen, Kernelkontrolle.',
     en: 'Everything: release model, init system, filesystem, hardening, governance, architectures, kernel control.',
   },
-  modeQuestionCount: { de: '{n} Fragen', en: '{n} questions' },
+  modeQuestionCount: { de: 'ab {n} Fragen', en: 'from {n} questions' },
 
   // --- Fragebogen ---
   questionOf: { de: 'Frage {a} von {b}', en: 'Question {a} of {b}' },
@@ -276,6 +280,8 @@ export const ui = {
   fieldSnap: { de: 'Snap', en: 'Snap' },
   fieldAur: { de: 'AUR-Zugriff', en: 'AUR access' },
   fieldDefaultDesktop: { de: 'Standard-Desktop', en: 'Default desktop' },
+  desktopFreeChoice: { de: 'Desktop frei wählbar', en: 'Desktop is your choice' },
+  desktopNone: { de: 'Ohne Desktop', en: 'No desktop' },
   fieldDesktops: { de: 'Verfügbare Desktops', en: 'Available desktops' },
   fieldInstaller: { de: 'Installation', en: 'Installation' },
   fieldInstallDifficulty: { de: 'Installationsaufwand', en: 'Installation effort' },

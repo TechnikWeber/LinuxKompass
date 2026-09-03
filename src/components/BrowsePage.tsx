@@ -32,8 +32,14 @@ function DistroTile({ distro }: { distro: Distro }) {
       <p style={{ margin: 0, color: 'var(--ink-muted)', fontSize: 'var(--step--1)' }}>{tl(distro.tagline)}</p>
       <ul className="chiprow">
         <li className="chip">{tl(releaseModelShort[distro.releaseModel])}</li>
+        {/* Ohne Standard-Desktop ist die Aussage nicht „nichts", sondern
+            entweder „du wählst selbst" oder „das ist kein Desktop-System". */}
         <li className="chip">
-          {distro.defaultDesktop === 'none' ? '—' : desktopById.get(distro.defaultDesktop)?.name ?? distro.defaultDesktop}
+          {distro.defaultDesktop !== 'none'
+            ? desktopById.get(distro.defaultDesktop)?.name ?? distro.defaultDesktop
+            : distro.availableDesktops.length > 0
+              ? t('desktopFreeChoice')
+              : t('desktopNone')}
         </li>
         <li className="chip">{tl(installerShort[distro.installer])}</li>
       </ul>
