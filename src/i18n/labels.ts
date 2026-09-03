@@ -53,6 +53,25 @@ export const releaseModelLabels: Labels<ReleaseModel> = {
   atomic: { de: 'Bildbasiert und unveränderlich', en: 'Image-based and immutable' },
 };
 
+/**
+ * Kurzformen für Etiketten auf Karten. Die ausführlichen Bezeichnungen oben
+ * bleiben für Tabellen und Detailseiten, wo Platz für ganze Sätze ist.
+ */
+export const releaseModelShort: Labels<ReleaseModel> = {
+  lts: { de: 'Langzeit-Support', en: 'Long-term support' },
+  fixed: { de: 'Feste Versionen', en: 'Fixed releases' },
+  'semi-rolling': { de: 'Halbrollend', en: 'Semi-rolling' },
+  rolling: { de: 'Rollend', en: 'Rolling' },
+  atomic: { de: 'Unveränderlich', en: 'Immutable' },
+};
+
+export const installerShort: Labels<InstallerKind> = {
+  'graphical-guided': { de: 'Grafisch geführt', en: 'Guided installer' },
+  'graphical-expert': { de: 'Grafisch, anspruchsvoll', en: 'Graphical, demanding' },
+  'tui-guided': { de: 'Textbasiert', en: 'Text-based' },
+  manual: { de: 'Handarbeit', en: 'Manual install' },
+};
+
 export const initLabels: Labels<InitSystem> = {
   systemd: { de: 'systemd', en: 'systemd' },
   openrc: { de: 'OpenRC', en: 'OpenRC' },
@@ -161,6 +180,42 @@ export const archLabels: Labels<Arch> = {
   riscv64: { de: 'RISC-V', en: 'RISC-V' },
   ppc64le: { de: 'POWER', en: 'POWER' },
   s390x: { de: 'IBM Z', en: 'IBM Z' },
+};
+
+/**
+ * Anzeigetexte für Schlagworte, die als Treffer auf einer Ergebniskarte
+ * erscheinen können. Was hier fehlt, wird nicht angezeigt – interne Kürzel
+ * sollen nie in der Oberfläche landen.
+ */
+export const tagLabels: Record<string, L10n> = {
+  'windows-optik': { de: 'Windows-ähnliche Bedienung', en: 'Windows-like layout' },
+  umsteiger: { de: 'Auf Umsteiger zugeschnitten', en: 'Built for switchers' },
+  'macos-feeling': { de: 'macOS-ähnliche Bedienung', en: 'macOS-like layout' },
+  klassisch: { de: 'Klassisches Bedienkonzept', en: 'Classic layout' },
+  modern: { de: 'Moderne Oberfläche', en: 'Modern interface' },
+  design: { de: 'Durchgestaltete Oberfläche', en: 'Thoroughly designed' },
+  anpassbar: { de: 'Weitgehend anpassbar', en: 'Highly configurable' },
+  gaming: { de: 'Für Spiele vorbereitet', en: 'Prepared for gaming' },
+  handheld: { de: 'Für Handhelds', en: 'For handhelds' },
+  notebook: { de: 'Auf Notebooks abgestimmt', en: 'Tuned for laptops' },
+  hdr: { de: 'HDR-tauglich', en: 'HDR capable' },
+  vrr: { de: 'Variable Bildwiederholrate', en: 'Variable refresh rate' },
+  nvidia: { de: 'NVIDIA vorbereitet', en: 'NVIDIA prepared' },
+  'nvidia-iso': { de: 'Eigene NVIDIA-Ausgabe', en: 'Dedicated NVIDIA image' },
+  'kein-snap': { de: 'Ohne Snap', en: 'Without snap' },
+  flatpak: { de: 'Flatpak ab Werk', en: 'Flatpak out of the box' },
+  aur: { de: 'Zugriff auf das AUR', en: 'AUR access' },
+  distrobox: { de: 'Container-Werkzeuge', en: 'Container tooling' },
+  atomic: { de: 'Unveränderliches System', en: 'Immutable system' },
+  rollback: { de: 'Updates umkehrbar', en: 'Reversible updates' },
+  'btrfs-snapshots': { de: 'Schnappschüsse ab Werk', en: 'Snapshots out of the box' },
+  'ohne-systemd': { de: 'Ohne systemd', en: 'Without systemd' },
+  selinux: { de: 'SELinux ab Werk', en: 'SELinux out of the box' },
+  'zehn-jahre': { de: 'Zehn Jahre Updates', en: 'Ten years of updates' },
+  '32-bit': { de: '32-Bit-Ausgabe', en: '32-bit edition' },
+  wayland: { de: 'Wayland ab Werk', en: 'Wayland by default' },
+  // Bewusst ohne Text, weil das Etikett daneben dasselbe schon sagt:
+  // langzeitsupport, rolling, semi-rolling.
 };
 
 export const familyLabels: Record<string, L10n> = {

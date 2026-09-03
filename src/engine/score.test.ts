@@ -390,3 +390,29 @@ describe('Desktop-Begründungen', () => {
     }
   });
 });
+
+describe('Beschriftungen', () => {
+  it('zeigt kein internes Schlagwort ohne Anzeigetext', async () => {
+    const { tagLabels } = await import('../i18n/labels');
+    const { desktopById: byId } = await import('../data/desktops');
+    // Alle Schlagworte, die eine Frage überhaupt als Treffer erzeugen kann,
+    // brauchen entweder einen Anzeigetext oder sind ein Desktopname.
+    const boostable = new Set<string>();
+    for (const q of allQuestions) {
+      for (const o of q.options) {
+        for (const tag of Object.keys(o.effect.boostTags ?? {})) boostable.add(tag);
+      }
+    }
+    const unlabelled = [...boostable].filter((t) => !tagLabels[t] && !byId.has(t));
+    // Bewusst ohne Text bleiben nur die, die ein Etikett daneben schon sagt.
+    expect(unlabelled.sort()).toEqual(['langzeitsupport', 'rolling', 'semi-rolling']);
+  });
+
+  it('hat für jedes Release-Modell und jeden Installer eine Kurzform', async () => {
+    const { releaseModelShort, installerShort } = await import('../i18n/labels');
+    for (const d of distros) {
+      expect(releaseModelShort[d.releaseModel], d.id).toBeDefined();
+      expect(installerShort[d.installer], d.id).toBeDefined();
+    }
+  });
+});

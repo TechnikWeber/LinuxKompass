@@ -2,8 +2,9 @@ import { useMemo, useState } from 'react';
 import { distros } from '../data/distros';
 import type { Audience, Distro, ReleaseModel } from '../data/types';
 import {
-  audienceLabels, familyLabels, installerLabels, releaseModelLabels, useI18n,
+  audienceLabels, familyLabels, installerShort, releaseModelLabels, releaseModelShort, useI18n,
 } from '../i18n';
+import { desktopById } from '../data/desktops';
 import { CompareToggle, Link, Monogram } from './common';
 
 type SortKey = 'name' | 'beginnerFriendly' | 'freshness' | 'lightweight';
@@ -30,9 +31,11 @@ function DistroTile({ distro }: { distro: Distro }) {
       </header>
       <p style={{ margin: 0, color: 'var(--ink-muted)', fontSize: 'var(--step--1)' }}>{tl(distro.tagline)}</p>
       <ul className="chiprow">
-        <li className="chip">{tl(releaseModelLabels[distro.releaseModel])}</li>
-        <li className="chip">{distro.defaultDesktop === 'none' ? '—' : distro.defaultDesktop}</li>
-        <li className="chip">{tl(installerLabels[distro.installer])}</li>
+        <li className="chip">{tl(releaseModelShort[distro.releaseModel])}</li>
+        <li className="chip">
+          {distro.defaultDesktop === 'none' ? '—' : desktopById.get(distro.defaultDesktop)?.name ?? distro.defaultDesktop}
+        </li>
+        <li className="chip">{tl(installerShort[distro.installer])}</li>
       </ul>
       <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
         <Link to={{ name: 'distro', id: distro.id }} className="btn btn--small">

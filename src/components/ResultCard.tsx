@@ -1,6 +1,6 @@
 import type { DistroResult } from '../engine/score';
 import { requirements } from '../engine/requirements';
-import { ratingLabels, useI18n, releaseModelLabels, installerLabels } from '../i18n';
+import { ratingLabels, tagLabels, useI18n, releaseModelShort, installerShort } from '../i18n';
 import { desktopById } from '../data/desktops';
 import { CompareToggle, Link, Monogram } from './common';
 
@@ -38,14 +38,18 @@ export function ResultCard({ result, rank, featured }: { result: DistroResult; r
       {featured && <p style={{ margin: 0 }}>{tl(d.description)}</p>}
 
       <ul className="chiprow">
-        <li className="chip">{tl(releaseModelLabels[d.releaseModel])}</li>
+        <li className="chip">{tl(releaseModelShort[d.releaseModel])}</li>
         <li className="chip">{d.currentVersion}</li>
-        <li className="chip">{tl(installerLabels[d.installer])}</li>
-        {result.matchedTags.slice(0, 3).map((tag) => (
-          <li key={tag} className="chip chip--accent">
-            {desktopById.get(tag)?.name ?? tag.replace(/-/g, ' ')}
-          </li>
-        ))}
+        <li className="chip">{tl(installerShort[d.installer])}</li>
+        {result.matchedTags
+          .map((tag) => ({ tag, label: desktopById.get(tag)?.name ?? tl(tagLabels[tag]) }))
+          .filter((entry) => entry.label)
+          .slice(0, 3)
+          .map((entry) => (
+            <li key={entry.tag} className="chip chip--accent">
+              {entry.label}
+            </li>
+          ))}
       </ul>
 
       <div className="reasons">
