@@ -4,8 +4,7 @@ import type { Audience, Distro, ReleaseModel } from '../data/types';
 import {
   audienceLabels, familyLabels, installerShort, releaseModelLabels, releaseModelShort, useI18n,
 } from '../i18n';
-import { desktopById } from '../data/desktops';
-import { CompareToggle, Link, Monogram } from './common';
+import { CompareToggle, DefaultDesktopLabel, Link, Monogram } from './common';
 
 type SortKey = 'name' | 'beginnerFriendly' | 'freshness' | 'lightweight';
 
@@ -32,14 +31,8 @@ function DistroTile({ distro }: { distro: Distro }) {
       <p style={{ margin: 0, color: 'var(--ink-muted)', fontSize: 'var(--step--1)' }}>{tl(distro.tagline)}</p>
       <ul className="chiprow">
         <li className="chip">{tl(releaseModelShort[distro.releaseModel])}</li>
-        {/* Ohne Standard-Desktop ist die Aussage nicht „nichts", sondern
-            entweder „du wählst selbst" oder „das ist kein Desktop-System". */}
         <li className="chip">
-          {distro.defaultDesktop !== 'none'
-            ? desktopById.get(distro.defaultDesktop)?.name ?? distro.defaultDesktop
-            : distro.availableDesktops.length > 0
-              ? t('desktopFreeChoice')
-              : t('desktopNone')}
+          <DefaultDesktopLabel distro={distro} />
         </li>
         <li className="chip">{tl(installerShort[distro.installer])}</li>
       </ul>

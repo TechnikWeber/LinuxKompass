@@ -2,7 +2,7 @@ import type { DistroResult } from '../engine/score';
 import { requirements } from '../engine/requirements';
 import { ratingLabels, tagLabels, useI18n, releaseModelShort, installerShort } from '../i18n';
 import { desktopById } from '../data/desktops';
-import { CompareToggle, Link, Monogram } from './common';
+import { CompareToggle, DefaultDesktopLabel, Link, Monogram } from './common';
 
 /** Eine Empfehlung mit Begründung, Punkteherkunft und Warnungen. */
 export function ResultCard({ result, rank, featured }: { result: DistroResult; rank: number; featured?: boolean }) {
@@ -39,10 +39,16 @@ export function ResultCard({ result, rank, featured }: { result: DistroResult; r
 
       <ul className="chiprow">
         <li className="chip">{tl(releaseModelShort[d.releaseModel])}</li>
+        <li className="chip">
+          <DefaultDesktopLabel distro={d} />
+        </li>
         <li className="chip">{d.currentVersion}</li>
         <li className="chip">{tl(installerShort[d.installer])}</li>
+        {/* Desktopnamen sind hier bewusst raus: Der Standard-Desktop steht
+            schon als eigenes Etikett und stünde sonst doppelt da. */}
         {result.matchedTags
-          .map((tag) => ({ tag, label: desktopById.get(tag)?.name ?? tl(tagLabels[tag]) }))
+          .filter((tag) => !desktopById.has(tag))
+          .map((tag) => ({ tag, label: tl(tagLabels[tag]) }))
           .filter((entry) => entry.label)
           .slice(0, 3)
           .map((entry) => (

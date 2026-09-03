@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import type { Distro } from '../data/types';
 import { useApp, type CompareKind, type Route } from '../state/app';
 import { useI18n } from '../i18n';
+import { desktopById } from '../data/desktops';
 
 /** Interner Link, der über den Hash-Router navigiert. */
 export function Link({
@@ -28,6 +29,22 @@ export function Link({
       {children}
     </a>
   );
+}
+
+/**
+ * Standard-Desktop als Etikett.
+ *
+ * Fehlt einer, ist die Aussage nicht „nichts": Arch oder Gentoo überlassen
+ * die Wahl bewusst dir, Proxmox ist schlicht kein Desktop-System. Beides
+ * steht hier an einer Stelle, damit Übersicht und Ergebniskarte dieselbe
+ * Auskunft geben.
+ */
+export function DefaultDesktopLabel({ distro }: { distro: Distro }) {
+  const { t } = useI18n();
+  if (distro.defaultDesktop !== 'none') {
+    return <>{desktopById.get(distro.defaultDesktop)?.name ?? distro.defaultDesktop}</>;
+  }
+  return <>{distro.availableDesktops.length > 0 ? t('desktopFreeChoice') : t('desktopNone')}</>;
 }
 
 export function Monogram({ distro, large }: { distro: Distro; large?: boolean }) {
