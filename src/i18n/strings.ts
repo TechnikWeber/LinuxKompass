@@ -127,8 +127,8 @@ export const ui = {
     en: 'Not very solid yet — answer more questions or switch to a deeper mode.',
   },
   resultConfidenceMedium: {
-    de: 'Solide. Die vorderen Plätze liegen nah beieinander – sieh dir den Vergleich an.',
-    en: 'Solid. The top places are close together — take a look at the comparison.',
+    de: 'Ordentlich. Die vorderen Plätze liegen nah beieinander – sieh dir den Vergleich an.',
+    en: 'Reasonably solid. The top places are close together — take a look at the comparison.',
   },
   resultConfidenceHigh: {
     de: 'Belastbar. Die Empfehlung hebt sich deutlich vom Rest ab.',

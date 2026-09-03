@@ -192,7 +192,7 @@ export const securitySpecial: Distro[] = [
     downloadUrl: 'https://www.raspberrypi.com/software/operating-systems/',
     docsUrl: 'https://www.raspberrypi.com/documentation/',
     basedOn: 'debian', family: 'debian', originCountry: 'GB', firstRelease: 2012, governance: 'foundation',
-    currentVersion: 'Ausgabe auf Debian-13-Basis („Trixie")', currentVersionDate: '2026-06',
+    currentVersion: 'Debian-13-Basis („Trixie")', currentVersionDate: '2026-06',
     supportUntil: { de: 'Entlang von Debian 13.', en: 'In line with Debian 13.' },
     releaseModel: 'lts',
     releaseCadence: { de: 'Neue Abbilder mehrmals im Jahr, Hauptbasis pro Debian-Version.', en: 'New images several times a year, with a base change per Debian release.' },

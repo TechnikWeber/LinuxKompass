@@ -6,6 +6,9 @@ import { CompareToggle, Link, Monogram } from './common';
 
 /** Eine Empfehlung mit Begründung, Punkteherkunft und Warnungen. */
 export function ResultCard({ result, rank, featured }: { result: DistroResult; rank: number; featured?: boolean }) {
+  // Die hervorgehobene Karte folgt direkt auf die h1 der Seite und muss
+  // deshalb eine h2 sein; die Alternativen stehen unter einer eigenen h2.
+  const Heading = featured ? 'h2' : 'h3';
   const { t, tl, tls } = useI18n();
   const d = result.distro;
   const top = result.breakdown.filter((b) => b.points > 0).slice(0, 5);
@@ -19,9 +22,9 @@ export function ResultCard({ result, rank, featured }: { result: DistroResult; r
           <p style={{ margin: 0, fontSize: 'var(--step--1)', color: 'var(--ink-faint)' }}>
             {featured ? t('resultTopPick') : `#${rank}`}
           </p>
-          <h3 className="result-card__title">
+          <Heading className="result-card__title">
             <Link to={{ name: 'distro', id: d.id }}>{d.name}</Link>
-          </h3>
+          </Heading>
           <p style={{ margin: 0, color: 'var(--ink-muted)' }}>{tl(d.tagline)}</p>
         </div>
         <div className="result-card__score">
@@ -112,7 +115,7 @@ export function ResultCard({ result, rank, featured }: { result: DistroResult; r
 
       {featured && tls(d.warnings).length > 0 && (
         <div className="callout callout--warning">
-          <h4 className="callout__title">{t('detailWarnings')}</h4>
+          <h3 className="callout__title">{t('detailWarnings')}</h3>
           <ul style={{ margin: 0 }}>
             {tls(d.warnings).map((w) => (
               <li key={w}>{w}</li>

@@ -63,6 +63,16 @@ describe('Datenbestand', () => {
     }
   });
 
+  it('hält kurze Beschriftungen kurz genug für die Kartenansicht', () => {
+    // Sehr lange Versionsangaben landen als Chip in schmalen Rasterspalten und
+    // haben dort schon einmal das Layout aufgerissen. Der Kontext gehört in die
+    // Beschreibung, nicht in die Versionsangabe.
+    for (const d of distros) {
+      expect(d.currentVersion.length, `${d.id}: "${d.currentVersion}"`).toBeLessThanOrEqual(34);
+      expect(d.monogram.length, d.id).toBeLessThanOrEqual(3);
+    }
+  });
+
   it('nennt basedOn nur mit existierender ID', () => {
     const ids = new Set(distros.map((d) => d.id));
     for (const d of distros) {

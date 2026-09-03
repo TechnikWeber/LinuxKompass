@@ -66,8 +66,6 @@ export interface ScoreOutcome {
   confidence: number;
 }
 
-const EMPTY_PROFILE_MESSAGE = 'Es wurden noch keine Fragen beantwortet.';
-
 /** Baut aus den Antworten das Nutzerprofil. */
 export function buildProfile(mode: Mode, answers: Answers): Profile {
   const profile: Profile = {
@@ -325,5 +323,3 @@ export function scoreAll(
 
   return { results, relaxed, profile, confidence };
 }
-
-export { EMPTY_PROFILE_MESSAGE };
