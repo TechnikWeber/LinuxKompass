@@ -27,14 +27,24 @@ then explains every recommendation instead of just printing a number.
   Arch is excluded — not merely down-ranked. Requirements are only relaxed when
   nothing at all would remain, and the result tells you exactly which one was
   dropped.
-- **Side-by-side comparison.** Tick any distributions to compare up to six of
-  them across all attributes, with a filter that hides rows where they agree.
+- **A desktop recommendation, separately.** The desktop often matters more day
+  to day than the distribution beneath it, and on almost any distribution you
+  can swap it — so it gets its own short verdict ("Cinnamon fits your answers
+  because it comes closest to the way Windows works"), with its caveats and
+  whether the recommended distribution actually ships it.
+- **Side-by-side comparison.** Tick any distributions *and* desktops to compare
+  up to six of each. They are compared in two separate tables rather than one:
+  they have different attributes, and shortlisting "Mint or Fedora" and
+  "Cinnamon or Plasma" at the same time is a perfectly normal thing to do. A
+  filter hides rows where the entries agree.
 - **What will not work.** Adobe Creative Cloud, kernel-level anti-cheat, CAD,
   German tax software, old NVIDIA cards on Wayland, accessibility, free-software
   purity: an 18-entry catalogue of things that decide a switch regardless of
   distribution — each with the alternatives that actually exist.
 - **Shareable results.** Answers are encoded in the URL, so a result link
   reproduces the exact recommendation.
+- **Try before installing.** Links to [DistroSea](https://distrosea.com/), where
+  80+ distributions and their desktops run live in the browser.
 - German and English throughout, light and dark themes, keyboard accessible,
   prints cleanly to PDF, no tracking, no cookies, no external requests.
 

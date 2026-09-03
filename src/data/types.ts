@@ -252,6 +252,9 @@ export interface DesktopEnvironment {
   lightweight: number;
   touchFriendly: number;
   waylandStatus: L10n;
+  /** Maschinenlesbar, weil alte NVIDIA-Karten eine X11-Sitzung brauchen. */
+  x11Session: 'available' | 'ending' | 'none';
+  waylandSession: 'default' | 'optional' | 'none';
   /** Barrierefreiheit: Bildschirmleser, Kontrast, Skalierung. */
   accessibility: number;
   strengths: L10nList;

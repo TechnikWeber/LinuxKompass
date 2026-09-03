@@ -1,7 +1,7 @@
 import { Fragment, useMemo, useState, type ReactNode } from 'react';
-import { getDistro } from '../data/distros';
+import { distros, getDistro } from '../data/distros';
 import { desktopById } from '../data/desktops';
-import type { Distro, RatingKey } from '../data/types';
+import type { DesktopEnvironment, Distro, RatingKey } from '../data/types';
 import {
   archLabels, familyLabels, governanceLabels, initLabels, installerLabels, libcLabels,
   maintenanceLabels, nvidiaLabels, packageFormatLabels, packageManagerLabels, ratingLabels,
@@ -26,12 +26,16 @@ const RATING_ROWS: RatingKey[] = [
 
 export function ComparePage() {
   const { t, tl, lang } = useI18n();
-  const { compare, toggleCompare, clearCompare } = useApp();
+  const { compare, compareDesktops, toggleCompare, clearCompare } = useApp();
   const [onlyDiffs, setOnlyDiffs] = useState(false);
 
   const selected = useMemo(
     () => compare.map((id) => getDistro(id)).filter((d): d is Distro => Boolean(d)),
     [compare],
+  );
+  const selectedDesktops = useMemo(
+    () => compareDesktops.map((id) => desktopById.get(id)).filter((d): d is DesktopEnvironment => Boolean(d)),
+    [compareDesktops],
   );
 
   const rows = useMemo<Row[]>(() => {
@@ -121,6 +125,61 @@ export function ComparePage() {
     return [...basics, ...desktop, ...packages, ...hardware, ...ratings, ...telemetry];
   }, [selected, t, tl]);
 
+
+  const desktopRows = useMemo<Row[]>(() => {
+    if (selectedDesktops.length === 0) return [];
+
+    const make = (label: string, fn: (de: DesktopEnvironment) => string): Row => {
+      const values = selectedDesktops.map(fn);
+      return { group: 'desktop', label, keys: values, cells: values.map((v, i) => <span key={i}>{v}</span>) };
+    };
+
+    const sessionLabel = (v: DesktopEnvironment['x11Session'] | DesktopEnvironment['waylandSession']) => {
+      const map: Record<string, string> = lang === 'de'
+        ? { available: 'verfügbar', ending: 'läuft aus', none: 'nicht verfügbar', default: 'Standard', optional: 'optional' }
+        : { available: 'available', ending: 'being phased out', none: 'not available', default: 'default', optional: 'optional' };
+      return map[v] ?? v;
+    };
+
+    const numeric = (label: string, pick: (de: DesktopEnvironment) => number): Row => {
+      const values = selectedDesktops.map(pick);
+      const best = Math.max(...values);
+      return {
+        group: 'desktop',
+        label,
+        keys: values.map(String),
+        cells: values.map((v, i) => (
+          <span key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <span style={{ fontVariantNumeric: 'tabular-nums', minWidth: '2.2ch', fontWeight: v === best ? 700 : 400 }}>{v}</span>
+            <span className="meter__track" style={{ width: '4.5rem', gridColumn: 'auto' }}>
+              <span
+                className="meter__fill"
+                style={{ display: 'block', width: `${v * 10}%`, background: v === best ? 'var(--accent)' : 'var(--rule-strong)' }}
+              />
+            </span>
+          </span>
+        )),
+      };
+    };
+
+    return [
+      make(t('desktopFeelsLike'), (de) => tl(de.feelsLike)),
+      make(t('desktopMemory'), (de) => `~${de.ramFootprintMb} MB`),
+      make(t('fieldX11'), (de) => sessionLabel(de.x11Session)),
+      make(t('fieldWayland'), (de) => sessionLabel(de.waylandSession)),
+      make(t('desktopWayland'), (de) => tl(de.waylandStatus)),
+      numeric(t('sortBeginner'), (de) => de.beginnerFriendly),
+      numeric(t('desktopCustomizability'), (de) => de.customizability),
+      numeric(t('sortLightweight'), (de) => de.lightweight),
+      numeric(t('desktopTouch'), (de) => de.touchFriendly),
+      numeric(t('desktopAccessibility'), (de) => de.accessibility),
+      make(t('desktopUsedBy'), (de) => {
+        const names = distros.filter((d) => d.defaultDesktop === de.id).map((d) => d.name);
+        return names.length > 0 ? names.slice(0, 6).join(', ') : '—';
+      }),
+    ];
+  }, [selectedDesktops, t, tl, lang]);
+
   const groupTitles: Record<string, string> = {
     basics: lang === 'de' ? 'Grunddaten' : 'Basics',
     desktop: lang === 'de' ? 'Oberfläche' : 'Desktop',
@@ -130,7 +189,7 @@ export function ComparePage() {
     other: lang === 'de' ? 'Sonstiges' : 'Other',
   };
 
-  if (selected.length === 0) {
+  if (selected.length === 0 && selectedDesktops.length === 0) {
     return (
       <section className="section">
         <div className="container container--narrow stack">
@@ -157,97 +216,162 @@ export function ComparePage() {
         <header className="stack">
           <h1 style={{ fontSize: 'var(--step-3)' }}>{t('compareTitle')}</h1>
           <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
-            <span className="chip">{t('compareCount', { n: selected.length })}</span>
+            <span className="chip">{t('compareCount', { n: selected.length + selectedDesktops.length })}</span>
             <label style={{ display: 'inline-flex', gap: '0.4rem', alignItems: 'center', cursor: 'pointer' }}>
               <input type="checkbox" checked={onlyDiffs} onChange={(e) => setOnlyDiffs(e.target.checked)} style={{ width: 'auto' }} />
               {t('compareOnlyDiffs')}
             </label>
-            <button type="button" className="btn btn--small btn--quiet" onClick={clearCompare}>
+            <button type="button" className="btn btn--small btn--quiet" onClick={() => clearCompare()}>
               {t('compareClear')}
             </button>
           </div>
         </header>
 
-        <div className="tablewrap">
-          <table>
-            <thead>
-              <tr>
-                <th scope="col" style={{ minWidth: '12rem' }}>
-                  &nbsp;
-                </th>
-                {selected.map((d) => (
-                  <th key={d.id} scope="col" style={{ minWidth: '14rem' }}>
-                    <span style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                      <Monogram distro={d} />
-                      <span style={{ minWidth: 0 }}>
-                        <Link to={{ name: 'distro', id: d.id }}>{d.name}</Link>
-                        <button
-                          type="button"
-                          className="btn btn--quiet btn--small no-print"
-                          onClick={() => toggleCompare(d.id)}
-                          aria-label={`${t('compareRemove')}: ${d.name}`}
-                          style={{ padding: '0 0.35em' }}
-                        >
-                          ✕
-                        </button>
-                      </span>
-                    </span>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {visibleRows.map((row) => {
-                const differs = new Set(row.keys).size > 1;
-                const showGroup = row.group !== lastGroup;
-                lastGroup = row.group;
-                return (
-                  <Fragment key={`${row.group}-${row.label}`}>
-                    {showGroup && (
-                      <tr>
-                        <th
-                          scope="row"
-                          colSpan={selected.length + 1}
-                          style={{
-                            background: 'var(--paper-sunken)',
-                            textTransform: 'uppercase',
-                            letterSpacing: '0.07em',
-                            fontSize: 'var(--step--1)',
-                            color: 'var(--ink-faint)',
-                          }}
-                        >
-                          {groupTitles[row.group]}
-                        </th>
-                      </tr>
-                    )}
-                    <tr className={differs ? 'row--differs' : undefined}>
-                      <th scope="row">{row.label}</th>
-                      {row.cells.map((cell, i) => (
-                        <td key={i}>{cell}</td>
-                      ))}
-                    </tr>
-                  </Fragment>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+        <p className="callout callout--info" style={{ fontSize: 'var(--step--1)' }}>
+          {t('compareBothHint')}
+        </p>
 
-        <div className="grid grid--2">
-          {selected.map((d) => (
-            <article key={d.id} className="card">
-              <h2 style={{ fontSize: 'var(--step-1)' }}>{d.name}</h2>
-              <h3 style={{ fontSize: 'var(--step-0)', fontFamily: 'var(--font-body)', color: 'var(--ink-faint)' }}>
-                {t('detailWarnings')}
-              </h3>
-              <ul>
-                {(lang === 'de' ? d.warnings.de : d.warnings.en).map((w) => (
-                  <li key={w}>{w}</li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
+        {selected.length > 0 && (
+          <section className="stack">
+            <h2 style={{ fontSize: 'var(--step-2)' }}>{t('compareDistros')}</h2>
+          <div className="tablewrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col" style={{ minWidth: '12rem' }}>
+                    &nbsp;
+                  </th>
+                  {selected.map((d) => (
+                    <th key={d.id} scope="col" style={{ minWidth: '14rem' }}>
+                      <span style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                        <Monogram distro={d} />
+                        <span style={{ minWidth: 0 }}>
+                          <Link to={{ name: 'distro', id: d.id }}>{d.name}</Link>
+                          <button
+                            type="button"
+                            className="btn btn--quiet btn--small no-print"
+                            onClick={() => toggleCompare(d.id)}
+                            aria-label={`${t('compareRemove')}: ${d.name}`}
+                            style={{ padding: '0 0.35em' }}
+                          >
+                            ✕
+                          </button>
+                        </span>
+                      </span>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {visibleRows.map((row) => {
+                  const differs = new Set(row.keys).size > 1;
+                  const showGroup = row.group !== lastGroup;
+                  lastGroup = row.group;
+                  return (
+                    <Fragment key={`${row.group}-${row.label}`}>
+                      {showGroup && (
+                        <tr>
+                          <th
+                            scope="row"
+                            colSpan={selected.length + 1}
+                            style={{
+                              background: 'var(--paper-sunken)',
+                              textTransform: 'uppercase',
+                              letterSpacing: '0.07em',
+                              fontSize: 'var(--step--1)',
+                              color: 'var(--ink-faint)',
+                            }}
+                          >
+                            {groupTitles[row.group]}
+                          </th>
+                        </tr>
+                      )}
+                      <tr className={differs ? 'row--differs' : undefined}>
+                        <th scope="row">{row.label}</th>
+                        {row.cells.map((cell, i) => (
+                          <td key={i}>{cell}</td>
+                        ))}
+                      </tr>
+                    </Fragment>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="grid grid--2">
+            {selected.map((d) => (
+              <article key={d.id} className="card">
+                <h2 style={{ fontSize: 'var(--step-1)' }}>{d.name}</h2>
+                <h3 style={{ fontSize: 'var(--step-0)', fontFamily: 'var(--font-body)', color: 'var(--ink-faint)' }}>
+                  {t('detailWarnings')}
+                </h3>
+                <ul>
+                  {(lang === 'de' ? d.warnings.de : d.warnings.en).map((w) => (
+                    <li key={w}>{w}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+          </section>
+        )}
+
+        {selectedDesktops.length > 0 && (
+          <section className="stack">
+            <h2 style={{ fontSize: 'var(--step-2)' }}>{t('compareDesktops')}</h2>
+            <div className="tablewrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col" style={{ minWidth: '12rem' }}>
+                      &nbsp;
+                    </th>
+                    {selectedDesktops.map((de) => (
+                      <th key={de.id} scope="col" style={{ minWidth: '13rem' }}>
+                        <span style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                          <span
+                            aria-hidden="true"
+                            style={{ width: '0.7rem', height: '0.7rem', borderRadius: 3, background: `hsl(${de.accent})`, flex: 'none' }}
+                          />
+                          {de.name}
+                          <button
+                            type="button"
+                            className="btn btn--quiet btn--small no-print"
+                            onClick={() => toggleCompare(de.id, 'desktop')}
+                            aria-label={`${t('compareRemove')}: ${de.name}`}
+                            style={{ padding: '0 0.35em' }}
+                          >
+                            ✕
+                          </button>
+                        </span>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {desktopRows.map((row) => {
+                    const differs = new Set(row.keys).size > 1;
+                    if (onlyDiffs && !differs) return null;
+                    return (
+                      <tr key={row.label} className={differs ? 'row--differs' : undefined}>
+                        <th scope="row">{row.label}</th>
+                        {row.cells.map((cell, i) => (
+                          <td key={i}>{cell}</td>
+                        ))}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <p style={{ fontSize: 'var(--step--1)', color: 'var(--ink-muted)' }}>
+              <Link to={{ name: 'desktops' }}>{t('desktopPickAll')}</Link>
+            </p>
+          </section>
+        )}
+
+
       </div>
     </section>
   );

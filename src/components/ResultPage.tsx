@@ -7,6 +7,7 @@ import { useApp, MAX_COMPARE } from '../state/app';
 import { CompareToggle, Link, Monogram } from './common';
 import { FlagList } from './FlagList';
 import { ResultCard } from './ResultCard';
+import { DesktopPick } from './DesktopPick';
 
 const TIE_THRESHOLD = 3;
 
@@ -171,6 +172,8 @@ export function ResultPage() {
           </section>
         )}
 
+        <DesktopPick mode={mode} answers={answers} topDistro={top?.distro} />
+
         {outcome.profile.flags.size > 0 && (
           <section className="stack">
             <h2 style={{ fontSize: 'var(--step-2)' }}>{t('resultFlagsTitle')}</h2>
@@ -209,6 +212,16 @@ export function ResultPage() {
                       : 'Only install once everything works in the live session.'}
                   </li>
                 </ol>
+              </div>
+              <div className="card">
+                <h3 style={{ fontSize: 'var(--step-1)' }}>{t('tryLiveTitle')}</h3>
+                <p style={{ color: 'var(--ink-muted)' }}>{t('tryLiveText')}</p>
+                <p style={{ marginBottom: '0.35rem' }}>
+                  <a className="btn btn--small" href="https://distrosea.com/" target="_blank" rel="noreferrer noopener">
+                    {t('tryLiveLink')} <span aria-hidden="true">↗</span>
+                  </a>
+                </p>
+                <p style={{ fontSize: 'var(--step--1)', color: 'var(--ink-faint)', margin: 0 }}>{t('tryLiveDisclaimer')}</p>
               </div>
               <div className="card">
                 <h3 style={{ fontSize: 'var(--step-1)' }}>

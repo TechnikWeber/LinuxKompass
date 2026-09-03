@@ -184,3 +184,47 @@ export const sectionLabels: Record<string, L10n> = {
   software: { de: 'Software', en: 'Software' },
   philosophy: { de: 'Grundhaltung', en: 'Philosophy' },
 };
+
+// ---------------------------------------------------------------------------
+// Desktop-Empfehlung
+// ---------------------------------------------------------------------------
+
+/** Begründungen, eingesetzt in „… passt X, weil {Grund} und {Grund}." */
+export const desktopReasonLabels: Record<string, L10n> = {
+  'explicit-choice': { de: 'du ihn ausdrücklich gewählt hast', en: 'you picked it explicitly' },
+  'windows-like': { de: 'er dem Bedienkonzept von Windows am nächsten kommt', en: 'it comes closest to the way Windows works' },
+  'macos-like': { de: 'er sich ähnlich wie macOS bedienen lässt', en: 'it is operated much like macOS' },
+  calm: { de: 'er aufgeräumt und ablenkungsarm ist', en: 'it is tidy and distraction-free' },
+  configurable: { de: 'sich daran fast alles einstellen lässt', en: 'almost everything about it can be configured' },
+  beginner: { de: 'er ohne Vorwissen sofort bedienbar ist', en: 'it is usable straight away without prior knowledge' },
+  lightweight: { de: 'er mit dem Arbeitsspeicher deines Rechners gut zurechtkommt', en: 'it copes well with your machine’s memory' },
+  touch: { de: 'er sich per Touch und Gesten gut bedienen lässt', en: 'it works well with touch and gestures' },
+  accessibility: { de: 'er die beste Unterstützung für Bildschirmleser mitbringt', en: 'it has the best screen-reader support' },
+  'hdr-multimonitor': { de: 'er HDR und gemischte Bildschirmauflösungen am besten beherrscht', en: 'it handles HDR and mixed display resolutions best' },
+  'x11-needed': { de: 'er weiterhin eine X11-Sitzung anbietet', en: 'it still offers an X11 session' },
+  tiling: { de: 'er Fenster automatisch anordnet', en: 'it arranges windows automatically' },
+};
+
+/** Einschränkungen, die zur Empfehlung dazugehören. */
+export const desktopConcernLabels: Record<string, L10n> = {
+  'x11-ending': {
+    de: 'Die X11-Sitzung entfällt mit Plasma 6.8 im Oktober 2026.',
+    en: 'The X11 session disappears with Plasma 6.8 in October 2026.',
+  },
+  'no-x11': {
+    de: 'Bietet keine X11-Sitzung mehr – deine Grafikkarte braucht aber eine.',
+    en: 'No longer offers an X11 session — but your graphics card needs one.',
+  },
+  heavy: {
+    de: 'Braucht vergleichsweise viel Arbeitsspeicher.',
+    en: 'Uses comparatively much memory.',
+  },
+  steep: {
+    de: 'Muss erst eingerichtet und gelernt werden.',
+    en: 'Has to be set up and learned first.',
+  },
+  'weak-accessibility': {
+    de: 'Schwache Unterstützung für Bildschirmleser und Vergrößerung.',
+    en: 'Weak support for screen readers and magnification.',
+  },
+};

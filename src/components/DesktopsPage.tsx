@@ -1,7 +1,7 @@
 import { desktops } from '../data/desktops';
 import { distros } from '../data/distros';
 import { useI18n } from '../i18n';
-import { Link, Meter } from './common';
+import { CompareToggle, Link, Meter } from './common';
 
 export function DesktopsPage() {
   const { t, tl, tls } = useI18n();
@@ -13,6 +13,12 @@ export function DesktopsPage() {
           <h1 style={{ fontSize: 'var(--step-3)' }}>{t('desktopsTitle')}</h1>
           <p className="prose" style={{ color: 'var(--ink-muted)' }}>
             {t('desktopsLead')}
+          </p>
+          <p style={{ fontSize: 'var(--step--1)', color: 'var(--ink-faint)' }}>
+            {t('tryLiveText')}{' '}
+            <a href="https://distrosea.com/" target="_blank" rel="noreferrer noopener">
+              {t('tryLiveLink')} ↗
+            </a>
           </p>
         </header>
 
@@ -109,6 +115,9 @@ export function DesktopsPage() {
                     {t('detailWebsite')} ↗
                   </a>
                 </p>
+                <div className="no-print">
+                  <CompareToggle id={de.id} kind="desktop" small />
+                </div>
               </article>
             );
           })}

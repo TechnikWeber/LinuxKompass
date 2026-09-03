@@ -28,9 +28,17 @@ eine Zahl auszugeben.
   wollen, bekommt Arch ausgeschlossen – nicht bloß abgewertet. Gelockert wird
   nur, wenn sonst gar nichts übrig bliebe, und dann wird genau benannt, welche
   Anforderung dafür fallen musste.
-- **Direkter Vergleich.** Distributionen anhaken und bis zu sechs davon über
-  alle Merkmale nebeneinander legen – mit einem Filter, der Zeilen ausblendet,
-  in denen sie übereinstimmen.
+- **Eigene Desktop-Empfehlung.** Die Oberfläche entscheidet im Alltag oft mehr
+  als die Distribution darunter, und sie lässt sich bei fast jeder Distribution
+  austauschen – deshalb bekommt sie ein eigenes kurzes Urteil („Zu deinen
+  Antworten passt Cinnamon, weil er dem Bedienkonzept von Windows am nächsten
+  kommt"), samt Einschränkungen und der Angabe, ob die empfohlene Distribution
+  ihn überhaupt mitliefert.
+- **Direkter Vergleich.** Distributionen **und** Desktops anhaken und je bis zu
+  sechs nebeneinander legen. Verglichen wird in zwei getrennten Tabellen statt
+  in einer: Sie haben unterschiedliche Merkmale, und „Mint oder Fedora" und
+  „Cinnamon oder Plasma" gleichzeitig zu überlegen ist völlig normal. Ein Filter
+  blendet Zeilen aus, in denen die Einträge übereinstimmen.
 - **Auch das, was nicht geht.** Adobe Creative Cloud, Spiele mit
   Kernel-Anti-Cheat, CAD, deutsche Steuersoftware, alte NVIDIA-Karten unter
   Wayland, Barrierefreiheit, konsequent freie Software: ein Katalog aus 18
@@ -38,6 +46,8 @@ eine Zahl auszugeben.
   jeweils mit den Alternativen, die es tatsächlich gibt.
 - **Teilbare Ergebnisse.** Die Antworten stehen in der Adresszeile, ein
   Ergebnis-Link stellt dieselbe Empfehlung wieder her.
+- **Vorher ausprobieren.** Verweis auf [DistroSea](https://distrosea.com/), wo
+  über 80 Distributionen und ihre Oberflächen live im Browser laufen.
 - Durchgehend deutsch und englisch, helles und dunkles Farbschema, mit der
   Tastatur bedienbar, sauber als PDF druckbar, ohne Nutzerverfolgung, ohne
   Cookies, ohne externe Anfragen.

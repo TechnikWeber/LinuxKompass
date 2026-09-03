@@ -18,23 +18,33 @@ export type Route =
 // Zustand
 // ---------------------------------------------------------------------------
 
+/** Was in der engeren Wahl liegen kann. */
+export type CompareKind = 'distro' | 'desktop';
+
 interface State {
   mode: Mode;
   /** Wurde der Modus bewusst gewählt (Triage abgeschlossen oder manuell)? */
   modeChosen: boolean;
   answers: Answers;
+  /*
+   * Distributionen und Desktops werden getrennt gehalten statt in einer Liste.
+   * Sie haben völlig unterschiedliche Merkmale, ließen sich also nie in einer
+   * Tabelle nebeneinanderstellen – und sie schließen sich nicht aus: „Mint
+   * oder Fedora" und „Cinnamon oder Plasma" ist eine normale Fragestellung.
+   */
   compare: string[];
+  compareDesktops: string[];
 }
 
 type Action =
   | { type: 'setMode'; mode: Mode; chosen?: boolean }
   | { type: 'answer'; questionId: string; optionIds: string[] }
   | { type: 'reset' }
-  | { type: 'toggleCompare'; id: string }
-  | { type: 'clearCompare' }
+  | { type: 'toggleCompare'; id: string; kind: CompareKind }
+  | { type: 'clearCompare'; kind?: CompareKind }
   | { type: 'load'; state: Partial<State> };
 
-const initialState: State = { mode: 'beginner', modeChosen: false, answers: {}, compare: [] };
+const initialState: State = { mode: 'beginner', modeChosen: false, answers: {}, compare: [], compareDesktops: [] };
 
 export const MAX_COMPARE = 6;
 
@@ -49,15 +59,18 @@ function reducer(state: State, action: Action): State {
       return { ...state, answers };
     }
     case 'reset':
-      return { ...initialState, mode: state.mode, compare: state.compare };
+      return { ...initialState, mode: state.mode, compare: state.compare, compareDesktops: state.compareDesktops };
     case 'toggleCompare': {
-      const has = state.compare.includes(action.id);
-      if (has) return { ...state, compare: state.compare.filter((c) => c !== action.id) };
-      if (state.compare.length >= MAX_COMPARE) return state;
-      return { ...state, compare: [...state.compare, action.id] };
+      const key = action.kind === 'desktop' ? 'compareDesktops' : 'compare';
+      const list = state[key];
+      if (list.includes(action.id)) return { ...state, [key]: list.filter((c) => c !== action.id) };
+      if (list.length >= MAX_COMPARE) return state;
+      return { ...state, [key]: [...list, action.id] };
     }
     case 'clearCompare':
-      return { ...state, compare: [] };
+      if (action.kind === 'distro') return { ...state, compare: [] };
+      if (action.kind === 'desktop') return { ...state, compareDesktops: [] };
+      return { ...state, compare: [], compareDesktops: [] };
     case 'load':
       return { ...state, ...action.state };
     default:
@@ -128,8 +141,8 @@ interface AppContextValue extends State {
   setMode: (mode: Mode, chosen?: boolean) => void;
   setAnswer: (questionId: string, optionIds: string[]) => void;
   reset: () => void;
-  toggleCompare: (id: string) => void;
-  clearCompare: () => void;
+  toggleCompare: (id: string, kind?: CompareKind) => void;
+  clearCompare: (kind?: CompareKind) => void;
   /** Teilbarer Link auf das aktuelle Ergebnis. */
   shareUrl: () => string;
   theme: 'light' | 'dark' | 'system';
@@ -176,6 +189,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     }
     const c = params.get('c');
     if (c) loaded.compare = c.split('.').filter(Boolean).slice(0, MAX_COMPARE);
+    const cd = params.get('cd');
+    if (cd) loaded.compareDesktops = cd.split('.').filter(Boolean).slice(0, MAX_COMPARE);
     if (Object.keys(loaded).length > 0) dispatch({ type: 'load', state: loaded });
     setRoute(r);
     setHydrated(true);
@@ -205,6 +220,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
       if (incomingCompare !== null && incomingCompare !== stateRef.current.compare.join('.')) {
         loaded.compare = incomingCompare.split('.').filter(Boolean).slice(0, MAX_COMPARE);
       }
+      const incomingDesktops = params.get('cd');
+      if (incomingDesktops !== null && incomingDesktops !== stateRef.current.compareDesktops.join('.')) {
+        loaded.compareDesktops = incomingDesktops.split('.').filter(Boolean).slice(0, MAX_COMPARE);
+      }
       if (Object.keys(loaded).length > 0) dispatch({ type: 'load', state: loaded });
       setRoute(r);
     };
@@ -233,9 +252,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
       const encoded = encodeAnswers(state.answers);
       if (encoded) params.set('a', encoded);
       if (state.compare.length > 0) params.set('c', state.compare.join('.'));
+      if (state.compareDesktops.length > 0) params.set('cd', state.compareDesktops.join('.'));
       return `${base}?${params.toString()}`;
     },
-    [state.mode, state.answers, state.compare],
+    [state.mode, state.answers, state.compare, state.compareDesktops],
   );
 
   const navigate = useCallback(
@@ -265,8 +285,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
       setMode: (mode, chosen) => dispatch({ type: 'setMode', mode, chosen }),
       setAnswer: (questionId, optionIds) => dispatch({ type: 'answer', questionId, optionIds }),
       reset: () => dispatch({ type: 'reset' }),
-      toggleCompare: (id) => dispatch({ type: 'toggleCompare', id }),
-      clearCompare: () => dispatch({ type: 'clearCompare' }),
+      toggleCompare: (id, kind = 'distro') => dispatch({ type: 'toggleCompare', id, kind }),
+      clearCompare: (kind) => dispatch({ type: 'clearCompare', kind }),
       shareUrl: () => `${window.location.origin}${window.location.pathname}${buildHash({ name: 'result' }, true)}`,
       theme,
       setTheme: setThemeState,

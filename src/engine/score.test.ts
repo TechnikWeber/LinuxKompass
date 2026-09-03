@@ -4,7 +4,8 @@ import { allQuestions, questionsForMode, visibleQuestions, type Answers } from '
 import { requirements } from './requirements';
 import { buildProfile, scoreAll } from './score';
 import { flagById } from '../data/flags';
-import { desktopById } from '../data/desktops';
+import { desktopById, desktops } from '../data/desktops';
+import { scoreDesktops } from './desktop';
 
 /** Hilfsfunktion: nimmt die erste Option einer Frage. */
 function pick(questionId: string, optionId: string): Answers {
@@ -284,5 +285,108 @@ describe('Bewertung', () => {
       terminal: ['copy-paste'], german: ['essential'], blockers: ['none'], 'safety-net': ['manual'],
     }).confidence;
     expect(many).toBeGreaterThan(few);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Desktop-Empfehlung
+// ---------------------------------------------------------------------------
+
+describe('Desktop-Empfehlung', () => {
+  it('schweigt, solange nichts über die Oberfläche gesagt wurde', () => {
+    expect(scoreDesktops('beginner', { blockers: ['none'] }).answered).toBe(0);
+  });
+
+  it('empfiehlt Windows-Umsteigern eine klassische Oberfläche', () => {
+    const { results } = scoreDesktops('beginner', { look: ['windows-like'], terminal: ['never'] });
+    expect(['cinnamon', 'plasma', 'mate', 'xfce']).toContain(results[0].desktop.id);
+    expect(results[0].reasons).toContain('windows-like');
+  });
+
+  it('empfiehlt macOS-Umsteigern Pantheon oder GNOME', () => {
+    const { results } = scoreDesktops('beginner', { look: ['macos-like'] });
+    expect(['pantheon', 'gnome', 'budgie']).toContain(results[0].desktop.id);
+  });
+
+  it('schließt bei alter NVIDIA-Karte Wayland-only-Oberflächen aus', () => {
+    const { results } = scoreDesktops('beginner', { gpu: ['nvidia-old'], look: ['clean'] });
+    for (const r of results.filter((x) => x.eligible)) {
+      expect(r.desktop.x11Session, r.desktop.id).not.toBe('none');
+    }
+    expect(results.find((r) => r.desktop.id === 'gnome')?.eligible).toBe(false);
+  });
+
+  it('setzt die ausdrückliche Wahl durch', () => {
+    const { results } = scoreDesktops('advanced', {
+      'desktop-preference': ['xfce'],
+      look: ['macos-like'],
+      'display-setup': ['hdr'],
+    });
+    expect(results[0].desktop.id).toBe('xfce');
+    expect(results[0].reasons).toContain('explicit-choice');
+  });
+
+  it('bevorzugt bei Bildschirmleser-Bedarf GNOME', () => {
+    const { results } = scoreDesktops('advanced', { 'workload-extra': ['accessibility'] });
+    expect(results[0].desktop.id).toBe('gnome');
+    expect(results[0].reasons).toContain('accessibility');
+  });
+
+  it('bevorzugt auf sehr schwacher Hardware sparsame Oberflächen', () => {
+    const { results } = scoreDesktops('beginner', { ram: ['ram-2'], 'hardware-age': ['ancient'] });
+    expect(results[0].desktop.ramFootprintMb).toBeLessThanOrEqual(500);
+  });
+
+  it('nennt bei Plasma das Auslaufen der X11-Sitzung', () => {
+    const { results } = scoreDesktops('advanced', { 'desktop-preference': ['plasma'] });
+    expect(results[0].desktop.id).toBe('plasma');
+    expect(results[0].concerns).toContain('x11-ending');
+  });
+
+  it('hält alle Desktop-Punktzahlen im Bereich 0–100', () => {
+    const { results } = scoreDesktops('expert', {
+      look: ['tweak'], ram: ['ram-4'], 'display-setup': ['hdr', 'touch'], terminal: ['daily'],
+    });
+    for (const r of results) {
+      expect(r.score, r.desktop.id).toBeGreaterThanOrEqual(0);
+      expect(r.score, r.desktop.id).toBeLessThanOrEqual(100);
+    }
+  });
+});
+
+describe('Desktop-Datenbestand', () => {
+  it('gibt für jeden Desktop Sitzungsarten an', () => {
+    for (const de of desktops) {
+      expect(['available', 'ending', 'none'], de.id).toContain(de.x11Session);
+      expect(['default', 'optional', 'none'], de.id).toContain(de.waylandSession);
+    }
+  });
+
+  it('lässt keinen Desktop ohne jede Sitzungsart zurück', () => {
+    for (const de of desktops) {
+      expect(de.x11Session !== 'none' || de.waylandSession !== 'none', de.id).toBe(true);
+    }
+  });
+});
+
+describe('Desktop-Begründungen', () => {
+  it('nennt die X11-Sitzung, wenn die Grafikkarte sie braucht', () => {
+    const { results } = scoreDesktops('beginner', { gpu: ['nvidia-old'], look: ['windows-like'] });
+    expect(results[0].reasons).toContain('x11-needed');
+  });
+
+  it('nennt Einsteigerfreundlichkeit, wenn das Terminal ausgeschlossen wurde', () => {
+    const { results } = scoreDesktops('beginner', { terminal: ['never'], look: ['windows-like'] });
+    expect(results[0].reasons).toContain('beginner');
+  });
+
+  it('vergibt keine Begründung, die in der Oberfläche keinen Text hat', async () => {
+    const { desktopReasonLabels } = await import('../i18n/labels');
+    const answers = { look: ['tweak'], gpu: ['nvidia-old'], terminal: ['never'], ram: ['ram-2'] };
+    for (const r of scoreDesktops('beginner', answers).results) {
+      for (const code of r.reasons) {
+        expect(desktopReasonLabels[code], `${r.desktop.id}: ${code}`).toBeDefined();
+      }
+    }
   });
 });

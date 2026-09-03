@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import type { Distro } from '../data/types';
-import { useApp, type Route } from '../state/app';
+import { useApp, type CompareKind, type Route } from '../state/app';
 import { useI18n } from '../i18n';
 
 /** Interner Link, der über den Hash-Router navigiert. */
@@ -78,10 +78,10 @@ export function YesNo({ value }: { value: boolean }) {
 }
 
 /** Häkchen, um eine Distribution in die engere Wahl zu legen. */
-export function CompareToggle({ id, small }: { id: string; small?: boolean }) {
-  const { compare, toggleCompare } = useApp();
+export function CompareToggle({ id, small, kind = 'distro' }: { id: string; small?: boolean; kind?: CompareKind }) {
+  const { compare, compareDesktops, toggleCompare } = useApp();
   const { t } = useI18n();
-  const active = compare.includes(id);
+  const active = (kind === 'desktop' ? compareDesktops : compare).includes(id);
   return (
     <button
       type="button"
@@ -89,7 +89,7 @@ export function CompareToggle({ id, small }: { id: string; small?: boolean }) {
       aria-pressed={active}
       onClick={(e) => {
         e.stopPropagation();
-        toggleCompare(id);
+        toggleCompare(id, kind);
       }}
     >
       <span aria-hidden="true">{active ? '☑' : '☐'}</span>

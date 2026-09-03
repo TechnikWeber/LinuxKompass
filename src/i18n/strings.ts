@@ -164,8 +164,42 @@ export const ui = {
   resultRefine: { de: 'Antworten anpassen', en: 'Adjust answers' },
   resultDeepen: { de: 'Tiefer nachfragen ({mode})', en: 'Ask deeper questions ({mode})' },
 
+  // --- Desktop-Empfehlung ---
+  desktopPickTitle: { de: 'Und welche Oberfläche?', en: 'And which desktop?' },
+  desktopPickLead: {
+    de: 'Die Oberfläche entscheidet im Alltag oft mehr als die Distribution darunter – und sie lässt sich bei fast jeder Distribution austauschen. Du bist also nicht festgelegt.',
+    en: 'Day to day the desktop often matters more than the distribution beneath it — and on almost any distribution you can swap it. So you are not locked in.',
+  },
+  desktopPickSentence: { de: 'Zu deinen Antworten passt {name}, weil {reasons}.', en: '{name} fits your answers because {reasons}.' },
+  desktopPickSentencePlain: { de: 'Zu deinen Antworten passt {name} am besten.', en: '{name} fits your answers best.' },
+  desktopPickAlternatives: { de: 'Ebenfalls passend', en: 'Also a good fit' },
+  desktopPickInTop: { de: '{distro} bietet {name} als Standard an.', en: '{distro} ships {name} as its default.' },
+  desktopPickAvailable: { de: '{distro} bietet {name} zur Auswahl an.', en: '{distro} offers {name} as an option.' },
+  desktopPickNotAvailable: {
+    de: '{distro} liefert {name} nicht mit. Entweder du nimmst dort den Standard-Desktop, oder du wählst eine Distribution aus der Liste, die {name} anbietet.',
+    en: '{distro} does not ship {name}. Either use its default desktop, or pick a distribution from the list that offers {name}.',
+  },
+  desktopPickAll: { de: 'Alle Desktops ansehen', en: 'See all desktops' },
+  desktopPickCaveat: { de: 'Gut zu wissen', en: 'Worth knowing' },
+  tryLiveTitle: { de: 'Vorher ausprobieren, ohne etwas zu installieren', en: 'Try before installing anything' },
+  tryLiveText: {
+    de: 'Auf DistroSea lassen sich über 80 Distributionen und deren Oberflächen direkt im Browser starten. Das ersetzt keinen Test auf der eigenen Hardware – dafür braucht es einen USB-Stick –, aber für den ersten Eindruck von Bedienkonzept und Optik reicht es völlig.',
+    en: 'DistroSea runs over 80 distributions and their desktops straight in your browser. It does not replace a test on your own hardware — that needs a USB stick — but for a first impression of look and feel it is more than enough.',
+  },
+  tryLiveLink: { de: 'DistroSea öffnen', en: 'Open DistroSea' },
+  tryLiveDisclaimer: {
+    de: 'Externes Angebot, nicht von uns betrieben.',
+    en: 'External service, not operated by us.',
+  },
+
   // --- Vergleich ---
   compareTitle: { de: 'Vergleich', en: 'Comparison' },
+  compareDistros: { de: 'Distributionen', en: 'Distributions' },
+  compareDesktops: { de: 'Desktop-Umgebungen', en: 'Desktop environments' },
+  compareBothHint: {
+    de: 'Distributionen und Oberflächen werden getrennt verglichen – sie haben unterschiedliche Merkmale und schließen sich nicht aus.',
+    en: 'Distributions and desktops are compared separately — they have different attributes and do not exclude one another.',
+  },
   compareEmpty: {
     de: 'Noch nichts ausgewählt. Setze auf einer Distribution ein Häkchen, um sie hier zu vergleichen.',
     en: 'Nothing selected yet. Tick a distribution to compare it here.',
