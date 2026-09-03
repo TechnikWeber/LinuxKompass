@@ -46,7 +46,7 @@ export const enterprise: Distro[] = [
     checkedAt: CHECKED,
     sources: [
       { label: 'AlmaLinux', url: 'https://almalinux.org/' },
-      { label: 'AlmaLinux EOL-Übersicht', url: 'https://endoflife.date/almalinux' },
+      { label: 'AlmaLinux end-of-life dates', url: 'https://endoflife.date/almalinux' },
     ],
   },
 
@@ -177,7 +177,7 @@ export const enterprise: Distro[] = [
     firstSteps: { de: ['Paketquelle auf pve-no-subscription umstellen (privat)', 'Erste VM anlegen und Sicherungsziel einrichten'], en: ['Switch the repository to pve-no-subscription (for private use)', 'Create a first VM and configure a backup target'] },
     checkedAt: CHECKED,
     sources: [
-      { label: 'Proxmox VE 9.0', url: 'https://www.proxmox.com/en/about/company-details/press-releases/proxmox-virtual-environment-9-0' },
+      { label: 'Proxmox VE 9.0 press release', url: 'https://www.proxmox.com/en/about/company-details/press-releases/proxmox-virtual-environment-9-0' },
       { label: 'Proxmox VE arm64 (CNX Software)', url: 'https://www.cnx-software.com/2026/08/07/proxmox-ve-now-officially-supports-64-bit-arm-aarch64-targets/' },
     ],
   },

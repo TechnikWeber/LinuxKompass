@@ -60,6 +60,9 @@ export function Layout({ children }: { children: ReactNode }) {
             <Link to={{ name: 'browse' }} className="navlink">
               {t('navBrowse')}
             </Link>
+            <Link to={{ name: 'desktops' }} className="navlink">
+              {t('navDesktops')}
+            </Link>
             <Link to={{ name: 'compare' }} className="navlink">
               {t('navCompare')}
             </Link>
@@ -80,7 +83,7 @@ export function Layout({ children }: { children: ReactNode }) {
         <div className="container colophon__grid">
           <div>
             <h4>{t('appName')}</h4>
-            <p style={{ maxWidth: '32ch' }}>{t('heroLead').split('.')[0]}.</p>
+            <p style={{ maxWidth: '34ch' }}>{t('footerBlurb')}</p>
           </div>
           <div>
             <h4>{t('navStart')}</h4>
@@ -90,6 +93,9 @@ export function Layout({ children }: { children: ReactNode }) {
               </li>
               <li>
                 <Link to={{ name: 'browse' }}>{t('navBrowse')}</Link>
+              </li>
+              <li>
+                <Link to={{ name: 'desktops' }}>{t('navDesktops')}</Link>
               </li>
               <li>
                 <Link to={{ name: 'compare' }}>{t('navCompare')}</Link>

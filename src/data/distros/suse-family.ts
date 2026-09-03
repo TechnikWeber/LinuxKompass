@@ -88,7 +88,7 @@ export const suseFamily: Distro[] = [
     firstSteps: { de: ['Packman einbinden und Codecs wechseln', 'Cockpit für die Systemverwaltung im Browser einrichten'], en: ['Add Packman and switch codecs', 'Set up Cockpit for browser-based administration'] },
     checkedAt: CHECKED,
     sources: [
-      { label: 'openSUSE Leap 16 Release', url: 'https://news.opensuse.org/2025/10/01/next-chapter-opens-with-leap-release/' },
+      { label: 'openSUSE Leap 16 release announcement', url: 'https://news.opensuse.org/2025/10/01/next-chapter-opens-with-leap-release/' },
       { label: 'The last of YaST? (LWN)', url: 'https://lwn.net/Articles/1020408/' },
     ],
   },

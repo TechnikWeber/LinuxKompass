@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { Distro, L10n } from '../data/types';
+import type { Distro } from '../data/types';
 import { useApp, type Route } from '../state/app';
 import { useI18n } from '../i18n';
 
@@ -96,28 +96,4 @@ export function CompareToggle({ id, small }: { id: string; small?: boolean }) {
       {active ? t('compareAdded') : t('compareAdd')}
     </button>
   );
-}
-
-export function Explainer({ summary, children }: { summary: string; children: ReactNode }) {
-  return (
-    <details className="explainer">
-      <summary>{summary}</summary>
-      <div>{children}</div>
-    </details>
-  );
-}
-
-export function L10nList({ items }: { items: string[] }) {
-  return (
-    <ul>
-      {items.map((item) => (
-        <li key={item}>{item}</li>
-      ))}
-    </ul>
-  );
-}
-
-export function useText() {
-  const { tl, tls } = useI18n();
-  return { text: (v: L10n | undefined) => tl(v), list: (v: { de: string[]; en: string[] } | undefined) => tls(v) };
 }

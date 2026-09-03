@@ -9,5 +9,13 @@ export default defineConfig(({ command }) => ({
   build: {
     outDir: 'dist',
     sourcemap: false,
+    rollupOptions: {
+      output: {
+        // Der Datenbestand ändert sich häufiger als die Bibliotheken.
+        // Getrennte Bündel halten den Browser-Cache dafür länger gültig.
+        manualChunks: (id: string) =>
+          id.includes('/src/data/') ? 'data' : id.includes('node_modules') ? 'vendor' : undefined,
+      },
+    },
   },
 }));

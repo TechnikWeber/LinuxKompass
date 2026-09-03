@@ -45,7 +45,7 @@ export const independent: Distro[] = [
     firstSteps: { de: ['configuration.nix in eine Versionsverwaltung legen', 'Mit „nix-shell" oder Flakes Projektumgebungen ausprobieren', 'Home Manager erst nach den Grundlagen angehen'], en: ['Put configuration.nix under version control', 'Try project environments with "nix-shell" or flakes', 'Approach Home Manager only after the basics'] },
     checkedAt: CHECKED,
     sources: [
-      { label: 'NixOS 26.05 Release', url: 'https://nixos.org/blog/announcements/2026/nixos-2605/' },
+      { label: 'NixOS 26.05 release', url: 'https://nixos.org/blog/announcements/2026/nixos-2605/' },
     ],
   },
 
@@ -134,7 +134,7 @@ export const independent: Distro[] = [
     checkedAt: CHECKED,
     sources: [
       { label: 'Gentoo Linux', url: 'https://www.gentoo.org/' },
-      { label: 'Gentoo Binärpakete (Linuxiac)', url: 'https://linuxiac.com/gentoo-focuses-on-binary-packages/' },
+      { label: 'Gentoo binary packages (Linuxiac)', url: 'https://linuxiac.com/gentoo-focuses-on-binary-packages/' },
     ],
   },
 
@@ -220,7 +220,9 @@ export const independent: Distro[] = [
     warnings: { de: ['Die eigene Paketsammlung ist deutlich kleiner als bei Debian, Fedora oder Arch – Flatpak gleicht vieles aus, aber nicht alles.', 'Das Projekt hatte in der Vergangenheit Phasen mit sehr wenig Aktivität.'], en: ['The in-house package collection is much smaller than Debian’s, Fedora’s or Arch’s — Flatpak covers a lot, but not everything.', 'The project has had phases of very low activity in the past.'] },
     firstSteps: { de: ['Softwarezentrum öffnen und Flathub-Quelle prüfen', 'Treiberwerkzeug für NVIDIA nutzen'], en: ['Open the software centre and check the Flathub source', 'Use the driver tool for NVIDIA'] },
     checkedAt: CHECKED,
-    sources: [{ label: 'Solus 4.9', url: 'https://getsol.us/2026/04/solus-4-9-released/' }],
+    sources: [
+      { label: 'Solus 4.9 "Serenity" release', url: 'https://getsol.us/2026/04/solus-4-9-released/' },
+    ],
   },
 
   {

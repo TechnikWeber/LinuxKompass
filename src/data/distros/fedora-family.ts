@@ -134,7 +134,7 @@ export const fedoraFamily: Distro[] = [
     checkedAt: CHECKED,
     sources: [
       { label: 'Fedora Atomic Desktops', url: 'https://fedoraproject.org/atomic-desktops/' },
-      { label: 'Atomic Desktops in Fedora 44', url: 'https://fedoramagazine.org/whats-new-fedora-atomic-desktops-in-fedora-linux-44/' },
+      { label: 'Fedora Atomic Desktops in Fedora 44', url: 'https://fedoramagazine.org/whats-new-fedora-atomic-desktops-in-fedora-linux-44/' },
     ],
   },
 

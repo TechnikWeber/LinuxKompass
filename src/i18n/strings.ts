@@ -16,7 +16,12 @@ export const ui = {
   navQuiz: { de: 'Fragebogen', en: 'Questionnaire' },
   navBrowse: { de: 'Alle Distributionen', en: 'All distributions' },
   navCompare: { de: 'Vergleich', en: 'Comparison' },
+  navDesktops: { de: 'Desktops', en: 'Desktops' },
   navAbout: { de: 'Über das Projekt', en: 'About' },
+  footerBlurb: {
+    de: 'Entscheidungshilfe für den Umstieg auf Linux. Quelloffen, ohne Werbung, ohne Nutzerverfolgung.',
+    en: 'A decision aid for moving to Linux. Open source, no ads, no tracking.',
+  },
 
   // --- Startseite ---
   heroKicker: { de: 'Entscheidungshilfe, keine Rangliste', en: 'A decision aid, not a leaderboard' },
@@ -263,6 +268,23 @@ export const ui = {
   no: { de: 'nein', en: 'no' },
   none: { de: 'keiner', en: 'none' },
   gb: { de: 'GB', en: 'GB' },
+
+  // --- Desktops ---
+  desktopsTitle: { de: 'Desktop-Umgebungen', en: 'Desktop environments' },
+  desktopsLead: {
+    de: 'Für den Alltag entscheidet die Oberfläche oft mehr als die Distribution darunter. Fast jede Distribution bietet mehrere an – hier stehen sie im Vergleich.',
+    en: 'Day to day, the desktop often matters more than the distribution beneath it. Almost every distribution offers several — here they are side by side.',
+  },
+  desktopFeelsLike: { de: 'Fühlt sich an wie', en: 'Feels like' },
+  desktopMemory: { de: 'Speicher im Leerlauf', en: 'Idle memory use' },
+  desktopWayland: { de: 'Wayland-Stand', en: 'Wayland status' },
+  desktopStrengths: { de: 'Stärken', en: 'Strengths' },
+  desktopTradeoffs: { de: 'Preis dafür', en: 'Trade-offs' },
+  desktopAccessibility: { de: 'Barrierefreiheit', en: 'Accessibility' },
+  desktopTouch: { de: 'Touch-Bedienung', en: 'Touch support' },
+  desktopCustomizability: { de: 'Anpassbarkeit', en: 'Configurability' },
+  desktopUsedBy: { de: 'Standard bei', en: 'Default in' },
+  desktopAvailableIn: { de: 'Wählbar bei {n} Distributionen', en: 'Selectable in {n} distributions' },
 
   // --- Über ---
   aboutTitle: { de: 'Über LinuxKompass', en: 'About LinuxKompass' },

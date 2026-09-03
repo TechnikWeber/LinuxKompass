@@ -46,7 +46,7 @@ export const archFamily: Distro[] = [
     checkedAt: CHECKED,
     sources: [
       { label: 'Arch Linux', url: 'https://archlinux.org/' },
-      { label: 'ArchWiki Installation Guide', url: 'https://wiki.archlinux.org/title/Installation_guide' },
+      { label: 'ArchWiki installation guide', url: 'https://wiki.archlinux.org/title/Installation_guide' },
     ],
   },
 

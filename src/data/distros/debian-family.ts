@@ -46,7 +46,7 @@ export const debianFamily: Distro[] = [
     firstSteps: { de: ['contrib und non-free-firmware in /etc/apt/sources.list aktivieren', 'backports einrichten, wenn Hardware zu neu ist', 'Flathub für aktuelle Desktop-Programme hinzufügen'], en: ['Enable contrib and non-free-firmware in /etc/apt/sources.list', 'Set up backports if your hardware is too new', 'Add Flathub for current desktop applications'] },
     checkedAt: CHECKED,
     sources: [
-      { label: 'Debian 13.6 Release', url: 'https://www.debian.org/News/2026/20260711' },
+      { label: 'Debian 13.6 release', url: 'https://www.debian.org/News/2026/20260711' },
       { label: 'Debian Releases', url: 'https://www.debian.org/releases/' },
     ],
   },
@@ -58,14 +58,14 @@ export const debianFamily: Distro[] = [
     accent: '96 40% 35%',
     tagline: { de: 'Mint-Bedienkomfort ohne Ubuntu darunter.', en: 'The Mint experience without Ubuntu underneath.' },
     description: {
-      de: 'LMDE ist die Rückversicherung des Mint-Teams: derselbe Cinnamon-Desktop, dieselben Werkzeuge, aber direkt auf Debian statt auf Ubuntu. Wer Mint mag, aber Snap, Canonical-Entscheidungen oder die Ubuntu-Zwischenschicht meiden will, bekommt hier praktisch dasselbe System.',
-      en: 'LMDE is the Mint team’s insurance policy: the same Cinnamon desktop and tools, but built directly on Debian rather than Ubuntu. If you like Mint but want to avoid snaps, Canonical’s decisions or the Ubuntu layer, you get practically the same system here.',
+      de: 'LMDE ist die Rückversicherung des Mint-Teams: derselbe Cinnamon-Desktop, dieselben Werkzeuge, aber direkt auf Debian statt auf Ubuntu. Ausgabe 7 „Gigi" erschien im Oktober 2025 auf Basis von Debian 13 mit dem LTS-Kernel 6.12. Wer Mint mag, aber Snap, Canonical-Entscheidungen oder die Ubuntu-Zwischenschicht meiden will, bekommt hier praktisch dasselbe System.',
+      en: 'LMDE is the Mint team’s insurance policy: the same Cinnamon desktop and tools, but built directly on Debian rather than Ubuntu. Release 7 "Gigi" arrived in October 2025 on a Debian 13 base with the 6.12 LTS kernel. If you like Mint but want to avoid snaps, Canonical’s decisions or the Ubuntu layer, you get practically the same system here.',
     },
     website: 'https://linuxmint.com/download_lmde.php',
     downloadUrl: 'https://linuxmint.com/download_lmde.php',
     germanResourceUrl: 'https://linuxmintusers.de',
     basedOn: 'debian', family: 'debian', originCountry: 'IE / FR', firstRelease: 2010, governance: 'community',
-    currentVersion: 'LMDE 7 (Basis Debian 13 „Trixie")', currentVersionDate: '2026-01',
+    currentVersion: 'LMDE 7 „Gigi"', currentVersionDate: '2025-10',
     supportUntil: { de: 'Entlang von Debian 13: Vollsupport bis August 2028.', en: 'In line with Debian 13: full support until August 2028.' },
     releaseModel: 'lts',
     releaseCadence: { de: 'Eine Ausgabe pro Debian-Hauptversion, also etwa alle zwei Jahre.', en: 'One release per Debian major version, roughly every two years.' },
@@ -91,7 +91,10 @@ export const debianFamily: Distro[] = [
     warnings: { de: ['Nur Cinnamon, keine anderen Desktop-Ausgaben.', 'Debian-Basis bedeutet weniger Firmware ab Werk als bei Ubuntu-basierten Ausgaben – bei sehr neuen WLAN-Chips vorher im Live-System testen.'], en: ['Cinnamon only, no other desktop editions.', 'A Debian base means less firmware out of the box than Ubuntu-based editions — test very new Wi-Fi chips in the live session first.'] },
     firstSteps: { de: ['Live-System zuerst testen, ob WLAN und Grafik laufen', 'Timeshift einrichten'], en: ['Test the live session first for Wi-Fi and graphics', 'Set up Timeshift'] },
     checkedAt: CHECKED,
-    sources: [{ label: 'LMDE Download', url: 'https://linuxmint.com/download_lmde.php' }],
+    sources: [
+      { label: 'LMDE Download', url: 'https://linuxmint.com/download_lmde.php' },
+      { label: 'LMDE 7 "Gigi" release announcement', url: 'https://blog.linuxmint.com/?p=4885' },
+    ],
   },
 
   {
@@ -136,7 +139,7 @@ export const debianFamily: Distro[] = [
     checkedAt: CHECKED,
     sources: [
       { label: 'MX Linux 25.2', url: 'https://mxlinux.org/blog/' },
-      { label: 'MX Linux 25 auf Debian 13 (Linuxiac)', url: 'https://linuxiac.com/mx-linux-25-officially-released-with-debian-13-base/' },
+      { label: 'MX Linux 25 on Debian 13 (Linuxiac)', url: 'https://linuxiac.com/mx-linux-25-officially-released-with-debian-13-base/' },
     ],
   },
 

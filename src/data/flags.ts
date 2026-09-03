@@ -68,7 +68,7 @@ export const flags: Flag[] = [
         'If client files have to go back in Adobe formats, dual boot or a second device is the honest answer rather than any workaround.',
       ],
     },
-    links: [{ label: 'DaVinci Resolve für Linux', url: 'https://www.blackmagicdesign.com/products/davinciresolve' }, { label: 'Krita', url: 'https://krita.org' }],
+    links: [{ label: 'DaVinci Resolve', url: 'https://www.blackmagicdesign.com/products/davinciresolve' }, { label: 'Krita', url: 'https://krita.org' }],
   },
   {
     id: 'cad',

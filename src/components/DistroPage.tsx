@@ -177,7 +177,13 @@ export function DistroPage({ id }: { id: string }) {
               <YesNo value={distro.aur} />
             </Fact>
             <Fact label={t('fieldDefaultDesktop')}>
-              {distro.defaultDesktop === 'none' ? t('none') : desktopById.get(distro.defaultDesktop)?.name ?? distro.defaultDesktop}
+              {distro.defaultDesktop === 'none' ? (
+                t('none')
+              ) : (
+                <Link to={{ name: 'desktops' }}>
+                  {desktopById.get(distro.defaultDesktop)?.name ?? distro.defaultDesktop}
+                </Link>
+              )}
             </Fact>
             <Fact label={t('fieldDesktops')}>
               {distro.availableDesktops.length === 0

@@ -91,7 +91,7 @@ export const ubuntuDerivatives: Distro[] = [
     firstSteps: { de: ['Zorin Appearance öffnen und das gewünschte Layout wählen', 'Zorin Connect für das Smartphone einrichten'], en: ['Open Zorin Appearance and choose your layout', 'Set up Zorin Connect for your phone'] },
     checkedAt: CHECKED,
     sources: [
-      { label: 'Zorin OS 18.1 Release', url: 'https://blog.zorin.com/2026/04/15/zorin-os-18.1-is-released/' },
+      { label: 'Zorin OS 18.1 release', url: 'https://blog.zorin.com/2026/04/15/zorin-os-18.1-is-released/' },
     ],
   },
 
@@ -179,7 +179,7 @@ export const ubuntuDerivatives: Distro[] = [
     checkedAt: CHECKED,
     sources: [
       { label: 'TUXEDO OS', url: 'https://www.tuxedocomputers.com/os' },
-      { label: 'Rebase auf Debian (OMG! Ubuntu, Juli 2026)', url: 'https://www.omgubuntu.co.uk/2026/07/slug-tuxedo-os-debian-rebase' },
+      { label: 'TUXEDO OS rebase on Debian (OMG! Ubuntu, 2026-07)', url: 'https://www.omgubuntu.co.uk/2026/07/slug-tuxedo-os-debian-rebase' },
     ],
   },
 

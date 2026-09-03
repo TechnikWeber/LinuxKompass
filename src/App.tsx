@@ -9,6 +9,7 @@ import { ResultPage } from './components/ResultPage';
 import { BrowsePage } from './components/BrowsePage';
 import { DistroPage } from './components/DistroPage';
 import { ComparePage } from './components/ComparePage';
+import { DesktopsPage } from './components/DesktopsPage';
 import { AboutPage } from './components/AboutPage';
 import { CompareTray } from './components/CompareTray';
 import { getDistro } from './data/distros';
@@ -26,6 +27,7 @@ function useDocumentTitle() {
       : route.name === 'result' ? t('resultTitle')
       : route.name === 'browse' ? t('navBrowse')
       : route.name === 'compare' ? t('navCompare')
+      : route.name === 'desktops' ? t('desktopsTitle')
       : t('navAbout');
     document.title = suffix ? `${app} – ${suffix}` : app;
   }, [route, t, lang]);
@@ -44,6 +46,7 @@ export default function App() {
       {route.name === 'browse' && <BrowsePage />}
       {route.name === 'distro' && <DistroPage id={route.id} />}
       {route.name === 'compare' && <ComparePage />}
+      {route.name === 'desktops' && <DesktopsPage />}
       {route.name === 'about' && <AboutPage />}
       <CompareTray />
     </Layout>

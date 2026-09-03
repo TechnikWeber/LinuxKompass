@@ -93,7 +93,7 @@ export function QuizPage() {
                 )}
               </div>
 
-              <div className="stack stack-sm" role={isMulti ? 'group' : 'radiogroup'} aria-label={tl(current.title)}>
+              <div className="stack stack-sm" role="group" aria-label={tl(current.title)}>
                 {current.options.map((option) => {
                   const active = selected.includes(option.id);
                   return (

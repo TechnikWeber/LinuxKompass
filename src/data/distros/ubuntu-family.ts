@@ -103,7 +103,7 @@ export const ubuntuFamily: Distro[] = [
     },
     checkedAt: CHECKED,
     sources: [
-      { label: 'Ubuntu 26.04 LTS Release Notes', url: 'https://documentation.ubuntu.com/release-notes/26.04/' },
+      { label: 'Ubuntu 26.04 LTS release notes', url: 'https://documentation.ubuntu.com/release-notes/26.04/' },
       { label: 'Ubuntu release cycle', url: 'https://ubuntu.com/about/release-cycle' },
     ],
   },
@@ -208,7 +208,7 @@ export const ubuntuFamily: Distro[] = [
     checkedAt: CHECKED,
     sources: [
       { label: 'Linux Mint Releases', url: 'https://linuxmint.com/download_all.php' },
-      { label: 'Mint 23 auf Ubuntu 26.04 (Phoronix)', url: 'https://www.phoronix.com/news/Mint-23-Alfa' },
+      { label: 'Mint 23 on Ubuntu 26.04 (Phoronix)', url: 'https://www.phoronix.com/news/Mint-23-Alfa' },
     ],
   },
 
@@ -301,7 +301,7 @@ export const ubuntuFamily: Distro[] = [
     },
     checkedAt: CHECKED,
     sources: [
-      { label: 'Kubuntu 26.04 release', url: 'https://kubuntu.org/news/' },
+      { label: 'Kubuntu news', url: 'https://kubuntu.org/news/' },
       { label: 'Ubuntu flavours', url: 'https://ubuntu.com/desktop/flavors' },
     ],
   },

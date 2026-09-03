@@ -11,6 +11,7 @@ export type Route =
   | { name: 'browse' }
   | { name: 'distro'; id: string }
   | { name: 'compare' }
+  | { name: 'desktops' }
   | { name: 'about' };
 
 // ---------------------------------------------------------------------------
@@ -101,6 +102,7 @@ function parseHash(): { route: Route; params: URLSearchParams } {
     case 'result': route = { name: 'result' }; break;
     case 'browse': route = { name: 'browse' }; break;
     case 'compare': route = { name: 'compare' }; break;
+    case 'desktops': route = { name: 'desktops' }; break;
     case 'about': route = { name: 'about' }; break;
     case 'distro': if (segments[1]) route = { name: 'distro', id: segments[1] }; break;
     default: route = { name: 'home' };
@@ -153,10 +155,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [route, setRoute] = useState<Route>(() => parseHash().route);
   const [theme, setThemeState] = useState<'light' | 'dark' | 'system'>(readTheme);
   const [hydrated, setHydrated] = useState(false);
+  // Spiegel des Zustands für den hashchange-Listener, der nur einmal
+  // registriert wird und trotzdem den aktuellen Stand sehen muss.
   const stateRef = useRef(state);
-  stateRef.current = state;
+  useEffect(() => {
+    stateRef.current = state;
+  }, [state]);
 
-  // Beim ersten Laden Zustand aus der Adresszeile übernehmen.
+  // Beim ersten Laden Zustand aus der Adresszeile übernehmen. Die Adresszeile
+  // ist hier das externe System, mit dem synchronisiert wird.
   useEffect(() => {
     const { route: r, params } = parseHash();
     const loaded: Partial<State> = {};
