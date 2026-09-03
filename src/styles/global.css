@@ -470,14 +470,24 @@ details.explainer > div { padding: 0 0.85rem 0.85rem; font-size: var(--step--1);
    Auswahlleiste für den Vergleich
    -------------------------------------------------------------------------- */
 
+/* Fest am unteren Rand statt sticky: Ein sticky-Element kann sich nur
+   innerhalb seines eigenen Containers verschieben. Als dessen letztes Kind
+   hätte es keinen Spielraum und würde einfach am Seitenende liegen. */
 .traybar {
-  position: sticky; bottom: 0; z-index: 25;
+  position: fixed; inset: auto 0 0 0; z-index: 25;
   background: var(--paper-raised); border-top: 1px solid var(--rule-strong);
-  box-shadow: 0 -4px 20px rgb(28 27 25 / 0.06);
+  box-shadow: 0 -4px 20px rgb(28 27 25 / 0.08);
   padding-block: 0.6rem;
 }
+/* Platz freihalten, damit die Leiste den Seitenfuß nicht verdeckt. */
+.shell:has(.traybar) { padding-bottom: 5.5rem; }
 .traybar__inner { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
-.traybar__items { display: flex; gap: 0.35rem; flex-wrap: wrap; flex: 1 1 auto; }
+/* Ohne den Reset zeichnet der Browser seine Aufzählungspunkte weiterhin –
+   im Flex-Layout landen sie dann unter den Chips statt davor. */
+.traybar__items {
+  display: flex; gap: 0.35rem; flex-wrap: wrap; flex: 1 1 auto;
+  list-style: none; padding: 0; margin: 0;
+}
 
 /* --------------------------------------------------------------------------
    Druck

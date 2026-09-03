@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { useI18n } from '../i18n';
 import { useApp } from '../state/app';
 import { Link } from './common';
+import { CompareTray } from './CompareTray';
 import { distros } from '../data/distros';
 
 const CHECK_DATE = distros[0]?.checkedAt ?? '';
@@ -128,6 +129,8 @@ export function Layout({ children }: { children: ReactNode }) {
           </div>
         </div>
       </footer>
+
+      <CompareTray />
     </div>
   );
 }

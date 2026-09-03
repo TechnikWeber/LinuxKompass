@@ -11,7 +11,6 @@ import { DistroPage } from './components/DistroPage';
 import { ComparePage } from './components/ComparePage';
 import { DesktopsPage } from './components/DesktopsPage';
 import { AboutPage } from './components/AboutPage';
-import { CompareTray } from './components/CompareTray';
 import { getDistro } from './data/distros';
 
 /** Setzt den Seitentitel passend zur Ansicht – wichtig für Verlauf und Vorlesen. */
@@ -48,7 +47,6 @@ export default function App() {
       {route.name === 'compare' && <ComparePage />}
       {route.name === 'desktops' && <DesktopsPage />}
       {route.name === 'about' && <AboutPage />}
-      <CompareTray />
     </Layout>
   );
 }
