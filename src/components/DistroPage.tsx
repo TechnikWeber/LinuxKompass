@@ -6,7 +6,7 @@ import {
   ratingHelp, ratingLabels, releaseModelLabels, secureBootLabels, useI18n,
 } from '../i18n';
 import type { RatingKey } from '../data/types';
-import { CompareToggle, Fact, Link, Meter, Monogram, YesNo } from './common';
+import { CompareToggle, DefaultDesktopLabel, Fact, Link, Meter, Monogram, YesNo } from './common';
 
 const RATING_ORDER: RatingKey[] = [
   'beginnerFriendly', 'stability', 'freshness', 'hardwareSupport', 'lightweight', 'gaming',
@@ -61,8 +61,12 @@ export function DistroPage({ id }: { id: string }) {
           </p>
 
           <ul className="chiprow">
-            <li className="chip chip--accent">{tl(familyLabels[distro.family])}</li>
+            <li className="chip">{tl(familyLabels[distro.family])}</li>
             <li className="chip">{tl(releaseModelLabels[distro.releaseModel])}</li>
+            {/* Blau steht in jeder Ansicht für die Desktop-Aussage. */}
+            <li className="chip chip--accent">
+              <DefaultDesktopLabel distro={distro} />
+            </li>
             <li className="chip">{distro.currentVersion}</li>
             {distro.audiences.map((a) => (
               <li key={a} className="chip">

@@ -96,7 +96,7 @@ export function TriagePage() {
                 className="btn btn--primary"
                 onClick={() => {
                   setMode(active, true);
-                  navigate({ name: 'quiz' });
+                  navigate({ name: 'quiz' }, { mode: active });
                 }}
               >
                 {t('modeContinue')} <span aria-hidden="true">→</span>
@@ -112,7 +112,7 @@ export function TriagePage() {
               className="btn btn--quiet"
               onClick={() => {
                 setMode(mode, true);
-                navigate({ name: 'quiz' });
+                navigate({ name: 'quiz' }, { mode });
               }}
             >
               {t('triageSkip')}

@@ -37,7 +37,7 @@ export function HomePage() {
             {t('heroLead')}
           </p>
           <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '1.75rem' }}>
-            <Link to={{ name: 'triage' }} className="btn btn--primary">
+            <Link to={{ name: 'triage' }} className="btn btn--primary" fresh>
               {t('heroStart')} <span aria-hidden="true">→</span>
             </Link>
             <Link to={{ name: 'browse' }} className="btn">

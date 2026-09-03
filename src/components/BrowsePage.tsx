@@ -31,7 +31,8 @@ function DistroTile({ distro }: { distro: Distro }) {
       <p style={{ margin: 0, color: 'var(--ink-muted)', fontSize: 'var(--step--1)' }}>{tl(distro.tagline)}</p>
       <ul className="chiprow">
         <li className="chip">{tl(releaseModelShort[distro.releaseModel])}</li>
-        <li className="chip">
+        {/* Blau steht in jeder Ansicht für die Desktop-Aussage. */}
+        <li className="chip chip--accent">
           <DefaultDesktopLabel distro={distro} />
         </li>
         <li className="chip">{tl(installerShort[distro.installer])}</li>

@@ -135,9 +135,22 @@ export function routeToPath(route: Route): string {
 // Kontext
 // ---------------------------------------------------------------------------
 
+/**
+ * Zustand, der beim Navigieren von der Adresszeile abweichen darf.
+ *
+ * Wer den Modus wechselt oder den Fragebogen neu startet und im selben
+ * Klick weiternavigiert, sieht den frischen Wert noch nicht im `state`:
+ * der Reducer läuft erst nach dem Ereignis. Ohne diese Mitgabe schriebe
+ * die Adresszeile den alten Stand fest und holte ihn gleich zurück.
+ */
+export interface NavigateOverrides {
+  mode?: Mode;
+  answers?: Answers;
+}
+
 interface AppContextValue extends State {
   route: Route;
-  navigate: (route: Route, options?: { withState?: boolean }) => void;
+  navigate: (route: Route, options?: { withState?: boolean } & NavigateOverrides) => void;
   setMode: (mode: Mode, chosen?: boolean) => void;
   setAnswer: (questionId: string, optionIds: string[]) => void;
   reset: () => void;
@@ -244,12 +257,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [theme]);
 
   const buildHash = useCallback(
-    (target: Route, withState: boolean) => {
+    (target: Route, withState: boolean, overrides?: NavigateOverrides) => {
       const base = routeToPath(target);
       if (!withState) return base;
       const params = new URLSearchParams();
-      params.set('m', state.mode);
-      const encoded = encodeAnswers(state.answers);
+      params.set('m', overrides?.mode ?? state.mode);
+      const encoded = encodeAnswers(overrides?.answers ?? state.answers);
       if (encoded) params.set('a', encoded);
       if (state.compare.length > 0) params.set('c', state.compare.join('.'));
       if (state.compareDesktops.length > 0) params.set('cd', state.compareDesktops.join('.'));
@@ -259,9 +272,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
   );
 
   const navigate = useCallback(
-    (target: Route, options?: { withState?: boolean }) => {
+    (target: Route, options?: { withState?: boolean } & NavigateOverrides) => {
       const withState = options?.withState ?? ['result', 'quiz', 'compare'].includes(target.name);
-      window.location.hash = buildHash(target, withState);
+      window.location.hash = buildHash(target, withState, options);
       window.scrollTo({ top: 0, behavior: 'auto' });
     },
     [buildHash],

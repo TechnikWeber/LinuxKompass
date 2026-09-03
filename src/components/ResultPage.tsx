@@ -49,7 +49,7 @@ export function ResultPage() {
             </p>
           </div>
           <div>
-            <Link to={{ name: 'triage' }} className="btn btn--primary">
+            <Link to={{ name: 'triage' }} className="btn btn--primary" fresh>
               {t('heroStart')}
             </Link>
           </div>
@@ -98,7 +98,7 @@ export function ResultPage() {
                 className="btn btn--small"
                 onClick={() => {
                   setMode(deeperMode);
-                  navigate({ name: 'quiz' });
+                  navigate({ name: 'quiz' }, { mode: deeperMode });
                 }}
               >
                 {t('resultDeepen', { mode: deeperLabel })}

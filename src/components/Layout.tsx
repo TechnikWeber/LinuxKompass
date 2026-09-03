@@ -65,7 +65,9 @@ export function Layout({ children }: { children: ReactNode }) {
             {t('appName')}
           </Link>
           <nav className="masthead__nav" aria-label={t('appName')}>
-            <Link to={{ name: 'quiz' }} className="navlink">
+            {/* Der Fragebogen beginnt bei der Einstufung – aus der Navigation
+                heraus also immer von vorn, nicht mitten in alten Antworten. */}
+            <Link to={{ name: 'triage' }} className="navlink" fresh>
               {t('navQuiz')}
             </Link>
             <Link to={{ name: 'browse' }} className="navlink">
@@ -100,7 +102,7 @@ export function Layout({ children }: { children: ReactNode }) {
             <h4>{t('navStart')}</h4>
             <ul className="stack-sm stack">
               <li>
-                <Link to={{ name: 'triage' }}>{t('navQuiz')}</Link>
+                <Link to={{ name: 'triage' }} fresh>{t('navQuiz')}</Link>
               </li>
               <li>
                 <Link to={{ name: 'browse' }}>{t('navBrowse')}</Link>

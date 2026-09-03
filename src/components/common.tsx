@@ -4,16 +4,24 @@ import { useApp, type CompareKind, type Route } from '../state/app';
 import { useI18n } from '../i18n';
 import { desktopById } from '../data/desktops';
 
-/** Interner Link, der über den Hash-Router navigiert. */
+/**
+ * Interner Link, der über den Hash-Router navigiert.
+ *
+ * `fresh` kennzeichnet die Einstiege in den Fragebogen: Wer ihn öffnet,
+ * will von vorn anfangen und nicht die Antworten von vorhin vorfinden.
+ * Wer schon mittendrin ist, öffnet ihn nicht neu – dort bleibt alles
+ * stehen, sonst löschte ein Fehlklick in der Navigation die halbe Arbeit.
+ */
 export function Link({
-  to, children, className, withState, ...rest
+  to, children, className, withState, fresh, ...rest
 }: {
   to: Route;
   children: ReactNode;
   className?: string;
   withState?: boolean;
+  fresh?: boolean;
 } & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'>) {
-  const { navigate, route } = useApp();
+  const { navigate, route, reset } = useApp();
   const isCurrent = route.name === to.name && (to.name !== 'distro' || (route as { id?: string }).id === to.id);
   return (
     <a
@@ -22,7 +30,14 @@ export function Link({
       aria-current={isCurrent ? 'page' : undefined}
       onClick={(e) => {
         e.preventDefault();
-        navigate(to, withState === undefined ? undefined : { withState });
+        const restart = Boolean(fresh) && route.name !== 'triage' && route.name !== 'quiz';
+        if (restart) reset();
+        navigate(to, {
+          ...(withState === undefined ? undefined : { withState }),
+          // Der Reducer läuft erst nach dem Klick: Ohne diese Mitgabe stünden
+          // die verworfenen Antworten noch in der Adresszeile.
+          ...(restart ? { answers: {} } : undefined),
+        });
       }}
       {...rest}
     >

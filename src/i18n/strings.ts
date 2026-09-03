@@ -153,6 +153,7 @@ export const ui = {
   },
   resultWhyTitle: { de: 'Warum diese Empfehlung', en: 'Why this recommendation' },
   resultBreakdown: { de: 'Punkteherkunft', en: 'Where the points come from' },
+  resultMatchedTag: { de: 'Passt zu deinen Angaben', en: 'Matches your answers' },
   resultStrengths: { de: 'Spricht dafür', en: 'In favour' },
   resultWeaknesses: { de: 'Spricht dagegen', en: 'Against' },
   resultBonus: { de: 'Zuschlag aus deinen Vorlieben', en: 'Bonus from your preferences' },

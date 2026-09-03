@@ -37,9 +37,12 @@ export function ResultCard({ result, rank, featured }: { result: DistroResult; r
 
       {featured && <p style={{ margin: 0 }}>{tl(d.description)}</p>}
 
+      {/* Farbe hat hier eine feste Bedeutung, in jeder Ansicht dieselbe:
+          blau ist die Aussage über den Desktop, grün mit Haken ein Treffer
+          zu den eigenen Angaben. Alles Übrige bleibt neutral. */}
       <ul className="chiprow">
         <li className="chip">{tl(releaseModelShort[d.releaseModel])}</li>
-        <li className="chip">
+        <li className="chip chip--accent">
           <DefaultDesktopLabel distro={d} />
         </li>
         <li className="chip">{d.currentVersion}</li>
@@ -52,7 +55,8 @@ export function ResultCard({ result, rank, featured }: { result: DistroResult; r
           .filter((entry) => entry.label)
           .slice(0, 3)
           .map((entry) => (
-            <li key={entry.tag} className="chip chip--accent">
+            <li key={entry.tag} className="chip chip--positive" title={t('resultMatchedTag')}>
+              <span aria-hidden="true">✓</span>
               {entry.label}
             </li>
           ))}
