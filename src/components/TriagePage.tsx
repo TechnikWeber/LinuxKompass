@@ -50,9 +50,7 @@ export function TriagePage() {
                     setChosen(null);
                   }}
                 >
-                  <span className="answer__box answer__box--radio" aria-hidden="true">
-                    {picks[q.id] === o.score ? '●' : ''}
-                  </span>
+                  <span className="answer__box answer__box--radio" aria-hidden="true" />
                   <span className="answer__label">{tl(o.label)}</span>
                 </button>
               ))}

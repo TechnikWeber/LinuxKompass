@@ -6,6 +6,18 @@ import { distros } from '../data/distros';
 
 const CHECK_DATE = distros[0]?.checkedAt ?? '';
 
+/** Kompassnadel im Ring – identisch zum Symbol im Browser-Tab. */
+function BrandMark() {
+  return (
+    <svg className="brand__mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <rect width="64" height="64" rx="14" fill="var(--accent)" />
+      <circle cx="32" cy="32" r="20" fill="none" stroke="var(--accent-ink)" strokeWidth="2.5" opacity="0.5" />
+      <path d="M32 12 L38 30 L32 52 L26 30 Z" fill="var(--accent-ink)" />
+      <circle cx="32" cy="32" r="3.4" fill="var(--accent)" />
+    </svg>
+  );
+}
+
 function ThemeToggle() {
   const { theme, setTheme } = useApp();
   const { t } = useI18n();
@@ -48,9 +60,7 @@ export function Layout({ children }: { children: ReactNode }) {
       <header className="masthead no-print">
         <div className="container masthead__inner">
           <Link to={{ name: 'home' }} className="brand">
-            <span className="brand__mark" aria-hidden="true">
-              ◈
-            </span>
+            <BrandMark />
             {t('appName')}
           </Link>
           <nav className="masthead__nav" aria-label={t('appName')}>

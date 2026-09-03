@@ -214,11 +214,12 @@ hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
   font-family: var(--font-display); font-size: var(--step-1); font-weight: 600;
   color: var(--ink); text-decoration: none; letter-spacing: -0.015em;
 }
+/* Dasselbe Kompass-Motiv wie das Browser-Symbol, damit Tab und Kopfzeile
+   erkennbar zusammengehören. */
 .brand__mark {
-  width: 1.6em; height: 1.6em; border-radius: 50%;
-  background: var(--accent); color: var(--accent-ink);
-  display: inline-grid; place-items: center; font-size: 0.72em;
+  width: 1.55em; height: 1.55em;
   align-self: center; flex: none;
+  display: block;
 }
 .brand:hover { color: var(--accent); }
 
@@ -405,14 +406,33 @@ th[scope='row'] { font-weight: 500; color: var(--ink-muted); white-space: nowrap
   border-color: var(--accent); background: var(--accent-soft);
   box-shadow: inset 0 0 0 1px var(--accent);
 }
+/* Punkt und Haken werden gezeichnet, nicht als Schriftzeichen gesetzt.
+   Als Glyph erbten sie die Zeilenhöhe des Fließtextes, wurden dadurch höher
+   als ihre Box und saßen sichtbar zu tief. */
 .answer__box {
-  width: 1.15em; height: 1.15em; flex: none; margin-top: 0.22em;
+  width: 1.15em; height: 1.15em; flex: none; margin-top: 0.25em;
   border: 1.5px solid var(--rule-strong); background: var(--paper);
-  display: grid; place-items: center; font-size: 0.85em; color: var(--accent-ink);
+  position: relative;
+  transition: background-color 0.12s, border-color 0.12s;
 }
 .answer__box--radio { border-radius: 50%; }
 .answer__box--check { border-radius: 4px; }
 .answer[aria-pressed='true'] .answer__box { background: var(--accent); border-color: var(--accent); }
+
+.answer[aria-pressed='true'] .answer__box--radio::after {
+  content: '';
+  position: absolute; inset: 0; margin: auto;
+  width: 0.42em; height: 0.42em; border-radius: 50%;
+  background: var(--accent-ink);
+}
+.answer[aria-pressed='true'] .answer__box--check::after {
+  content: '';
+  position: absolute; left: 50%; top: 50%;
+  width: 0.28em; height: 0.55em;
+  border: solid var(--accent-ink);
+  border-width: 0 2px 2px 0;
+  transform: translate(-50%, -58%) rotate(45deg);
+}
 .answer__label { font-weight: 500; display: block; }
 .answer__hint { font-size: var(--step--1); color: var(--ink-muted); display: block; margin-top: 0.15rem; }
 

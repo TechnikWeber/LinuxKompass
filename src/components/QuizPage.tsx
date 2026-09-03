@@ -107,9 +107,7 @@ export function QuizPage() {
                       <span
                         className={`answer__box ${isMulti ? 'answer__box--check' : 'answer__box--radio'}`}
                         aria-hidden="true"
-                      >
-                        {active ? (isMulti ? '✓' : '●') : ''}
-                      </span>
+                      />
                       <span>
                         <span className="answer__label">{tl(option.label)}</span>
                         {option.hint && <span className="answer__hint">{tl(option.hint)}</span>}
