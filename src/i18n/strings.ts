@@ -11,7 +11,8 @@ export const ui = {
   tagline: { de: 'Welches Linux passt zu dir?', en: 'Which Linux fits you?' },
   skipToContent: { de: 'Zum Inhalt springen', en: 'Skip to content' },
   langSwitch: { de: 'Sprache', en: 'Language' },
-  themeToggle: { de: 'Farbschema wechseln', en: 'Toggle colour scheme' },
+  themeToDark: { de: 'Auf dunkles Design umschalten', en: 'Switch to the dark theme' },
+  themeToLight: { de: 'Auf helles Design umschalten', en: 'Switch to the light theme' },
   navStart: { de: 'Start', en: 'Home' },
   navQuiz: { de: 'Fragebogen', en: 'Questionnaire' },
   navBrowse: { de: 'Alle Distributionen', en: 'All distributions' },
@@ -156,6 +157,10 @@ export const ui = {
   resultMatchedTag: { de: 'Passt zu deinen Angaben', en: 'Matches your answers' },
   resultStrengths: { de: 'Spricht dafür', en: 'In favour' },
   resultWeaknesses: { de: 'Spricht dagegen', en: 'Against' },
+  resultOpenWishes: { de: 'Bleibt offen', en: 'Left unmet' },
+  resultNothingFor: { de: 'Nichts, was besonders dafür spricht.', en: 'Nothing that particularly speaks for it.' },
+  resultNothingAgainst: { de: 'Nichts, was dagegen spricht.', en: 'Nothing that speaks against it.' },
+  ratingLowWanted: { de: 'je weniger, desto besser', en: 'less is better' },
   resultBonus: { de: 'Zuschlag aus deinen Vorlieben', en: 'Bonus from your preferences' },
   resultFlagsTitle: { de: 'Bevor du umsteigst', en: 'Before you switch' },
   resultFlagsLead: {
@@ -341,8 +346,7 @@ export const ui = {
   close: { de: 'Schließen', en: 'Close' },
   points: { de: 'Punkte', en: 'points' },
   outOf10: { de: 'von 10', en: 'out of 10' },
-  excludedBecause: { de: 'Ausgeschlossen, weil diese Distribution', en: 'Excluded because this distribution' },
-  notMet: { de: 'nicht', en: 'does not' },
+  excludedBecause: { de: 'Ausgeschlossen – diese Distribution', en: 'Excluded — this distribution' },
   ofWhich: { de: 'davon', en: 'of which' },
 } as const satisfies Record<string, L10n>;
 

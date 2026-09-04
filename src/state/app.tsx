@@ -21,6 +21,9 @@ export type Route =
 /** Was in der engeren Wahl liegen kann. */
 export type CompareKind = 'distro' | 'desktop';
 
+/** Farbschema. Es gibt nur die beiden bewussten Wahlmöglichkeiten. */
+export type Theme = 'light' | 'dark';
+
 interface State {
   mode: Mode;
   /** Wurde der Modus bewusst gewählt (Triage abgeschlossen oder manuell)? */
@@ -158,28 +161,38 @@ interface AppContextValue extends State {
   clearCompare: (kind?: CompareKind) => void;
   /** Teilbarer Link auf das aktuelle Ergebnis. */
   shareUrl: () => string;
-  theme: 'light' | 'dark' | 'system';
-  setTheme: (theme: 'light' | 'dark' | 'system') => void;
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
 }
 
 const AppContext = createContext<AppContextValue | null>(null);
 
+/** Seiten, deren Zustand in der Adresszeile mitgeführt wird. */
+const SYNCED_ROUTES: Route['name'][] = ['quiz', 'result', 'compare'];
+
 const THEME_KEY = 'linuxkompass.theme';
 
-function readTheme(): 'light' | 'dark' | 'system' {
+/*
+ * Vorgabe ist das helle Design, nicht die Systemeinstellung.
+ *
+ * Viele Telefone schalten abends automatisch auf Dunkel um. Die Seite wechselte
+ * dann mitten im Fragebogen das Aussehen, ohne dass jemand etwas gewählt hätte.
+ * Das Dunkle bleibt gleichwertig – aber als Entscheidung, nicht als Uhrzeit.
+ */
+function readTheme(): Theme {
   try {
     const stored = localStorage.getItem(THEME_KEY);
     if (stored === 'light' || stored === 'dark') return stored;
   } catch {
-    // Speicher nicht verfügbar – dann eben Systemeinstellung.
+    // Speicher nicht verfügbar – dann gilt die Vorgabe.
   }
-  return 'system';
+  return 'light';
 }
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [route, setRoute] = useState<Route>(() => parseHash().route);
-  const [theme, setThemeState] = useState<'light' | 'dark' | 'system'>(readTheme);
+  const [theme, setThemeState] = useState<Theme>(readTheme);
   const [hydrated, setHydrated] = useState(false);
   // Spiegel des Zustands für den hashchange-Listener, der nur einmal
   // registriert wird und trotzdem den aktuellen Stand sehen muss.
@@ -245,12 +258,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    const root = document.documentElement;
-    if (theme === 'system') root.removeAttribute('data-theme');
-    else root.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-theme', theme);
     try {
-      if (theme === 'system') localStorage.removeItem(THEME_KEY);
-      else localStorage.setItem(THEME_KEY, theme);
+      localStorage.setItem(THEME_KEY, theme);
     } catch {
       // Ohne Speicher gilt die Wahl nur für diese Sitzung.
     }
@@ -275,15 +285,23 @@ export function AppProvider({ children }: { children: ReactNode }) {
     (target: Route, options?: { withState?: boolean } & NavigateOverrides) => {
       const withState = options?.withState ?? ['result', 'quiz', 'compare'].includes(target.name);
       window.location.hash = buildHash(target, withState, options);
-      window.scrollTo({ top: 0, behavior: 'auto' });
+      // Siehe QuizPage: `auto` folgt dem CSS und damit `smooth`.
+      window.scrollTo({ top: 0, behavior: 'instant' });
     },
     [buildHash],
   );
 
-  // Adresszeile mitführen, solange man im Fragebogen oder Ergebnis ist.
+  /*
+   * Adresszeile mitführen, solange man im Fragebogen, Ergebnis oder Vergleich ist.
+   *
+   * Der Fragebogen gehört dazu, weil sonst nach „Von vorn beginnen" die alten
+   * Antworten noch in der Adresszeile stünden: ein Klick auf Zurück im Browser
+   * holte sie wortlos zurück. Nebenbei übersteht so auch ein Neuladen der Seite
+   * den aktuellen Stand.
+   */
   useEffect(() => {
     if (!hydrated) return;
-    if (route.name !== 'result' && route.name !== 'compare') return;
+    if (!SYNCED_ROUTES.includes(route.name)) return;
     const next = buildHash(route, true);
     if (`#${window.location.hash.replace(/^#/, '')}` !== next) {
       window.history.replaceState(null, '', next);

@@ -408,6 +408,32 @@ describe('Beschriftungen', () => {
     expect(unlabelled.sort()).toEqual(['langzeitsupport', 'rolling', 'semi-rolling']);
   });
 
+  it('hat zu jeder Anforderung alle drei Textformen in beiden Sprachen', async () => {
+    const { requirementList } = await import('./requirements');
+    for (const r of requirementList) {
+      for (const form of ['label', 'negated', 'short'] as const) {
+        for (const lang of ['de', 'en'] as const) {
+          expect(r[form][lang].trim().length, `${r.id}.${form}.${lang}`).toBeGreaterThan(0);
+        }
+      }
+      // Die verneinte Form muss wirklich verneinen. Ein versehentlich kopierter
+      // Bejahungssatz stünde sonst als Ausschlussgrund auf der Ergebnisseite.
+      for (const lang of ['de', 'en'] as const) {
+        expect(r.negated[lang], `${r.id}.${lang}`).not.toBe(r.label[lang]);
+      }
+    }
+  });
+
+  it('stellt keine Anforderung dem Nutzer mit vorangestelltem „nicht" hin', async () => {
+    const { requirementList } = await import('./requirements');
+    // „nicht richtet den Treiber ein" war der Fehler, den diese Prüfung
+    // festhält: Die Verneinung gehört im Deutschen ins Satzinnere.
+    for (const r of requirementList) {
+      expect(r.negated.de.startsWith('nicht '), r.id).toBe(false);
+      expect(r.negated.en.startsWith('not '), r.id).toBe(false);
+    }
+  });
+
   it('hat für jedes Release-Modell und jeden Installer eine Kurzform', async () => {
     const { releaseModelShort, installerShort } = await import('../i18n/labels');
     for (const d of distros) {

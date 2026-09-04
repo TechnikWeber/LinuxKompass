@@ -136,7 +136,7 @@ export function ResultPage() {
             <p style={{ color: 'var(--ink-muted)' }}>{t('resultRelaxedLead')}</p>
             <ul style={{ margin: 0 }}>
               {outcome.relaxed.map((id) => (
-                <li key={id}>{tl(requirements.get(id)?.label)}</li>
+                <li key={id}>{tl(requirements.get(id)?.short)}</li>
               ))}
             </ul>
           </div>
@@ -305,7 +305,7 @@ export function ResultPage() {
                     <span style={{ color: 'var(--ink-muted)' }}>
                       {t('excludedBecause')}{' '}
                       {r.failed
-                        .map((f) => `${t('notMet')} ${tl(requirements.get(f.requirementId)?.label)}`)
+                        .map((f) => tl(requirements.get(f.requirementId)?.negated))
                         .join(' · ')}
                     </span>
                   </div>

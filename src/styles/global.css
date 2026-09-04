@@ -2,6 +2,11 @@
    LinuxKompass – Gestaltung
    Ruhig, redaktionell, hell zuerst. Dunkles Schema als gleichwertige Variante.
    Keine externen Schriften: schnelle Ladezeit, funktioniert auch offline.
+
+   Das dunkle Schema hängt bewusst nur an `data-theme` und nicht zusätzlich an
+   `prefers-color-scheme`: Telefone schalten abends von selbst um, und die Seite
+   wechselte dann mitten in der Arbeit das Aussehen. Hell ist die Vorgabe,
+   dunkel eine Entscheidung über den Schalter im Kopf der Seite.
    ========================================================================== */
 
 :root {
@@ -75,33 +80,6 @@
   --shadow-md: 0 2px 8px rgb(0 0 0 / 0.35), 0 12px 32px rgb(0 0 0 / 0.28);
 }
 
-
-@media (prefers-color-scheme: dark) {
-:root:not([data-theme='light']) {
-  color-scheme: dark;
-  --paper: #16161a;
-  --paper-raised: #1e1e23;
-  --paper-sunken: #121215;
-  --ink: #ece9e3;
-  --ink-muted: #a8a49c;
-  --ink-faint: #7d7a76;
-  --rule: #2e2e35;
-  --rule-strong: #43434c;
-  --accent: #6fb6d2;
-  --accent-strong: #9ad0e6;
-  --accent-soft: #17303a;
-  --accent-ink: #0d1a20;
-  --positive: #79c39a;
-  --positive-soft: #16291f;
-  --caution: #d9a86a;
-  --caution-soft: #2c2314;
-  --critical: #e4938c;
-  --critical-soft: #2e1a18;
-  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
-  --shadow-md: 0 2px 8px rgb(0 0 0 / 0.35), 0 12px 32px rgb(0 0 0 / 0.28);
-}
-
-}
 
 /* --------------------------------------------------------------------------
    Grundlagen
@@ -466,6 +444,7 @@ details.explainer > div { padding: 0 0.85rem 0.85rem; font-size: var(--step--1);
 .reasons ul { list-style: none; padding: 0; margin: 0; font-size: var(--step--1); }
 .reasons li { display: flex; gap: 0.45rem; align-items: baseline; }
 .reasons li::before { content: '·'; color: var(--ink-faint); }
+.reasons__empty { margin: 0; font-size: var(--step--1); color: var(--ink-faint); }
 
 .excluded-item { display: flex; gap: 0.75rem; align-items: baseline; padding: 0.5rem 0; border-bottom: 1px dashed var(--rule); font-size: var(--step--1); }
 .excluded-item:last-child { border-bottom: 0; }

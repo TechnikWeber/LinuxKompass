@@ -14,6 +14,21 @@ export function QuizPage() {
 
   const questions = useMemo(() => visibleQuestions(mode, answers), [mode, answers]);
   const total = questions.length;
+
+  /*
+   * Jede Frage beginnt oben.
+   *
+   * Die Fragen sind unterschiedlich lang. Wer die letzte Antwort einer langen
+   * Liste anklickt oder unten auf „Weiter" drückt, stünde sonst mitten in der
+   * nächsten Frage – bei kurzen Fragen sogar unterhalb davon, im Nichts.
+   */
+  function goTo(next: number) {
+    setIndex(Math.max(0, Math.min(next, total - 1)));
+    // `instant` statt `auto`: `auto` überlässt die Entscheidung dem CSS,
+    // und dort steht `scroll-behavior: smooth` – eine lange Seite kröche
+    // dann sichtbar nach oben, statt einfach oben zu beginnen.
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
   // Beim Moduswechsel kann die aktuelle Frage wegfallen: dann auf die letzte
   // vorhandene zurückfallen, ohne dafür einen zusätzlichen Renderdurchlauf zu brauchen.
   const safeIndex = Math.max(0, Math.min(index, total - 1));
@@ -47,7 +62,8 @@ export function QuizPage() {
     } else {
       setAnswer(current.id, selected.includes(optionId) ? [] : [optionId]);
       if (!selected.includes(optionId) && safeIndex < total - 1) {
-        window.setTimeout(() => setIndex(Math.min(safeIndex + 1, total - 1)), 180);
+        // Kurz stehen lassen, damit die eigene Auswahl noch sichtbar wird.
+        window.setTimeout(() => goTo(safeIndex + 1), 180);
       }
     }
   }
@@ -127,11 +143,11 @@ export function QuizPage() {
 
             {/* Navigation */}
             <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', alignItems: 'center' }}>
-              <button type="button" className="btn" disabled={safeIndex === 0} onClick={() => setIndex(Math.max(0, safeIndex - 1))}>
+              <button type="button" className="btn" disabled={safeIndex === 0} onClick={() => goTo(safeIndex - 1)}>
                 <span aria-hidden="true">←</span> {t('quizBack')}
               </button>
               {!atEnd && (
-                <button type="button" className="btn" onClick={() => setIndex(Math.min(total - 1, safeIndex + 1))}>
+                <button type="button" className="btn" onClick={() => goTo(safeIndex + 1)}>
                   {selected.length > 0 ? t('quizNext') : t('quizSkip')} <span aria-hidden="true">→</span>
                 </button>
               )}
@@ -144,7 +160,7 @@ export function QuizPage() {
                 style={{ marginLeft: 'auto' }}
                 onClick={() => {
                   reset();
-                  setIndex(0);
+                  goTo(0);
                 }}
               >
                 {t('quizRestart')}

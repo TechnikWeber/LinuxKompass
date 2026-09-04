@@ -120,7 +120,7 @@ export function AboutPage() {
         </section>
 
         <div>
-          <Link to={{ name: 'triage' }} className="btn btn--primary">
+          <Link to={{ name: 'triage' }} className="btn btn--primary" fresh>
             {t('heroStart')} <span aria-hidden="true">→</span>
           </Link>
         </div>

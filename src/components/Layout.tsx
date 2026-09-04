@@ -23,13 +23,16 @@ function ThemeToggle() {
   const { theme, setTheme } = useApp();
   const { t } = useI18n();
   const next = theme === 'dark' ? 'light' : 'dark';
+  // Benennt das Ziel, nicht die Handlung: „Farbschema wechseln" ließ offen,
+  // wohin – vorgelesen wie angetippt.
+  const label = next === 'dark' ? t('themeToDark') : t('themeToLight');
   return (
     <button
       type="button"
       className="btn btn--quiet btn--icon"
       onClick={() => setTheme(next)}
-      title={t('themeToggle')}
-      aria-label={t('themeToggle')}
+      title={label}
+      aria-label={label}
     >
       <span aria-hidden="true">{theme === 'dark' ? '☀' : '☾'}</span>
     </button>

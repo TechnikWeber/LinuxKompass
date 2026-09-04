@@ -7,7 +7,7 @@ const MODE_ORDER: Mode[] = ['beginner', 'advanced', 'expert'];
 
 export function TriagePage() {
   const { t, tl } = useI18n();
-  const { navigate, setMode, mode } = useApp();
+  const { navigate, setMode, mode, reset } = useApp();
   const [picks, setPicks] = useState<Record<string, number>>({});
   const [chosen, setChosen] = useState<Mode | null>(null);
 
@@ -15,6 +15,23 @@ export function TriagePage() {
   const score = Object.values(picks).reduce((a, b) => a + b, 0);
   const suggested = answeredAll ? suggestMode(score) : null;
   const active = chosen ?? suggested ?? mode;
+
+  /*
+   * Von hier aus beginnt der Fragebogen immer von vorn.
+   *
+   * Die Einstufung ist die erste Seite des Fragebogens, nicht eine Ansicht
+   * daneben: Wer sie noch einmal durchläuft, will neu anfangen. Alte Antworten
+   * stünden sonst wieder angehakt in den Fragen – ohne dass irgendwo stünde,
+   * woher sie kommen. Ein Fehlklick in der Navigation verliert trotzdem nichts:
+   * gelöscht wird erst hier beim Start, nicht schon beim Öffnen dieser Seite.
+   */
+  function startQuiz(target: Mode) {
+    reset();
+    setMode(target, true);
+    // Der Reducer läuft erst nach dem Klick – deshalb beides mitgeben, sonst
+    // schriebe die Adresszeile den alten Stand fest und holte ihn zurück.
+    navigate({ name: 'quiz' }, { mode: target, answers: {} });
+  }
 
   const modeInfo: Record<Mode, { title: string; desc: string }> = {
     beginner: { title: t('modeBeginner'), desc: t('modeBeginnerDesc') },
@@ -95,8 +112,7 @@ export function TriagePage() {
                 type="button"
                 className="btn btn--primary"
                 onClick={() => {
-                  setMode(active, true);
-                  navigate({ name: 'quiz' }, { mode: active });
+                  startQuiz(active);
                 }}
               >
                 {t('modeContinue')} <span aria-hidden="true">→</span>
@@ -111,8 +127,7 @@ export function TriagePage() {
               type="button"
               className="btn btn--quiet"
               onClick={() => {
-                setMode(mode, true);
-                navigate({ name: 'quiz' }, { mode });
+                startQuiz(mode);
               }}
             >
               {t('triageSkip')}

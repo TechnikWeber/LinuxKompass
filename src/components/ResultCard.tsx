@@ -1,8 +1,61 @@
-import type { DistroResult } from '../engine/score';
+import type { DistroResult, RatingContribution } from '../engine/score';
+import type { Distro, RatingKey } from '../data/types';
 import { requirements } from '../engine/requirements';
 import { ratingLabels, tagLabels, useI18n, releaseModelShort, installerShort } from '../i18n';
 import { desktopById } from '../data/desktops';
 import { CompareToggle, DefaultDesktopLabel, Link, Monogram } from './common';
+
+/*
+ * Ausweichliste, wenn keine gewichtete Dimension die Schwelle in `score.ts`
+ * reißt.
+ *
+ * Früher stand hier Fließtext aus `bestFor`/`notFor`. Neben Zeilen der Form
+ * „Stabilität 9/10" las sich das wie eine andere Art von Aussage, obwohl beide
+ * dasselbe beantworten sollen. Also auch hier Dimensionen, nur mit weicherer
+ * Schwelle – und ausschließlich solche, die in den Antworten überhaupt ein
+ * Gewicht haben. Eine 2/10 in Unternehmenstauglichkeit „spricht dagegen",
+ * wenn jemand nach einem Spielerechner gefragt hat, eben nicht.
+ */
+const CLEARLY_GOOD = 7;
+const CLEARLY_WEAK = 5;
+
+/** Bei negativem Gewicht ist ein niedriger Wert der erwünschte. */
+function effectiveValue(weight: number, value: number): number {
+  return weight < 0 ? 10 - value : value;
+}
+
+function fallbackRatings(breakdown: RatingContribution[], direction: 'high' | 'low', count: number): RatingKey[] {
+  return breakdown
+    .filter((b) =>
+      direction === 'high'
+        ? effectiveValue(b.weight, b.value) >= CLEARLY_GOOD
+        : effectiveValue(b.weight, b.value) <= CLEARLY_WEAK,
+    )
+    .sort((a, b) => {
+      const av = effectiveValue(a.weight, a.value);
+      const bv = effectiveValue(b.weight, b.value);
+      return direction === 'high' ? bv - av : av - bv;
+    })
+    .slice(0, count)
+    .map((b) => b.key);
+}
+
+/** Eine Bewertungsdimension als Begründungszeile. */
+function RatingReason({ distro, rating, inverted }: { distro: Distro; rating: RatingKey; inverted: boolean }) {
+  const { t, tl } = useI18n();
+  return (
+    <li>
+      <span>
+        {tl(ratingLabels[rating])}
+        {/* Bei negativ gewichteten Dimensionen ist ein niedriger Wert der
+            erwünschte: ohne diesen Zusatz stünde „Aktualität 2/10" scheinbar
+            widersprüchlich unter „Spricht dafür". */}
+        {inverted && <span style={{ color: 'var(--ink-faint)' }}> ({t('ratingLowWanted')})</span>}{' '}
+        <span style={{ color: 'var(--ink-faint)' }}>{distro.ratings[rating]}/10</span>
+      </span>
+    </li>
+  );
+}
 
 /** Eine Empfehlung mit Begründung, Punkteherkunft und Warnungen. */
 export function ResultCard({ result, rank, featured }: { result: DistroResult; rank: number; featured?: boolean }) {
@@ -13,6 +66,10 @@ export function ResultCard({ result, rank, featured }: { result: DistroResult; r
   const d = result.distro;
   const top = result.breakdown.filter((b) => b.points > 0).slice(0, 5);
   const maxPoints = Math.max(1, ...top.map((b) => b.points));
+
+  const weightOf = new Map(result.breakdown.map((b) => [b.key, b.weight]));
+  const strengthKeys = result.strengths.length > 0 ? result.strengths : fallbackRatings(result.breakdown, 'high', 3);
+  const weaknessKeys = result.weaknesses.length > 0 ? result.weaknesses : fallbackRatings(result.breakdown, 'low', 2);
 
   return (
     <article className={`card ${featured ? 'card--raised' : ''} result-card`}>
@@ -65,36 +122,39 @@ export function ResultCard({ result, rank, featured }: { result: DistroResult; r
       <div className="reasons">
         <div>
           <h4>{t('resultStrengths')}</h4>
-          <ul>
-            {result.strengths.length > 0
-              ? result.strengths.map((k) => (
-                  <li key={k}>
-                    {tl(ratingLabels[k])} <span style={{ color: 'var(--ink-faint)' }}>{d.ratings[k]}/10</span>
-                  </li>
-                ))
-              : tls(d.bestFor).slice(0, 3).map((s) => <li key={s}>{s}</li>)}
-          </ul>
+          {strengthKeys.length > 0 ? (
+            <ul>
+              {strengthKeys.map((k) => (
+                <RatingReason key={k} distro={d} rating={k} inverted={(weightOf.get(k) ?? 0) < 0} />
+              ))}
+            </ul>
+          ) : (
+            <p className="reasons__empty">{t('resultNothingFor')}</p>
+          )}
         </div>
         <div>
           <h4>{t('resultWeaknesses')}</h4>
-          <ul>
-            {result.weaknesses.length > 0
-              ? result.weaknesses.map((k) => (
-                  <li key={k}>
-                    {tl(ratingLabels[k])} <span style={{ color: 'var(--ink-faint)' }}>{d.ratings[k]}/10</span>
-                  </li>
-                ))
-              : tls(d.notFor).slice(0, 2).map((s) => <li key={s}>{s}</li>)}
-          </ul>
+          {weaknessKeys.length > 0 ? (
+            <ul>
+              {weaknessKeys.map((k) => (
+                <RatingReason key={k} distro={d} rating={k} inverted={(weightOf.get(k) ?? 0) < 0} />
+              ))}
+            </ul>
+          ) : (
+            /* Leere Spalte sähe nach Fehler aus – und „nichts gefunden" ist
+               hier eine Aussage, keine Lücke. */
+            <p className="reasons__empty">{t('resultNothingAgainst')}</p>
+          )}
         </div>
+        {/* Eigene Spalte statt einer zweiten „Spricht dagegen"-Überschrift:
+            hier geht es nicht um eine Schwäche der Distribution, sondern um
+            einen Wunsch aus dem Fragebogen, den sie nicht erfüllt. */}
         {result.missedPreferences.length > 0 && (
           <div>
-            <h4>{t('resultWeaknesses')}</h4>
+            <h4>{t('resultOpenWishes')}</h4>
             <ul>
               {result.missedPreferences.slice(0, 3).map((id) => (
-                <li key={id}>
-                  {t('notMet')} {tl(requirements.get(id)?.label)}
-                </li>
+                <li key={id}>{tl(requirements.get(id)?.short)}</li>
               ))}
             </ul>
           </div>
