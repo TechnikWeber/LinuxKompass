@@ -179,7 +179,11 @@ export function buildProfile(mode: Mode, answers: Answers): Profile {
  * niedrige Werte gut. Normiert auf 0–100, damit die Zahl unabhängig von der
  * Anzahl beantworteter Fragen vergleichbar bleibt.
  */
-function ratingScore(distro: Distro, weights: Profile['weights']): { score: number; breakdown: RatingContribution[] } {
+function ratingScore(
+  distro: Distro,
+  weights: Profile['weights'],
+  explain: boolean,
+): { score: number; breakdown: RatingContribution[] } {
   const entries = Object.entries(weights) as [RatingKey, number][];
   const totalWeight = entries.reduce((sum, [, w]) => sum + Math.abs(w), 0);
   if (totalWeight === 0) return { score: 50, breakdown: [] };
@@ -193,10 +197,10 @@ function ratingScore(distro: Distro, weights: Profile['weights']): { score: numb
     const normalised = weight > 0 ? value / 10 : (10 - value) / 10;
     const gained = Math.abs(weight) * normalised;
     achieved += gained;
-    breakdown.push({ key, weight, value, points: (gained / totalWeight) * 100 });
+    if (explain) breakdown.push({ key, weight, value, points: (gained / totalWeight) * 100 });
   }
 
-  breakdown.sort((a, b) => Math.abs(b.weight) - Math.abs(a.weight));
+  if (explain) breakdown.sort((a, b) => Math.abs(b.weight) - Math.abs(a.weight));
   return { score: (achieved / totalWeight) * 100, breakdown };
 }
 
@@ -225,17 +229,41 @@ function softCap(value: number): number {
   return SOFT_CAP_START + SOFT_CAP_RANGE * (1 - Math.exp(-(value - SOFT_CAP_START) / SOFT_CAP_TAU));
 }
 
+/**
+ * Platzhalter für „scheitert an mindestens einer Anforderung", wenn niemand
+ * wissen will, an welcher. Eine gemeinsame leere Liste zu teilen wäre falsch:
+ * `eligible` liest die Länge, und die muss von null verschieden sein.
+ */
+const NOT_ELIGIBLE: RequirementSource[] = [{ requirementId: '', questionId: '', optionId: '' }];
+
 function requirementHolds(id: string, distro: Distro): boolean {
   const requirement = requirements.get(id);
   if (!requirement) return true;
   return requirement.test(distro);
 }
 
-/** Bewertet eine einzelne Distribution gegen das Profil. */
-function evaluate(distro: Distro, profile: Profile, activeRequirements: RequirementSource[]): DistroResult {
-  const { score: base, breakdown } = ratingScore(distro, profile.weights);
+/**
+ * Bewertet eine einzelne Distribution gegen das Profil.
+ *
+ * `explain` schaltet die Erklärstücke ab – Punkteherkunft, erfüllte und
+ * verfehlte Wünsche, getroffene Schlagworte, Stärken und Schwächen. Die
+ * Rechnung selbst bleibt Zeile für Zeile dieselbe, es entstehen nur keine
+ * Listen, die niemand liest. Die Kipp-Analyse rechnet den Fragebogen
+ * dutzendfach durch und braucht davon nichts außer dem Namen ganz oben.
+ */
+function evaluate(
+  distro: Distro,
+  profile: Profile,
+  activeRequirements: RequirementSource[],
+  explain: boolean,
+): DistroResult {
+  const { score: base, breakdown } = ratingScore(distro, profile.weights, explain);
 
-  const failed = activeRequirements.filter((r) => !requirementHolds(r.requirementId, distro));
+  const failed = explain
+    ? activeRequirements.filter((r) => !requirementHolds(r.requirementId, distro))
+    : activeRequirements.some((r) => !requirementHolds(r.requirementId, distro))
+      ? NOT_ELIGIBLE
+      : [];
 
   const metPreferences: string[] = [];
   const missedPreferences: string[] = [];
@@ -244,10 +272,10 @@ function evaluate(distro: Distro, profile: Profile, activeRequirements: Requirem
   for (const [id, weight] of profile.preferred) {
     prefWeight += weight;
     if (requirementHolds(id, distro)) {
-      metPreferences.push(id);
+      if (explain) metPreferences.push(id);
       prefAchieved += weight;
     } else {
-      missedPreferences.push(id);
+      if (explain) missedPreferences.push(id);
       prefAchieved -= weight;
     }
   }
@@ -264,7 +292,7 @@ function evaluate(distro: Distro, profile: Profile, activeRequirements: Requirem
   for (const [tag, value] of profile.tagBoost) {
     if (distro.tags.includes(tag) || distro.defaultDesktop === tag || distro.availableDesktops.includes(tag)) {
       boost += value;
-      matchedTags.push(tag);
+      if (explain) matchedTags.push(tag);
     }
   }
   for (const [aud, value] of profile.audienceBoost) {
@@ -310,8 +338,9 @@ function evaluate(distro: Distro, profile: Profile, activeRequirements: Requirem
 export function scoreAll(
   mode: Mode,
   answers: Answers,
-  options: { pool?: Distro[]; minimumResults?: number } = {},
+  options: { pool?: Distro[]; minimumResults?: number; explain?: boolean } = {},
 ): ScoreOutcome {
+  const explain = options.explain ?? true;
   const pool = options.pool ?? allDistros;
   // Nur lockern, wenn sonst gar nichts übrig bliebe. Ein kleines Ergebnisfeld
   // ist eine ehrliche Antwort ("das kann wirklich nur diese eine"), eine
@@ -343,7 +372,7 @@ export function scoreAll(
   }
 
   const results = pool
-    .map((d) => evaluate(d, profile, active))
+    .map((d) => evaluate(d, profile, active, explain))
     .sort((a, b) => {
       if (a.eligible !== b.eligible) return a.eligible ? -1 : 1;
       return b.score - a.score;

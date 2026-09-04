@@ -170,9 +170,58 @@ export const ui = {
   resultNextStepsTitle: { de: 'Wie es weitergeht', en: 'What to do next' },
   resultShare: { de: 'Ergebnis-Link kopieren', en: 'Copy result link' },
   resultShareCopied: { de: 'Link kopiert', en: 'Link copied' },
-  resultPrint: { de: 'Drucken oder als PDF sichern', en: 'Print or save as PDF' },
+  resultPrint: { de: 'Drucken oder als PDF', en: 'Print or save as PDF' },
   resultRefine: { de: 'Antworten anpassen', en: 'Adjust answers' },
   resultDeepen: { de: 'Tiefer nachfragen ({mode})', en: 'Ask deeper questions ({mode})' },
+
+  // --- Nachprüfen: Kipp-Punkte und Gegenprobe ---
+  verifyTitle: { de: 'Die Empfehlung nachprüfen', en: 'Check the recommendation' },
+  verifyLead: {
+    de: 'Beides ist freiwillig und rechnet erst, wenn du es aufklappst.',
+    en: 'Both are optional and only start calculating once you open them.',
+  },
+
+  flipTitle: { de: 'Was würde die Empfehlung kippen?', en: 'What would change the recommendation?' },
+  flipLead: {
+    de: 'Wir setzen jede Frage nacheinander auf jede andere Antwort und rechnen neu. Hier steht nur, wo oben etwas anderes herauskäme.',
+    en: 'We set every question to each of its other answers in turn and score again. Listed here is only where a different distribution would come out on top.',
+  },
+  flipAnswered: { de: 'Daran hängt deine Empfehlung', en: 'Your recommendation hinges on these' },
+  flipOpen: { de: 'Diese offenen Fragen würden sie ändern', en: 'These unanswered questions would change it' },
+  flipNoneAnswered: {
+    de: 'Keine deiner Antworten kippt die Empfehlung, wenn du sie änderst.',
+    en: 'Changing any single one of your answers does not change the recommendation.',
+  },
+  flipNone: {
+    de: 'Keine einzelne andere Antwort ändert die Empfehlung. Sie hängt also an keiner wackligen Angabe.',
+    en: 'No single different answer changes the recommendation. It does not hinge on one shaky detail.',
+  },
+  flipTested: { de: '{n} Antwortmöglichkeiten durchgerechnet.', en: '{n} possible answers scored.' },
+  flipThen: { de: 'dann {name}', en: 'then {name}' },
+  flipUnansweredNote: { de: 'noch offen', en: 'still open' },
+  flipMoreQuestions: { de: 'Dazu {n} weitere Fragen mit demselben Muster.', en: 'Plus {n} more questions with the same pattern.' },
+  flipCalculating: { de: 'Wird gerechnet …', en: 'Calculating …' },
+
+  whyNotTitle: { de: 'Warum nicht eine andere?', en: 'Why not a different one?' },
+  whyNotLead: {
+    de: 'Viele kommen mit einem Namen im Kopf her, weil er überall genannt wird. Lies ihn direkt gegen die Empfehlung – mit denselben Zahlen, aus denen sie entstanden ist.',
+    en: 'Many arrive with one name in mind because it is mentioned everywhere. Read it straight against the recommendation — using the same numbers it came from.',
+  },
+  whyNotPopular: { de: 'Häufig genannt', en: 'Frequently named' },
+  whyNotOther: { de: 'Andere Distribution', en: 'Another distribution' },
+  whyNotClose: { de: 'Gegenprobe schließen', en: 'Close the comparison' },
+  whyNotFails: { de: 'Fällt schon an deinen harten Anforderungen durch:', en: 'Fails your hard requirements outright:' },
+  whyNotBehind: { de: 'Liegt {n} Punkte hinter {name}.', en: '{n} points behind {name}.' },
+  whyNotAheadButOut: {
+    de: 'Käme auf {n} Punkte mehr – ist aber durch deine Anforderungen ausgeschlossen.',
+    en: 'Would score {n} points higher — but your requirements rule it out.',
+  },
+  whyNotTied: { de: 'Praktisch gleichauf mit {name}.', en: 'Practically tied with {name}.' },
+  whyNotWorse: { de: 'Verliert Punkte bei', en: 'Loses points on' },
+  whyNotBetter: { de: 'Gewinnt Punkte bei', en: 'Gains points on' },
+  whyNotMisses: { de: 'Erfüllt diese Wünsche nicht, {name} schon:', en: 'Does not meet these wishes, {name} does:' },
+  whyNotExtra: { de: 'Kann dafür, was {name} nicht bietet:', en: 'Offers what {name} does not:' },
+  whyNotVersus: { de: 'gegen {name}', en: 'versus {name}' },
 
   // --- Desktop-Empfehlung ---
   desktopPickTitle: { de: 'Und welche Oberfläche?', en: 'And which desktop?' },
@@ -193,8 +242,8 @@ export const ui = {
   desktopPickCaveat: { de: 'Gut zu wissen', en: 'Worth knowing' },
   tryLiveTitle: { de: 'Vorher ausprobieren, ohne etwas zu installieren', en: 'Try before installing anything' },
   tryLiveText: {
-    de: 'Auf DistroSea lassen sich über 80 Distributionen und deren Oberflächen direkt im Browser starten. Das ersetzt keinen Test auf der eigenen Hardware – dafür braucht es einen USB-Stick –, aber für den ersten Eindruck von Bedienkonzept und Optik reicht es völlig.',
-    en: 'DistroSea runs over 80 distributions and their desktops straight in your browser. It does not replace a test on your own hardware — that needs a USB stick — but for a first impression of look and feel it is more than enough.',
+    de: 'Nur den Eindruck vom Aussehen willst du vorab? Über 80 Distributionen laufen direkt im Browser:',
+    en: 'Only after a first impression of the look? Over 80 distributions run straight in your browser:',
   },
   tryLiveLink: { de: 'DistroSea öffnen', en: 'Open DistroSea' },
   tryLiveDisclaimer: {

@@ -30,13 +30,14 @@ export type ReleaseModel =
   | 'rolling' // rollend (Arch, Tumbleweed, Void, Gentoo)
   | 'atomic'; // bildbasiert/unveränderlich (Silverblue, Bazzite, Aeon, NixOS-artig)
 
-export type InitSystem = 'systemd' | 'openrc' | 'runit' | 'sysvinit' | 's6' | 'dinit' | 'bsd-style' | 'other';
+export type InitSystem = 'systemd' | 'openrc' | 'runit' | 'sysvinit' | 's6' | 'dinit' | 'shepherd' | 'bsd-style' | 'other';
 
 export type PackageManager =
   | 'apt' | 'dnf' | 'rpm-ostree' | 'zypper' | 'transactional-update' | 'pacman'
-  | 'xbps' | 'apk' | 'portage' | 'nix' | 'eopkg' | 'slackpkg' | 'pkgtool' | 'ostree';
+  | 'xbps' | 'apk' | 'portage' | 'nix' | 'guix' | 'eopkg' | 'slackpkg' | 'pkgtool' | 'ostree'
+  | 'urpmi' | 'abroot';
 
-export type PackageFormat = 'deb' | 'rpm' | 'pkg.tar.zst' | 'xbps' | 'apk' | 'ebuild' | 'nix' | 'eopkg' | 'txz';
+export type PackageFormat = 'deb' | 'rpm' | 'pkg.tar.zst' | 'xbps' | 'apk' | 'ebuild' | 'nix' | 'guix' | 'eopkg' | 'txz';
 
 export type Libc = 'glibc' | 'musl';
 

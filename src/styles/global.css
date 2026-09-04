@@ -427,6 +427,9 @@ details.explainer > summary::-webkit-details-marker { display: none; }
 details.explainer > summary::before { content: '＋ '; color: var(--accent); }
 details.explainer[open] > summary::before { content: '－ '; }
 details.explainer > div { padding: 0 0.85rem 0.85rem; font-size: var(--step--1); color: var(--ink-muted); max-width: var(--measure); }
+/* Nachprüfen-Abschnitte stellen Spalten nebeneinander und brauchen die
+   ganze Breite; die Lesebreite gilt nur für Fließtext. */
+details.explainer--wide > div { max-width: none; }
 
 /* --------------------------------------------------------------------------
    Ergebnis
@@ -445,6 +448,36 @@ details.explainer > div { padding: 0 0.85rem 0.85rem; font-size: var(--step--1);
 .reasons li { display: flex; gap: 0.45rem; align-items: baseline; }
 .reasons li::before { content: '·'; color: var(--ink-faint); }
 .reasons__empty { margin: 0; font-size: var(--step--1); color: var(--ink-faint); }
+
+/* --------------------------------------------------------------------------
+   Nachprüfen: Kipp-Punkte und Gegenprobe
+   Beide sitzen in einem details.explainer und übernehmen dessen kleine
+   Schriftgröße -- die Abschnitte sollen ruhig bleiben und nicht mit der
+   Empfehlung darüber um Aufmerksamkeit ringen.
+   -------------------------------------------------------------------------- */
+
+.flip + .flip { margin-top: 0.7rem; }
+.flip__question { margin: 0 0 0.25rem; color: var(--ink); font-weight: 600; }
+.flip__question .chip { margin-left: 0.4rem; font-weight: 400; }
+.flip__list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.2rem; }
+.flip__list li { display: flex; gap: 0.45rem; align-items: baseline; flex-wrap: wrap; }
+.flip__answer { color: var(--ink-muted); }
+
+.whynot__pick { display: flex; gap: 0.4rem; flex-wrap: wrap; align-items: center; }
+.whynot__pick select { max-width: 14rem; }
+.whynot__heading {
+  font-family: var(--font-body); font-size: var(--step--1); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-faint);
+  margin: 0 0 0.3rem;
+}
+.whynot__result { display: grid; gap: 0.7rem; max-width: none; }
+.whynot__head { display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap; }
+.whynot__score { margin-left: auto; font-variant-numeric: tabular-nums; color: var(--ink-faint); }
+.whynot__columns { display: grid; gap: 0.85rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.whynot__list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.2rem; }
+.whynot__list li { display: flex; gap: 0.5rem; justify-content: space-between; align-items: baseline; }
+.whynot__list li::before { content: '·'; color: var(--ink-faint); }
+.whynot__list li > span:first-of-type { flex: 1; }
 
 .excluded-item { display: flex; gap: 0.75rem; align-items: baseline; padding: 0.5rem 0; border-bottom: 1px dashed var(--rule); font-size: var(--step--1); }
 .excluded-item:last-child { border-bottom: 0; }

@@ -3,9 +3,9 @@ import { useI18n } from '../i18n';
 import { useApp } from '../state/app';
 import { Link } from './common';
 import { CompareTray } from './CompareTray';
-import { distros } from '../data/distros';
+import { oldestCheckDate } from '../data/distros';
 
-const CHECK_DATE = distros[0]?.checkedAt ?? '';
+const CHECK_DATE = oldestCheckDate;
 
 /** Kompassnadel im Ring – identisch zum Symbol im Browser-Tab. */
 function BrandMark() {

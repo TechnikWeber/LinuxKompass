@@ -1,4 +1,4 @@
-import { distros } from '../data/distros';
+import { distros, newestCheckDate, oldestCheckDate } from '../data/distros';
 import { allQuestions } from '../data/questions';
 import { requirementList } from '../engine/requirements';
 import { useI18n } from '../i18n';
@@ -7,7 +7,7 @@ import { Link } from './common';
 export function AboutPage() {
   const { t, lang } = useI18n();
   const de = lang === 'de';
-  const checked = distros[0]?.checkedAt ?? '';
+
 
   return (
     <section className="section">
@@ -48,8 +48,8 @@ export function AboutPage() {
           <h2>{t('aboutDataTitle')}</h2>
           <p>
             {de
-              ? `Alle ${distros.length} Einträge wurden am ${checked} anhand der offiziellen Ankündigungen, Release Notes und Projektseiten geprüft. Zu jeder Distribution stehen die verwendeten Quellen und das Prüfdatum auf der Detailseite.`
-              : `All ${distros.length} entries were checked on ${checked} against official announcements, release notes and project pages. Each distribution's detail page lists the sources used and the date of the check.`}
+              ? `Jeder der ${distros.length} Einträge trägt sein eigenes Prüfdatum – nachgesehen wurde jeweils in den offiziellen Ankündigungen, Release Notes und Projektseiten. Der älteste Eintrag wurde am ${oldestCheckDate} geprüft, der jüngste am ${newestCheckDate}. Quellen und Datum stehen auf jeder Detailseite.`
+              : `Each of the ${distros.length} entries carries its own check date — verified against official announcements, release notes and project pages. The oldest entry was checked on ${oldestCheckDate}, the newest on ${newestCheckDate}. Sources and dates are on every detail page.`}
           </p>
           <p>
             {de

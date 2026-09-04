@@ -1,4 +1,4 @@
-import { distros } from '../data/distros';
+import { distros, oldestCheckDate } from '../data/distros';
 import { allQuestions, baseQuestionCount } from '../data/questions';
 import { useI18n } from '../i18n';
 import { Link } from './common';
@@ -18,7 +18,7 @@ function Stat({ value, label }: { value: string; label: string }) {
 
 export function HomePage() {
   const { t, lang } = useI18n();
-  const checked = distros[0]?.checkedAt ?? '';
+  const checked = oldestCheckDate;
 
   const features = [
     { title: t('featureModesTitle'), text: t('featureModesText') },

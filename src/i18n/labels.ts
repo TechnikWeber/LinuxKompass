@@ -79,6 +79,7 @@ export const initLabels: Labels<InitSystem> = {
   sysvinit: { de: 'sysVinit', en: 'sysVinit' },
   s6: { de: 's6', en: 's6' },
   dinit: { de: 'dinit', en: 'dinit' },
+  shepherd: { de: 'GNU Shepherd', en: 'GNU Shepherd' },
   'bsd-style': { de: 'BSD-artige Init-Skripte', en: 'BSD-style init scripts' },
   other: { de: 'anderes', en: 'other' },
 };
@@ -94,6 +95,9 @@ export const packageManagerLabels: Labels<PackageManager> = {
   apk: { de: 'apk', en: 'apk' },
   portage: { de: 'Portage', en: 'Portage' },
   nix: { de: 'Nix', en: 'Nix' },
+  guix: { de: 'Guix', en: 'Guix' },
+  urpmi: { de: 'urpmi/dnf', en: 'urpmi/dnf' },
+  abroot: { de: 'ABRoot + apx', en: 'ABRoot + apx' },
   eopkg: { de: 'eopkg', en: 'eopkg' },
   slackpkg: { de: 'slackpkg', en: 'slackpkg' },
   pkgtool: { de: 'pkgtool', en: 'pkgtool' },
@@ -108,6 +112,7 @@ export const packageFormatLabels: Labels<PackageFormat> = {
   apk: { de: '.apk', en: '.apk' },
   ebuild: { de: 'ebuild (Quellcode)', en: 'ebuild (source)' },
   nix: { de: 'Nix-Ableitung', en: 'Nix derivation' },
+  guix: { de: 'Guix-Paket', en: 'Guix package' },
   eopkg: { de: '.eopkg', en: '.eopkg' },
   txz: { de: '.txz', en: '.txz' },
 };

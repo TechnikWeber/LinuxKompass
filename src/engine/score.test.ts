@@ -205,12 +205,13 @@ describe('Bewertung', () => {
   });
 
   it('lockert nur im Notfall und lässt ein kleines Ergebnisfeld sonst stehen', () => {
-    // „Deklarativ“ beschreibt genau eine Distribution. Das ist eine gültige
-    // Antwort und darf nicht stillschweigend aufgeweicht werden.
+    // „Deklarativ" beschreibt genau zwei Distributionen: NixOS und Guix. Ein
+    // Ergebnisfeld dieser Größe ist eine gültige Antwort und darf nicht
+    // stillschweigend aufgeweicht werden.
     const outcome = scoreAll('expert', { 'package-philosophy': ['declarative'] });
     const eligible = outcome.results.filter((r) => r.eligible);
     expect(outcome.relaxed).toEqual([]);
-    expect(eligible.map((r) => r.distro.id)).toEqual(['nixos']);
+    expect(eligible.map((r) => r.distro.id).sort()).toEqual(['guix', 'nixos']);
   });
 
   it('setzt eine eindeutige Antwort auch gegen eine allgemein starke Distribution durch', () => {
@@ -406,6 +407,28 @@ describe('Beschriftungen', () => {
     const unlabelled = [...boostable].filter((t) => !tagLabels[t] && !byId.has(t));
     // Bewusst ohne Text bleiben nur die, die ein Etikett daneben schon sagt.
     expect(unlabelled.sort()).toEqual(['langzeitsupport', 'rolling', 'semi-rolling']);
+  });
+
+  it('rechnet ohne Erklärstücke exakt dasselbe', () => {
+    // Die Kipp-Analyse nutzt den Schnellpfad. Käme dabei eine andere
+    // Reihenfolge heraus, behauptete sie Umschwünge, die es nicht gibt.
+    const cases: Answers[] = [
+      {},
+      { purpose: ['gaming'], gpu: ['nvidia-new'] },
+      { purpose: ['everyday'], terminal: ['never'], 'update-appetite': ['never-touch'], german: ['important'] },
+      { purpose: ['server'], 'update-appetite': ['bleeding'], 'breakage-tolerance': ['fun'] },
+    ];
+    for (const answers of cases) {
+      for (const mode of ['beginner', 'advanced', 'expert'] as const) {
+        const full = scoreAll(mode, answers);
+        const fast = scoreAll(mode, answers, { explain: false });
+        const label = `${mode} ${JSON.stringify(answers)}`;
+        expect(fast.results.map((r) => r.distro.id), label).toEqual(full.results.map((r) => r.distro.id));
+        expect(fast.results.map((r) => r.score), label).toEqual(full.results.map((r) => r.score));
+        expect(fast.results.map((r) => r.eligible), label).toEqual(full.results.map((r) => r.eligible));
+        expect(fast.relaxed, label).toEqual(full.relaxed);
+      }
+    }
   });
 
   it('dreht keine Dimension um, bei der mehr immer besser ist', async () => {

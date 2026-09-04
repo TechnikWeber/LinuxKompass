@@ -8,14 +8,18 @@ import { CompareToggle, Link, Monogram } from './common';
 import { FlagList } from './FlagList';
 import { ResultCard } from './ResultCard';
 import { DesktopPick } from './DesktopPick';
+import { WhatWouldFlip } from './WhatWouldFlip';
+import { WhyNot } from './WhyNot';
 
 const TIE_THRESHOLD = 3;
+
+/** Sichtbare Plätze der Rangliste, bevor „Mehr anzeigen" nötig wird. */
+const VISIBLE_RANKS = 8;
 
 export function ResultPage() {
   const { t, tl, lang } = useI18n();
   const { mode, answers, navigate, setMode, compare, shareUrl } = useApp();
   const [showAll, setShowAll] = useState(false);
-  const [showExcluded, setShowExcluded] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const outcome = useMemo(() => scoreAll(mode, answers), [mode, answers]);
@@ -24,7 +28,9 @@ export function ResultPage() {
   const answeredAny = Object.keys(answers).length > 0;
 
   const top = eligible[0];
-  const alternatives = eligible.slice(1, 5);
+  // Drei statt vier: Darunter steht ohnehin die vollständige Rangliste. Eine
+  // vierte Karte wiederholt nur, was die Tabelle in einer Zeile sagt.
+  const alternatives = eligible.slice(1, 4);
   const tied = top ? eligible.filter((r) => top.score - r.score <= TIE_THRESHOLD) : [];
 
   const confidenceText =
@@ -67,28 +73,41 @@ export function ResultPage() {
             {t('resultLead')}
           </p>
 
-          <div className="card" style={{ maxWidth: '46rem' }}>
-            <div className="meter">
-              <span className="meter__label">{t('resultConfidence')}</span>
-              <span className="meter__value">{Math.round(outcome.confidence * 100)} %</span>
-              <div className="meter__track">
-                <div className="progress__fill" style={{ width: `${outcome.confidence * 100}%`, height: '100%' }} />
-              </div>
-            </div>
-            <p style={{ marginTop: '0.6rem', marginBottom: 0, fontSize: 'var(--step--1)', color: 'var(--ink-muted)' }}>
-              {confidenceText}
-              {unanswered.length > 0 && (
-                <>
-                  {' '}
-                  {lang === 'de'
-                    ? `${unanswered.length} Frage(n) sind noch offen.`
-                    : `${unanswered.length} question(s) are still unanswered.`}
-                </>
-              )}
+        </header>
+
+        {outcome.relaxed.length > 0 && (
+          <div className="callout callout--warning">
+            <h2 className="callout__title">{t('resultRelaxed')}</h2>
+            <p style={{ color: 'var(--ink-muted)' }}>{t('resultRelaxedLead')}</p>
+            <ul style={{ margin: 0 }}>
+              {outcome.relaxed.map((id) => (
+                <li key={id}>{tl(requirements.get(id)?.short)}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {eligible.length > 0 && eligible.length <= 3 && (
+          <div className="callout callout--info">
+            <p style={{ margin: 0 }}>{t('resultNarrow', { n: eligible.length, total: outcome.results.length })}</p>
+          </div>
+        )}
+
+        {/* Die Empfehlung zuerst. Verlässlichkeit, Kipp-Punkte und Gegenprobe
+            beantworten alle dieselbe Frage – „wie sehr kann ich mich darauf
+            verlassen?" – und stehen deshalb zusammen dahinter, nicht als Messuhr
+            davor, an der man erst vorbeiscrollen muss. */}
+        {top && <ResultCard result={top} rank={1} featured />}
+
+        {tied.length > 1 && (
+          <div className="callout callout--info">
+            <p style={{ margin: 0 }}>
+              {t('resultTiedWarning')} <strong>{tied.map((r) => r.distro.name).join(' · ')}</strong>
             </p>
           </div>
+        )}
 
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }} className="no-print">
+        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }} className="no-print">
             <button type="button" className="btn btn--small" onClick={() => navigate({ name: 'quiz' })}>
               {t('resultRefine')}
             </button>
@@ -122,43 +141,42 @@ export function ResultPage() {
             <button type="button" className="btn btn--small" onClick={() => window.print()}>
               {t('resultPrint')}
             </button>
-            {compare.length > 0 && (
-              <Link to={{ name: 'compare' }} className="btn btn--small btn--primary">
-                {t('compareOpen')} ({compare.length})
-              </Link>
-            )}
-          </div>
-        </header>
+          {compare.length > 0 && (
+            <Link to={{ name: 'compare' }} className="btn btn--small btn--primary">
+              {t('compareOpen')} ({compare.length})
+            </Link>
+          )}
+        </div>
 
-        {outcome.relaxed.length > 0 && (
-          <div className="callout callout--warning">
-            <h2 className="callout__title">{t('resultRelaxed')}</h2>
-            <p style={{ color: 'var(--ink-muted)' }}>{t('resultRelaxedLead')}</p>
-            <ul style={{ margin: 0 }}>
-              {outcome.relaxed.map((id) => (
-                <li key={id}>{tl(requirements.get(id)?.short)}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {eligible.length > 0 && eligible.length <= 3 && (
-          <div className="callout callout--info">
-            <p style={{ margin: 0 }}>
-              {t('resultNarrow', { n: eligible.length, total: outcome.results.length })}
-            </p>
-          </div>
-        )}
-
-        {top && <ResultCard result={top} rank={1} featured />}
-
-        {tied.length > 1 && (
-          <div className="callout callout--info">
-            <p style={{ margin: 0 }}>
-              {t('resultTiedWarning')}{' '}
-              <strong>{tied.map((r) => r.distro.name).join(' · ')}</strong>
-            </p>
-          </div>
+        {/* Alles zum Nachprüfen an einer Stelle, das Aufwendige zugeklappt:
+            Die Seite wächst um zwei Zeilen statt um zwei Kapitel, und gerechnet
+            wird erst, wenn jemand es wissen will. */}
+        {top && (
+          <section className="stack">
+            <h2 style={{ fontSize: 'var(--step-2)' }}>{t('verifyTitle')}</h2>
+            <div className="card">
+              <div className="meter">
+                <span className="meter__label">{t('resultConfidence')}</span>
+                <span className="meter__value">{Math.round(outcome.confidence * 100)} %</span>
+                <div className="meter__track">
+                  <div className="progress__fill" style={{ width: `${outcome.confidence * 100}%`, height: '100%' }} />
+                </div>
+              </div>
+              <p style={{ marginTop: '0.6rem', marginBottom: 0, fontSize: 'var(--step--1)', color: 'var(--ink-muted)' }}>
+                {confidenceText}
+                {unanswered.length > 0 && (
+                  <>
+                    {' '}
+                    {lang === 'de'
+                      ? `${unanswered.length} Frage(n) sind noch offen.`
+                      : `${unanswered.length} question(s) are still unanswered.`}
+                  </>
+                )}
+              </p>
+            </div>
+            <WhatWouldFlip mode={mode} answers={answers} />
+            <WhyNot top={top} results={outcome.results} />
+          </section>
         )}
 
         {alternatives.length > 0 && (
@@ -205,6 +223,17 @@ export function ResultPage() {
                     {lang === 'de'
                       ? 'Live-System starten und prüfen: WLAN, Ton, Bildschirmauflösung, Drucker, externer Monitor.'
                       : 'Boot the live session and check Wi-Fi, sound, resolution, printer and external monitor.'}
+                    <br />
+                    {/* Der Blick ins Aussehen stand bisher als eigene Karte
+                        daneben. Als Schritt in der Vorbereitung steht er da,
+                        wo man ihn braucht, und kostet keine halbe Bildschirmhöhe. */}
+                    <span style={{ fontSize: 'var(--step--1)', color: 'var(--ink-muted)' }}>
+                      {t('tryLiveText')}{' '}
+                      <a href="https://distrosea.com/" target="_blank" rel="noreferrer noopener">
+                        {t('tryLiveLink')} <span aria-hidden="true">↗</span>
+                      </a>{' '}
+                      ({t('tryLiveDisclaimer')})
+                    </span>
                   </li>
                   <li>
                     {lang === 'de'
@@ -212,16 +241,6 @@ export function ResultPage() {
                       : 'Only install once everything works in the live session.'}
                   </li>
                 </ol>
-              </div>
-              <div className="card">
-                <h3 style={{ fontSize: 'var(--step-1)' }}>{t('tryLiveTitle')}</h3>
-                <p style={{ color: 'var(--ink-muted)' }}>{t('tryLiveText')}</p>
-                <p style={{ marginBottom: '0.35rem' }}>
-                  <a className="btn btn--small" href="https://distrosea.com/" target="_blank" rel="noreferrer noopener">
-                    {t('tryLiveLink')} <span aria-hidden="true">↗</span>
-                  </a>
-                </p>
-                <p style={{ fontSize: 'var(--step--1)', color: 'var(--ink-faint)', margin: 0 }}>{t('tryLiveDisclaimer')}</p>
               </div>
               <div className="card">
                 <h3 style={{ fontSize: 'var(--step-1)' }}>
@@ -237,6 +256,9 @@ export function ResultPage() {
           </section>
         )}
 
+        {/* Rangliste und Ausgeschlossene sind beide Nachschlagematerial und
+            hatten je eine eigene Überschrift. Zusammen ist es ein Abschnitt,
+            und die lange Ausschlussliste bleibt zugeklappt. */}
         <section className="stack">
           <h2 style={{ fontSize: 'var(--step-2)' }}>{t('resultAllRanked')}</h2>
           <div className="tablewrap">
@@ -253,7 +275,7 @@ export function ResultPage() {
                 </tr>
               </thead>
               <tbody>
-                {(showAll ? eligible : eligible.slice(0, 12)).map((r, i) => (
+                {(showAll ? eligible : eligible.slice(0, VISIBLE_RANKS)).map((r, i) => (
                   <tr key={r.distro.id}>
                     <td style={{ color: 'var(--ink-faint)', fontVariantNumeric: 'tabular-nums' }}>{i + 1}</td>
                     <th scope="row">
@@ -272,31 +294,24 @@ export function ResultPage() {
               </tbody>
             </table>
           </div>
-          {eligible.length > 12 && (
+          {eligible.length > VISIBLE_RANKS && (
             <div className="no-print">
               <button type="button" className="btn btn--small" onClick={() => setShowAll((v) => !v)}>
-                {showAll ? t('showLess') : `${t('showMore')} (${eligible.length - 12})`}
+                {showAll ? t('showLess') : `${t('showMore')} (${eligible.length - VISIBLE_RANKS})`}
               </button>
             </div>
           )}
           {compare.length >= MAX_COMPARE && (
             <p style={{ fontSize: 'var(--step--1)', color: 'var(--ink-faint)' }}>{t('compareLimit')}</p>
           )}
-        </section>
 
-        {excluded.length > 0 && (
-          <section className="stack">
-            <h2 style={{ fontSize: 'var(--step-2)' }}>
-              {t('resultExcluded')} ({excluded.length})
-            </h2>
-            <p className="prose" style={{ color: 'var(--ink-muted)' }}>
-              {t('resultExcludedLead')}
-            </p>
-            <button type="button" className="btn btn--small no-print" onClick={() => setShowExcluded((v) => !v)}>
-              {showExcluded ? t('showLess') : t('showMore')}
-            </button>
-            {showExcluded && (
-              <div className="card">
+          {excluded.length > 0 && (
+            <details className="explainer explainer--wide">
+              <summary>
+                {t('resultExcluded')} ({excluded.length})
+              </summary>
+              <div className="stack stack-sm">
+                <p style={{ margin: 0 }}>{t('resultExcludedLead')}</p>
                 {excluded.map((r) => (
                   <div key={r.distro.id} className="excluded-item">
                     <Link to={{ name: 'distro', id: r.distro.id }} style={{ minWidth: '9rem', fontWeight: 600 }}>
@@ -304,16 +319,14 @@ export function ResultPage() {
                     </Link>
                     <span style={{ color: 'var(--ink-muted)' }}>
                       {t('excludedBecause')}{' '}
-                      {r.failed
-                        .map((f) => tl(requirements.get(f.requirementId)?.negated))
-                        .join(' · ')}
+                      {r.failed.map((f) => tl(requirements.get(f.requirementId)?.negated)).join(' · ')}
                     </span>
                   </div>
                 ))}
               </div>
-            )}
-          </section>
-        )}
+            </details>
+          )}
+        </section>
       </div>
     </section>
   );
