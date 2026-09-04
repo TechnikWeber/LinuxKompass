@@ -345,13 +345,40 @@ label { font-size: var(--step--1); color: var(--ink-muted); }
    Tabellen
    -------------------------------------------------------------------------- */
 
-.tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: var(--radius-lg); background: var(--paper-raised); }
-table { border-collapse: collapse; width: 100%; font-size: var(--step--1); }
+/*
+ * Der Rahmen um die Tabelle rollt in beide Richtungen.
+ *
+ * `overflow-x: auto` allein genügt nicht: Sobald eine Achse rollt, macht der
+ * Browser aus der anderen ebenfalls einen Rollbereich. Und ein `position:
+ * sticky` klebt immer am nächsten Rollbereich, nicht am Fenster -- ohne
+ * Höhengrenze rollt dieser Rahmen vertikal nie, die Kopfzeile klebte also an
+ * einer Kante, die selbst mit der Seite nach oben wanderte. Genau deshalb war
+ * bei langen Vergleichstabellen nach ein paar Zeilen nicht mehr erkennbar,
+ * welche Spalte zu welcher Distribution gehört.
+ *
+ * Mit einer Höhengrenze rollen lange Tabellen in sich, und die Namen bleiben
+ * stehen. Kurze Tabellen erreichen die Grenze nicht und verhalten sich
+ * unverändert.
+ */
+.tablewrap {
+  overflow: auto;
+  max-height: calc(100dvh - 7rem);
+  /* Bei einem Sprung direkt auf die Tabelle sonst unter der Kopfleiste
+     einrasten -- dann läge die festgestellte Kopfzeile dahinter. */
+  scroll-margin-top: 5.5rem;
+  border: 1px solid var(--rule); border-radius: var(--radius-lg); background: var(--paper-raised);
+}
+table { border-collapse: separate; border-spacing: 0; width: 100%; font-size: var(--step--1); }
 th, td { text-align: left; padding: 0.65rem 0.85rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
 thead th { position: sticky; top: 0; background: var(--paper-raised); z-index: 2; font-weight: 600; border-bottom: 2px solid var(--rule-strong); }
-tbody tr:last-child td { border-bottom: 0; }
+tbody tr:last-child td, tbody tr:last-child th { border-bottom: 0; }
 tbody tr:hover td { background: color-mix(in srgb, var(--paper-sunken) 60%, transparent); }
 th[scope='row'] { font-weight: 500; color: var(--ink-muted); white-space: nowrap; position: sticky; left: 0; background: var(--paper-raised); z-index: 1; }
+/* Die Ecke oben links gehört beiden Richtungen an und muss über beiden liegen. */
+thead th:first-child { left: 0; z-index: 3; }
+/* Gruppenüberschriften laufen über die ganze Breite und dürfen nicht als
+   Zeilenkopf links kleben bleiben -- sonst stehen sie über den Werten. */
+tbody th[colspan] { position: static; }
 .row--differs th[scope='row'] { color: var(--ink); font-weight: 600; }
 .row--differs td { background: color-mix(in srgb, var(--accent-soft) 45%, transparent); }
 
@@ -511,6 +538,8 @@ details.explainer--wide > div { max-width: none; }
 
 @media print {
   .masthead, .colophon, .traybar, .no-print { display: none !important; }
+  /* Auf Papier gibt es kein Rollen: Die Tabelle muss vollständig heraus. */
+  .tablewrap { max-height: none; overflow: visible; }
   body { background: #fff; color: #000; font-size: 10.5pt; }
   .card { break-inside: avoid; border-color: #bbb; }
   a[href^='http']::after { content: ' (' attr(href) ')'; font-size: 0.8em; color: #555; word-break: break-all; }
