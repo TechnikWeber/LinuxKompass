@@ -408,6 +408,26 @@ describe('Beschriftungen', () => {
     expect(unlabelled.sort()).toEqual(['langzeitsupport', 'rolling', 'semi-rolling']);
   });
 
+  it('dreht keine Dimension um, bei der mehr immer besser ist', async () => {
+    const { buildProfile, INVERTIBLE_RATINGS } = await import('./score');
+    // Ein negatives Gewicht bedeutet dort „weniger wichtig", nicht „je
+    // schlechter, desto besser". Sonst stünde am Ende „Stabilität
+    // (je weniger, desto besser) 8/10" auf der Ergebniskarte.
+    for (const q of allQuestions) {
+      for (const o of q.options) {
+        for (const mode of ['beginner', 'advanced', 'expert'] as const) {
+          if (!q.modes.includes(mode)) continue;
+          const weights = buildProfile(mode, { [q.id]: [o.id] }).weights;
+          for (const [key, weight] of Object.entries(weights)) {
+            if (weight < 0) {
+              expect(INVERTIBLE_RATINGS.has(key as never), `${q.id}/${o.id}: ${key}`).toBe(true);
+            }
+          }
+        }
+      }
+    }
+  });
+
   it('hat zu jeder Anforderung alle drei Textformen in beiden Sprachen', async () => {
     const { requirementList } = await import('./requirements');
     for (const r of requirementList) {

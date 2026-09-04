@@ -157,7 +157,7 @@ export const ui = {
   resultMatchedTag: { de: 'Passt zu deinen Angaben', en: 'Matches your answers' },
   resultStrengths: { de: 'Spricht dafür', en: 'In favour' },
   resultWeaknesses: { de: 'Spricht dagegen', en: 'Against' },
-  resultOpenWishes: { de: 'Bleibt offen', en: 'Left unmet' },
+  resultOpenWishes: { de: 'Gewünscht, aber nicht dabei', en: 'Wanted, but not offered' },
   resultNothingFor: { de: 'Nichts, was besonders dafür spricht.', en: 'Nothing that particularly speaks for it.' },
   resultNothingAgainst: { de: 'Nichts, was dagegen spricht.', en: 'Nothing that speaks against it.' },
   ratingLowWanted: { de: 'je weniger, desto besser', en: 'less is better' },

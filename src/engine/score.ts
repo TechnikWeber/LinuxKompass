@@ -66,6 +66,27 @@ export interface ScoreOutcome {
   confidence: number;
 }
 
+/**
+ * Dimensionen, bei denen ein niedriger Wert wirklich der gewünschte sein kann.
+ *
+ * Bei allen übrigen ist mehr immer besser. Ein negatives Gewicht dort heißt
+ * „das ist mir weniger wichtig", nicht „ich hätte gern wenig davon": Wer
+ * versionierte Sicherungen hat, braucht weniger Stabilität – wünscht sich aber
+ * kein instabiles System. Solche Gewichte werden deshalb unten bei null
+ * abgefangen, statt die Dimension umzudrehen.
+ *
+ * Die drei hier sind echte Vorlieben in beide Richtungen: Wer zehn Jahre Ruhe
+ * will, möchte tatsächlich ältere, abgehangene Software; wer ein fertig
+ * abgestimmtes Produkt sucht, will gerade nicht das unveränderte Upstream; und
+ * wer kachelnde Fenster und Skripte sucht, will kein System, das ihm alles
+ * abnimmt.
+ */
+export const INVERTIBLE_RATINGS: ReadonlySet<RatingKey> = new Set<RatingKey>([
+  'freshness',
+  'upstreamPurity',
+  'beginnerFriendly',
+]);
+
 /** Baut aus den Antworten das Nutzerprofil. */
 export function buildProfile(mode: Mode, answers: Answers): Profile {
   const profile: Profile = {
@@ -138,6 +159,15 @@ export function buildProfile(mode: Mode, answers: Answers): Profile {
   }
 
   for (const flag of suppressed) profile.flags.delete(flag);
+
+  // Erst nach dem Aufsummieren abfangen: Ein „stability: -1" darf die Betonung
+  // aus einer anderen Antwort mindern (3 - 1 = 2), aber nie unter null fallen
+  // und damit aus „weniger wichtig" ein „je schlechter, desto besser" machen.
+  for (const key of Object.keys(profile.weights) as RatingKey[]) {
+    if ((profile.weights[key] ?? 0) < 0 && !INVERTIBLE_RATINGS.has(key)) {
+      delete profile.weights[key];
+    }
+  }
 
   return profile;
 }
