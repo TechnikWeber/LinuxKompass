@@ -212,6 +212,14 @@ hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
 
 .masthead__tools { display: flex; gap: 0.35rem; align-items: center; }
 
+/* Während des Fragebogens nimmt die Kopfzeile auf schmalen Bildschirmen sonst
+   gut ein Drittel der Höhe ein. Unter Desktop-Breite bleibt dort nur die Marke
+   stehen, Navigation und Schalter erscheinen ab genügend Platz wieder. */
+@media (max-width: 61.99rem) {
+  .masthead--quiz .masthead__nav,
+  .masthead--quiz .masthead__tools { display: none; }
+}
+
 .colophon {
   margin-top: auto; border-top: 1px solid var(--rule);
   background: var(--paper-sunken); padding-block: 2.5rem;

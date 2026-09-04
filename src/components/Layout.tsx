@@ -55,13 +55,18 @@ function LangToggle() {
 
 export function Layout({ children }: { children: ReactNode }) {
   const { t } = useI18n();
+  const { route } = useApp();
+  // Während der Fragen soll das Handy die Fragen zeigen, nicht die Kopfzeile:
+  // Navigation und Schalter kosten dort sonst gut ein Drittel des Bildschirms.
+  // Ab Desktop-Breite ist genug Platz, da bleibt alles wie gewohnt sichtbar.
+  const isQuizFlow = route.name === 'triage' || route.name === 'quiz';
   return (
     <div className="shell">
       <a className="skip-link" href="#main">
         {t('skipToContent')}
       </a>
 
-      <header className="masthead no-print">
+      <header className={`masthead no-print${isQuizFlow ? ' masthead--quiz' : ''}`}>
         <div className="container masthead__inner">
           <Link to={{ name: 'home' }} className="brand">
             <BrandMark />
