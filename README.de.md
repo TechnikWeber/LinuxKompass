@@ -125,7 +125,5 @@ Datenbestand, eigener Bewertungslogik und eigener Gestaltung.
 
 ## Lizenz
 
-Der Code steht unter der [MIT-Lizenz](LICENSE). Die Distributionsdaten in
-`src/data/` stehen unter
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) – nachnutzen gern,
-aber mit Herkunftsangabe.
+Code: [MIT](LICENSE). Die Distributionsdaten in `src/data/`: [CC-BY-4.0](LICENSE-DATA) –
+nachnutzen gern, aber mit Herkunftsangabe.
