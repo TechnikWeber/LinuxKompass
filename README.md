@@ -1,5 +1,13 @@
 # LinuxKompass
 
+<p>
+  <img alt="Status: stable" src="https://img.shields.io/badge/status-stable-brightgreen">
+  <a href="https://github.com/TechnikWeber/LinuxKompass/actions/workflows/deploy.yml"><img alt="build" src="https://img.shields.io/github/actions/workflow/status/TechnikWeber/LinuxKompass/deploy.yml?branch=main&label=build"></a>
+  <img alt="Platform: browser" src="https://img.shields.io/badge/platform-browser-blue">
+  <img alt="UI: English | Deutsch" src="https://img.shields.io/badge/UI-English%20%7C%20Deutsch-informational">
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-green"></a>
+</p>
+
 A bilingual decision aid for people who want to switch to Linux and do not know
 where to start. It asks about your hardware, your habits and your patience — and
 then explains every recommendation instead of just printing a number.
