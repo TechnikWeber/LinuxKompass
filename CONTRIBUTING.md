@@ -1,5 +1,3 @@
-**English** · [Deutsch](#mitmachen)
-
 # Contributing to LinuxKompass
 
 Corrections are the most valuable contribution here. Version numbers and support
@@ -40,57 +38,6 @@ automatically in the questionnaire, the overview and the comparison. Two rules:
   `score.test.ts` that pins the behaviour you intended.
 
 ## Before opening a pull request
-
-```bash
-npm run typecheck && npm run lint && npm run test:run && npm run build
-```
-
----
-
-# Mitmachen
-
-Korrekturen sind hier der wertvollste Beitrag. Versionsnummern und
-Supportzeiträume veralten innerhalb von Monaten, und eine falsche Angabe ist
-schlimmer als eine fehlende.
-
-## Einen Distributionseintrag korrigieren
-
-Die Daten liegen in `src/data/distros/`, nach Familien gruppiert. Jeder Eintrag
-ist reine, typisierte Datenstruktur – am Code muss nichts angefasst werden.
-
-1. Eintrag suchen und korrigieren.
-2. `checkedAt` auf das heutige Datum setzen (`JJJJ-MM-TT`).
-3. Unter `sources` die offizielle Ankündigung, die Release Notes oder die
-   Projektseite ergänzen, gegen die du geprüft hast. Blogbeiträge und
-   Nachrichtenseiten sind als Zweitquelle in Ordnung, nie als einzige.
-4. `npm run test:run` ausführen. Die Tests prüfen Verweise, den Wertebereich
-   aller Bewertungen und die Vollständigkeit beider Sprachen.
-
-Bitte immer `de` **und** `en` füllen – ein einsprachiger Eintrag fällt durch die
-Tests.
-
-## Eine Distribution ergänzen
-
-In die Datei der passenden Familie eintragen (oder `independent.ts`), dann
-erscheint sie automatisch im Fragebogen, in der Übersicht und im Vergleich. Zwei
-Regeln:
-
-- **Bewertungen sind relativ** zu anderen Desktop-Distributionen, nicht absolut.
-  „8 von 10 bei Stabilität" heißt „stabiler als die meisten", nicht „zu 80 %
-  fehlerfrei".
-- **Warnungen ehrlich schreiben.** Die Felder `warnings` und `notFor` machen
-  dieses Werkzeug erst nützlich. Ein Eintrag, bei dem alles großartig klingt, ist
-  nicht fertig.
-
-## Fragen oder Bewertung ändern
-
-- Fragen: `src/data/questions/` – `core.ts` (alle Modi), `advanced.ts`,
-  `expert.ts`. Reine Daten; die Wirkungen verweisen auf benannte Anforderungen
-  aus `src/engine/requirements.ts`.
-- Bewertung: `src/engine/score.ts`. Änderungen brauchen einen Test in
-  `score.test.ts`, der das gewünschte Verhalten festhält.
-
-## Vor einem Pull Request
 
 ```bash
 npm run typecheck && npm run lint && npm run test:run && npm run build

@@ -1,5 +1,3 @@
-**English** · [Deutsch](README.de.md)
-
 # LinuxKompass
 
 A bilingual decision aid for people who want to switch to Linux and do not know
