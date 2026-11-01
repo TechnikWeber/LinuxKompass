@@ -14,6 +14,14 @@ then explains every recommendation instead of just printing a number.
 
 **→ [technikweber.github.io/LinuxKompass](https://technikweber.github.io/LinuxKompass/)**
 
+<table>
+  <tr>
+    <td align="center" valign="top"><a href="docs/screenshots/home.png"><img src="docs/screenshots/home.png" width="270" alt="LinuxKompass start page: Which Linux suits you?"></a><br>Start</td>
+    <td align="center" valign="top"><a href="docs/screenshots/quiz.png"><img src="docs/screenshots/quiz.png" width="270" alt="Question 5 of 12, where do you come from, with the interim ranking"></a><br>Questionnaire with live ranking</td>
+    <td align="center" valign="top"><a href="docs/screenshots/result.png"><img src="docs/screenshots/result.png" width="270" alt="Top match Linux Mint with score and the reasons for it"></a><br>Result with reasons</td>
+  </tr>
+</table>
+
 ## What it does
 
 - **Three depths.** Three short questions estimate whether you want the beginner
