@@ -8,11 +8,15 @@
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-green"></a>
 </p>
 
+<p>
+  <a href="https://technikweber.github.io/LinuxKompass/"><b>Open in your browser</b></a> &nbsp;·&nbsp;
+  <a href="#what-it-does"><b>What it does</b></a> &nbsp;·&nbsp;
+  <a href="https://technikweber.github.io/2026/linuxkompass/"><b>Blog post (German)</b></a>
+</p>
+
 A bilingual decision aid for people who want to switch to Linux and do not know
 where to start. It asks about your hardware, your habits and your patience — and
 then explains every recommendation instead of just printing a number.
-
-**→ [technikweber.github.io/LinuxKompass](https://technikweber.github.io/LinuxKompass/)**
 
 <table>
   <tr>
