@@ -93,6 +93,7 @@ export function ComparePage() {
       make('hardware', t('fieldRaspberry'), (d) => bool(d.runsOnRaspberryPi)),
       make('hardware', t('fieldSecureBoot'), (d) => tl(secureBootLabels[d.secureBoot])),
       make('hardware', t('fieldNvidia'), (d) => tl(nvidiaLabels[d.nvidia])),
+      make('hardware', t('fieldNvidiaLegacy'), (d) => tl(nvidiaLabels[d.nvidiaLegacy ?? d.nvidia])),
       make('hardware', t('fieldCodecs'), (d) => bool(d.codecsOutOfBox)),
       make('hardware', t('fieldInstaller'), (d) => `${tl(installerLabels[d.installer])} (${d.installDifficulty}/10)`),
       make('hardware', t('fieldFde'), (d) => bool(d.fullDiskEncryptionInInstaller)),

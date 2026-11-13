@@ -1,6 +1,6 @@
 import type { Distro } from '../types';
 
-const CHECKED = '2026-09-03';
+const CHECKED = '2026-11-13';
 
 /** Eigenständig entwickelte Distributionen ohne große Familie im Rücken. */
 export const independent: Distro[] = [
@@ -19,7 +19,7 @@ export const independent: Distro[] = [
     docsUrl: 'https://nixos.org/manual/nixos/stable/',
     basedOn: null, family: 'nix', originCountry: 'NL', firstRelease: 2003, governance: 'community',
     currentVersion: '26.05 „Yarara"', currentVersionDate: '2026-05-30',
-    supportUntil: { de: 'Fehlerkorrekturen und Sicherheitsupdates bis 31. Dezember 2026; die nächste Ausgabe erscheint im November 2026.', en: 'Bug fixes and security updates until 31 December 2026; the next release arrives in November 2026.' },
+    supportUntil: { de: 'Fehlerkorrekturen und Sicherheitsupdates bis 31. Dezember 2026; die Nachfolgeausgabe 26.11 „Zokor" erscheint Ende November 2026.', en: 'Bug fixes and security updates until 31 December 2026; its successor 26.11 "Zokor" arrives at the end of November 2026.' },
     releaseModel: 'fixed',
     releaseCadence: { de: 'Zwei Ausgaben pro Jahr (Mai und November), dazu ein „unstable"-Zweig als Rolling Release.', en: 'Two releases per year (May and November), plus an "unstable" channel as a rolling release.' },
     init: 'systemd', libc: 'glibc', packageManager: 'nix', packageFormat: 'nix',
@@ -145,21 +145,21 @@ export const independent: Distro[] = [
     accent: '205 65% 35%',
     tagline: { de: 'Winzig, sicherheitsorientiert – der Standard in Container-Abbildern.', en: 'Tiny and security-focused — the default in container images.' },
     description: {
-      de: 'Alpine setzt auf musl statt glibc und BusyBox statt der GNU-Werkzeuge. Ein Grundsystem passt in wenige Dutzend Megabyte. Für Container ist Alpine die verbreitetste Wahl überhaupt; als Desktop ist es möglich, aber ein Sonderweg mit spürbaren Einschränkungen.',
-      en: 'Alpine uses musl instead of glibc and BusyBox instead of the GNU tools. A base system fits in a few dozen megabytes. For containers Alpine is by far the most common choice; as a desktop it is possible but a niche path with noticeable limitations.',
+      de: 'Alpine setzt auf musl statt glibc und BusyBox statt der GNU-Werkzeuge. Ein Grundsystem passt in wenige Dutzend Megabyte. Für Container ist Alpine die verbreitetste Wahl überhaupt; als Desktop ist es möglich, aber ein Sonderweg mit spürbaren Einschränkungen. Der Zweig 3.24 vom Juni 2026 bringt GNOME 50, Plasma 6.6 und erstmals COSMIC.',
+      en: 'Alpine uses musl instead of glibc and BusyBox instead of the GNU tools. A base system fits in a few dozen megabytes. For containers Alpine is by far the most common choice; as a desktop it is possible but a niche path with noticeable limitations. The 3.24 branch from June 2026 brings GNOME 50, Plasma 6.6 and, for the first time, COSMIC.',
     },
     website: 'https://alpinelinux.org',
     downloadUrl: 'https://alpinelinux.org/downloads/',
     docsUrl: 'https://wiki.alpinelinux.org',
     basedOn: null, family: 'independent', originCountry: 'international', firstRelease: 2005, governance: 'community',
-    currentVersion: '3.23.4', currentVersionDate: '2026-04-15',
+    currentVersion: '3.24.4', currentVersionDate: '2026-11-05',
     supportUntil: { de: 'Etwa 2 Jahre pro Hauptzweig; neue Zweige erscheinen halbjährlich.', en: 'About 2 years per major branch; new branches appear twice a year.' },
     releaseModel: 'fixed',
     releaseCadence: { de: 'Zwei Hauptzweige pro Jahr, dazu ein „edge"-Zweig als Rolling Release.', en: 'Two major branches per year, plus an "edge" rolling branch.' },
     init: 'openrc', libc: 'musl', packageManager: 'apk', packageFormat: 'apk',
     flatpakReady: true, snapReady: false, appimageFriendly: false, aur: false,
     extraRepos: { de: ['community- und testing-Zweige', 'edge für neueste Pakete'], en: ['community and testing branches', 'edge for the newest packages'] },
-    defaultDesktop: 'none', availableDesktops: ['xfce', 'plasma', 'gnome', 'sway', 'i3'],
+    defaultDesktop: 'none', availableDesktops: ['xfce', 'plasma', 'gnome', 'cosmic', 'sway', 'i3'],
     installer: 'tui-guided', installDifficulty: 7,
     minRamGb: 1, recommendedRamGb: 2, minStorageGb: 2,
     architectures: ['x86_64', 'i686', 'aarch64', 'armhf', 'riscv64', 'ppc64le', 's390x'], supports32Bit: true, runsOnRaspberryPi: true,
@@ -178,7 +178,10 @@ export const independent: Distro[] = [
     warnings: { de: ['musl statt glibc bedeutet: viele fertige Binärprogramme laufen nicht. Das betrifft auch manche Sprachlaufzeiten.', 'Als Desktop fehlen Bequemlichkeiten, die anderswo selbstverständlich sind.'], en: ['musl instead of glibc means many prebuilt binaries will not run. That includes some language runtimes.', 'As a desktop it lacks conveniences that are taken for granted elsewhere.'] },
     firstSteps: { de: ['setup-alpine als Einstiegsskript nutzen', 'Für Desktops setup-desktop verwenden', 'Bei Bedarf gcompat für glibc-Programme einrichten'], en: ['Use setup-alpine as the entry script', 'Use setup-desktop for desktops', 'Set up gcompat if you need glibc binaries'] },
     checkedAt: CHECKED,
-    sources: [{ label: 'Alpine Linux', url: 'https://alpinelinux.org/' }],
+    sources: [
+      { label: 'Alpine Linux', url: 'https://alpinelinux.org/' },
+      { label: 'Alpine Linux 3.24 brings COSMIC (Linuxiac)', url: 'https://linuxiac.com/alpine-linux-3-24-brings-cosmic-desktop-to-its-community-repository/' },
+    ],
   },
 
   {
@@ -274,13 +277,13 @@ export const independent: Distro[] = [
     accent: '35 85% 50%',
     tagline: { de: 'Passt auf einen USB-Stick und läuft komplett im Arbeitsspeicher.', en: 'Fits on a USB stick and runs entirely in RAM.' },
     description: {
-      de: 'Puppy ist weniger eine Distribution als eine Bauweise: Sehr kleine Abbilder, die vollständig in den Arbeitsspeicher geladen werden und danach selbst auf uralten Rechnern flott laufen. Sitzungen lassen sich auf dem Stick speichern. Die Ausgaben tragen inzwischen Datumsnummern statt Versionsnummern.',
-      en: 'Puppy is less a distribution than a build method: very small images loaded entirely into RAM that then run briskly even on ancient machines. Sessions can be saved onto the stick. Editions now carry date-based numbers rather than version numbers.',
+      de: 'Puppy ist weniger eine Distribution als eine Bauweise: Sehr kleine Abbilder, die vollständig in den Arbeitsspeicher geladen werden und danach selbst auf uralten Rechnern flott laufen. Sitzungen lassen sich auf dem Stick speichern. Die Ausgaben tragen inzwischen Datumsnummern statt Versionsnummern; auf Debian-13-Basis gibt es sogar erste Varianten mit Wayland.',
+      en: 'Puppy is less a distribution than a build method: very small images loaded entirely into RAM that then run briskly even on ancient machines. Sessions can be saved onto the stick. Editions now carry date-based numbers rather than version numbers; on a Debian 13 base there are even first variants with Wayland.',
     },
     website: 'https://puppylinux-woof-ce.github.io',
     downloadUrl: 'https://puppylinux-woof-ce.github.io/index.html#download',
     basedOn: null, family: 'independent', originCountry: 'AU', firstRelease: 2003, governance: 'community',
-    currentVersion: '2026er Serie (datumsbasiert)', currentVersionDate: '2026-09',
+    currentVersion: '2026er Serie (datumsbasiert)', currentVersionDate: '2026-03',
     supportUntil: { de: 'Kein festes Modell; die jeweils zugrunde liegende Paketbasis bestimmt die Lebensdauer.', en: 'No fixed model; the underlying package base determines the lifespan.' },
     releaseModel: 'fixed',
     releaseCadence: { de: 'Neue Abbilder erscheinen unregelmäßig, oft mehrmals im Jahr.', en: 'New images appear irregularly, often several times a year.' },
@@ -316,14 +319,14 @@ export const independent: Distro[] = [
     accent: '215 45% 42%',
     tagline: { de: 'Ausschließlich freie Software – von der Free Software Foundation empfohlen.', en: 'Exclusively free software — endorsed by the Free Software Foundation.' },
     description: {
-      de: 'Trisquel entfernt aus einer Ubuntu-LTS-Basis konsequent jede unfreie Komponente, auch die Firmware im Kernel. Es ist eine der wenigen Distributionen, die von der Free Software Foundation offiziell empfohlen werden. Version 12.0 erschien im April 2026.',
-      en: 'Trisquel strips every non-free component from an Ubuntu LTS base, including firmware blobs in the kernel. It is one of the few distributions officially endorsed by the Free Software Foundation. Version 12.0 arrived in April 2026.',
+      de: 'Trisquel entfernt aus einer Ubuntu-LTS-Basis konsequent jede unfreie Komponente, auch die Firmware im Kernel. Es ist eine der wenigen Distributionen, die von der Free Software Foundation offiziell empfohlen werden. Version 12.0 „Ecne" erschien im April 2026 auf Basis von Ubuntu 24.04 und läuft erstmals neben x86-64 auch auf ARM, POWER und RISC-V.',
+      en: 'Trisquel strips every non-free component from an Ubuntu LTS base, including firmware blobs in the kernel. It is one of the few distributions officially endorsed by the Free Software Foundation. Version 12.0 "Ecne" arrived in April 2026 on an Ubuntu 24.04 base and, for the first time, runs on ARM, POWER and RISC-V as well as x86-64.',
     },
     website: 'https://trisquel.info',
     downloadUrl: 'https://trisquel.info/en/download',
     basedOn: 'ubuntu', family: 'ubuntu', originCountry: 'ES', firstRelease: 2005, governance: 'community',
-    currentVersion: '12.0', currentVersionDate: '2026-04-11',
-    supportUntil: { de: 'Entlang der zugrunde liegenden Ubuntu-LTS.', en: 'In line with the underlying Ubuntu LTS.' },
+    currentVersion: '12.0 „Ecne"', currentVersionDate: '2026-04-11',
+    supportUntil: { de: 'Entlang von Ubuntu 24.04 LTS, also etwa bis April 2029.', en: 'In line with Ubuntu 24.04 LTS, so until around April 2029.' },
     releaseModel: 'lts',
     releaseCadence: { de: 'Eine Ausgabe pro Ubuntu-LTS, mit Verzögerung.', en: 'One release per Ubuntu LTS, with a delay.' },
     init: 'systemd', libc: 'glibc', packageManager: 'apt', packageFormat: 'deb',
@@ -332,7 +335,7 @@ export const independent: Distro[] = [
     defaultDesktop: 'mate', availableDesktops: ['mate', 'lxde'],
     installer: 'graphical-guided', installDifficulty: 3,
     minRamGb: 2, recommendedRamGb: 4, minStorageGb: 20,
-    architectures: ['x86_64'], supports32Bit: false, runsOnRaspberryPi: false,
+    architectures: ['x86_64', 'aarch64', 'armhf', 'ppc64le', 'riscv64'], supports32Bit: false, runsOnRaspberryPi: false,
     secureBoot: 'none', nvidia: 'unsupported', codecsOutOfBox: false,
     fullDiskEncryptionInInstaller: true, snapshotRollback: false, atomic: false,
     waylandDefault: false, x11SessionAvailable: true,
@@ -348,6 +351,9 @@ export const independent: Distro[] = [
     warnings: { de: ['Ohne unfreie Firmware funktionieren viele WLAN-Chips, Bluetooth-Module und Grafikkarten nicht – vorher unbedingt im Live-System testen.', 'Die Paketbasis hinkt Ubuntu deutlich hinterher.'], en: ['Without non-free firmware many Wi-Fi chips, Bluetooth modules and GPUs will not work — always test in the live session first.', 'The package base trails Ubuntu considerably.'] },
     firstSteps: { de: ['Im Live-System prüfen, ob WLAN und Grafik funktionieren', 'Ersatzhardware mit freien Treibern einplanen (z. B. USB-WLAN-Stick)'], en: ['Check Wi-Fi and graphics in the live session', 'Budget for replacement hardware with free drivers (a USB Wi-Fi stick, for instance)'] },
     checkedAt: CHECKED,
-    sources: [{ label: 'Trisquel', url: 'https://trisquel.info/' }],
+    sources: [
+      { label: 'Trisquel', url: 'https://trisquel.info/' },
+      { label: 'Trisquel 12.0 "Ecne" released (Help Net Security)', url: 'https://www.helpnetsecurity.com/2026/04/13/trisquel-12-0-ecne-released/' },
+    ],
   },
 ];

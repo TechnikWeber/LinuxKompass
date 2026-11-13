@@ -1,6 +1,6 @@
 import type { Distro } from '../types';
 
-const CHECKED = '2026-09-04';
+const CHECKED = '2026-11-13';
 
 /**
  * Die RPM-Welt jenseits von Red Hat und SUSE.
@@ -35,8 +35,8 @@ export const mandrivaFamily: Distro[] = [
     currentVersion: '10',
     currentVersionDate: '2026-06',
     supportUntil: {
-      de: 'März 2028. Die Vorgängerversion 9 wird noch bis September 2026 gepflegt.',
-      en: 'March 2028. The previous release, 9, is maintained until September 2026.',
+      de: 'März 2028. Die Vorgängerversion 9 bekam nur noch bis Ende September 2026 Updates.',
+      en: 'March 2028. The previous release, 9, only received updates until the end of September 2026.',
     },
     releaseModel: 'fixed',
     releaseCadence: {
@@ -166,8 +166,8 @@ export const mandrivaFamily: Distro[] = [
       en: 'The other Mandriva heir — compiled entirely with Clang.',
     },
     description: {
-      de: 'OpenMandriva ist der zweite Zweig aus dem Mandriva-Erbe und geht technisch einen eigenen Weg: Die gesamte Distribution wird mit dem LLVM/Clang-Compiler übersetzt statt mit GCC, und es gibt Ausgaben, die auf neuere Prozessorbefehle (x86-64-v3) optimiert sind. Es gibt sie zweigleisig – die feste Ausgabe Lx 6.0 und den rollenden Zweig ROME, der laufend aktuelle Software liefert.',
-      en: 'OpenMandriva is the second branch of the Mandriva inheritance and takes its own technical route: the whole distribution is built with the LLVM/Clang compiler rather than GCC, and there are builds tuned for newer processor instructions (x86-64-v3). It comes in two tracks — the fixed Lx 6.0 release and the rolling ROME branch that ships current software continuously.',
+      de: 'OpenMandriva ist der zweite Zweig aus dem Mandriva-Erbe und geht technisch einen eigenen Weg: Die gesamte Distribution wird mit dem LLVM/Clang-Compiler übersetzt statt mit GCC, und es gibt Ausgaben, die auf neuere Prozessorbefehle (x86-64-v3) optimiert sind. Es gibt sie zweigleisig – die feste Ausgabe Lx 6.0 vom April 2025 und den rollenden Zweig ROME, der laufend aktuelle Software liefert und zuletzt im Oktober 2026 als ROME 26.09 neue Abbilder bekam.',
+      en: 'OpenMandriva is the second branch of the Mandriva inheritance and takes its own technical route: the whole distribution is built with the LLVM/Clang compiler rather than GCC, and there are builds tuned for newer processor instructions (x86-64-v3). It comes in two tracks — the fixed Lx 6.0 release from April 2025 and the rolling ROME branch that ships current software continuously and most recently got fresh images as ROME 26.09 in October 2026.',
     },
     website: 'https://www.openmandriva.org',
     downloadUrl: 'https://www.openmandriva.org/en/downloads',
@@ -177,7 +177,7 @@ export const mandrivaFamily: Distro[] = [
     originCountry: 'FR / RU',
     firstRelease: 2013,
     governance: 'foundation',
-    currentVersion: '6.0 (fest) bzw. ROME (rollend)',
+    currentVersion: '6.0 (fest) bzw. ROME 26.09',
     currentVersionDate: '2025-04',
     supportUntil: {
       de: 'Die feste Ausgabe bis zur nächsten Hauptversion; ROME rollt ohne Endtermin weiter.',
@@ -263,11 +263,11 @@ export const mandrivaFamily: Distro[] = [
     },
     warnings: {
       de: [
-        'Kleines Projekt mit wenigen Aktiven. Die feste Ausgabe 6.0 stammt vom April 2025 – wer aktuelle Software will, muss auf ROME wechseln.',
+        'Kleines Projekt mit wenigen Aktiven. Die feste Ausgabe 6.0 stammt vom April 2025 und hat noch keinen Nachfolger – wer aktuelle Software will, muss auf ROME wechseln.',
         'Deutschsprachige Hilfe gibt es praktisch nicht.',
       ],
       en: [
-        'A small project with few active contributors. The fixed 6.0 release dates from April 2025 — anyone wanting current software has to switch to ROME.',
+        'A small project with few active contributors. The fixed 6.0 release dates from April 2025 and has no successor yet — anyone wanting current software has to switch to ROME.',
         'German-language help is effectively non-existent.',
       ],
     },
@@ -287,6 +287,7 @@ export const mandrivaFamily: Distro[] = [
     sources: [
       { label: 'OpenMandriva: aktuelle Ausgaben', url: 'https://wiki.openmandriva.org/en/distribution/releases/current' },
       { label: 'OpenMandriva Lx 6.0 Ankündigung', url: 'https://www.openmandriva.org/en/news/article/openmandriva-lx-6-0-rock-the-spring-release/' },
+      { label: 'OpenMandriva News (ROME 26.09)', url: 'https://www.openmandriva.org/en/news/' },
     ],
   },
 
@@ -311,8 +312,8 @@ export const mandrivaFamily: Distro[] = [
     originCountry: 'US',
     firstRelease: 2003,
     governance: 'single-maintainer',
-    currentVersion: '2026.07 (rollend)',
-    currentVersionDate: '2026-07',
+    currentVersion: '2026.06 (rollend)',
+    currentVersionDate: '2026-06-30',
     supportUntil: {
       de: 'Kein Endtermin: Wer regelmäßig aktualisiert, bleibt dauerhaft auf dem aktuellen Stand.',
       en: 'No end date: keep updating and you stay current indefinitely.',
@@ -406,11 +407,13 @@ export const mandrivaFamily: Distro[] = [
         'Secure Boot wird nicht unterstützt. Auf den meisten Rechnern ab Werk muss es im UEFI abgeschaltet werden.',
         'Das Paketangebot ist deutlich kleiner als bei Debian oder Fedora, und Fremdquellen sind nicht vorgesehen.',
         'Das Projekt wird seit über 20 Jahren im Wesentlichen von einer Person geführt.',
+        'Nach einem Brand beim Betreiber der Server im Juni 2025 waren Website, Forum und Wiki lange nur eingeschränkt erreichbar.',
       ],
       en: [
         'Secure Boot is not supported. On most machines it has to be switched off in UEFI first.',
         'The package selection is much smaller than Debian’s or Fedora’s, and third-party sources are not intended.',
         'The project has been led essentially by one person for over 20 years.',
+        'After a fire at the server operator’s premises in June 2025, the website, forum and wiki were only partly reachable for a long time.',
       ],
     },
     firstSteps: {
@@ -429,6 +432,7 @@ export const mandrivaFamily: Distro[] = [
     sources: [
       { label: 'PCLinuxOS – offizielle Seite', url: 'https://www.pclinuxos.com' },
       { label: 'Wikipedia: PCLinuxOS', url: 'https://en.wikipedia.org/wiki/PCLinuxOS' },
+      { label: 'PCLinuxOS has new ISO files (Linux Today)', url: 'https://www.linuxtoday.com/blog/pclinuxos-has-new-iso-files/' },
     ],
   },
 ];

@@ -348,6 +348,7 @@ export const ui = {
   fieldRaspberry: { de: 'Raspberry Pi', en: 'Raspberry Pi' },
   fieldSecureBoot: { de: 'Secure Boot', en: 'Secure Boot' },
   fieldNvidia: { de: 'NVIDIA-Treiber', en: 'NVIDIA driver' },
+  fieldNvidiaLegacy: { de: 'NVIDIA GTX 900/10xx', en: 'NVIDIA GTX 900/10xx' },
   fieldCodecs: { de: 'Mediencodecs ab Werk', en: 'Media codecs out of the box' },
   fieldFde: { de: 'Verschlüsselung im Installer', en: 'Encryption in the installer' },
   fieldSnapshots: { de: 'Systemschnappschüsse', en: 'System snapshots' },

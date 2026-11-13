@@ -212,6 +212,9 @@ export function DistroPage({ id }: { id: string }) {
             </Fact>
             <Fact label={t('fieldSecureBoot')}>{tl(secureBootLabels[distro.secureBoot])}</Fact>
             <Fact label={t('fieldNvidia')}>{tl(nvidiaLabels[distro.nvidia])}</Fact>
+            {distro.nvidiaLegacy && distro.nvidiaLegacy !== distro.nvidia && (
+              <Fact label={t('fieldNvidiaLegacy')}>{tl(nvidiaLabels[distro.nvidiaLegacy])}</Fact>
+            )}
             <Fact label={t('fieldCodecs')}>
               <YesNo value={distro.codecsOutOfBox} />
             </Fact>

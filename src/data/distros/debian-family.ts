@@ -1,6 +1,6 @@
 import type { Distro } from '../types';
 
-const CHECKED = '2026-09-03';
+const CHECKED = '2026-11-13';
 
 export const debianFamily: Distro[] = [
   {
@@ -10,18 +10,18 @@ export const debianFamily: Distro[] = [
     accent: '340 75% 45%',
     tagline: { de: 'Das Fundament, auf dem ein Großteil der Linux-Welt steht.', en: 'The foundation a large part of the Linux world stands on.' },
     description: {
-      de: 'Debian ist ein Projekt ohne Firma dahinter, das seit 1993 nach eigenen Regeln arbeitet und dessen „stable"-Zweig sprichwörtlich langweilig zuverlässig ist. Version 13 „Trixie" erschien im August 2025, aktuell ist die Punktausgabe 13.6. Debian ist Basis von Ubuntu, Mint LMDE, MX, Kali, Proxmox und vielen weiteren.',
-      en: 'Debian is a project with no company behind it, running by its own rules since 1993, whose "stable" branch is proverbially, boringly reliable. Version 13 "Trixie" arrived in August 2025; 13.6 is the current point release. Debian is the base of Ubuntu, LMDE, MX, Kali, Proxmox and many more.',
+      de: 'Debian ist ein Projekt ohne Firma dahinter, das seit 1993 nach eigenen Regeln arbeitet und dessen „stable"-Zweig sprichwörtlich langweilig zuverlässig ist. Version 13 „Trixie" erschien im August 2025, aktuell ist die Punktausgabe 13.7 vom September 2026. Debian ist Basis von Ubuntu, Mint LMDE, MX, Kali, Proxmox und vielen weiteren.',
+      en: 'Debian is a project with no company behind it, running by its own rules since 1993, whose "stable" branch is proverbially, boringly reliable. Version 13 "Trixie" arrived in August 2025; 13.7 from September 2026 is the current point release. Debian is the base of Ubuntu, LMDE, MX, Kali, Proxmox and many more.',
     },
     website: 'https://www.debian.org',
     downloadUrl: 'https://www.debian.org/distrib/',
     docsUrl: 'https://www.debian.org/doc/',
     germanResourceUrl: 'https://debianforum.de',
     basedOn: null, family: 'debian', originCountry: 'international', firstRelease: 1993, governance: 'community',
-    currentVersion: '13.6 „Trixie"', currentVersionDate: '2026-07-11',
+    currentVersion: '13.7 „Trixie"', currentVersionDate: '2026-09-12',
     supportUntil: { de: 'Vollständiger Support bis 9. August 2028, danach LTS bis 30. Juni 2030.', en: 'Full support until 9 August 2028, then LTS until 30 June 2030.' },
     releaseModel: 'lts',
-    releaseCadence: { de: 'Neue Hauptversion etwa alle zwei Jahre, „wenn sie fertig ist". Punktausgaben alle 2–3 Monate.', en: 'A new major release roughly every two years, "when it is ready". Point releases every 2–3 months.' },
+    releaseCadence: { de: 'Neue Hauptversion etwa alle zwei Jahre, „wenn sie fertig ist" – Debian 14 „Forky" wird für 2027 erwartet. Punktausgaben alle 2–3 Monate.', en: 'A new major release roughly every two years, "when it is ready" — Debian 14 "Forky" is expected in 2027. Point releases every 2–3 months.' },
     init: 'systemd', libc: 'glibc', packageManager: 'apt', packageFormat: 'deb',
     flatpakReady: true, snapReady: false, appimageFriendly: true, aur: false,
     extraRepos: { de: ['contrib/non-free für Firmware und Treiber', 'backports für neuere Pakete', 'Flathub'], en: ['contrib/non-free for firmware and drivers', 'backports for newer packages', 'Flathub'] },
@@ -46,7 +46,7 @@ export const debianFamily: Distro[] = [
     firstSteps: { de: ['contrib und non-free-firmware in /etc/apt/sources.list aktivieren', 'backports einrichten, wenn Hardware zu neu ist', 'Flathub für aktuelle Desktop-Programme hinzufügen'], en: ['Enable contrib and non-free-firmware in /etc/apt/sources.list', 'Set up backports if your hardware is too new', 'Add Flathub for current desktop applications'] },
     checkedAt: CHECKED,
     sources: [
-      { label: 'Debian 13.6 release', url: 'https://www.debian.org/News/2026/20260711' },
+      { label: 'Debian 13.7 release', url: 'https://www.debian.org/News/2026/20260912' },
       { label: 'Debian Releases', url: 'https://www.debian.org/releases/' },
     ],
   },
@@ -104,14 +104,14 @@ export const debianFamily: Distro[] = [
     accent: '210 15% 35%',
     tagline: { de: 'Debian-Stabilität, aufgebohrt mit außergewöhnlich guten Werkzeugen.', en: 'Debian stability, augmented by unusually good tools.' },
     description: {
-      de: 'MX Linux nimmt Debian stable und legt eine Sammlung eigener Werkzeuge darüber, die es sonst nirgends gibt: MX Snapshot erstellt aus dem laufenden System eine startfähige ISO, MX Packageinstaller holt aktuelle Pakete kontrolliert nach. Version 25 „Infinity" nutzt Debian 13, wahlweise mit einem 7er-Kernel für neue Hardware.',
-      en: 'MX Linux takes Debian stable and layers on a set of tools you will not find elsewhere: MX Snapshot turns your running system into a bootable ISO, MX Packageinstaller pulls in newer packages in a controlled way. Version 25 "Infinity" uses Debian 13, optionally with a 7.x kernel for new hardware.',
+      de: 'MX Linux nimmt Debian stable und legt eine Sammlung eigener Werkzeuge darüber, die es sonst nirgends gibt: MX Snapshot erstellt aus dem laufenden System eine startfähige ISO, MX Packageinstaller holt aktuelle Pakete kontrolliert nach. Version 25 „Infinity" nutzt Debian 13, wahlweise mit einem 7er-Kernel für neue Hardware; die Punktausgabe 25.3 vom September 2026 gibt es auch als Ausgabe für den Raspberry Pi.',
+      en: 'MX Linux takes Debian stable and layers on a set of tools you will not find elsewhere: MX Snapshot turns your running system into a bootable ISO, MX Packageinstaller pulls in newer packages in a controlled way. Version 25 "Infinity" uses Debian 13, optionally with a 7.x kernel for new hardware; the 25.3 point release from September 2026 also comes as a Raspberry Pi edition.',
     },
     website: 'https://mxlinux.org',
     downloadUrl: 'https://mxlinux.org/download-links/',
     germanResourceUrl: 'https://forum.mxlinux.org/viewforum.php?f=115',
     basedOn: 'debian', family: 'debian', originCountry: 'international', firstRelease: 2014, governance: 'community',
-    currentVersion: '25.2 „Infinity"', currentVersionDate: '2026-06',
+    currentVersion: '25.3 „Infinity"', currentVersionDate: '2026-09-20',
     supportUntil: { de: 'Entlang von Debian 13: bis August 2028 voll unterstützt.', en: 'In line with Debian 13: fully supported until August 2028.' },
     releaseModel: 'lts',
     releaseCadence: { de: 'Eine Hauptausgabe pro Debian-Version, Zwischenausgaben mit aktualisierten ISOs.', en: 'One major release per Debian version, refreshed ISOs in between.' },
@@ -121,7 +121,7 @@ export const debianFamily: Distro[] = [
     defaultDesktop: 'xfce', availableDesktops: ['xfce', 'plasma', 'fluxbox'],
     installer: 'graphical-guided', installDifficulty: 2,
     minRamGb: 2, recommendedRamGb: 4, minStorageGb: 20,
-    architectures: ['x86_64', 'i686'], supports32Bit: true, runsOnRaspberryPi: false,
+    architectures: ['x86_64', 'i686', 'aarch64'], supports32Bit: true, runsOnRaspberryPi: true,
     secureBoot: 'full', nvidia: 'gui-tool', codecsOutOfBox: true,
     fullDiskEncryptionInInstaller: true, snapshotRollback: false, atomic: false,
     waylandDefault: false, x11SessionAvailable: true,
@@ -138,7 +138,7 @@ export const debianFamily: Distro[] = [
     firstSteps: { de: ['MX Tools öffnen und einen ersten Rundgang machen', 'MX Package Installer für aktuelle Browser und Programme nutzen'], en: ['Open MX Tools and take a first tour', 'Use MX Package Installer for current browsers and applications'] },
     checkedAt: CHECKED,
     sources: [
-      { label: 'MX Linux 25.2', url: 'https://mxlinux.org/blog/' },
+      { label: 'MX Linux 25.3 released with Debian 13.7 updates (Linuxiac)', url: 'https://linuxiac.com/mx-linux-25-3-released-with-debian-13-7-updates/' },
       { label: 'MX Linux 25 on Debian 13 (Linuxiac)', url: 'https://linuxiac.com/mx-linux-25-officially-released-with-debian-13-base/' },
     ],
   },
@@ -150,13 +150,13 @@ export const debianFamily: Distro[] = [
     accent: '0 0% 25%',
     tagline: { de: 'Bringt Rechner zum Laufen, die andere Distributionen aufgeben.', en: 'Boots machines other distributions give up on.' },
     description: {
-      de: 'antiX ist bewusst spartanisch: kein systemd, kein schwerer Desktop, dafür Fenstermanager wie IceWM oder Fluxbox und ein Speicherbedarf im dreistelligen Megabyte-Bereich. Version 26 basiert auf Debian 13 und bringt gleich fünf Init-Systeme mit, standardmäßig runit.',
-      en: 'antiX is deliberately spartan: no systemd, no heavy desktop, but window managers like IceWM or Fluxbox and memory use measured in hundreds of megabytes. Version 26 is based on Debian 13 and ships five init systems, with runit as the default.',
+      de: 'antiX ist bewusst spartanisch: kein systemd, kein schwerer Desktop, dafür Fenstermanager wie IceWM oder Fluxbox und ein Speicherbedarf im dreistelligen Megabyte-Bereich. Version 26 basiert auf Debian 13 und bringt gleich fünf Init-Systeme mit, standardmäßig runit; die Fehlerkorrektur-Ausgabe 26.1 folgte im Oktober 2026.',
+      en: 'antiX is deliberately spartan: no systemd, no heavy desktop, but window managers like IceWM or Fluxbox and memory use measured in hundreds of megabytes. Version 26 is based on Debian 13 and ships five init systems, with runit as the default; the 26.1 bug-fix release followed in October 2026.',
     },
     website: 'https://antixlinux.com',
     downloadUrl: 'https://antixlinux.com/download/',
     basedOn: 'debian', family: 'debian', originCountry: 'international', firstRelease: 2007, governance: 'community',
-    currentVersion: '26 „Stephen Kapos"', currentVersionDate: '2026-03',
+    currentVersion: '26.1', currentVersionDate: '2026-10-09',
     supportUntil: { de: 'Entlang von Debian 13 bis August 2028.', en: 'In line with Debian 13 until August 2028.' },
     releaseModel: 'lts',
     releaseCadence: { de: 'Eine Ausgabe pro Debian-Hauptversion.', en: 'One release per Debian major version.' },
@@ -184,6 +184,7 @@ export const debianFamily: Distro[] = [
     checkedAt: CHECKED,
     sources: [
       { label: 'antiX 26 (The Register)', url: 'https://www.theregister.com/2026/03/24/antix_26_bonsai_trixie/' },
+      { label: 'antiX 26.1 released (Linux Today)', url: 'https://www.linuxtoday.com/blog/antix-26-1-released-as-a-debian-13-based-systemd-free-linux/' },
     ],
   },
 
@@ -200,7 +201,7 @@ export const debianFamily: Distro[] = [
     website: 'https://www.devuan.org',
     downloadUrl: 'https://www.devuan.org/os/download',
     basedOn: 'debian', family: 'debian', originCountry: 'international', firstRelease: 2017, governance: 'community',
-    currentVersion: '6 „Excalibur" (Basis Debian 13)', currentVersionDate: '2026-02',
+    currentVersion: '6.1 „Excalibur"', currentVersionDate: '2026-01',
     supportUntil: { de: 'Grob entlang von Debian 13; das Projekt hinkt Debian meist einige Monate hinterher.', en: 'Roughly in line with Debian 13; the project usually trails Debian by some months.' },
     releaseModel: 'lts',
     releaseCadence: { de: 'Eine Ausgabe pro Debian-Hauptversion, mit Verzögerung.', en: 'One release per Debian major version, with a delay.' },
@@ -226,6 +227,9 @@ export const debianFamily: Distro[] = [
     warnings: { de: ['Ohne systemd fehlen Funktionen, die moderne Desktop-Software voraussetzt – rechne mit Nacharbeit.', 'Das Projekt ist deutlich kleiner als Debian; Sicherheitsupdates können später kommen.'], en: ['Without systemd some functions modern desktop software assumes are missing — expect extra work.', 'The project is much smaller than Debian; security updates can arrive later.'] },
     firstSteps: { de: ['Init-System bewusst wählen (sysVinit, OpenRC oder runit)', 'Prüfen, ob benötigte Programme ohne systemd laufen'], en: ['Choose your init system deliberately (sysVinit, OpenRC or runit)', 'Verify the applications you need work without systemd'] },
     checkedAt: CHECKED,
-    sources: [{ label: 'Devuan', url: 'https://www.devuan.org/' }],
+    sources: [
+      { label: 'Devuan', url: 'https://www.devuan.org/' },
+      { label: 'Devuan 6.1 point release (Linuxiac)', url: 'https://linuxiac.com/devuan-6-1-point-release-ships-with-debian-13-2-updates/' },
+    ],
   },
 ];

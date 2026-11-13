@@ -1,6 +1,6 @@
 import type { Distro } from '../types';
 
-const CHECKED = '2026-09-03';
+const CHECKED = '2026-11-13';
 
 /** Bildbasierte Systeme aus dem Universal-Blue-Umfeld sowie SteamOS. */
 export const gamingAtomic: Distro[] = [
@@ -11,14 +11,14 @@ export const gamingAtomic: Distro[] = [
     accent: '285 65% 55%',
     tagline: { de: 'Konsolen-Erlebnis auf dem PC – Steam Deck, Handheld oder Wohnzimmer.', en: 'A console experience on a PC — Steam Deck, handheld or living room.' },
     description: {
-      de: 'Bazzite ist ein Fedora-Atomic-Abbild, das SteamOS nachempfindet: Spielmodus mit Controller-Bedienung, HDR, VRR, alle Treiber und Codecs vorbereitet. Es gibt eigene Abbilder für Steam Deck, ROG Ally, Legion Go und normale Desktops. Das System aktualisiert sich als Ganzes und lässt sich jederzeit zurückrollen.',
-      en: 'Bazzite is a Fedora Atomic image modelled on SteamOS: a controller-driven game mode, HDR, VRR, all drivers and codecs prepared. There are dedicated images for Steam Deck, ROG Ally, Legion Go and ordinary desktops. The system updates as a whole and can be rolled back at any time.',
+      de: 'Bazzite ist ein Fedora-Atomic-Abbild, das SteamOS nachempfindet: Spielmodus mit Controller-Bedienung, HDR, VRR, alle Treiber und Codecs vorbereitet. Es gibt eigene Abbilder für Steam Deck, ROG Ally, Legion Go und normale Desktops, dazu eigene für ältere NVIDIA-Karten. Das System aktualisiert sich als Ganzes und lässt sich jederzeit zurückrollen. Seit November 2026 läuft es auf Fedora 45 mit Plasma 6.8.',
+      en: 'Bazzite is a Fedora Atomic image modelled on SteamOS: a controller-driven game mode, HDR, VRR, all drivers and codecs prepared. There are dedicated images for Steam Deck, ROG Ally, Legion Go and ordinary desktops, plus separate ones for older NVIDIA cards. The system updates as a whole and can be rolled back at any time. Since November 2026 it runs on Fedora 45 with Plasma 6.8.',
     },
     website: 'https://bazzite.gg',
     downloadUrl: 'https://bazzite.gg/#image-picker',
     docsUrl: 'https://docs.bazzite.gg',
     basedOn: 'fedora-kinoite', family: 'fedora', originCountry: 'international', firstRelease: 2023, governance: 'community',
-    currentVersion: 'fortlaufend (Basis Fedora 44)', currentVersionDate: '2026-08',
+    currentVersion: 'fortlaufend (Basis Fedora 45)', currentVersionDate: '2026-11-05',
     supportUntil: { de: 'Fortlaufend – das Abbild wandert automatisch auf neue Fedora-Versionen.', en: 'Continuous — the image moves to new Fedora versions automatically.' },
     releaseModel: 'atomic',
     releaseCadence: { de: 'Neue Abbilder mehrmals pro Woche, automatisch im Hintergrund.', en: 'New images several times a week, applied automatically in the background.' },
@@ -31,22 +31,23 @@ export const gamingAtomic: Distro[] = [
     architectures: ['x86_64'], supports32Bit: false, runsOnRaspberryPi: false,
     secureBoot: 'partial', nvidia: 'preinstalled', codecsOutOfBox: true,
     fullDiskEncryptionInInstaller: true, snapshotRollback: true, atomic: true,
-    waylandDefault: true, x11SessionAvailable: true,
+    waylandDefault: true, x11SessionAvailable: false,
     maintenanceLoad: 'very-low',
     telemetry: { de: 'Keine Nutzungsdatenerhebung durch das Projekt.', en: 'No usage data collection by the project.' },
     commercialSupport: false,
     audiences: ['gamer', 'beginner', 'switcher', 'intermediate'],
     tags: ['gaming', 'handheld', 'steam-deck', 'atomic', 'hdr', 'vrr'],
     ratings: { beginnerFriendly: 8, stability: 9, freshness: 9, customizability: 5, lightweight: 4, gaming: 10, hardwareSupport: 10, communitySize: 7, germanSupport: 4, documentation: 8, enterpriseReady: 2, privacy: 7, softwareAvailability: 7, upgradeSmoothness: 10, creativeWork: 6, upstreamPurity: 5 },
-    highlights: { de: ['Eigene Abbilder für Steam Deck, ROG Ally, Legion Go und Desktop', 'Spielmodus wie auf der Konsole, Desktop nur einen Knopfdruck entfernt', 'NVIDIA-Abbild mit vorinstalliertem Treiber', 'Ein kaputtes Update kostet einen Neustart, keine Neuinstallation'], en: ['Dedicated images for Steam Deck, ROG Ally, Legion Go and desktop', 'A console-style game mode, with the desktop one button away', 'An NVIDIA image with the driver preinstalled', 'A broken update costs a reboot, not a reinstall'] },
+    highlights: { de: ['Eigene Abbilder für Steam Deck, ROG Ally, Legion Go und Desktop', 'Spielmodus wie auf der Konsole, Desktop nur einen Knopfdruck entfernt', 'NVIDIA-Abbilder mit vorinstalliertem Treiber – auch mit dem Langzeittreiber für GTX 900 und 10xx', 'Ein kaputtes Update kostet einen Neustart, keine Neuinstallation'], en: ['Dedicated images for Steam Deck, ROG Ally, Legion Go and desktop', 'A console-style game mode, with the desktop one button away', 'NVIDIA images with the driver preinstalled — including the long-term driver for GTX 900 and 10xx', 'A broken update costs a reboot, not a reinstall'] },
     bestFor: { de: ['Handhelds und Wohnzimmer-PCs', 'Spiele-PCs, die einfach laufen sollen', 'Umsteiger, die vor allem spielen wollen'], en: ['Handhelds and living-room PCs', 'Gaming PCs that should just work', 'Switchers whose main use is gaming'] },
     notFor: { de: ['Wer tief ins System eingreifen will', 'Arbeitsplätze mit spezieller Systemsoftware', 'Kleine SSDs'], en: ['Anyone who wants to dig into the system', 'Workstations with special system software', 'Small SSDs'] },
-    warnings: { de: ['Spiele mit Kernel-Anti-Cheat (Valorant, Fortnite, League of Legends) laufen auch hier nicht – das ist eine Entscheidung der Hersteller, keine Frage der Distribution.', 'Systemnahe Änderungen laufen über ujust-Befehle und Container statt über den Paketmanager.'], en: ['Games with kernel anti-cheat (Valorant, Fortnite, League of Legends) do not run here either — that is a publisher decision, not a distribution issue.', 'System-level changes go through ujust commands and containers instead of a package manager.'] },
+    warnings: { de: ['Spiele mit Kernel-Anti-Cheat (Valorant, League of Legends) laufen auch hier nicht – das ist eine Entscheidung der Hersteller, keine Frage der Distribution. Fortnite ist mit Epics neuem Easy Anti-Cheat für Linux angekündigt, aber noch nicht spielbar.', 'Systemnahe Änderungen laufen über ujust-Befehle und Container statt über den Paketmanager.', 'Mit Plasma 6.8 gibt es keine X11-Sitzung mehr; der Spielmodus läuft ohnehin über Gamescope.'], en: ['Games with kernel anti-cheat (Valorant, League of Legends) do not run here either — that is a publisher decision, not a distribution issue. Fortnite is announced with Epic’s new Easy Anti-Cheat for Linux but not playable yet.', 'System-level changes go through ujust commands and containers instead of a package manager.', 'With Plasma 6.8 there is no X11 session any more; game mode runs through Gamescope anyway.'] },
     firstSteps: { de: ['Beim Herunterladen genau das passende Abbild wählen (Hardware und Desktop)', 'ujust --list ansehen: dort stecken die Zusatzfunktionen', 'Vor dem Kauf von Spielen ProtonDB prüfen'], en: ['Pick exactly the right image when downloading (hardware and desktop)', 'Look at ujust --list: the extras live there', 'Check ProtonDB before buying games'] },
     checkedAt: CHECKED,
     sources: [
       { label: 'Bazzite', url: 'https://bazzite.gg/' },
-      { label: 'Universal Blue', url: 'https://universal-blue.org/' },
+      { label: 'Bazzite 45 arrives (GamingOnLinux)', url: 'https://www.gamingonlinux.com/2026/11/bazzite-45-arrives-powered-by-fedora-linux-45-for-gamers/' },
+      { label: 'Bazzite FAQ: NVIDIA images', url: 'https://docs.bazzite.gg/General/FAQ/' },
     ],
   },
 
@@ -57,8 +58,8 @@ export const gamingAtomic: Distro[] = [
     accent: '210 70% 48%',
     tagline: { de: 'Ein Arbeitsplatz für Entwicklung, der sich wie ein Chromebook wartet.', en: 'A developer workstation that maintains itself like a Chromebook.' },
     description: {
-      de: 'Bluefin ist ein Fedora-Silverblue-Abbild mit GNOME, das für Entwicklungsarbeit fertig eingerichtet ist: Homebrew, Distrobox, Container-Werkzeuge, VS Code und die Codecs sind schon da. Updates laufen automatisch im Hintergrund; sichtbar wird davon nur der Neustart.',
-      en: 'Bluefin is a Fedora Silverblue image with GNOME, set up for development work: Homebrew, Distrobox, container tooling, VS Code and codecs are already there. Updates run automatically in the background; the only visible part is the reboot.',
+      de: 'Bluefin ist ein Fedora-Silverblue-Abbild mit GNOME, das für Entwicklungsarbeit fertig eingerichtet ist: Homebrew, Distrobox, Container-Werkzeuge, VS Code und die Codecs sind schon da. Updates laufen automatisch im Hintergrund; sichtbar wird davon nur der Neustart. Wer es ruhiger mag, nimmt Bluefin LTS auf Basis von CentOS Stream 10.',
+      en: 'Bluefin is a Fedora Silverblue image with GNOME, set up for development work: Homebrew, Distrobox, container tooling, VS Code and codecs are already there. Updates run automatically in the background; the only visible part is the reboot. If you prefer a calmer pace, Bluefin LTS is based on CentOS Stream 10.',
     },
     website: 'https://projectbluefin.io',
     downloadUrl: 'https://projectbluefin.io/#download',
@@ -75,7 +76,8 @@ export const gamingAtomic: Distro[] = [
     installer: 'graphical-guided', installDifficulty: 2,
     minRamGb: 8, recommendedRamGb: 16, minStorageGb: 60,
     architectures: ['x86_64'], supports32Bit: false, runsOnRaspberryPi: false,
-    secureBoot: 'partial', nvidia: 'preinstalled', codecsOutOfBox: true,
+    // Die Abbilder mit dem geschlossenen Treiber sind eingestellt; ältere Karten laufen nur mit Nouveau.
+    secureBoot: 'partial', nvidia: 'preinstalled', nvidiaLegacy: 'unsupported', codecsOutOfBox: true,
     fullDiskEncryptionInInstaller: true, snapshotRollback: true, atomic: true,
     waylandDefault: true, x11SessionAvailable: false,
     maintenanceLoad: 'very-low',
@@ -87,10 +89,13 @@ export const gamingAtomic: Distro[] = [
     highlights: { de: ['Alles für Entwicklung vorbereitet – kein Einrichtungstag', 'Updates ohne Zutun, Rückkehr jederzeit möglich', 'NVIDIA-Abbild verfügbar', 'Homebrew statt Systempakete für Werkzeuge'], en: ['Everything for development prepared — no setup day', 'Hands-off updates, rollback always available', 'NVIDIA image available', 'Homebrew instead of system packages for tooling'] },
     bestFor: { de: ['Entwicklungsrechner, die einfach nur laufen sollen', 'Wer Container statt lokaler Installationen bevorzugt', 'Teams mit identischen Arbeitsplätzen'], en: ['Development machines that should simply run', 'Anyone preferring containers over local installs', 'Teams with identical workstations'] },
     notFor: { de: ['Wer das Grundsystem stark umbauen will', 'Gaming als Hauptzweck (dafür gibt es Bazzite)'], en: ['Anyone wanting to heavily modify the base system', 'Gaming as the main purpose (Bazzite exists for that)'] },
-    warnings: { de: ['Kein offizielles Fedora-Projekt – die Abbilder werden von einer Community gebaut.', 'Die deutschsprachige Community ist praktisch nicht vorhanden.'], en: ['Not an official Fedora project — the images are built by a community.', 'The German-speaking community is practically non-existent.'] },
+    warnings: { de: ['Kein offizielles Fedora-Projekt – die Abbilder werden von einer Community gebaut.', 'Das NVIDIA-Abbild nutzt nur noch die offenen Kernelmodule ab GTX 16xx; ältere Karten bekommen keinen proprietären Treiber mehr – Bazzite pflegt ihn weiter.', 'Die deutschsprachige Community ist praktisch nicht vorhanden.'], en: ['Not an official Fedora project — the images are built by a community.', 'The NVIDIA image only uses the open kernel modules for GTX 16xx and newer; older cards no longer get a proprietary driver — Bazzite still maintains one.', 'The German-speaking community is practically non-existent.'] },
     firstSteps: { de: ['Bluefin-Handbuch überfliegen: das Konzept unterscheidet sich von klassischem Linux', 'brew install für Kommandozeilenwerkzeuge nutzen'], en: ['Skim the Bluefin handbook: the model differs from classic Linux', 'Use brew install for command-line tools'] },
     checkedAt: CHECKED,
-    sources: [{ label: 'Project Bluefin', url: 'https://projectbluefin.io/' }],
+    sources: [
+      { label: 'Project Bluefin', url: 'https://projectbluefin.io/' },
+      { label: 'Bluefin LTS released on CentOS Stream 10 (Linuxiac)', url: 'https://linuxiac.com/bluefin-lts-released-immutable-desktop-on-centos-stream-10/' },
+    ],
   },
 
   {
@@ -117,9 +122,10 @@ export const gamingAtomic: Distro[] = [
     installer: 'graphical-guided', installDifficulty: 2,
     minRamGb: 8, recommendedRamGb: 16, minStorageGb: 60,
     architectures: ['x86_64'], supports32Bit: false, runsOnRaspberryPi: false,
-    secureBoot: 'partial', nvidia: 'preinstalled', codecsOutOfBox: true,
+    // Wie Bluefin: kein geschlossener Treiber mehr für Karten vor der GTX-16-Serie.
+    secureBoot: 'partial', nvidia: 'preinstalled', nvidiaLegacy: 'unsupported', codecsOutOfBox: true,
     fullDiskEncryptionInInstaller: true, snapshotRollback: true, atomic: true,
-    waylandDefault: true, x11SessionAvailable: true,
+    waylandDefault: true, x11SessionAvailable: false,
     maintenanceLoad: 'very-low',
     telemetry: { de: 'Keine Nutzungsdatenerhebung.', en: 'No usage data collection.' },
     commercialSupport: false,
@@ -129,7 +135,7 @@ export const gamingAtomic: Distro[] = [
     highlights: { de: ['Plasma mit automatischen, umkehrbaren Updates', 'Codecs und NVIDIA-Treiber je nach Abbild schon dabei', 'Wartungsaufwand nahe null'], en: ['Plasma with automatic, reversible updates', 'Codecs and NVIDIA drivers included depending on the image', 'Maintenance effort close to zero'] },
     bestFor: { de: ['Plasma-Fans ohne Lust auf Systempflege', 'Rechner, die man für andere betreut', 'Entwicklung in Containern'], en: ['Plasma fans with no appetite for system maintenance', 'Machines you maintain for other people', 'Container-based development'] },
     notFor: { de: ['Systemnahe Spezialsoftware', 'Wer alles selbst zusammenbauen möchte'], en: ['Special system-level software', 'Anyone who wants to assemble everything themselves'] },
-    warnings: { de: ['Kein offizielles Fedora-Projekt.', 'Kaum deutschsprachige Hilfe.'], en: ['Not an official Fedora project.', 'Barely any German-language help.'] },
+    warnings: { de: ['Kein offizielles Fedora-Projekt.', 'Das NVIDIA-Abbild ist nur für GTX 16xx und neuer gedacht; ältere Karten laufen ohne proprietären Treiber.', 'Kaum deutschsprachige Hilfe.'], en: ['Not an official Fedora project.', 'The NVIDIA image is only meant for GTX 16xx and newer; older cards run without a proprietary driver.', 'Barely any German-language help.'] },
     firstSteps: { de: ['Passendes Abbild wählen (mit oder ohne NVIDIA)', 'Automatische Updates in Ruhe laufen lassen'], en: ['Pick the right image (with or without NVIDIA)', 'Let the automatic updates do their work'] },
     checkedAt: CHECKED,
     sources: [{ label: 'Aurora', url: 'https://getaurora.dev/' }],
@@ -142,13 +148,13 @@ export const gamingAtomic: Distro[] = [
     accent: '215 40% 30%',
     tagline: { de: 'Valves eigenes System – auf dem Steam Deck unschlagbar, sonst eingeschränkt.', en: 'Valve’s own system — unbeatable on the Steam Deck, limited elsewhere.' },
     description: {
-      de: 'SteamOS 3 ist ein Arch-basiertes, unveränderliches System, das Valve für das Steam Deck entwickelt hat und inzwischen auch für ausgewählte andere Handhelds anbietet. Auf einem normalen Desktop-PC ist es offiziell nicht vorgesehen – dort ist Bazzite die bessere Wahl.',
-      en: 'SteamOS 3 is an Arch-based immutable system Valve built for the Steam Deck and now also offers for selected other handhelds. It is not officially intended for ordinary desktop PCs — Bazzite is the better choice there.',
+      de: 'SteamOS 3 ist ein Arch-basiertes, unveränderliches System, das Valve für das Steam Deck entwickelt hat. Inzwischen läuft es auch auf Valves Steam Machine (seit Juni 2026) und dem VR-Headset Steam Frame (seit September 2026) sowie auf ausgewählten Handhelds anderer Hersteller. Auf einem beliebigen Desktop-PC ist es offiziell nicht vorgesehen – dort ist Bazzite die bessere Wahl.',
+      en: 'SteamOS 3 is an Arch-based immutable system Valve built for the Steam Deck. It now also runs on Valve’s Steam Machine (since June 2026), the Steam Frame VR headset (since September 2026) and selected handhelds from other vendors. It is not officially intended for arbitrary desktop PCs — Bazzite is the better choice there.',
     },
     website: 'https://store.steampowered.com/steamos',
     downloadUrl: 'https://store.steampowered.com/steamos/download',
     basedOn: 'arch', family: 'arch', originCountry: 'US', firstRelease: 2013, governance: 'company',
-    currentVersion: '3.8', currentVersionDate: '2026-08',
+    currentVersion: '3.8', currentVersionDate: '2026-09',
     supportUntil: { de: 'Fortlaufend, solange Valve die Geräte unterstützt.', en: 'Continuous, as long as Valve supports the devices.' },
     releaseModel: 'atomic',
     releaseCadence: { de: 'Punktausgaben nach Bedarf, plus Beta- und Vorschaukanäle.', en: 'Point releases as needed, plus beta and preview channels.' },
@@ -169,11 +175,14 @@ export const gamingAtomic: Distro[] = [
     tags: ['handheld', 'steam-deck', 'gaming', 'atomic', 'valve'],
     ratings: { beginnerFriendly: 9, stability: 9, freshness: 7, customizability: 3, lightweight: 6, gaming: 10, hardwareSupport: 5, communitySize: 8, germanSupport: 5, documentation: 5, enterpriseReady: 1, privacy: 5, softwareAvailability: 5, upgradeSmoothness: 10, creativeWork: 3, upstreamPurity: 5 },
     highlights: { de: ['Perfekt auf das Steam Deck abgestimmt: Akku, Suspend, Controller', 'Spielmodus und Desktop-Modus in einem System', 'Proton und Shader-Vorbereitung greifen automatisch'], en: ['Perfectly tuned to the Steam Deck: battery, suspend, controllers', 'Game mode and desktop mode in one system', 'Proton and shader pre-caching work automatically'] },
-    bestFor: { de: ['Steam Deck und offiziell unterstützte Handhelds', 'Wohnzimmer-Konsolenersatz'], en: ['Steam Deck and officially supported handhelds', 'A living-room console replacement'] },
+    bestFor: { de: ['Steam Deck, Steam Machine und offiziell unterstützte Handhelds', 'Wohnzimmer-Konsolenersatz'], en: ['Steam Deck, Steam Machine and officially supported handhelds', 'A living-room console replacement'] },
     notFor: { de: ['Normale Desktop-PCs, vor allem mit NVIDIA-Grafik', 'Arbeit abseits von Spielen', 'Wer Software frei installieren will'], en: ['Ordinary desktop PCs, especially with NVIDIA graphics', 'Work beyond gaming', 'Anyone who wants to install software freely'] },
     warnings: { de: ['Auf beliebiger PC-Hardware ist SteamOS nicht offiziell unterstützt – für Desktops und NVIDIA-Karten ist Bazzite der bessere Weg.', 'Das Dateisystem ist schreibgeschützt; Änderungen überstehen Updates oft nicht.'], en: ['SteamOS is not officially supported on arbitrary PC hardware — Bazzite is the better route for desktops and NVIDIA cards.', 'The filesystem is read-only; modifications often do not survive updates.'] },
     firstSteps: { de: ['Vor dem Kauf prüfen, ob das Gerät offiziell unterstützt wird', 'Im Desktop-Modus Flathub für zusätzliche Programme nutzen'], en: ['Check whether your device is officially supported before buying', 'Use Flathub in desktop mode for extra applications'] },
     checkedAt: CHECKED,
-    sources: [{ label: 'SteamOS', url: 'https://store.steampowered.com/steamos' }],
+    sources: [
+      { label: 'SteamOS', url: 'https://store.steampowered.com/steamos' },
+      { label: 'SteamOS 3.8 with Steam Machine support (GamingOnLinux)', url: 'https://www.gamingonlinux.com/2026/09/steamos-3-8-28-stable-released-with-big-improvements-for-steam-deck-steam-machine-and-more-hardware-support/' },
+    ],
   },
 ];

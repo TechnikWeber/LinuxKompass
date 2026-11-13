@@ -200,6 +200,13 @@ export interface Distro {
 
   secureBoot: SecureBoot;
   nvidia: NvidiaHandling;
+  /**
+   * Wie kommt der Legacy-Treiber (Zweig 580) für GTX-900- und GTX-10-Karten
+   * auf das System? Seit Treiber 590 unterstützt NVIDIA diese Generationen
+   * nicht mehr, und einige Distributionen bieten den alten Zweig gar nicht
+   * oder nur noch auf Umwegen an. Nur angeben, wenn es von `nvidia` abweicht.
+   */
+  nvidiaLegacy?: NvidiaHandling;
   /** Mediencodecs (H.264/265, MP3 …) ohne Nacharbeit? */
   codecsOutOfBox: boolean;
   /** Verschlüsselung der Systemplatte im Installer anklickbar? */

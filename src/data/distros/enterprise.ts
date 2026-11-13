@@ -1,6 +1,6 @@
 import type { Distro } from '../types';
 
-const CHECKED = '2026-09-03';
+const CHECKED = '2026-11-13';
 
 /** Unternehmensnahe Systeme und Server-Plattformen. */
 export const enterprise: Distro[] = [
@@ -11,14 +11,14 @@ export const enterprise: Distro[] = [
     accent: '15 80% 50%',
     tagline: { de: 'Kostenloser RHEL-Ersatz mit zehn Jahren Lebensdauer.', en: 'A free RHEL replacement with a ten-year life.' },
     description: {
-      de: 'AlmaLinux entstand, als Red Hat CentOS als stabilen RHEL-Klon einstellte. Version 10 wird bis Mai 2035 mit Sicherheitsupdates versorgt, aktuell ist 10.2. Eine Stiftung trägt das Projekt; es ist binärkompatibel genug, dass RHEL-Software läuft, geht bei alter Hardware aber inzwischen eigene, großzügigere Wege.',
-      en: 'AlmaLinux was created when Red Hat discontinued CentOS as a stable RHEL clone. Version 10 receives security updates until May 2035; 10.2 is current. A foundation stewards the project; it is binary-compatible enough to run RHEL software, but has taken its own, more generous path on older hardware.',
+      de: 'AlmaLinux entstand, als Red Hat CentOS als stabilen RHEL-Klon einstellte. Version 10 wird bis Mai 2035 mit Sicherheitsupdates versorgt, aktuell ist 10.2; 10.3 folgt in Kürze, nachdem Red Hat RHEL 10.3 am 11. November 2026 freigegeben hat. Eine Stiftung trägt das Projekt; es ist binärkompatibel genug, dass RHEL-Software läuft, geht bei alter Hardware aber inzwischen eigene, großzügigere Wege.',
+      en: 'AlmaLinux was created when Red Hat discontinued CentOS as a stable RHEL clone. Version 10 receives security updates until May 2035; 10.2 is current, and 10.3 follows shortly after Red Hat released RHEL 10.3 on 11 November 2026. A foundation stewards the project; it is binary-compatible enough to run RHEL software, but has taken its own, more generous path on older hardware.',
     },
     website: 'https://almalinux.org',
     downloadUrl: 'https://almalinux.org/get-almalinux/',
     docsUrl: 'https://wiki.almalinux.org',
     basedOn: null, family: 'rhel', originCountry: 'US', firstRelease: 2021, governance: 'foundation',
-    currentVersion: '10.2', currentVersionDate: '2026-05',
+    currentVersion: '10.2', currentVersionDate: '2026-05-26',
     supportUntil: { de: 'Aktive Pflege bis Mai 2030, Sicherheitsupdates bis Mai 2035.', en: 'Active maintenance until May 2030, security updates until May 2035.' },
     releaseModel: 'lts',
     releaseCadence: { de: 'Punktausgaben etwa halbjährlich, Hauptversion alle 3 Jahre.', en: 'Point releases roughly every six months, a major version every 3 years.' },
@@ -46,6 +46,7 @@ export const enterprise: Distro[] = [
     checkedAt: CHECKED,
     sources: [
       { label: 'AlmaLinux', url: 'https://almalinux.org/' },
+      { label: 'AlmaLinux 10.2 released (Phoronix)', url: 'https://phoronix.com/news/almalinux-10.2-released' },
       { label: 'AlmaLinux end-of-life dates', url: 'https://endoflife.date/almalinux' },
     ],
   },
@@ -57,8 +58,8 @@ export const enterprise: Distro[] = [
     accent: '145 55% 35%',
     tagline: { de: 'Der andere RHEL-Klon – strenger auf Binärgleichheit bedacht.', en: 'The other RHEL rebuild — stricter about binary equivalence.' },
     description: {
-      de: 'Rocky Linux wurde vom CentOS-Mitgründer Gregory Kurtzer ins Leben gerufen und verfolgt dasselbe Ziel wie AlmaLinux, legt aber mehr Wert darauf, exakt dem RHEL-Original zu entsprechen. Version 10.2 erschien im Mai 2026, Support läuft bis Mai 2035.',
-      en: 'Rocky Linux was started by CentOS co-founder Gregory Kurtzer and pursues the same goal as AlmaLinux, but places more weight on matching RHEL exactly. Version 10.2 arrived in May 2026, with support until May 2035.',
+      de: 'Rocky Linux wurde vom CentOS-Mitgründer Gregory Kurtzer ins Leben gerufen und verfolgt dasselbe Ziel wie AlmaLinux, legt aber mehr Wert darauf, exakt dem RHEL-Original zu entsprechen. Version 10.2 erschien im Mai 2026, Support läuft bis Mai 2035; 10.3 folgt der im November 2026 erschienenen RHEL-Punktausgabe.',
+      en: 'Rocky Linux was started by CentOS co-founder Gregory Kurtzer and pursues the same goal as AlmaLinux, but places more weight on matching RHEL exactly. Version 10.2 arrived in May 2026, with support until May 2035; 10.3 follows the RHEL point release that came out in November 2026.',
     },
     website: 'https://rockylinux.org',
     downloadUrl: 'https://rockylinux.org/download',
@@ -90,7 +91,10 @@ export const enterprise: Distro[] = [
     warnings: { de: ['RHEL 10 hat die Anforderungen an die Prozessorgeneration angehoben – ältere Server können ausgeschlossen sein. AlmaLinux ist hier großzügiger.', 'Ohne EPEL ist die Paketauswahl für Desktops sehr knapp.'], en: ['RHEL 10 raised the required CPU generation — older servers may be excluded. AlmaLinux is more generous here.', 'Without EPEL the package selection is very thin for desktops.'] },
     firstSteps: { de: ['EPEL aktivieren', 'Prüfen, ob die Serverhardware die RHEL-10-Anforderungen erfüllt'], en: ['Enable EPEL', 'Verify your server hardware meets the RHEL 10 requirements'] },
     checkedAt: CHECKED,
-    sources: [{ label: 'Rocky Linux', url: 'https://rockylinux.org/' }],
+    sources: [
+      { label: 'Rocky Linux', url: 'https://rockylinux.org/' },
+      { label: 'Rocky Linux news', url: 'https://rockylinux.org/news' },
+    ],
   },
 
   {
@@ -107,7 +111,7 @@ export const enterprise: Distro[] = [
     downloadUrl: 'https://www.centos.org/download/',
     basedOn: null, family: 'rhel', originCountry: 'US', firstRelease: 2019, governance: 'company-community',
     currentVersion: '10', currentVersionDate: '2026-09',
-    supportUntil: { de: 'Etwa 5 Jahre pro Hauptversion, parallel zur RHEL-Vollsupportphase.', en: 'About 5 years per major version, alongside the RHEL full support phase.' },
+    supportUntil: { de: 'Etwa 5 Jahre pro Hauptversion, parallel zur RHEL-Vollsupportphase. CentOS Stream 9 endet Ende Mai 2027.', en: 'About 5 years per major version, alongside the RHEL full support phase. CentOS Stream 9 ends in late May 2027.' },
     releaseModel: 'semi-rolling',
     releaseCadence: { de: 'Fortlaufende Updates vor jeder RHEL-Punktausgabe.', en: 'Continuous updates ahead of each RHEL point release.' },
     init: 'systemd', libc: 'glibc', packageManager: 'dnf', packageFormat: 'rpm',
@@ -142,15 +146,15 @@ export const enterprise: Distro[] = [
     accent: '25 85% 48%',
     tagline: { de: 'Der Standard für Heimserver und kleine Virtualisierungsumgebungen.', en: 'The default for home servers and small virtualisation setups.' },
     description: {
-      de: 'Proxmox VE ist kein Desktop-System, sondern eine Virtualisierungsplattform auf Debian-Basis: virtuelle Maschinen, LXC-Container, ZFS und Backups über eine Weboberfläche. Version 9 baut auf Debian 13 auf; seit 9.2 gibt es offizielle ARM64-Ausgaben, die etwa auf einem Raspberry Pi 5 laufen.',
-      en: 'Proxmox VE is not a desktop system but a Debian-based virtualisation platform: virtual machines, LXC containers, ZFS and backups through a web interface. Version 9 builds on Debian 13; since 9.2 there are official ARM64 builds that run on a Raspberry Pi 5, for instance.',
+      de: 'Proxmox VE ist kein Desktop-System, sondern eine Virtualisierungsplattform auf Debian-Basis: virtuelle Maschinen, LXC-Container, ZFS und Backups über eine Weboberfläche. Version 9 baut auf Debian 13 auf. Seit August 2026 gibt es 9.2 auch offiziell für ARM64-Server mit UEFI – Einplatinenrechner wie der Raspberry Pi sind ausdrücklich nicht unterstützt.',
+      en: 'Proxmox VE is not a desktop system but a Debian-based virtualisation platform: virtual machines, LXC containers, ZFS and backups through a web interface. Version 9 builds on Debian 13. Since August 2026, 9.2 is also officially available for ARM64 servers with UEFI — single-board computers such as the Raspberry Pi are explicitly not supported.',
     },
     website: 'https://www.proxmox.com',
     downloadUrl: 'https://www.proxmox.com/en/downloads',
     docsUrl: 'https://pve.proxmox.com/pve-docs/',
     germanResourceUrl: 'https://forum.proxmox.com/forums/deutsch-german.45/',
     basedOn: 'debian', family: 'debian', originCountry: 'AT', firstRelease: 2008, governance: 'company',
-    currentVersion: '9.2', currentVersionDate: '2026-08',
+    currentVersion: '9.2', currentVersionDate: '2026-05-21',
     supportUntil: { de: 'Entlang der Debian-13-Basis; Enterprise-Quellen mit Abonnement.', en: 'In line with the Debian 13 base; enterprise repositories require a subscription.' },
     releaseModel: 'lts',
     releaseCadence: { de: 'Hauptversion pro Debian-Version, Punktausgaben mehrmals jährlich.', en: 'A major version per Debian release, point releases several times a year.' },
@@ -160,7 +164,8 @@ export const enterprise: Distro[] = [
     defaultDesktop: 'none', availableDesktops: [],
     installer: 'graphical-guided', installDifficulty: 4,
     minRamGb: 4, recommendedRamGb: 32, minStorageGb: 32,
-    architectures: ['x86_64', 'aarch64'], supports32Bit: false, runsOnRaspberryPi: true,
+    // ARM64 nur auf UEFI-/ACPI-Servern; „Device-tree-only"-Boards wie der Pi sind ausgeschlossen.
+    architectures: ['x86_64', 'aarch64'], supports32Bit: false, runsOnRaspberryPi: false,
     secureBoot: 'full', nvidia: 'repo-manual', codecsOutOfBox: false,
     fullDiskEncryptionInInstaller: false, snapshotRollback: true, atomic: false,
     waylandDefault: false, x11SessionAvailable: false,
@@ -178,6 +183,7 @@ export const enterprise: Distro[] = [
     checkedAt: CHECKED,
     sources: [
       { label: 'Proxmox VE 9.0 press release', url: 'https://www.proxmox.com/en/about/company-details/press-releases/proxmox-virtual-environment-9-0' },
+      { label: 'Proxmox VE Roadmap (9.2, arm64)', url: 'https://pve.proxmox.com/wiki/Roadmap' },
       { label: 'Proxmox VE arm64 (CNX Software)', url: 'https://www.cnx-software.com/2026/08/07/proxmox-ve-now-officially-supports-64-bit-arm-aarch64-targets/' },
     ],
   },

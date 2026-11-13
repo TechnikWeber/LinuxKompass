@@ -1,6 +1,6 @@
 import type { Distro } from '../types';
 
-const CHECKED = '2026-09-04';
+const CHECKED = '2026-11-13';
 
 /**
  * Nachschlagewerk-Ergänzungen: eigenständige Systeme mit klarem Profil.
@@ -40,8 +40,8 @@ export const moreIndependent: Distro[] = [
     },
     releaseModel: 'rolling',
     releaseCadence: {
-      de: 'Fortlaufend über `guix pull`; Installationsabbilder erscheinen in großen Abständen.',
-      en: 'Continuous via `guix pull`; installation images appear at long intervals.',
+      de: 'Fortlaufend über `guix pull`; seit 1.5 soll einmal im Jahr ein neues Installationsabbild erscheinen.',
+      en: 'Continuous via `guix pull`; since 1.5, a new installation image is meant to appear once a year.',
     },
     init: 'shepherd',
     libc: 'glibc',
@@ -270,12 +270,12 @@ export const moreIndependent: Distro[] = [
       de: [
         'Das gewohnte `apt install` gibt es so nicht. Software kommt über Flatpak oder apx-Container – das ist eine echte Umgewöhnung.',
         'Junges Projekt mit kleiner Community. Bei Problemen ist man schneller allein als bei Fedora Silverblue.',
-        'Version 3 ist frisch erschienen; wer Ruhe braucht, wartet ein paar Punktausgaben ab.',
+        'Version 3 ist erst seit Ende August 2026 da; wer Ruhe braucht, wartet ein paar Punktausgaben ab.',
       ],
       en: [
         'The familiar `apt install` is not available in that form. Software comes via Flatpak or apx containers — a genuine adjustment.',
         'A young project with a small community. Problems leave you on your own sooner than on Fedora Silverblue.',
-        'Version 3 is brand new; if you need calm, wait for a few point releases.',
+        'Version 3 has only been out since late August 2026; if you need calm, wait for a few point releases.',
       ],
     },
     firstSteps: {
@@ -455,8 +455,8 @@ export const moreIndependent: Distro[] = [
       en: 'The most distinctive desktop in Linux — from China, built on Debian.',
     },
     description: {
-      de: 'deepin fällt vor allem durch eines auf: die eigene Oberfläche DDE, die niemandem nachgebaut ist und ungewöhnlich viel Sorgfalt auf Animationen, Symbole und Abstände legt. Dazu kommt eine ganze Reihe selbst entwickelter Anwendungen. Version 25 erschien 2026 mit DDE 7.0 und einem unveränderlichen Systemkern: Anwendungen und Treiber liegen als Schichten darüber, Updates greifen als Ganzes und nehmen sich beim nächsten Start selbst zurück, wenn etwas schiefging.',
-      en: 'deepin stands out for one thing above all: its own DDE desktop, which imitates nobody and puts unusual care into animations, icons and spacing. On top of that comes a whole set of in-house applications. Version 25 arrived in 2026 with DDE 7.0 and an immutable system core: applications and drivers sit as layers above it, updates apply as a whole and roll themselves back on the next boot if something went wrong.',
+      de: 'deepin fällt vor allem durch eines auf: die eigene Oberfläche DDE, die niemandem nachgebaut ist und ungewöhnlich viel Sorgfalt auf Animationen, Symbole und Abstände legt. Dazu kommt eine ganze Reihe selbst entwickelter Anwendungen. Version 25 erschien im Juni 2025 mit DDE 7.0 und einem unveränderlichen Systemkern: Anwendungen und Treiber liegen als Schichten darüber, Updates greifen als Ganzes und nehmen sich beim nächsten Start selbst zurück, wenn etwas schiefging. 2026 folgten 25.1 mit Kernel 6.18 und KI-Funktionen und im Juli 25.2.',
+      en: 'deepin stands out for one thing above all: its own DDE desktop, which imitates nobody and puts unusual care into animations, icons and spacing. On top of that comes a whole set of in-house applications. Version 25 arrived in June 2025 with DDE 7.0 and an immutable system core: applications and drivers sit as layers above it, updates apply as a whole and roll themselves back on the next boot if something went wrong. 2026 brought 25.1 with kernel 6.18 and AI features, and 25.2 in July.',
     },
     website: 'https://www.deepin.org/en/',
     downloadUrl: 'https://www.deepin.org/en/download/',
@@ -466,8 +466,8 @@ export const moreIndependent: Distro[] = [
     originCountry: 'CN',
     firstRelease: 2004,
     governance: 'company-community',
-    currentVersion: '25.0.2',
-    currentVersionDate: '2026-07',
+    currentVersion: '25.2',
+    currentVersionDate: '2026-07-08',
     supportUntil: {
       de: 'Laufende Punktausgaben innerhalb der Hauptversion 25.',
       en: 'Rolling point releases within the 25 series.',
@@ -583,7 +583,8 @@ export const moreIndependent: Distro[] = [
     },
     checkedAt: CHECKED,
     sources: [
-      { label: 'deepin 25 – offizielle Vorstellung', url: 'https://www.deepin.org/en/deepin-25/' },
+      { label: 'deepin 25 – offizielle Vorstellung', url: 'https://www.deepin.org/en/deepin-25-release' },
+      { label: 'deepin 25.1 arrives with kernel 6.18 (Linuxiac)', url: 'https://linuxiac.com/deepin-25-1-arrives-with-linux-kernel-6-18-and-new-ai-features/' },
       { label: 'deepin Release Notes', url: 'https://www.deepin.org/en/category/release-notes/' },
     ],
   },

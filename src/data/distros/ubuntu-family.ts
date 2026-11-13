@@ -1,6 +1,6 @@
 import type { Distro } from '../types';
 
-const CHECKED = '2026-09-03';
+const CHECKED = '2026-11-13';
 
 /** Ubuntu selbst, die offiziellen Flavours und die bekanntesten Ableger. */
 export const ubuntuFamily: Distro[] = [
@@ -14,8 +14,8 @@ export const ubuntuFamily: Distro[] = [
       en: 'The industry default — supported and documented everywhere.',
     },
     description: {
-      de: 'Ubuntu ist die Distribution, auf die sich Hardwarehersteller, Softwareanbieter und Anleitungen im Netz zuerst beziehen. Version 26.04 LTS „Resolute Raccoon" liefert GNOME 50 und einen 7er-Kernel und wird fünf Jahre gepflegt. Der Preis dafür: Canonical schiebt einige Kernanwendungen als Snap-Pakete aus, was Startzeiten und Kontrolle beeinflusst.',
-      en: 'Ubuntu is the distribution hardware vendors, software vendors and online tutorials target first. Release 26.04 LTS "Resolute Raccoon" ships GNOME 50 on a 7.x kernel with five years of maintenance. The trade-off: Canonical delivers several core applications as snaps, which affects start-up times and user control.',
+      de: 'Ubuntu ist die Distribution, auf die sich Hardwarehersteller, Softwareanbieter und Anleitungen im Netz zuerst beziehen. Version 26.04 LTS „Resolute Raccoon" liefert GNOME 50 und einen 7er-Kernel und wird fünf Jahre gepflegt; die Zwischenausgabe 26.10 „Stonking Stingray" vom Oktober 2026 bringt GNOME 51, bekommt aber nur neun Monate. Der Preis für die Verbreitung: Canonical schiebt einige Kernanwendungen als Snap-Pakete aus, was Startzeiten und Kontrolle beeinflusst.',
+      en: 'Ubuntu is the distribution hardware vendors, software vendors and online tutorials target first. Release 26.04 LTS "Resolute Raccoon" ships GNOME 50 on a 7.x kernel with five years of maintenance; the October 2026 interim release 26.10 "Stonking Stingray" brings GNOME 51 but only gets nine months. The price of that reach: Canonical delivers several core applications as snaps, which affects start-up times and user control.',
     },
     website: 'https://ubuntu.com',
     downloadUrl: 'https://ubuntu.com/download/desktop',
@@ -34,8 +34,8 @@ export const ubuntuFamily: Distro[] = [
     },
     releaseModel: 'lts',
     releaseCadence: {
-      de: 'Alle 6 Monate eine Ausgabe, alle 2 Jahre im April eine LTS mit 5 Jahren Pflege.',
-      en: 'A release every 6 months; an LTS every two years in April with 5 years of maintenance.',
+      de: 'Alle 6 Monate eine Ausgabe, alle 2 Jahre im April eine LTS mit 5 Jahren Pflege. Zwischenausgaben wie 26.10 werden nur 9 Monate gepflegt.',
+      en: 'A release every 6 months; an LTS every two years in April with 5 years of maintenance. Interim releases such as 26.10 are maintained for only 9 months.',
     },
     init: 'systemd',
     libc: 'glibc',
@@ -53,7 +53,8 @@ export const ubuntuFamily: Distro[] = [
     availableDesktops: ['gnome'],
     installer: 'graphical-guided',
     installDifficulty: 2,
-    minRamGb: 4,
+    // Canonical hat das Minimum mit 26.04 von 4 auf 6 GB angehoben.
+    minRamGb: 6,
     recommendedRamGb: 8,
     minStorageGb: 25,
     architectures: ['x86_64', 'aarch64', 'riscv64', 'ppc64le', 's390x'],
@@ -90,12 +91,12 @@ export const ubuntuFamily: Distro[] = [
       en: ['Switchers who want as few edge cases as possible', 'Laptops with vendor certification (Dell, Lenovo, HP)', 'Development, because nearly every project ships Ubuntu packages', 'Companies that need a support contract'],
     },
     notFor: {
-      de: ['Menschen, die Snap-Pakete grundsätzlich ablehnen', 'Wer immer die allerneueste Software will', 'Sehr alte Rechner mit weniger als 4 GB RAM'],
-      en: ['People who reject snap packages on principle', 'Anyone who wants the very newest software', 'Very old machines with less than 4 GB of RAM'],
+      de: ['Menschen, die Snap-Pakete grundsätzlich ablehnen', 'Wer immer die allerneueste Software will', 'Rechner mit weniger als 6 GB RAM – dafür sind Xubuntu und Lubuntu gedacht'],
+      en: ['People who reject snap packages on principle', 'Anyone who wants the very newest software', 'Machines with less than 6 GB of RAM — that is what Xubuntu and Lubuntu are for'],
     },
     warnings: {
-      de: ['Firefox, Thunderbird und weitere Programme kommen als Snap – der erste Start dauert spürbar länger.', 'GNOME 50 hat die X11-Sitzung entfernt. Wer auf reines X11 angewiesen ist (alte NVIDIA-Karten, bestimmte Fernwartung, manche Bildschirmleser-Setups), braucht eine andere Distribution oder einen anderen Desktop.', 'Mediencodecs für MP3/H.264 werden nur nach ausdrücklicher Zustimmung im Installer eingerichtet.'],
-      en: ['Firefox, Thunderbird and others ship as snaps — the first launch is noticeably slower.', 'GNOME 50 removed the X11 session. If you depend on plain X11 (old NVIDIA cards, certain remote-support tools, some screen-reader setups) you need a different distribution or desktop.', 'Media codecs for MP3/H.264 are only installed if you explicitly agree during setup.'],
+      de: ['Firefox, Thunderbird und weitere Programme kommen als Snap – der erste Start dauert spürbar länger.', 'GNOME 50 hat die X11-Sitzung entfernt. Wer auf reines X11 angewiesen ist (bestimmte Fernwartung, manche Bildschirmleser-Setups, sehr alte Grafikkarten), braucht eine andere Distribution oder einen anderen Desktop.', 'Canonical nennt für 26.04 offiziell 6 GB Arbeitsspeicher als Minimum. Mit 4 GB lässt sich zwar installieren, im Alltag wird es aber eng.', 'Mediencodecs für MP3/H.264 werden nur nach ausdrücklicher Zustimmung im Installer eingerichtet.'],
+      en: ['Firefox, Thunderbird and others ship as snaps — the first launch is noticeably slower.', 'GNOME 50 removed the X11 session. If you depend on plain X11 (certain remote-support tools, some screen-reader setups, very old graphics cards) you need a different distribution or desktop.', 'Canonical officially lists 6 GB of RAM as the minimum for 26.04. Installing on 4 GB works, but daily use gets tight.', 'Media codecs for MP3/H.264 are only installed if you explicitly agree during setup.'],
     },
     firstSteps: {
       de: ['Im Installer „Zusätzliche Software von Drittanbietern" ankreuzen (Codecs, Treiber)', 'Ubuntu Pro im Menü „Software & Aktualisierungen" kostenlos aktivieren', 'Flathub nachrüsten, wenn Snap-Alternativen gewünscht sind'],
@@ -104,6 +105,8 @@ export const ubuntuFamily: Distro[] = [
     checkedAt: CHECKED,
     sources: [
       { label: 'Ubuntu 26.04 LTS release notes', url: 'https://documentation.ubuntu.com/release-notes/26.04/' },
+      { label: 'Ubuntu 26.04.1 LTS released', url: 'https://discourse.ubuntu.com/t/ubuntu-26-04-1-lts-released/86808' },
+      { label: 'Canonical releases Ubuntu 26.10', url: 'https://canonical.com/blog/canonical-releases-ubuntu-26-10-stonking-stingray' },
       { label: 'Ubuntu release cycle', url: 'https://ubuntu.com/about/release-cycle' },
     ],
   },
@@ -118,8 +121,8 @@ export const ubuntuFamily: Distro[] = [
       en: 'The gentlest move away from Windows — no surprises.',
     },
     description: {
-      de: 'Linux Mint nimmt die Ubuntu-LTS-Basis und entfernt alles, was Umsteiger irritiert: keine Snaps, ein klassisches Startmenü, eine Taskleiste unten. Die aktuelle Ausgabe 22.3 „Zena" baut auf Ubuntu 24.04 auf und wird bis 2029 gepflegt. Mint 23 mit Ubuntu-26.04-Basis und Wayland-Cinnamon ist für Dezember 2026 angekündigt.',
-      en: 'Linux Mint takes the Ubuntu LTS base and removes everything that irritates newcomers: no snaps, a classic start menu, a taskbar at the bottom. The current 22.3 "Zena" builds on Ubuntu 24.04 and is maintained until 2029. Mint 23 with an Ubuntu 26.04 base and Wayland Cinnamon is announced for December 2026.',
+      de: 'Linux Mint nimmt die Ubuntu-LTS-Basis und entfernt alles, was Umsteiger irritiert: keine Snaps, ein klassisches Startmenü, eine Taskleiste unten. Die aktuelle Ausgabe 22.3 „Zena" baut auf Ubuntu 24.04 auf und wird bis 2029 gepflegt. Die nächste heißt nicht Mint 23, sondern Linux Mint 27 „Adrien": Sie soll zu Weihnachten 2026 auf Ubuntu-26.04-Basis erscheinen und eröffnet einen jährlichen Rhythmus ohne Punktausgaben.',
+      en: 'Linux Mint takes the Ubuntu LTS base and removes everything that irritates newcomers: no snaps, a classic start menu, a taskbar at the bottom. The current 22.3 "Zena" builds on Ubuntu 24.04 and is maintained until 2029. The next release is not called Mint 23 but Linux Mint 27 "Adrien": it is due at Christmas 2026 on an Ubuntu 26.04 base and starts a yearly cycle without point releases.',
     },
     website: 'https://linuxmint.com',
     downloadUrl: 'https://linuxmint.com/download.php',
@@ -138,8 +141,8 @@ export const ubuntuFamily: Distro[] = [
     },
     releaseModel: 'lts',
     releaseCadence: {
-      de: 'Punktausgaben etwa halbjährlich innerhalb einer LTS-Serie; ab Mint 23 längere Entwicklungszyklen.',
-      en: 'Point releases roughly every six months within an LTS series; longer development cycles from Mint 23 onwards.',
+      de: 'Ab Mint 27 eine Ausgabe pro Jahr, Punktausgaben entfallen (27, 28, 29 …). Bis 22.3 gab es etwa halbjährliche Punktausgaben.',
+      en: 'From Mint 27, one release per year with no more point releases (27, 28, 29 …). Up to 22.3, point releases came roughly every six months.',
     },
     init: 'systemd',
     libc: 'glibc',
@@ -194,12 +197,12 @@ export const ubuntuFamily: Distro[] = [
       en: ['Windows switchers who want a familiar layout', 'Machines that should simply work', 'Family and club PCs you maintain for others', 'Old NVIDIA cards that still need an X11 session'],
     },
     notFor: {
-      de: ['Wer die neuesten Kernel- und Mesa-Versionen für aktuelle Grafikkarten braucht', 'Wayland-Fans – Cinnamon nutzt bis Mint 23 standardmäßig X11', 'Serverbetrieb'],
-      en: ['Anyone who needs the newest kernel and Mesa for brand-new GPUs', 'Wayland fans — Cinnamon defaults to X11 until Mint 23', 'Server duty'],
+      de: ['Wer die neuesten Kernel- und Mesa-Versionen für aktuelle Grafikkarten braucht', 'Wayland-Fans – Cinnamon startet weiterhin standardmäßig unter X11', 'Serverbetrieb'],
+      en: ['Anyone who needs the newest kernel and Mesa for brand-new GPUs', 'Wayland fans — Cinnamon still starts on X11 by default', 'Server duty'],
     },
     warnings: {
-      de: ['Die Paketbasis ist bewusst konservativ. Grafikkarten, die nach Frühjahr 2024 erschienen sind, brauchen unter Umständen den HWE-Kernel oder eine neuere Distribution.', 'Mint 23 kommt erst im Dezember 2026 – wer heute installiert, bleibt zunächst auf der 24.04-Basis.'],
-      en: ['The package base is deliberately conservative. GPUs released after spring 2024 may need the HWE kernel or a newer distribution.', 'Mint 23 only arrives in December 2026 — installing today means staying on the 24.04 base for now.'],
+      de: ['Die Paketbasis ist bewusst konservativ. Grafikkarten, die nach Frühjahr 2024 erschienen sind, brauchen unter Umständen den HWE-Kernel oder eine neuere Distribution.', 'Linux Mint 27 kommt erst zu Weihnachten 2026 – wer heute installiert, bleibt zunächst auf der 24.04-Basis und wechselt später per Versionssprung.', 'Die Wayland-Sitzung von Cinnamon soll mit Mint 27 nicht mehr als experimentell gelten; Standard bleibt vorerst X11.'],
+      en: ['The package base is deliberately conservative. GPUs released after spring 2024 may need the HWE kernel or a newer distribution.', 'Linux Mint 27 only arrives at Christmas 2026 — installing today means staying on the 24.04 base for now and moving up later with a version upgrade.', 'Cinnamon’s Wayland session is meant to stop being experimental with Mint 27; X11 remains the default for now.'],
     },
     firstSteps: {
       de: ['Timeshift einrichten und einen ersten Schnappschuss anlegen', 'Treiberverwaltung öffnen und empfohlene Treiber übernehmen', 'Aktualisierungsverwaltung durchlaufen lassen'],
@@ -208,7 +211,8 @@ export const ubuntuFamily: Distro[] = [
     checkedAt: CHECKED,
     sources: [
       { label: 'Linux Mint Releases', url: 'https://linuxmint.com/download_all.php' },
-      { label: 'Mint 23 on Ubuntu 26.04 (Phoronix)', url: 'https://www.phoronix.com/news/Mint-23-Alfa' },
+      { label: 'Linux Mint Monthly News – September 2026 (Linux Mint 27 "Adrien")', url: 'https://blog.linuxmint.com/?p=5086' },
+      { label: 'Wayland no longer experimental in Cinnamon (OMG! Ubuntu)', url: 'https://www.omgubuntu.co.uk/2026/07/linux-mint-wayland-fully-supported' },
     ],
   },
 
@@ -222,8 +226,8 @@ export const ubuntuFamily: Distro[] = [
       en: 'Ubuntu underneath, with the most configurable desktop in Linux.',
     },
     description: {
-      de: 'Kubuntu ist Ubuntu mit KDE Plasma statt GNOME. Die 26.04-Ausgabe liefert Plasma 6.6 auf Qt 6.10 mit Wayland-Sitzung als Standard. Wer von Windows kommt, findet hier das vertrauteste Bedienkonzept aller großen Desktops – und kann trotzdem jede Kleinigkeit umstellen.',
-      en: 'Kubuntu is Ubuntu with KDE Plasma instead of GNOME. The 26.04 release ships Plasma 6.6 on Qt 6.10 with a Wayland session by default. Coming from Windows, this is the most familiar of the big desktops — and still lets you change every last detail.',
+      de: 'Kubuntu ist Ubuntu mit KDE Plasma statt GNOME. Die 26.04-Ausgabe liefert Plasma 6.6 auf Qt 6.10 mit Wayland-Sitzung als Standard und behält die X11-Sitzung für ihre ganze Lebensdauer – anders als Plasma 6.8, das sie abgeschafft hat. Wer von Windows kommt, findet hier das vertrauteste Bedienkonzept aller großen Desktops und kann trotzdem jede Kleinigkeit umstellen.',
+      en: 'Kubuntu is Ubuntu with KDE Plasma instead of GNOME. The 26.04 release ships Plasma 6.6 on Qt 6.10 with a Wayland session by default and keeps the X11 session for its whole lifetime — unlike Plasma 6.8, which dropped it. Coming from Windows, this is the most familiar of the big desktops, and it still lets you change every last detail.',
     },
     website: 'https://kubuntu.org',
     downloadUrl: 'https://kubuntu.org/getkubuntu/',
@@ -280,8 +284,8 @@ export const ubuntuFamily: Distro[] = [
       creativeWork: 8, upstreamPurity: 5,
     },
     highlights: {
-      de: ['Plasma 6.6: der beste HDR- und Bildschirmskalierungs-Support unter Linux', 'X11-Sitzung noch bis Plasma 6.8 verfügbar', 'KDE-Programme wie Kdenlive, Krita und Okular ab Werk', 'Fenstergesten und Kacheln ohne Erweiterungen'],
-      en: ['Plasma 6.6: the best HDR and display scaling support in Linux', 'X11 session still available until Plasma 6.8', 'KDE apps like Kdenlive, Krita and Okular out of the box', 'Window gestures and tiling without extensions'],
+      de: ['Plasma 6.6: der beste HDR- und Bildschirmskalierungs-Support unter Linux', 'X11-Sitzung bleibt bis zum Ende von 26.04 verfügbar', 'KDE-Programme wie Kdenlive, Krita und Okular ab Werk', 'Fenstergesten und Kacheln ohne Erweiterungen'],
+      en: ['Plasma 6.6: the best HDR and display scaling support in Linux', 'The X11 session stays available until the end of 26.04', 'KDE apps like Kdenlive, Krita and Okular out of the box', 'Window gestures and tiling without extensions'],
     },
     bestFor: {
       de: ['Windows-Umsteiger, die alles einstellen wollen', 'Mehrere Bildschirme mit unterschiedlicher Auflösung', 'HDR-Monitore und Gaming'],
@@ -292,8 +296,8 @@ export const ubuntuFamily: Distro[] = [
       en: ['People overwhelmed by options', 'Very weak machines below 4 GB of RAM'],
     },
     warnings: {
-      de: ['Ab Plasma 6.8 (Oktober 2026) entfällt die X11-Sitzung. Wer sie braucht, sollte das bei der Planung berücksichtigen.', 'Nur 3 Jahre Support statt der 5 Jahre von Ubuntu selbst.'],
-      en: ['Plasma 6.8 (October 2026) removes the X11 session. Plan accordingly if you rely on it.', 'Only 3 years of support instead of Ubuntu’s own 5.'],
+      de: ['Plasma 6.8 (Oktober 2026) hat die X11-Sitzung entfernt. Kubuntu 26.04 bleibt bei Plasma 6.6 und behält sie; wer per Backports-PPA oder Versionssprung auf Plasma 6.8 geht, verliert sie.', 'Nur 3 Jahre Support statt der 5 Jahre von Ubuntu selbst.'],
+      en: ['Plasma 6.8 (October 2026) removed the X11 session. Kubuntu 26.04 stays on Plasma 6.6 and keeps it; moving to Plasma 6.8 through the backports PPA or a version upgrade loses it.', 'Only 3 years of support instead of Ubuntu’s own 5.'],
     },
     firstSteps: {
       de: ['Im Installer die Zusatzsoftware für Codecs mitinstallieren', 'Systemeinstellungen → Erscheinungsbild für Themes und Skalierung'],
@@ -302,6 +306,7 @@ export const ubuntuFamily: Distro[] = [
     checkedAt: CHECKED,
     sources: [
       { label: 'Kubuntu news', url: 'https://kubuntu.org/news/' },
+      { label: 'KDE Plasma 6.8 drops the X11 session (OSNews)', url: 'https://www.osnews.com/story/143911/kde-to-drop-x11-session-in-kde-plasma-6-8/' },
       { label: 'Ubuntu flavours', url: 'https://ubuntu.com/desktop/flavors' },
     ],
   },

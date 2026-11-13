@@ -36,13 +36,16 @@ export const desktops: DesktopEnvironment[] = [
     accent: '205 72% 46%',
     tagline: { de: 'Alles lässt sich einstellen – wirklich alles.', en: 'Everything is configurable — genuinely everything.' },
     description: {
-      de: 'Plasma sieht ab Werk aus wie ein modernes Windows und lässt sich bis in die letzte Ecke umbauen. Version 6.6 hat die beste HDR- und Mehrschirm-Unterstützung im Linux-Umfeld. Für Umsteiger ist es der Desktop mit den wenigsten Überraschungen.',
-      en: 'Plasma looks like a modern Windows out of the box and can be rebuilt down to the last corner. Version 6.6 has the best HDR and multi-monitor support in Linux. For switchers it is the desktop with the fewest surprises.',
+      de: 'Plasma sieht ab Werk aus wie ein modernes Windows und lässt sich bis in die letzte Ecke umbauen. Es hat die beste HDR- und Mehrschirm-Unterstützung im Linux-Umfeld. Version 6.8 erschien im Oktober 2026 zum 30. Geburtstag von KDE und ist die erste, die nur noch unter Wayland läuft. Für Umsteiger ist es der Desktop mit den wenigsten Überraschungen.',
+      en: 'Plasma looks like a modern Windows out of the box and can be rebuilt down to the last corner. It has the best HDR and multi-monitor support in Linux. Version 6.8 arrived in October 2026 for KDE’s 30th birthday and is the first that runs on Wayland only. For switchers it is the desktop with the fewest surprises.',
     },
     feelsLike: { de: 'Wie Windows 10/11 – Startmenü unten links, Taskleiste, Systembereich.', en: 'Like Windows 10/11 — start menu bottom left, taskbar, system tray.' },
     ramFootprintMb: 900,
     customizability: 10, beginnerFriendly: 8, lightweight: 6, touchFriendly: 7, accessibility: 6,
-    waylandStatus: { de: 'Wayland ist Standard; die X11-Sitzung entfällt mit Plasma 6.8 im Oktober 2026.', en: 'Wayland is the default; the X11 session disappears with Plasma 6.8 in October 2026.' },
+    waylandStatus: {
+      de: 'Seit Plasma 6.8 (Oktober 2026) nur noch Wayland. LTS-Distributionen mit älterem Plasma – Kubuntu 26.04, Debian 13 – bieten die X11-Sitzung für ihre Lebensdauer weiter an.',
+      en: 'Wayland only since Plasma 6.8 (October 2026). LTS distributions with an older Plasma — Kubuntu 26.04, Debian 13 — keep offering the X11 session for their lifetime.',
+    },
     x11Session: 'ending',
     waylandSession: 'default',
     strengths: {
@@ -50,8 +53,8 @@ export const desktops: DesktopEnvironment[] = [
       en: ['HDR, variable refresh rate and mixed display resolutions', 'Window gestures, tiling and rules without extra software', 'Very good bundled applications (Kdenlive, Krita, Okular)', 'Familiar to Windows switchers'],
     },
     tradeoffs: {
-      de: ['Die Fülle an Einstellungen kann überfordern', 'Barrierefreiheit ist schwächer als bei GNOME', 'Gelegentliche kleinere Fehler durch schnelle Entwicklung'],
-      en: ['The wealth of settings can overwhelm', 'Accessibility is weaker than GNOME’s', 'Occasional minor bugs due to fast development'],
+      de: ['Die Fülle an Einstellungen kann überfordern', 'Barrierefreiheit ist schwächer als bei GNOME', 'Gelegentliche kleinere Fehler durch schnelle Entwicklung', 'Aktuelle Versionen bieten keine X11-Sitzung mehr'],
+      en: ['The wealth of settings can overwhelm', 'Accessibility is weaker than GNOME’s', 'Occasional minor bugs due to fast development', 'Current versions no longer offer an X11 session'],
     },
     website: 'https://kde.org/plasma-desktop/',
   },
@@ -67,7 +70,10 @@ export const desktops: DesktopEnvironment[] = [
     feelsLike: { de: 'Wie Windows XP/7 – klassisch und berechenbar.', en: 'Like Windows XP/7 — classic and predictable.' },
     ramFootprintMb: 500,
     customizability: 7, beginnerFriendly: 8, lightweight: 9, touchFriendly: 3, accessibility: 5,
-    waylandStatus: { de: 'Läuft überwiegend auf X11; die Wayland-Portierung ist noch nicht abgeschlossen.', en: 'Runs mostly on X11; the Wayland port is not finished.' },
+    waylandStatus: {
+      de: 'Läuft überwiegend auf X11. Wayland geht mit fremden Compositoren wie labwc; ein eigener Compositor (xfwl4) ist für Xfce 4.22 in Arbeit.',
+      en: 'Runs mostly on X11. Wayland works with third-party compositors such as labwc; a compositor of its own (xfwl4) is in the works for Xfce 4.22.',
+    },
     x11Session: 'available',
     waylandSession: 'optional',
     strengths: {
@@ -92,7 +98,10 @@ export const desktops: DesktopEnvironment[] = [
     feelsLike: { de: 'Wie Windows 7 – nur aufgeräumter.', en: 'Like Windows 7 — only tidier.' },
     ramFootprintMb: 700,
     customizability: 7, beginnerFriendly: 10, lightweight: 7, touchFriendly: 3, accessibility: 5,
-    waylandStatus: { de: 'Wayland-Unterstützung ist noch experimentell; Standard bleibt X11 bis auf Weiteres.', en: 'Wayland support is still experimental; X11 remains the default for now.' },
+    waylandStatus: {
+      de: 'Die Wayland-Sitzung gilt ab Linux Mint 27 (Weihnachten 2026) nicht mehr als experimentell. Standard bleibt vorerst X11.',
+      en: 'From Linux Mint 27 (Christmas 2026) the Wayland session is no longer considered experimental. X11 remains the default for now.',
+    },
     x11Session: 'available',
     waylandSession: 'optional',
     strengths: {
@@ -100,8 +109,8 @@ export const desktops: DesktopEnvironment[] = [
       en: ['Nothing to learn — everything is where you expect it', 'Very stable and predictable', 'A good selection of applets and extensions'],
     },
     tradeoffs: {
-      de: ['Wayland fehlt noch weitgehend', 'Praktisch nur bei Mint und LMDE gepflegt', 'Weniger modern als Plasma oder GNOME'],
-      en: ['Wayland is still largely missing', 'Practically only maintained on Mint and LMDE', 'Less modern than Plasma or GNOME'],
+      de: ['Wayland ist erst seit Kurzem alltagstauglich', 'Die Entwicklung liegt fast vollständig beim Mint-Team', 'Weniger modern als Plasma oder GNOME'],
+      en: ['Wayland has only recently become ready for daily use', 'Development rests almost entirely with the Mint team', 'Less modern than Plasma or GNOME'],
     },
     website: 'https://projects.linuxmint.com/cinnamon/',
   },
@@ -155,8 +164,8 @@ export const desktops: DesktopEnvironment[] = [
     accent: '187 82% 40%',
     tagline: { de: 'Der neue Desktop aus Rust – tastaturgetrieben und kachelnd.', en: 'The new Rust desktop — keyboard-driven and tiling.' },
     description: {
-      de: 'System76 hat COSMIC von Grund auf neu geschrieben, statt einen bestehenden Desktop anzupassen. Epoch 1 erschien im Dezember 2025. Fenster lassen sich automatisch kacheln, und fast alles ist über die Tastatur erreichbar.',
-      en: 'System76 wrote COSMIC from scratch rather than adapting an existing desktop. Epoch 1 arrived in December 2025. Windows can be tiled automatically and almost everything is reachable from the keyboard.',
+      de: 'System76 hat COSMIC von Grund auf neu geschrieben, statt einen bestehenden Desktop anzupassen. Epoch 1 erschien im Dezember 2025, seither kommen etwa monatlich Punktausgaben (im Oktober 2026 Version 1.11). Fenster lassen sich automatisch kacheln, und fast alles ist über die Tastatur erreichbar.',
+      en: 'System76 wrote COSMIC from scratch rather than adapting an existing desktop. Epoch 1 arrived in December 2025, followed by roughly monthly point releases (version 1.11 in October 2026). Windows can be tiled automatically and almost everything is reachable from the keyboard.',
     },
     feelsLike: { de: 'Wie ein moderner Kachel-Fenstermanager mit vollwertigem Desktop drumherum.', en: 'Like a modern tiling window manager wrapped in a full desktop.' },
     ramFootprintMb: 800,
@@ -205,9 +214,12 @@ export const desktops: DesktopEnvironment[] = [
     feelsLike: { de: 'Sehr nah an macOS: Dock unten, Menüleiste oben.', en: 'Very close to macOS: dock at the bottom, menu bar at the top.' },
     ramFootprintMb: 750,
     customizability: 3, beginnerFriendly: 9, lightweight: 6, touchFriendly: 6, accessibility: 5,
-    waylandStatus: { de: 'Noch überwiegend X11; die Wayland-Umstellung läuft.', en: 'Still mostly X11; the Wayland transition is under way.' },
+    waylandStatus: {
+      de: 'Seit elementary OS 8.1 ist die Wayland-Sitzung Standard; die klassische X11-Sitzung bleibt wählbar.',
+      en: 'The Wayland session has been the default since elementary OS 8.1; the classic X11 session remains selectable.',
+    },
     x11Session: 'available',
-    waylandSession: 'optional',
+    waylandSession: 'default',
     strengths: { de: ['Absolut einheitliche Gestaltung', 'Sehr ruhig und ablenkungsarm', 'Berechtigungsverwaltung für Anwendungen'], en: ['Absolutely consistent design', 'Very calm and distraction-free', 'Per-application permission management'] },
     tradeoffs: { de: ['Kaum anpassbar', 'Nur in elementary OS wirklich zu Hause', 'Kleines Programmangebot im eigenen AppCenter'], en: ['Barely configurable', 'Only really at home in elementary OS', 'A small application catalogue in its own AppCenter'] },
     website: 'https://elementary.io',
@@ -268,8 +280,8 @@ export const desktops: DesktopEnvironment[] = [
     accent: '200 80% 45%',
     tagline: { de: 'Funktional statt hübsch – und sehr genügsam.', en: 'Functional rather than pretty — and very frugal.' },
     description: {
-      de: 'LXQt ist der Qt-basierte Nachfolger von LXDE. Es liefert das Nötige – Leiste, Menü, Dateiverwaltung – und verzichtet auf alles andere. Version 2.3 unterstützt Wayland optional.',
-      en: 'LXQt is the Qt-based successor to LXDE. It provides the essentials — panel, menu, file manager — and skips everything else. Version 2.3 supports Wayland optionally.',
+      de: 'LXQt ist der Qt-basierte Nachfolger von LXDE. Es liefert das Nötige – Leiste, Menü, Dateiverwaltung – und verzichtet auf alles andere. Die 2er-Versionen laufen wahlweise auch unter Wayland, etwa mit labwc oder Miriway.',
+      en: 'LXQt is the Qt-based successor to LXDE. It provides the essentials — panel, menu, file manager — and skips everything else. The 2.x releases can also run on Wayland, with labwc or Miriway for instance.',
     },
     feelsLike: { de: 'Wie ein sehr schlankes Windows 2000.', en: 'Like a very lean Windows 2000.' },
     ramFootprintMb: 350,

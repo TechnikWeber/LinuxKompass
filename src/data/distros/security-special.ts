@@ -1,6 +1,6 @@
 import type { Distro } from '../types';
 
-const CHECKED = '2026-09-03';
+const CHECKED = '2026-11-13';
 
 /** Anonymität, Sicherheitsarbeit und Sonderzwecke. */
 export const securitySpecial: Distro[] = [
@@ -19,10 +19,10 @@ export const securitySpecial: Distro[] = [
     docsUrl: 'https://tails.net/doc/',
     germanResourceUrl: 'https://tails.net/index.de.html',
     basedOn: 'debian', family: 'debian', originCountry: 'international', firstRelease: 2009, governance: 'foundation',
-    currentVersion: '7.12', currentVersionDate: '2026-09-02',
-    supportUntil: { de: 'Fortlaufend; Updates erscheinen etwa alle 4–6 Wochen.', en: 'Continuous; updates appear roughly every 4–6 weeks.' },
+    currentVersion: '7.16', currentVersionDate: '2026-11',
+    supportUntil: { de: 'Fortlaufend; seit September 2026 erscheint etwa alle zwei Wochen eine neue Ausgabe.', en: 'Continuous; since September 2026 a new release appears roughly every two weeks.' },
     releaseModel: 'fixed',
-    releaseCadence: { de: 'Neue Ausgabe etwa alle 4–6 Wochen, sicherheitskritische Korrekturen schneller.', en: 'A new release roughly every 4–6 weeks, with faster security fixes.' },
+    releaseCadence: { de: 'Seit Tails 7.12 etwa alle zwei Wochen, sicherheitskritische Korrekturen auch dazwischen.', en: 'Roughly every two weeks since Tails 7.12, with security-critical fixes in between.' },
     init: 'systemd', libc: 'glibc', packageManager: 'apt', packageFormat: 'deb',
     flatpakReady: false, snapReady: false, appimageFriendly: false, aur: false,
     extraRepos: { de: ['Keine – Software nachinstallieren ist bewusst eingeschränkt'], en: ['None — installing extra software is deliberately restricted'] },
@@ -45,7 +45,10 @@ export const securitySpecial: Distro[] = [
     warnings: { de: ['Tails schützt vor Netzwerküberwachung, nicht vor manipulierter Hardware oder Firmware.', 'Ohne den dauerhaften Speicherbereich ist nach dem Herunterfahren alles verloren – das ist beabsichtigt.', 'Tor macht das Surfen spürbar langsamer und manche Dienste sperren Tor-Adressen.'], en: ['Tails protects against network surveillance, not against compromised hardware or firmware.', 'Without persistent storage everything is gone after shutdown — that is the point.', 'Tor makes browsing noticeably slower and some services block Tor addresses.'] },
     firstSteps: { de: ['Die deutschsprachige Dokumentation vor dem ersten Einsatz lesen', 'Dauerhaften Speicherbereich nur anlegen, wenn er wirklich gebraucht wird'], en: ['Read the documentation before first use', 'Only create persistent storage if you genuinely need it'] },
     checkedAt: CHECKED,
-    sources: [{ label: 'Tails', url: 'https://tails.net/' }],
+    sources: [
+      { label: 'Tails', url: 'https://tails.net/' },
+      { label: 'Tails 7.16 with Tor Browser 16 (Linuxiac)', url: 'https://linuxiac.com/?p=222013' },
+    ],
   },
 
   {
@@ -55,20 +58,20 @@ export const securitySpecial: Distro[] = [
     accent: '210 60% 40%',
     tagline: { de: 'Sicherheit durch Trennung: jede Aufgabe in einer eigenen virtuellen Maschine.', en: 'Security by compartmentalisation: every task in its own virtual machine.' },
     description: {
-      de: 'Qubes OS läuft auf dem Xen-Hypervisor und legt jede Tätigkeit in eine eigene virtuelle Maschine: Online-Banking getrennt vom Surfen, Arbeit getrennt vom Privaten, unbekannte Dateien in einer Wegwerf-Umgebung. Farbige Fensterrahmen zeigen die Zugehörigkeit. Version 4.3.1 erschien im Juni 2026.',
-      en: 'Qubes OS runs on the Xen hypervisor and puts every activity in its own virtual machine: online banking separate from browsing, work separate from personal use, unknown files in a disposable environment. Coloured window borders show which is which. Version 4.3.1 arrived in June 2026.',
+      de: 'Qubes OS läuft auf dem Xen-Hypervisor und legt jede Tätigkeit in eine eigene virtuelle Maschine: Online-Banking getrennt vom Surfen, Arbeit getrennt vom Privaten, unbekannte Dateien in einer Wegwerf-Umgebung. Farbige Fensterrahmen zeigen die Zugehörigkeit. Version 4.3.2 erschien im Oktober 2026 mit Fedora 44 als Standardvorlage.',
+      en: 'Qubes OS runs on the Xen hypervisor and puts every activity in its own virtual machine: online banking separate from browsing, work separate from personal use, unknown files in a disposable environment. Coloured window borders show which is which. Version 4.3.2 arrived in October 2026 with Fedora 44 as the default template.',
     },
     website: 'https://www.qubes-os.org',
     downloadUrl: 'https://www.qubes-os.org/downloads/',
     docsUrl: 'https://www.qubes-os.org/doc/',
     basedOn: null, family: 'fedora', originCountry: 'PL', firstRelease: 2012, governance: 'community',
-    currentVersion: '4.3.1', currentVersionDate: '2026-06-11',
+    currentVersion: '4.3.2', currentVersionDate: '2026-10-02',
     supportUntil: { de: 'Etwa ein Jahr nach Erscheinen der Nachfolgeversion.', en: 'About a year after the successor release appears.' },
     releaseModel: 'fixed',
     releaseCadence: { de: 'Hauptversionen in mehrjährigem Abstand, Punktausgaben dazwischen.', en: 'Major versions years apart, point releases in between.' },
     init: 'systemd', libc: 'glibc', packageManager: 'dnf', packageFormat: 'rpm',
     flatpakReady: false, snapReady: false, appimageFriendly: false, aur: false,
-    extraRepos: { de: ['Vorlagen für Fedora, Debian und Whonix 18', 'Community-Vorlagen'], en: ['Templates for Fedora, Debian and Whonix 18', 'community templates'] },
+    extraRepos: { de: ['Vorlagen für Fedora 44, Debian 13 und Whonix 18', 'Community-Vorlagen'], en: ['Templates for Fedora 44, Debian 13 and Whonix 18', 'community templates'] },
     defaultDesktop: 'xfce', availableDesktops: ['xfce', 'plasma'],
     installer: 'graphical-expert', installDifficulty: 7,
     minRamGb: 16, recommendedRamGb: 32, minStorageGb: 128,
@@ -90,6 +93,7 @@ export const securitySpecial: Distro[] = [
     checkedAt: CHECKED,
     sources: [
       { label: 'Qubes OS 4.3.1', url: 'https://www.qubes-os.org/news/2026/06/11/qubes-os-4-3-1-has-been-released/' },
+      { label: 'Qubes OS news (4.3.2)', url: 'https://www.qubes-os.org/news/' },
     ],
   },
 
@@ -100,14 +104,14 @@ export const securitySpecial: Distro[] = [
     accent: '210 80% 45%',
     tagline: { de: 'Werkzeugkasten für Sicherheitsprüfungen – kein Alltagssystem.', en: 'A toolkit for security testing — not an everyday system.' },
     description: {
-      de: 'Kali bündelt mehrere hundert Werkzeuge für Penetrationstests und digitale Forensik in einer Debian-basierten Distribution. Ausgabe 2026.2 erschien Ende Juni 2026 mit Kernel 6.19 und Xfce 4.20.7. Als tägliches Arbeitssystem ist Kali ausdrücklich nicht gedacht.',
-      en: 'Kali bundles several hundred penetration-testing and digital-forensics tools in a Debian-based distribution. Release 2026.2 arrived at the end of June 2026 with kernel 6.19 and Xfce 4.20.7. Kali is explicitly not intended as a daily driver.',
+      de: 'Kali bündelt mehrere hundert Werkzeuge für Penetrationstests und digitale Forensik in einer Debian-basierten Distribution. Ausgabe 2026.3 erschien Ende Oktober 2026 mit Kernel 7.1 und Plasma 6.7 für die KDE-Variante; Standard bleibt Xfce. Als tägliches Arbeitssystem ist Kali ausdrücklich nicht gedacht.',
+      en: 'Kali bundles several hundred penetration-testing and digital-forensics tools in a Debian-based distribution. Release 2026.3 arrived at the end of October 2026 with kernel 7.1 and Plasma 6.7 for the KDE variant; Xfce remains the default. Kali is explicitly not intended as a daily driver.',
     },
     website: 'https://www.kali.org',
     downloadUrl: 'https://www.kali.org/get-kali/',
     docsUrl: 'https://www.kali.org/docs/',
     basedOn: 'debian', family: 'debian', originCountry: 'US', firstRelease: 2013, governance: 'company',
-    currentVersion: '2026.2', currentVersionDate: '2026-06-29',
+    currentVersion: '2026.3', currentVersionDate: '2026-10-26',
     supportUntil: { de: 'Rollend auf Debian-Testing-Basis; vierteljährliche Abbilder.', en: 'Rolling on a Debian Testing base; quarterly images.' },
     releaseModel: 'rolling',
     releaseCadence: { de: 'Vier Abbilder pro Jahr, Pakete laufend.', en: 'Four images a year, packages continuously.' },
@@ -133,7 +137,10 @@ export const securitySpecial: Distro[] = [
     warnings: { de: ['Die enthaltenen Werkzeuge dürfen nur auf Systemen eingesetzt werden, für die eine ausdrückliche Erlaubnis vorliegt.', 'Als Alltagssystem ungeeignet: rollende Testing-Basis und viele Werkzeuge, die man nicht braucht.', 'Wer Linux lernen will, lernt es woanders besser.'], en: ['The included tools may only be used on systems you have explicit permission to test.', 'Unsuitable as a daily driver: a rolling Testing base and many tools you do not need.', 'If you want to learn Linux, you will learn it better elsewhere.'] },
     firstSteps: { de: ['Nur in einer virtuellen Maschine oder auf getrennter Hardware betreiben', 'Kali-Dokumentation und rechtliche Rahmenbedingungen lesen'], en: ['Run it only in a virtual machine or on separate hardware', 'Read the Kali documentation and the legal ground rules'] },
     checkedAt: CHECKED,
-    sources: [{ label: 'Kali Linux Releases', url: 'https://www.kali.org/releases/' }],
+    sources: [
+      { label: 'Kali Linux Releases', url: 'https://www.kali.org/releases/' },
+      { label: 'Kali Linux 2026.3 Release', url: 'https://www.kali.org/blog/kali-linux-2026-3-release/' },
+    ],
   },
 
   {
@@ -143,13 +150,13 @@ export const securitySpecial: Distro[] = [
     accent: '175 60% 38%',
     tagline: { de: 'Sicherheitswerkzeuge plus ein System, das man auch normal nutzen kann.', en: 'Security tools plus a system you can actually use normally.' },
     description: {
-      de: 'Parrot OS verfolgt einen ähnlichen Zweck wie Kali, ist aber genügsamer und bringt eine Home-Ausgabe mit, die als normales Arbeitssystem taugt. Der Fokus liegt zusätzlich auf Datenschutzwerkzeugen. Version 7.0 ist die aktuelle Hauptausgabe.',
-      en: 'Parrot OS serves a similar purpose to Kali but is lighter on resources and ships a Home edition usable as a normal working system. It additionally emphasises privacy tooling. Version 7.0 is the current major release.',
+      de: 'Parrot OS verfolgt einen ähnlichen Zweck wie Kali, ist aber genügsamer und bringt eine Home-Ausgabe mit, die als normales Arbeitssystem taugt. Der Fokus liegt zusätzlich auf Datenschutzwerkzeugen. Aktuell ist 7.3 vom Juni 2026 mit Kernel 7.0 und optional auf neuere Prozessoren optimierten Paketen.',
+      en: 'Parrot OS serves a similar purpose to Kali but is lighter on resources and ships a Home edition usable as a normal working system. It additionally emphasises privacy tooling. The current release is 7.3 from June 2026, with kernel 7.0 and optional packages optimised for newer processors.',
     },
     website: 'https://www.parrotsec.org',
     downloadUrl: 'https://www.parrotsec.org/download/',
     basedOn: 'debian', family: 'debian', originCountry: 'IT', firstRelease: 2013, governance: 'community',
-    currentVersion: '7.0', currentVersionDate: '2025-11',
+    currentVersion: '7.3', currentVersionDate: '2026-06',
     supportUntil: { de: 'Rollend auf Debian-Basis.', en: 'Rolling on a Debian base.' },
     releaseModel: 'semi-rolling',
     releaseCadence: { de: 'Hauptausgaben unregelmäßig, Pakete laufend.', en: 'Irregular major releases, packages continuously.' },
@@ -175,7 +182,10 @@ export const securitySpecial: Distro[] = [
     warnings: { de: ['Wie bei Kali gilt: Angriffswerkzeuge nur mit ausdrücklicher Erlaubnis einsetzen.', 'Kleinere Community als Kali – im Problemfall weniger Hilfe.'], en: ['As with Kali: only use offensive tools with explicit permission.', 'A smaller community than Kali — less help when something breaks.'] },
     firstSteps: { de: ['Die passende Ausgabe wählen (Home oder Security)', 'Bei Sicherheitsarbeit in virtueller Maschine testen'], en: ['Pick the right edition (Home or Security)', 'Test security work inside a virtual machine'] },
     checkedAt: CHECKED,
-    sources: [{ label: 'Parrot Security', url: 'https://www.parrotsec.org/' }],
+    sources: [
+      { label: 'Parrot Security', url: 'https://www.parrotsec.org/' },
+      { label: 'Parrot OS 7.3 is out (Linuxiac)', url: 'https://linuxiac.com/parrot-os-7-3-is-out-with-optimized-isos-for-modern-hardware/' },
+    ],
   },
 
   {
@@ -185,14 +195,14 @@ export const securitySpecial: Distro[] = [
     accent: '345 70% 48%',
     tagline: { de: 'Das offizielle System für den Raspberry Pi – und ein guter Einstieg fürs Basteln.', en: 'The official system for the Raspberry Pi — and a good entry point for tinkering.' },
     description: {
-      de: 'Raspberry Pi OS ist ein angepasstes Debian für die Einplatinenrechner der Raspberry Pi Foundation, inzwischen auf Debian-13-Basis. Es ist auf die Hardware abgestimmt, bringt Werkzeuge für GPIO und Kamera mit und ist wegen seiner riesigen Bastel-Community die pragmatische Standardwahl für Pi-Projekte.',
-      en: 'Raspberry Pi OS is a Debian adaptation for the Raspberry Pi Foundation’s single-board computers, now on a Debian 13 base. It is tuned to the hardware, ships tooling for GPIO and camera use, and its huge maker community makes it the pragmatic default for Pi projects.',
+      de: 'Raspberry Pi OS ist ein angepasstes Debian für die Einplatinenrechner der Raspberry Pi Foundation, inzwischen auf Debian-13-Basis. Es ist auf die Hardware abgestimmt, bringt Werkzeuge für GPIO und Kamera mit und ist wegen seiner riesigen Bastel-Community die pragmatische Standardwahl für Pi-Projekte. Die Oberfläche läuft auf dem Wayland-Compositor labwc und bekam im Herbst 2026 ein neues Dock.',
+      en: 'Raspberry Pi OS is a Debian adaptation for the Raspberry Pi Foundation’s single-board computers, now on a Debian 13 base. It is tuned to the hardware, ships tooling for GPIO and camera use, and its huge maker community makes it the pragmatic default for Pi projects. The desktop runs on the labwc Wayland compositor and gained a new dock in autumn 2026.',
     },
     website: 'https://www.raspberrypi.com/software/',
     downloadUrl: 'https://www.raspberrypi.com/software/operating-systems/',
     docsUrl: 'https://www.raspberrypi.com/documentation/',
     basedOn: 'debian', family: 'debian', originCountry: 'GB', firstRelease: 2012, governance: 'foundation',
-    currentVersion: 'Debian-13-Basis („Trixie")', currentVersionDate: '2026-06',
+    currentVersion: 'Debian-13-Basis („Trixie")', currentVersionDate: '2026-10-06',
     supportUntil: { de: 'Entlang von Debian 13.', en: 'In line with Debian 13.' },
     releaseModel: 'lts',
     releaseCadence: { de: 'Neue Abbilder mehrmals im Jahr, Hauptbasis pro Debian-Version.', en: 'New images several times a year, with a base change per Debian release.' },
@@ -218,6 +228,9 @@ export const securitySpecial: Distro[] = [
     warnings: { de: ['Versionssprünge auf eine neue Debian-Basis werden offiziell nicht unterstützt – dann besser neu aufsetzen.', 'SD-Karten verschleißen; für Dauerbetrieb SSD oder hochwertige Karten verwenden.'], en: ['Upgrades to a new Debian base are not officially supported — better to reinstall.', 'SD cards wear out; use an SSD or high-quality cards for continuous operation.'] },
     firstSteps: { de: ['Raspberry Pi Imager nutzen und WLAN/SSH vorab konfigurieren', 'Bei Dauerbetrieb auf SSD-Boot umstellen'], en: ['Use Raspberry Pi Imager and preconfigure Wi-Fi/SSH', 'Switch to SSD boot for continuous operation'] },
     checkedAt: CHECKED,
-    sources: [{ label: 'Raspberry Pi OS', url: 'https://www.raspberrypi.com/software/' }],
+    sources: [
+      { label: 'Raspberry Pi OS', url: 'https://www.raspberrypi.com/software/' },
+      { label: 'Raspberry Pi OS downloads', url: 'https://www.raspberrypi.com/software/operating-systems/' },
+    ],
   },
 ];

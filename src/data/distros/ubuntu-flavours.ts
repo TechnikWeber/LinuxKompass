@@ -1,6 +1,6 @@
 import type { Distro } from '../types';
 
-const CHECKED = '2026-09-03';
+const CHECKED = '2026-11-13';
 
 /** Die offiziellen Ubuntu-Flavours mit alternativen Desktops. */
 export const ubuntuFlavours: Distro[] = [
@@ -41,7 +41,7 @@ export const ubuntuFlavours: Distro[] = [
     highlights: { de: ['Xfce 4.20 läuft auf X11 – ideal für ältere Grafiktreiber', 'Bedienkonzept seit Jahren unverändert stabil', 'Sehr geringer Speicherhunger im Leerlauf'], en: ['Xfce 4.20 runs on X11 — ideal for older graphics drivers', 'A layout that has been stable for years', 'Very low idle memory usage'] },
     bestFor: { de: ['Notebooks von 2012–2018', 'Zweitrechner und Bastelkisten', 'Wer eine klassische Oberfläche ohne Effekte will'], en: ['Laptops from 2012–2018', 'Secondary and tinkering machines', 'Anyone wanting a classic desktop without effects'] },
     notFor: { de: ['Touchscreens und Tablets', 'Wer moderne Animationen und HDR erwartet'], en: ['Touchscreens and tablets', 'Anyone expecting modern animations and HDR'] },
-    warnings: { de: ['Xfce ist unter Wayland noch nicht vollständig; die Sitzung läuft weiter auf X11.', 'Fraktionale Skalierung auf HiDPI-Bildschirmen ist schwächer als bei GNOME oder Plasma.'], en: ['Xfce is not fully ported to Wayland; the session still runs on X11.', 'Fractional scaling on HiDPI screens is weaker than in GNOME or Plasma.'] },
+    warnings: { de: ['Xfce ist unter Wayland noch nicht vollständig; die Sitzung läuft weiter auf X11. Ein eigener Wayland-Compositor (xfwl4) ist erst für Xfce 4.22 in Arbeit.', 'Fraktionale Skalierung auf HiDPI-Bildschirmen ist schwächer als bei GNOME oder Plasma.'], en: ['Xfce is not fully ported to Wayland; the session still runs on X11. A Wayland compositor of its own (xfwl4) is only in the works for Xfce 4.22.', 'Fractional scaling on HiDPI screens is weaker than in GNOME or Plasma.'] },
     firstSteps: { de: ['Codec-Paket xubuntu-restricted-extras nachinstallieren', 'Energieverwaltung für ältere Akkus anpassen'], en: ['Install the xubuntu-restricted-extras codec package', 'Tune power management for ageing batteries'] },
     checkedAt: CHECKED,
     sources: [{ label: 'Xubuntu Releases', url: 'https://xubuntu.org/release/' }],
@@ -54,8 +54,8 @@ export const ubuntuFlavours: Distro[] = [
     accent: '200 80% 45%',
     tagline: { de: 'Die sparsamste offizielle Ubuntu-Variante.', en: 'The leanest official Ubuntu variant.' },
     description: {
-      de: 'Lubuntu setzt auf LXQt 2.3 und kommt mit sehr wenig Arbeitsspeicher aus. Die Oberfläche ist funktional statt hübsch – dafür startet sie auch auf Rechnern flott, bei denen andere Distributionen ins Schwitzen kommen.',
-      en: 'Lubuntu uses LXQt 2.3 and gets by on very little memory. The interface is functional rather than pretty — but it stays quick on machines where other distributions start to struggle.',
+      de: 'Lubuntu setzt auf LXQt 2.3 und kommt mit sehr wenig Arbeitsspeicher aus. Die Oberfläche ist funktional statt hübsch – dafür startet sie auch auf Rechnern flott, bei denen andere Distributionen ins Schwitzen kommen. Die Zwischenausgabe 26.10 bringt LXQt 2.4 und erstmals eine wählbare Wayland-Sitzung.',
+      en: 'Lubuntu uses LXQt 2.3 and gets by on very little memory. The interface is functional rather than pretty — but it stays quick on machines where other distributions start to struggle. The 26.10 interim release brings LXQt 2.4 and, for the first time, a selectable Wayland session.',
     },
     website: 'https://lubuntu.me',
     downloadUrl: 'https://lubuntu.me/downloads/',
@@ -97,17 +97,17 @@ export const ubuntuFlavours: Distro[] = [
     accent: '145 40% 38%',
     tagline: { de: 'Der klassische GNOME-2-Desktop, konsequent weitergepflegt.', en: 'The classic GNOME 2 desktop, faithfully carried forward.' },
     description: {
-      de: 'Ubuntu MATE führt das Bedienkonzept von GNOME 2 fort: zwei Leisten, klassische Menüs, keine Überraschungen. Der Umschalter „MATE Tweak" bietet fertige Layouts, die Windows, macOS oder Ubuntu Unity nachempfinden. Achtung: Die 26.04-Ausgabe steht noch aus, aktuell ist 24.04 LTS.',
-      en: 'Ubuntu MATE carries the GNOME 2 experience forward: two panels, classic menus, no surprises. "MATE Tweak" offers ready-made layouts imitating Windows, macOS or Ubuntu Unity. Note: the 26.04 release is still pending; 24.04 LTS is current.',
+      de: 'Ubuntu MATE führt das Bedienkonzept von GNOME 2 fort: zwei Leisten, klassische Menüs, keine Überraschungen. Der Umschalter „MATE Tweak" bietet fertige Layouts, die Windows, macOS oder Ubuntu Unity nachempfinden. Nach dem Rückzug des bisherigen Projektleiters gab es zu Ubuntu 26.04 keine LTS-Ausgabe; ein neues Team hat im Oktober 2026 die Zwischenausgabe 26.10 veröffentlicht, die nur neun Monate gepflegt wird.',
+      en: 'Ubuntu MATE carries the GNOME 2 experience forward: two panels, classic menus, no surprises. "MATE Tweak" offers ready-made layouts imitating Windows, macOS or Ubuntu Unity. After the previous project lead stepped down there was no LTS release for Ubuntu 26.04; a new team published the 26.10 interim release in October 2026, which is maintained for only nine months.',
     },
     website: 'https://ubuntu-mate.org',
     downloadUrl: 'https://ubuntu-mate.org/download/',
     germanResourceUrl: 'https://wiki.ubuntuusers.de/MATE/',
-    basedOn: 'ubuntu', family: 'ubuntu', originCountry: 'GB', firstRelease: 2014, governance: 'single-maintainer',
-    currentVersion: '24.04.4 LTS', currentVersionDate: '2026-02',
-    supportUntil: { de: 'April 2027 (3 Jahre ab 24.04).', en: 'April 2027 (3 years from 24.04).' },
-    releaseModel: 'lts',
-    releaseCadence: { de: 'Folgt Ubuntu, zuletzt aber mit Verzögerung.', en: 'Follows Ubuntu, though lately with delay.' },
+    basedOn: 'ubuntu', family: 'ubuntu', originCountry: 'GB', firstRelease: 2014, governance: 'community',
+    currentVersion: '26.10', currentVersionDate: '2026-10-15',
+    supportUntil: { de: 'Juli 2027 (Zwischenausgabe, 9 Monate). Die letzte LTS-Ausgabe 24.04 wird bis April 2027 gepflegt.', en: 'July 2027 (interim release, 9 months). The last LTS release, 24.04, is maintained until April 2027.' },
+    releaseModel: 'fixed',
+    releaseCadence: { de: 'Wieder im Ubuntu-Takt alle 6 Monate; ob es zu 28.04 wieder eine LTS gibt, ist offen.', en: 'Back on the 6-month Ubuntu cadence; whether 28.04 will be an LTS again is open.' },
     init: 'systemd', libc: 'glibc', packageManager: 'apt', packageFormat: 'deb',
     flatpakReady: false, snapReady: true, appimageFriendly: true, aur: false,
     extraRepos: { de: ['PPAs', 'Flathub nachrüstbar'], en: ['PPAs', 'Flathub can be added'] },
@@ -123,14 +123,18 @@ export const ubuntuFlavours: Distro[] = [
     commercialSupport: false,
     audiences: ['switcher', 'beginner', 'oldhardware'],
     tags: ['mate', 'klassisch', 'x11', 'raspberry-pi'],
-    ratings: { beginnerFriendly: 8, stability: 9, freshness: 3, customizability: 8, lightweight: 8, gaming: 5, hardwareSupport: 8, communitySize: 6, germanSupport: 7, documentation: 7, enterpriseReady: 5, privacy: 6, softwareAvailability: 9, upgradeSmoothness: 7, creativeWork: 5, upstreamPurity: 5 },
-    highlights: { de: ['MATE Tweak: Layout per Klick auf Windows- oder macOS-Optik umstellen', 'Läuft auch auf Raspberry Pi', 'Sehr berechenbare, klassische Bedienung'], en: ['MATE Tweak: switch the layout to a Windows or macOS feel in one click', 'Also runs on Raspberry Pi', 'Very predictable, classic interaction'] },
+    ratings: { beginnerFriendly: 8, stability: 8, freshness: 5, customizability: 8, lightweight: 8, gaming: 5, hardwareSupport: 8, communitySize: 5, germanSupport: 7, documentation: 6, enterpriseReady: 3, privacy: 6, softwareAvailability: 9, upgradeSmoothness: 6, creativeWork: 5, upstreamPurity: 5 },
+    highlights: { de: ['MATE Tweak: Layout per Klick auf Windows- oder macOS-Optik umstellen', 'Läuft auch auf Raspberry Pi', 'Sehr berechenbare, klassische Bedienung', 'MATE lässt sich auf Ubuntu 26.04 LTS auch nachinstallieren (ubuntu-mate-desktop)'], en: ['MATE Tweak: switch the layout to a Windows or macOS feel in one click', 'Also runs on Raspberry Pi', 'Very predictable, classic interaction', 'MATE can also be added to Ubuntu 26.04 LTS (ubuntu-mate-desktop)'] },
     bestFor: { de: ['Menschen, die GNOME 2 oder Windows XP/7 gewohnt sind', 'Ältere Nutzerinnen und Nutzer, die klare Menüs brauchen', 'Raspberry Pi als Desktop'], en: ['People used to GNOME 2 or Windows XP/7', 'Older users who need clear menus', 'Raspberry Pi as a desktop'] },
-    notFor: { de: ['Wer aktuelle Pakete braucht', 'Wayland-Umgebungen'], en: ['Anyone needing current packages', 'Wayland environments'] },
-    warnings: { de: ['Für Ubuntu 26.04 gibt es noch keine MATE-Ausgabe – die Basis ist damit zwei Jahre alt.', 'Das Projekt hängt stark an einer einzelnen Entwicklerperson.'], en: ['There is no MATE edition for Ubuntu 26.04 yet — the base is therefore two years old.', 'The project depends heavily on a single developer.'] },
-    firstSteps: { de: ['MATE Tweak öffnen und ein passendes Layout wählen', 'ubuntu-restricted-extras für Codecs installieren'], en: ['Open MATE Tweak and pick a layout', 'Install ubuntu-restricted-extras for codecs'] },
+    notFor: { de: ['Wer jahrelange Ruhe ohne Versionssprung will – 26.10 muss nach neun Monaten aktualisiert werden', 'Wayland-Umgebungen'], en: ['Anyone wanting years of calm without a version jump — 26.10 has to be upgraded after nine months', 'Wayland environments'] },
+    warnings: { de: ['Zu Ubuntu 26.04 gibt es keine Ubuntu-MATE-LTS. Wer Langzeitsupport will, installiert Ubuntu 26.04 und darauf den MATE-Desktop – oder nimmt Linux Mint mit MATE.', 'Das neue Team hat in 26.10 noch nicht alle MATE-Pakete auf den neuesten Stand gebracht; die Ausgabe ist vor allem eine Fortführung.', 'Bestehende 24.04-Installationen werden nur noch bis April 2027 gepflegt.'], en: ['There is no Ubuntu MATE LTS for Ubuntu 26.04. If you want long-term support, install Ubuntu 26.04 and add the MATE desktop — or use Linux Mint with MATE.', 'The new team has not yet brought every MATE package up to date in 26.10; the release is mainly a continuation.', 'Existing 24.04 installations are only maintained until April 2027.'] },
+    firstSteps: { de: ['MATE Tweak öffnen und ein passendes Layout wählen', 'ubuntu-restricted-extras für Codecs installieren', 'Den Versionssprung auf 27.04 rechtzeitig vor Juli 2027 einplanen'], en: ['Open MATE Tweak and pick a layout', 'Install ubuntu-restricted-extras for codecs', 'Plan the upgrade to 27.04 well before July 2027'] },
     checkedAt: CHECKED,
-    sources: [{ label: 'Ubuntu MATE Download', url: 'https://ubuntu-mate.org/download/' }],
+    sources: [
+      { label: 'Ubuntu MATE Download', url: 'https://ubuntu-mate.org/download/' },
+      { label: 'Ubuntu MATE missed 26.04 LTS, but a new team is keeping it alive (Linuxiac)', url: 'https://linuxiac.com/ubuntu-mate-missed-26-04-lts-but-a-new-team-is-keeping-it-alive/' },
+      { label: 'Ubuntu 26.10 flavours overview (OMG! Ubuntu)', url: 'https://www.omgubuntu.co.uk/2026/10/ubuntu-2610-flavours-overview' },
+    ],
   },
 
   {

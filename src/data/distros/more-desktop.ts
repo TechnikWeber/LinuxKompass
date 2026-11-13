@@ -1,6 +1,6 @@
 import type { Distro } from '../types';
 
-const CHECKED = '2026-09-04';
+const CHECKED = '2026-11-13';
 
 /**
  * Nachschlagewerk-Ergänzungen für den Schreibtisch.
@@ -20,8 +20,8 @@ export const moreDesktop: Distro[] = [
       en: 'The original that AlmaLinux and Rocky are copies of.',
     },
     description: {
-      de: 'RHEL ist die Distribution, gegen die Datenbanken, SAP, Autodesk und Zertifizierungsprogramme getestet werden – zehn Jahre Pflege je Hauptversion, ein fester Fahrplan und ein Hersteller, der dafür haftet. Version 10 erschien im Mai 2025, die aktuelle Punktausgabe 10.2 im Mai 2026. Für Privatpersonen ist RHEL kostenlos nutzbar: Das Developer-Abo deckt bis zu 16 Systeme ab, kostet nichts und ist dieselbe Software wie im Rechenzentrum.',
-      en: 'RHEL is the distribution databases, SAP, Autodesk and certification programmes are tested against — ten years of maintenance per major version, a fixed roadmap and a vendor who stands behind it. Version 10 arrived in May 2025, the current 10.2 point release in May 2026. Private individuals can use RHEL free of charge: the Developer subscription covers up to 16 systems, costs nothing and is the same software as in the data centre.',
+      de: 'RHEL ist die Distribution, gegen die Datenbanken, SAP, Autodesk und Zertifizierungsprogramme getestet werden – zehn Jahre Pflege je Hauptversion, ein fester Fahrplan und ein Hersteller, der dafür haftet. Version 10 erschien im Mai 2025, die aktuelle Punktausgabe 10.3 am 11. November 2026. Für Privatpersonen ist RHEL kostenlos nutzbar: Das Developer-Abo deckt bis zu 16 Systeme ab, kostet nichts und ist dieselbe Software wie im Rechenzentrum.',
+      en: 'RHEL is the distribution databases, SAP, Autodesk and certification programmes are tested against — ten years of maintenance per major version, a fixed roadmap and a vendor who stands behind it. Version 10 arrived in May 2025, the current 10.3 point release on 11 November 2026. Private individuals can use RHEL free of charge: the Developer subscription covers up to 16 systems, costs nothing and is the same software as in the data centre.',
     },
     website: 'https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux',
     downloadUrl: 'https://developers.redhat.com/products/rhel/download',
@@ -31,8 +31,8 @@ export const moreDesktop: Distro[] = [
     originCountry: 'US',
     firstRelease: 2000,
     governance: 'company',
-    currentVersion: '10.2',
-    currentVersionDate: '2026-05',
+    currentVersion: '10.3',
+    currentVersionDate: '2026-11-11',
     supportUntil: {
       de: 'Voller Support bis Mai 2030, Wartung bis Mai 2035. RHEL 9 läuft bis Mai 2032, RHEL 8 bis Mai 2029.',
       en: 'Full support until May 2030, maintenance until May 2035. RHEL 9 runs to May 2032, RHEL 8 to May 2029.',
@@ -154,6 +154,7 @@ export const moreDesktop: Distro[] = [
     sources: [
       { label: 'Red Hat Enterprise Linux Life Cycle', url: 'https://access.redhat.com/support/policy/updates/errata' },
       { label: 'RHEL Release Dates', url: 'https://access.redhat.com/articles/red-hat-enterprise-linux-release-dates' },
+      { label: 'Red Hat Enterprise Linux 10.3 and 9.9 (press release)', url: 'https://www.redhat.com/en/about/press-releases/red-hat-strengthens-hybrid-cloud-foundations-against-ai-driven-threats-latest-versions-red-hat-enterprise-linux' },
     ],
   },
 
@@ -167,8 +168,8 @@ export const moreDesktop: Distro[] = [
       en: 'Looks like an old Windows and runs on anything that still boots.',
     },
     description: {
-      de: 'Q4OS setzt auf Debian und bietet als Besonderheit den Trinity-Desktop an – eine gepflegte Fortführung von KDE 3, wie es um 2008 aussah. Das ist kein Nostalgieprojekt: Trinity braucht so wenig Speicher, dass Q4OS auf Rechnern läuft, die andere Distributionen längst aufgeben, und die Bedienung ist genau die, die Menschen von Windows XP und 7 kennen. Wer moderner mag, wählt bei der Installation stattdessen Plasma. Ein eigenes Werkzeug macht die Oberfläche auf Wunsch täuschend windowsähnlich.',
-      en: 'Q4OS builds on Debian and offers the Trinity desktop as its distinguishing feature — a maintained continuation of KDE 3 as it looked around 2008. This is not a nostalgia project: Trinity needs so little memory that Q4OS runs on machines other distributions gave up on long ago, and the interface is exactly what people know from Windows XP and 7. Anyone preferring something more modern picks Plasma during installation instead. A dedicated tool can make the desktop convincingly Windows-like.',
+      de: 'Q4OS setzt auf Debian und bietet als Besonderheit den Trinity-Desktop an – eine gepflegte Fortführung von KDE 3, wie es um 2008 aussah. Das ist kein Nostalgieprojekt: Trinity braucht so wenig Speicher, dass Q4OS auf Rechnern läuft, die andere Distributionen längst aufgeben, und die Bedienung ist genau die, die Menschen von Windows XP und 7 kennen. Wer moderner mag, wählt stattdessen die Plasma-Ausgabe, die seit 6.10 ganz ohne Trinity-Pakete auskommt. Ein eigenes Werkzeug macht die Oberfläche auf Wunsch täuschend windowsähnlich. Die aktuelle Punktausgabe 6.10 vom Oktober 2026 baut auf Debian 13.7 auf.',
+      en: 'Q4OS builds on Debian and offers the Trinity desktop as its distinguishing feature — a maintained continuation of KDE 3 as it looked around 2008. This is not a nostalgia project: Trinity needs so little memory that Q4OS runs on machines other distributions gave up on long ago, and the interface is exactly what people know from Windows XP and 7. Anyone preferring something more modern picks the Plasma edition instead, which has shipped without any Trinity packages since 6.10. A dedicated tool can make the desktop convincingly Windows-like. The current 6.10 point release from October 2026 is based on Debian 13.7.',
     },
     website: 'https://q4os.org',
     downloadUrl: 'https://q4os.org/downloads1.html',
@@ -178,8 +179,8 @@ export const moreDesktop: Distro[] = [
     originCountry: 'CZ',
     firstRelease: 2014,
     governance: 'community',
-    currentVersion: '6.1',
-    currentVersionDate: '2025-09',
+    currentVersion: '6.10',
+    currentVersionDate: '2026-10-08',
     supportUntil: {
       de: 'Folgt der zugrunde liegenden Debian-Version – mehrere Jahre je Ausgabe.',
       en: 'Follows the underlying Debian release — several years per edition.',
@@ -295,6 +296,7 @@ export const moreDesktop: Distro[] = [
     checkedAt: CHECKED,
     sources: [
       { label: 'Q4OS Downloads', url: 'https://q4os.org/downloads1.html' },
+      { label: 'Q4OS news', url: 'https://q4os.org/blog.html' },
       { label: 'Wikipedia: Q4OS', url: 'https://en.wikipedia.org/wiki/Q4OS' },
     ],
   },
@@ -400,22 +402,24 @@ export const moreDesktop: Distro[] = [
       de: [
         'Wer ein fertig eingerichtetes System erwartet',
         'Aktuelle Software – die Basis ist mehrere Jahre alt',
+        'Neuinstallationen, die länger als bis April 2027 halten sollen',
         'Wer bei Problemen schnell Hilfe braucht',
       ],
       en: [
         'Anyone expecting a ready-configured system',
         'Current software — the base is several years old',
+        'New installations meant to last beyond April 2027',
         'Anyone needing quick help when things go wrong',
       ],
     },
     warnings: {
       de: [
-        'Version 7.0.0 stammt vom August 2023 und beruht auf Ubuntu 22.04. Die Basis ist damit die älteste in dieser Übersicht, und im April 2027 endet ihre Pflege.',
+        'Version 7.0.0 stammt vom August 2023 und beruht auf Ubuntu 22.04. Die Basis ist damit die älteste in dieser Übersicht, und im April 2027 endet ihre Pflege. Version 8.0 ist seit 2025 angekündigt, aber noch nicht erschienen.',
         'Das Projekt hängt an sehr wenigen Personen; zwischen den Ausgaben liegen lange Pausen.',
         'Ab Werk ist fast nichts installiert – ein Office-Paket, ein Mailprogramm und Codecs musst du selbst nachrüsten.',
       ],
       en: [
-        'Version 7.0.0 dates from August 2023 and rests on Ubuntu 22.04. That is the oldest base in this overview, and its maintenance ends in April 2027.',
+        'Version 7.0.0 dates from August 2023 and rests on Ubuntu 22.04. That is the oldest base in this overview, and its maintenance ends in April 2027. Version 8.0 has been announced since 2025 but has not shipped yet.',
         'The project rests on very few people; long gaps separate the releases.',
         'Almost nothing is installed by default — an office suite, a mail client and codecs are all yours to add.',
       ],
@@ -449,8 +453,8 @@ export const moreDesktop: Distro[] = [
       en: 'Mint’s desktop on an original Ubuntu base.',
     },
     description: {
-      de: 'Ubuntu Cinnamon ist eine offizielle Ubuntu-Ausgabe mit dem Cinnamon-Desktop, den man sonst von Linux Mint kennt. Der Unterschied zu Mint liegt darunter: Hier bleibt der Ubuntu-Unterbau samt Snap unverändert, es kommt direkt von Canonical und folgt dem Ubuntu-Fahrplan. Version 26.04 LTS „Resolute Raccoon" erschien im April 2026 mit Cinnamon 6.4 und wird drei Jahre gepflegt.',
-      en: 'Ubuntu Cinnamon is an official Ubuntu flavour with the Cinnamon desktop otherwise known from Linux Mint. The difference from Mint lies underneath: the Ubuntu base including snap stays untouched, it comes straight from Canonical and follows the Ubuntu schedule. Version 26.04 LTS "Resolute Raccoon" arrived in April 2026 with Cinnamon 6.4 and is maintained for three years.',
+      de: 'Ubuntu Cinnamon ist eine offizielle Ubuntu-Ausgabe mit dem Cinnamon-Desktop, den man sonst von Linux Mint kennt. Der Unterschied zu Mint liegt darunter: Hier bleibt der Ubuntu-Unterbau samt Snap unverändert, es kommt direkt von Canonical und folgt dem Ubuntu-Fahrplan. Version 26.04 LTS „Resolute Raccoon" erschien im April 2026 mit Cinnamon 6.4.13 und wird drei Jahre gepflegt.',
+      en: 'Ubuntu Cinnamon is an official Ubuntu flavour with the Cinnamon desktop otherwise known from Linux Mint. The difference from Mint lies underneath: the Ubuntu base including snap stays untouched, it comes straight from Canonical and follows the Ubuntu schedule. Version 26.04 LTS "Resolute Raccoon" arrived in April 2026 with Cinnamon 6.4.13 and is maintained for three years.',
     },
     website: 'https://ubuntucinnamon.org',
     downloadUrl: 'https://ubuntucinnamon.org/download/',

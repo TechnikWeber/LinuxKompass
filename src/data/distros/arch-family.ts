@@ -1,6 +1,6 @@
 import type { Distro } from '../types';
 
-const CHECKED = '2026-09-03';
+const CHECKED = '2026-11-13';
 
 export const archFamily: Distro[] = [
   {
@@ -10,15 +10,15 @@ export const archFamily: Distro[] = [
     accent: '195 90% 45%',
     tagline: { de: 'Du baust dein System selbst – und verstehst danach, wie Linux funktioniert.', en: 'You build the system yourself — and understand Linux afterwards.' },
     description: {
-      de: 'Arch liefert kein fertiges System, sondern einen Baukasten und eine hervorragende Dokumentation. Alles ist rollend aktuell, es gibt keine Versionssprünge, und das ArchWiki ist die beste Linux-Dokumentation überhaupt – auch für Nutzer anderer Distributionen. Der Installer archinstall nimmt heute viel Handarbeit ab, ersetzt aber kein Verständnis.',
-      en: 'Arch does not ship a finished system but a construction kit and outstanding documentation. Everything is rolling and current, there are no version jumps, and the ArchWiki is the best Linux documentation there is — useful even on other distributions. The archinstall installer removes a lot of manual work today, but it does not replace understanding.',
+      de: 'Arch liefert kein fertiges System, sondern einen Baukasten und eine hervorragende Dokumentation. Alles ist rollend aktuell, es gibt keine Versionssprünge, und das ArchWiki ist die beste Linux-Dokumentation überhaupt – auch für Nutzer anderer Distributionen. Der Installer archinstall (seit Version 4.0 mit neuer Textoberfläche) nimmt heute viel Handarbeit ab, ersetzt aber kein Verständnis.',
+      en: 'Arch does not ship a finished system but a construction kit and outstanding documentation. Everything is rolling and current, there are no version jumps, and the ArchWiki is the best Linux documentation there is — useful even on other distributions. The archinstall installer (with a new text interface since version 4.0) removes a lot of manual work today, but it does not replace understanding.',
     },
     website: 'https://archlinux.org',
     downloadUrl: 'https://archlinux.org/download/',
     docsUrl: 'https://wiki.archlinux.org',
     germanResourceUrl: 'https://wiki.archlinux.de',
     basedOn: null, family: 'arch', originCountry: 'CA', firstRelease: 2002, governance: 'community',
-    currentVersion: 'rollend (ISO 2026.09)', currentVersionDate: '2026-09-01',
+    currentVersion: 'rollend (ISO 2026.11)', currentVersionDate: '2026-11-01',
     supportUntil: { de: 'Kein Ende – regelmäßig aktualisieren genügt.', en: 'No end date — updating regularly is enough.' },
     releaseModel: 'rolling',
     releaseCadence: { de: 'Fortlaufend; die Installations-ISO wird monatlich neu gebaut.', en: 'Continuous; the install ISO is rebuilt monthly.' },
@@ -41,12 +41,13 @@ export const archFamily: Distro[] = [
     highlights: { de: ['Das ArchWiki – auch für Nutzer anderer Distributionen unverzichtbar', 'AUR: praktisch jede existierende Linux-Software ist verfügbar', 'Keine Versionssprünge, keine Neuinstallation nach Jahren', 'Nur das installiert, was man wirklich braucht'], en: ['The ArchWiki — indispensable even if you run something else', 'AUR: practically every piece of Linux software exists there', 'No version jumps, no reinstall after years', 'Only what you actually need gets installed'] },
     bestFor: { de: ['Wer Linux wirklich verstehen will', 'Fensterverwalter wie Hyprland oder Sway', 'Gaming mit neuester Mesa und Kernel', 'Menschen, die Zeit und Neugier mitbringen'], en: ['Anyone who genuinely wants to understand Linux', 'Window managers like Hyprland or Sway', 'Gaming with the newest Mesa and kernel', 'People with time and curiosity'] },
     notFor: { de: ['Rechner, die ohne Aufmerksamkeit laufen sollen', 'Einsteiger', 'Firmenarbeitsplätze mit Supportanspruch', 'Menschen, die keine Update-Hinweise lesen wollen'], en: ['Machines expected to run unattended', 'Beginners', 'Corporate workstations with support requirements', 'People who will not read update announcements'] },
-    warnings: { de: ['Updates können manuelle Eingriffe erfordern – die Ankündigungen auf archlinux.org sind Pflichtlektüre.', 'Ein System, das monatelang nicht aktualisiert wurde, lässt sich nur mit Aufwand wieder einfangen.', 'Ohne Sicherungen oder Btrfs-Schnappschüsse ist ein misslungenes Update unangenehm.'], en: ['Updates can require manual intervention — the announcements on archlinux.org are required reading.', 'A system left unupdated for months is painful to catch up.', 'Without backups or Btrfs snapshots a failed update is unpleasant.'] },
+    warnings: { de: ['Updates können manuelle Eingriffe erfordern – die Ankündigungen auf archlinux.org sind Pflichtlektüre.', 'Ein System, das monatelang nicht aktualisiert wurde, lässt sich nur mit Aufwand wieder einfangen.', 'Ohne Sicherungen oder Btrfs-Schnappschüsse ist ein misslungenes Update unangenehm.', 'Die NVIDIA-Pakete setzen seit Treiber 590 auf die offenen Module; GTX-900- und GTX-10-Karten brauchen das Paket nvidia-580xx aus dem AUR.'], en: ['Updates can require manual intervention — the announcements on archlinux.org are required reading.', 'A system left unupdated for months is painful to catch up.', 'Without backups or Btrfs snapshots a failed update is unpleasant.', 'Since driver 590 the NVIDIA packages use the open modules; GTX 900 and GTX 10 cards need the nvidia-580xx package from the AUR.'] },
     firstSteps: { de: ['archinstall nutzen, aber die Installationsanleitung trotzdem lesen', 'Btrfs mit Snapper oder Timeshift einrichten', 'Vor jedem Update kurz die Arch-News prüfen'], en: ['Use archinstall, but read the installation guide anyway', 'Set up Btrfs with Snapper or Timeshift', 'Skim the Arch news before each update'] },
     checkedAt: CHECKED,
     sources: [
       { label: 'Arch Linux', url: 'https://archlinux.org/' },
       { label: 'ArchWiki installation guide', url: 'https://wiki.archlinux.org/title/Installation_guide' },
+      { label: 'NVIDIA 590 drops Pascal support (Arch news)', url: 'https://archlinux.org/news/nvidia-590-driver-drops-pascal-support-main-packages-switch-to-open-kernel-modules/' },
     ],
   },
 
@@ -63,18 +64,20 @@ export const archFamily: Distro[] = [
     website: 'https://endeavouros.com',
     downloadUrl: 'https://endeavouros.com/download/',
     basedOn: 'arch', family: 'arch', originCountry: 'international', firstRelease: 2019, governance: 'community',
-    currentVersion: 'ISO „Titan"', currentVersionDate: '2026-06',
+    currentVersion: 'ISO „Titan Nova"', currentVersionDate: '2026-08-28',
     supportUntil: { de: 'Kein Ende – rollend.', en: 'No end date — rolling.' },
     releaseModel: 'rolling',
     releaseCadence: { de: 'Fortlaufend; neue ISOs mehrmals im Jahr.', en: 'Continuous; new ISOs a few times a year.' },
     init: 'systemd', libc: 'glibc', packageManager: 'pacman', packageFormat: 'pkg.tar.zst',
     flatpakReady: true, snapReady: false, appimageFriendly: true, aur: true,
     extraRepos: { de: ['AUR', 'multilib', 'kleines EndeavourOS-Repository mit Werkzeugen', 'Flathub'], en: ['AUR', 'multilib', 'a small EndeavourOS repository with tools', 'Flathub'] },
-    defaultDesktop: 'plasma', availableDesktops: ['plasma', 'gnome', 'xfce', 'cinnamon', 'mate', 'budgie', 'lxqt', 'i3', 'sway', 'hyprland'],
+    // Budgie ist mit „Titan Nova" vorübergehend aus dem Installer verschwunden.
+    defaultDesktop: 'plasma', availableDesktops: ['plasma', 'gnome', 'xfce', 'cinnamon', 'mate', 'lxqt', 'i3', 'sway', 'hyprland'],
     installer: 'graphical-guided', installDifficulty: 4,
     minRamGb: 4, recommendedRamGb: 8, minStorageGb: 20,
     architectures: ['x86_64'], supports32Bit: false, runsOnRaspberryPi: false,
-    secureBoot: 'none', nvidia: 'installer-option', codecsOutOfBox: true,
+    // Der Installer bietet nur noch nvidia-open (ab GTX 16xx); ältere Karten brauchen das AUR.
+    secureBoot: 'none', nvidia: 'installer-option', nvidiaLegacy: 'repo-manual', codecsOutOfBox: true,
     fullDiskEncryptionInInstaller: true, snapshotRollback: false, atomic: false,
     waylandDefault: true, x11SessionAvailable: true,
     maintenanceLoad: 'high',
@@ -83,13 +86,16 @@ export const archFamily: Distro[] = [
     audiences: ['power-user', 'developer', 'tinkerer', 'gamer', 'intermediate'],
     tags: ['arch', 'rolling', 'aur', 'installer', 'nah-am-original'],
     ratings: { beginnerFriendly: 5, stability: 7, freshness: 10, customizability: 10, lightweight: 8, gaming: 9, hardwareSupport: 9, communitySize: 7, germanSupport: 6, documentation: 7, enterpriseReady: 3, privacy: 8, softwareAvailability: 10, upgradeSmoothness: 7, creativeWork: 8, upstreamPurity: 9 },
-    highlights: { de: ['Praktisch reines Arch, aber in 20 Minuten installiert', 'Über zehn Desktop-Umgebungen im Installer wählbar', 'Freundliches Forum mit schneller Hilfe', 'NVIDIA-Treiber im Installer ankreuzbar'], en: ['Practically pure Arch, but installed in 20 minutes', 'More than ten desktops selectable in the installer', 'A friendly forum with fast help', 'NVIDIA drivers selectable during install'] },
+    highlights: { de: ['Praktisch reines Arch, aber in 20 Minuten installiert', 'Rund zehn Desktops und Fenstermanager im Installer wählbar', 'Freundliches Forum mit schneller Hilfe', 'NVIDIA-Treiber für GTX 16xx und neuer im Installer ankreuzbar'], en: ['Practically pure Arch, but installed in 20 minutes', 'Around ten desktops and window managers selectable in the installer', 'A friendly forum with fast help', 'NVIDIA drivers for GTX 16xx and newer selectable during install'] },
     bestFor: { de: ['Wer Arch will, ohne einen Nachmittag zu investieren', 'Zweitrechner zum Lernen', 'Gaming auf aktueller AMD-Hardware'], en: ['Anyone who wants Arch without spending an afternoon', 'A second machine for learning', 'Gaming on current AMD hardware'] },
     notFor: { de: ['Rechner ohne regelmäßige Pflege', 'Einsteiger ohne Terminalbereitschaft', 'Secure Boot ohne Nacharbeit'], en: ['Machines without regular maintenance', 'Beginners unwilling to use a terminal', 'Secure Boot without extra work'] },
-    warnings: { de: ['Es bleibt Arch: Updates wollen begleitet werden, und das Terminal ist Teil des Alltags.', 'Secure Boot muss abgeschaltet oder aufwendig selbst eingerichtet werden.'], en: ['It remains Arch: updates want supervision and the terminal is part of daily life.', 'Secure Boot has to be disabled or set up manually with effort.'] },
+    warnings: { de: ['Es bleibt Arch: Updates wollen begleitet werden, und das Terminal ist Teil des Alltags.', 'Secure Boot muss abgeschaltet oder aufwendig selbst eingerichtet werden.', 'Für GTX-900- und GTX-10-Karten bietet der Installer keinen proprietären Treiber mehr; der Legacy-Treiber 580 kommt aus dem AUR.'], en: ['It remains Arch: updates want supervision and the terminal is part of daily life.', 'Secure Boot has to be disabled or set up manually with effort.', 'For GTX 900 and GTX 10 cards the installer no longer offers a proprietary driver; the legacy 580 driver comes from the AUR.'] },
     firstSteps: { de: ['Btrfs mit Snapshots wählen, falls angeboten', 'Welcome-App durchgehen und Spiegelserver aktualisieren', 'Arch-News abonnieren'], en: ['Choose Btrfs with snapshots if offered', 'Walk through the Welcome app and refresh mirrors', 'Subscribe to the Arch news'] },
     checkedAt: CHECKED,
-    sources: [{ label: 'EndeavourOS', url: 'https://endeavouros.com/' }],
+    sources: [
+      { label: 'EndeavourOS news', url: 'https://endeavouros.com/news/' },
+      { label: 'EndeavourOS Ganymede Neo switches to nvidia-open (Linuxiac)', url: 'https://linuxiac.com/endeavouros-releases-ganymede-neo-with-nvidia-driver-changes/' },
+    ],
   },
 
   {
@@ -99,14 +105,14 @@ export const archFamily: Distro[] = [
     accent: '155 60% 40%',
     tagline: { de: 'Arch mit Sicherheitsnetz – und einer eigenen Meinung dazu, wann Updates kommen.', en: 'Arch with a safety net — and its own opinions about update timing.' },
     description: {
-      de: 'Manjaro hält Arch-Pakete etwa zwei Wochen zurück, testet sie und liefert sie dann gebündelt aus. Dazu kommen ein grafischer Installer, eine Kernel- und eine Treiberverwaltung. Version 26.0 „Anh-Linh" bringt Plasma 6.5 und GNOME 49. Der Ansatz macht das System zugänglicher, erzeugt aber eigene Fallstricke.',
-      en: 'Manjaro holds Arch packages back for about two weeks, tests them and then ships them in batches. It adds a graphical installer plus kernel and driver managers. Version 26.0 "Anh-Linh" brings Plasma 6.5 and GNOME 49. The approach makes the system more approachable but creates pitfalls of its own.',
+      de: 'Manjaro hält Arch-Pakete etwa zwei Wochen zurück, testet sie und liefert sie dann gebündelt aus. Dazu kommen ein grafischer Installer, eine Kernel- und eine Treiberverwaltung. Version 26.1 „Bian-May" brachte im Sommer 2026 Plasma 6.7, GNOME 50 und Kernel 7.1. Der Ansatz macht das System zugänglicher, erzeugt aber eigene Fallstricke.',
+      en: 'Manjaro holds Arch packages back for about two weeks, tests them and then ships them in batches. It adds a graphical installer plus kernel and driver managers. Version 26.1 "Bian-May" brought Plasma 6.7, GNOME 50 and kernel 7.1 in summer 2026. The approach makes the system more approachable but creates pitfalls of its own.',
     },
     website: 'https://manjaro.org',
     downloadUrl: 'https://manjaro.org/products/download/x86',
     germanResourceUrl: 'https://forum.manjaro.org/c/deutsch/',
     basedOn: 'arch', family: 'arch', originCountry: 'DE / AT / FR', firstRelease: 2011, governance: 'company-community',
-    currentVersion: '26.0 „Anh-Linh"', currentVersionDate: '2026-06',
+    currentVersion: '26.1.2 „Bian-May"', currentVersionDate: '2026-09-10',
     supportUntil: { de: 'Kein Ende – rollend.', en: 'No end date — rolling.' },
     releaseModel: 'semi-rolling',
     releaseCadence: { de: 'Gebündelte Update-Wellen etwa alle 2–4 Wochen.', en: 'Batched update waves roughly every 2–4 weeks.' },
@@ -117,7 +123,8 @@ export const archFamily: Distro[] = [
     installer: 'graphical-guided', installDifficulty: 2,
     minRamGb: 4, recommendedRamGb: 8, minStorageGb: 30,
     architectures: ['x86_64', 'aarch64'], supports32Bit: false, runsOnRaspberryPi: true,
-    secureBoot: 'none', nvidia: 'installer-option', codecsOutOfBox: true,
+    // 26.1 hat Pascal aus dem Standardweg genommen; ob mhwd den 580er-Zweig anbietet, ist nicht verlässlich.
+    secureBoot: 'none', nvidia: 'installer-option', nvidiaLegacy: 'repo-manual', codecsOutOfBox: true,
     fullDiskEncryptionInInstaller: true, snapshotRollback: false, atomic: false,
     waylandDefault: true, x11SessionAvailable: true,
     maintenanceLoad: 'medium',
@@ -129,10 +136,13 @@ export const archFamily: Distro[] = [
     highlights: { de: ['Grafische Kernelverwaltung: mehrere Kernel parallel installierbar', 'Treiberverwaltung erkennt NVIDIA und Hybridgrafik zuverlässig', 'Deutschsprachiges Forum mit aktiver Community', 'Aktuelle Pakete ohne die volle Arch-Handarbeit'], en: ['A graphical kernel manager: several kernels installable side by side', 'A driver manager that reliably detects NVIDIA and hybrid graphics', 'An active German-language forum', 'Current packages without the full Arch legwork'] },
     bestFor: { de: ['Wer aktuelle Software mit etwas Puffer möchte', 'Notebooks mit Hybridgrafik', 'Deutschsprachige Nutzer, die eine Arch-nahe Distribution suchen'], en: ['Anyone wanting current software with a little buffer', 'Laptops with hybrid graphics', 'German speakers looking for an Arch-like distribution'] },
     notFor: { de: ['Wer viel aus dem AUR installiert', 'Produktionssysteme', 'Einsteiger, die nie ins Terminal wollen'], en: ['Anyone installing a lot from the AUR', 'Production systems', 'Beginners who never want to touch a terminal'] },
-    warnings: { de: ['AUR-Pakete werden gegen aktuelle Arch-Bibliotheken gebaut – auf Manjaros zurückgehaltener Basis führt das regelmäßig zu Problemen.', 'Das Projekt hatte in der Vergangenheit mehrfach abgelaufene TLS-Zertifikate und organisatorische Turbulenzen.', 'Kein Secure Boot.'], en: ['AUR packages are built against current Arch libraries — on Manjaro’s held-back base that regularly causes trouble.', 'The project has repeatedly had expired TLS certificates and organisational turbulence in the past.', 'No Secure Boot.'] },
+    warnings: { de: ['AUR-Pakete werden gegen aktuelle Arch-Bibliotheken gebaut – auf Manjaros zurückgehaltener Basis führt das regelmäßig zu Problemen.', 'Das Projekt hatte in der Vergangenheit mehrfach abgelaufene TLS-Zertifikate und organisatorische Turbulenzen.', 'Kein Secure Boot.', 'Seit 26.1 deckt der Standard-NVIDIA-Treiber GTX-900- und GTX-10-Karten nicht mehr ab – vorher im Live-System prüfen, ob die Treiberverwaltung den Legacy-Zweig 580 anbietet.'], en: ['AUR packages are built against current Arch libraries — on Manjaro’s held-back base that regularly causes trouble.', 'The project has repeatedly had expired TLS certificates and organisational turbulence in the past.', 'No Secure Boot.', 'Since 26.1 the default NVIDIA driver no longer covers GTX 900 and GTX 10 cards — check in the live session whether the driver manager offers the legacy 580 branch.'] },
     firstSteps: { de: ['Nur Updates in vollen Wellen einspielen, nie teilweise', 'AUR sparsam nutzen; Flatpak bevorzugen', 'Treiber- und Kernelverwaltung einmal öffnen'], en: ['Only apply updates as full waves, never partially', 'Use the AUR sparingly; prefer Flatpak', 'Open the driver and kernel managers once'] },
     checkedAt: CHECKED,
-    sources: [{ label: 'Manjaro', url: 'https://manjaro.org/' }],
+    sources: [
+      { label: 'Manjaro', url: 'https://manjaro.org/' },
+      { label: 'Manjaro 26.1 Bian-May released', url: 'https://forum.manjaro.org/t/manjaro-26-1-bian-may-released/189526' },
+    ],
   },
 
   {
@@ -142,13 +152,13 @@ export const archFamily: Distro[] = [
     accent: '160 70% 40%',
     tagline: { de: 'Arch, für moderne Prozessoren neu übersetzt.', en: 'Arch, recompiled for modern CPUs.' },
     description: {
-      de: 'CachyOS baut die Arch-Pakete mit Optimierungen für neuere Prozessorbefehlssätze (x86-64-v3 und v4) neu und liefert einen eigenen Kernel mit alternativen Schedulern. In Spiele-Vergleichstests liegt es regelmäßig vorn – auch wenn der Abstand bei modernen Systemen meist klein ist.',
-      en: 'CachyOS rebuilds Arch packages with optimisations for newer CPU instruction sets (x86-64-v3 and v4) and ships its own kernel with alternative schedulers. It regularly leads gaming benchmarks — even though on modern systems the margin is usually small.',
+      de: 'CachyOS baut die Arch-Pakete mit Optimierungen für neuere Prozessorbefehlssätze (x86-64-v3 und v4) neu und liefert einen eigenen Kernel mit alternativen Schedulern. In Spiele-Vergleichstests liegt es regelmäßig vorn – auch wenn der Abstand bei modernen Systemen meist klein ist. Seit August 2026 bietet der Installer zusätzlich Server-Profile; an einem eigenen Kernel für Epics neues Easy Anti-Cheat wird gearbeitet.',
+      en: 'CachyOS rebuilds Arch packages with optimisations for newer CPU instruction sets (x86-64-v3 and v4) and ships its own kernel with alternative schedulers. It regularly leads gaming benchmarks — even though on modern systems the margin is usually small. Since August 2026 the installer also offers server profiles, and a dedicated kernel for Epic’s new Easy Anti-Cheat is in the works.',
     },
     website: 'https://cachyos.org',
     downloadUrl: 'https://cachyos.org/download/',
     basedOn: 'arch', family: 'arch', originCountry: 'DE', firstRelease: 2021, governance: 'community',
-    currentVersion: 'rollend', currentVersionDate: '2026-08',
+    currentVersion: 'rollend (ISO 2026.08)', currentVersionDate: '2026-08-09',
     supportUntil: { de: 'Kein Ende – rollend.', en: 'No end date — rolling.' },
     releaseModel: 'rolling',
     releaseCadence: { de: 'Fortlaufend, ISO-Auffrischungen mehrmals im Jahr.', en: 'Continuous, with ISO refreshes several times a year.' },
@@ -174,7 +184,11 @@ export const archFamily: Distro[] = [
     warnings: { de: ['Die Leistungsvorteile sind messbar, im Alltag aber meist klein – Erwartungen entsprechend setzen.', 'Rollende Basis mit zusätzlichen eigenen Paketen: Fehler können aus zwei Richtungen kommen.', 'Kein Secure Boot ohne Handarbeit.'], en: ['The performance gains are measurable but usually small in daily use — set expectations accordingly.', 'A rolling base plus its own packages: problems can come from two directions.', 'No Secure Boot without manual work.'] },
     firstSteps: { de: ['Im Installer Btrfs mit Snapshots wählen', 'CachyOS Hello für Kernel- und Treiberoptionen öffnen'], en: ['Choose Btrfs with snapshots in the installer', 'Open CachyOS Hello for kernel and driver options'] },
     checkedAt: CHECKED,
-    sources: [{ label: 'CachyOS', url: 'https://cachyos.org/' }],
+    sources: [
+      { label: 'CachyOS', url: 'https://cachyos.org/' },
+      { label: 'CachyOS August 2026 release', url: 'https://cachyos.org/blog/2608-august-release' },
+      { label: 'CachyOS kernel for Easy Anti-Cheat v2 (GamingOnLinux)', url: 'https://www.gamingonlinux.com/2026/10/cachyos-linux-working-on-a-dedicated-kernel-for-supporting-easy-anti-cheat-v2/' },
+    ],
   },
 
   {
@@ -184,13 +198,13 @@ export const archFamily: Distro[] = [
     accent: '345 75% 50%',
     tagline: { de: 'Arch fürs Gaming, mit auffälliger Optik und automatischen Schnappschüssen.', en: 'Arch for gaming, with bold looks and automatic snapshots.' },
     description: {
-      de: 'Garuda liefert Steam, Lutris, Proton und Leistungswerkzeuge vorinstalliert, dazu Btrfs mit Snapper: Vor jedem Update entsteht ein Schnappschuss, den man beim Start auswählen kann. Die Standardoptik ist sehr auffällig, lässt sich aber ändern. Es gibt auch schlichte Ausgaben.',
-      en: 'Garuda ships Steam, Lutris, Proton and performance tools preinstalled, plus Btrfs with Snapper: every update creates a snapshot you can pick at boot. The default look is very loud but can be changed, and plainer editions exist.',
+      de: 'Garuda liefert Steam, Lutris, Proton und Leistungswerkzeuge vorinstalliert, dazu Btrfs mit Snapper: Vor jedem Update entsteht ein Schnappschuss, den man beim Start auswählen kann. Die Standardoptik ist sehr auffällig, lässt sich aber ändern. Es gibt auch schlichte Ausgaben. Mit „Temeraire" (August 2026) kam ein eigener Kernel auf CachyOS-Basis.',
+      en: 'Garuda ships Steam, Lutris, Proton and performance tools preinstalled, plus Btrfs with Snapper: every update creates a snapshot you can pick at boot. The default look is very loud but can be changed, and plainer editions exist. "Temeraire" (August 2026) brought a kernel of its own based on CachyOS.',
     },
     website: 'https://garudalinux.org',
     downloadUrl: 'https://garudalinux.org/downloads',
     basedOn: 'arch', family: 'arch', originCountry: 'international', firstRelease: 2020, governance: 'community',
-    currentVersion: 'rollend', currentVersionDate: '2026-08',
+    currentVersion: '„Temeraire" (ISO 260819)', currentVersionDate: '2026-08-19',
     supportUntil: { de: 'Kein Ende – rollend.', en: 'No end date — rolling.' },
     releaseModel: 'rolling',
     releaseCadence: { de: 'Fortlaufend.', en: 'Continuous.' },
@@ -201,7 +215,8 @@ export const archFamily: Distro[] = [
     installer: 'graphical-guided', installDifficulty: 3,
     minRamGb: 8, recommendedRamGb: 16, minStorageGb: 40,
     architectures: ['x86_64'], supports32Bit: false, runsOnRaspberryPi: false,
-    secureBoot: 'none', nvidia: 'installer-option', codecsOutOfBox: true,
+    // Seit dem Treiber 590 ab Werk keine Unterstützung für GTX-10-Karten.
+    secureBoot: 'none', nvidia: 'installer-option', nvidiaLegacy: 'repo-manual', codecsOutOfBox: true,
     fullDiskEncryptionInInstaller: true, snapshotRollback: true, atomic: false,
     waylandDefault: true, x11SessionAvailable: true,
     maintenanceLoad: 'high',
@@ -216,7 +231,10 @@ export const archFamily: Distro[] = [
     warnings: { de: ['Der Grundverbrauch ist hoch – unter 8 GB RAM wird es eng.', 'Viele Voreinstellungen und Eigenbauten: Fehlersuche ist schwerer als bei reinem Arch.', 'Chaotic-AUR ist eine Fremdquelle mit eigenem Vertrauensmodell.'], en: ['Baseline resource use is high — below 8 GB of RAM it gets tight.', 'Lots of defaults and custom pieces: troubleshooting is harder than on plain Arch.', 'Chaotic-AUR is a third-party source with its own trust model.'] },
     firstSteps: { de: ['Garuda Assistant öffnen und Spiegelserver aktualisieren', 'Schnappschuss-Aufbewahrung an den Plattenplatz anpassen'], en: ['Open the Garuda Assistant and refresh mirrors', 'Adjust snapshot retention to your disk space'] },
     checkedAt: CHECKED,
-    sources: [{ label: 'Garuda Linux', url: 'https://garudalinux.org/' }],
+    sources: [
+      { label: 'Garuda Linux', url: 'https://garudalinux.org/' },
+      { label: 'Garuda Linux Temeraire released (Linuxiac)', url: 'https://linuxiac.com/garuda-linux-temeraire-released-with-new-cachyos-based-kernel/' },
+    ],
   },
 
   {
