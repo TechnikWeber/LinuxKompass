@@ -101,19 +101,21 @@ export const flags: Flag[] = [
     severity: 'critical',
     title: { de: 'Spiele mit Kernel-Anti-Cheat laufen nicht', en: 'Games with kernel-level anti-cheat do not run' },
     message: {
-      de: 'Valorant und League of Legends nutzen Riot Vanguard, das im Windows-Kernel arbeitet und für das es keinen Linux-Weg gibt – Riot hat das ausdrücklich als Entscheidung bezeichnet, nicht als Fehler. Fortnite läuft ebenfalls nicht, obwohl Easy Anti-Cheat technisch Linux unterstützt: Epic hat den Schalter nicht umgelegt. Easy Anti-Cheat und BattlEye funktionieren nur, wenn die Spieleentwickler die Linux-Unterstützung aktiv einschalten.',
-      en: 'Valorant and League of Legends use Riot Vanguard, which operates in the Windows kernel and has no Linux path — Riot has explicitly called this a decision, not a bug. Fortnite does not run either, even though Easy Anti-Cheat technically supports Linux: Epic has not flipped the switch. Easy Anti-Cheat and BattlEye only work when game developers actively enable Linux support.',
+      de: 'Valorant und League of Legends nutzen Riot Vanguard, das im Windows-Kernel arbeitet und für das es keinen Linux-Weg gibt – Riot hat das ausdrücklich als Entscheidung bezeichnet, nicht als Fehler. Fortnite läuft ebenfalls noch nicht: Epic hat im Oktober 2026 eine neue Linux-Fassung von Easy Anti-Cheat angekündigt, mit der Fortnite als erstes Spiel kommen soll, aber ohne Termin. Sie setzt nach bisherigem Stand Secure Boot, TPM und einen signierten Kernel voraus; das Steam Deck erfüllt das derzeit nicht. Easy Anti-Cheat und BattlEye funktionieren ansonsten nur, wenn die Spieleentwickler die Linux-Unterstützung aktiv einschalten.',
+      en: 'Valorant and League of Legends use Riot Vanguard, which operates in the Windows kernel and has no Linux path — Riot has explicitly called this a decision, not a bug. Fortnite does not run yet either: in October 2026 Epic announced a new Linux version of Easy Anti-Cheat that Fortnite is meant to arrive with first, but without a date. As things stand it requires Secure Boot, a TPM and a signed kernel; the Steam Deck does not meet that at the moment. Otherwise, Easy Anti-Cheat and BattlEye only work when game developers actively enable Linux support.',
     },
     advice: {
       de: [
         'Vor der Entscheidung jedes einzelne Spiel auf ProtonDB und „Are We Anti-Cheat Yet?" nachschlagen – die Lage ändert sich pro Titel, nicht pro Distribution.',
         'Keine Distribution kann das lösen. Bazzite, CachyOS oder Nobara helfen bei allen anderen Spielen, aber nicht hier.',
-        'Möglichkeiten: Dual-Boot mit Windows, ein zweiter Rechner, oder Cloud-Gaming (GeForce NOW, Xbox Cloud).',
+        'Wer auf Fortnite unter Linux hofft, sollte eine Distribution mit vollständiger Secure-Boot-Unterstützung wählen – das neue Easy Anti-Cheat wird sie voraussichtlich verlangen.',
+        'Möglichkeiten bis dahin: Dual-Boot mit Windows, ein zweiter Rechner, oder Cloud-Gaming (GeForce NOW, Xbox Cloud).',
       ],
       en: [
         'Before deciding, look up each individual game on ProtonDB and "Are We Anti-Cheat Yet?" — the situation varies per title, not per distribution.',
         'No distribution can solve this. Bazzite, CachyOS or Nobara help with every other game, but not this one.',
-        'Options: dual boot with Windows, a second machine, or cloud gaming (GeForce NOW, Xbox Cloud).',
+        'If you are hoping for Fortnite on Linux, pick a distribution with full Secure Boot support — the new Easy Anti-Cheat is expected to demand it.',
+        'Options until then: dual boot with Windows, a second machine, or cloud gaming (GeForce NOW, Xbox Cloud).',
       ],
     },
     links: [
@@ -305,15 +307,15 @@ export const flags: Flag[] = [
     },
     advice: {
       de: [
-        'Am bequemsten sind Distributionen mit vorbereitetem Treiber: Pop!_OS (eigene NVIDIA-ISO), Nobara, Bazzite, TUXEDO OS.',
+        'Am bequemsten sind Distributionen mit vorbereitetem Treiber: Pop!_OS (eigene NVIDIA-ISO), Nobara, Bazzite, TUXEDO OS – bei den letzten drei muss dafür allerdings Secure Boot aus.',
         'Bei Fedora kommt der Treiber aus RPM Fusion und muss bewusst eingerichtet werden.',
-        'Secure Boot und NVIDIA-Treiber vertragen sich nur, wenn die Distribution das Signieren übernimmt – sonst muss Secure Boot aus.',
+        'Secure Boot und NVIDIA-Treiber vertragen sich nur, wenn die Distribution das Signieren übernimmt – Ubuntu, Linux Mint und openSUSE tun das, viele kleinere Projekte nicht.',
         'Im Live-System vorher testen, ob Bildschirm, Auflösung und externer Monitor funktionieren.',
       ],
       en: [
-        'The most convenient are distributions with the driver prepared: Pop!_OS (dedicated NVIDIA ISO), Nobara, Bazzite, TUXEDO OS.',
+        'The most convenient are distributions with the driver prepared: Pop!_OS (dedicated NVIDIA ISO), Nobara, Bazzite, TUXEDO OS — though the last three need Secure Boot switched off.',
         'On Fedora the driver comes from RPM Fusion and must be set up deliberately.',
-        'Secure Boot and the NVIDIA driver only coexist if the distribution handles signing — otherwise Secure Boot must be off.',
+        'Secure Boot and the NVIDIA driver only coexist if the distribution handles signing — Ubuntu, Linux Mint and openSUSE do, many smaller projects do not.',
         'Test in a live session first whether the display, resolution and external monitor work.',
       ],
     },
@@ -321,22 +323,24 @@ export const flags: Flag[] = [
   {
     id: 'nvidia-legacy',
     severity: 'warning',
-    title: { de: 'Ältere NVIDIA-Karten und Wayland vertragen sich schlecht', en: 'Older NVIDIA cards and Wayland do not get along' },
+    title: { de: 'Ältere NVIDIA-Karten: nur noch ein Legacy-Treiber', en: 'Older NVIDIA cards: only a legacy driver left' },
     message: {
-      de: 'NVIDIAs quelloffene Kernelmodule setzen die Turing-Generation voraus, also etwa ab GTX 16xx und RTX 20xx. Ältere Karten laufen mit den bisherigen Treibern weiter, unter Wayland aber oft mit Flackern, schwarzen Fenstern oder Problemen beim Aufwachen aus dem Ruhezustand. GNOME 50 hat die X11-Sitzung entfernt, Plasma folgt mit Version 6.8 im Oktober 2026.',
-      en: 'NVIDIA’s open kernel modules require the Turing generation, roughly GTX 16xx and RTX 20xx onwards. Older cards keep working with the legacy drivers, but under Wayland often show flickering, black windows or resume problems. GNOME 50 removed the X11 session; Plasma follows with 6.8 in October 2026.',
+      de: 'Seit Treiber 590 unterstützt NVIDIA die GTX-900- und GTX-10-Karten nicht mehr. Für sie bleibt der Treiberzweig 580, der nur noch Sicherheitsupdates bis 2028 bekommt – und den manche Distributionen gar nicht mehr anbieten (Nobara, Bluefin, Aurora) oder nur auf Umwegen (Arch, EndeavourOS, Fedora). GTX 700 und ältere Karten laufen nur noch mit dem freien Treiber Nouveau. Unter Wayland funktionieren GTX-900- und GTX-10-Karten mit dem 580er-Treiber inzwischen ordentlich, eine X11-Sitzung als Ausweichweg schadet trotzdem nicht. GNOME 50 und Plasma 6.8 bieten keine mehr an.',
+      en: 'Since driver 590, NVIDIA no longer supports GTX 900 and GTX 10 cards. They are left with the 580 driver branch, which only receives security updates until 2028 — and which some distributions no longer offer at all (Nobara, Bluefin, Aurora) or only in a roundabout way (Arch, EndeavourOS, Fedora). GTX 700 and older cards only run on the free Nouveau driver. Under Wayland, GTX 900 and GTX 10 cards now work reasonably well with the 580 driver, but an X11 session as a fallback does no harm. GNOME 50 and Plasma 6.8 no longer offer one.',
     },
     advice: {
       de: [
-        'Wähle eine Distribution mit X11-Sitzung: Linux Mint, MX Linux, Xubuntu oder eine Xfce-Ausgabe.',
-        'Bei KDE Plasma bleibt X11 nur noch bis Version 6.8 verfügbar – das ist eine Übergangslösung, keine dauerhafte.',
-        'Auf lange Sicht ist ein Grafikkartenwechsel auf AMD die entspannteste Lösung.',
+        'Am einfachsten: Linux Mint, Ubuntu oder Kubuntu – deren Treiberverwaltung bietet den 580er-Treiber per Klick an.',
+        'Zum Spielen: Bazzite pflegt eigene Abbilder mit dem Langzeittreiber für GTX 900 und 10xx.',
+        'Wer eine X11-Sitzung als Rückfallebene will: Linux Mint mit Cinnamon, Xfce oder MATE, oder Kubuntu 26.04, das bei Plasma 6.6 bleibt.',
+        'Auf lange Sicht ist eine Karte von AMD oder eine NVIDIA ab GTX 16xx die entspanntere Lösung – spätestens 2028.',
         'Unbedingt vorher im Live-System testen.',
       ],
       en: [
-        'Choose a distribution with an X11 session: Linux Mint, MX Linux, Xubuntu or an Xfce edition.',
-        'On KDE Plasma, X11 is only available up to version 6.8 — that is a stopgap, not a permanent answer.',
-        'Long term, moving to an AMD card is the least stressful solution.',
+        'Easiest: Linux Mint, Ubuntu or Kubuntu — their driver tools offer the 580 driver with one click.',
+        'For gaming: Bazzite maintains dedicated images with the long-term driver for GTX 900 and 10xx.',
+        'If you want an X11 session as a fallback: Linux Mint with Cinnamon, Xfce or MATE, or Kubuntu 26.04, which stays on Plasma 6.6.',
+        'Long term, an AMD card or an NVIDIA card from the GTX 16xx onwards is the less stressful solution — by 2028 at the latest.',
         'Definitely test in a live session first.',
       ],
     },
@@ -344,24 +348,50 @@ export const flags: Flag[] = [
   {
     id: 'apple-silicon',
     severity: 'warning',
-    title: { de: 'Apple Silicon: Linux läuft, aber nicht vollständig', en: 'Apple Silicon: Linux runs, but not completely' },
+    title: { de: 'Apple Silicon: Linux läuft, aber nicht auf jedem Mac', en: 'Apple Silicon: Linux runs, but not on every Mac' },
     message: {
-      de: 'Auf Macs mit M-Prozessor bringt das Asahi-Linux-Projekt Linux zum Laufen. Je nach Modell und Generation fehlen aber noch Bausteine – bei neueren Chips mehr als bei M1 und M2. Für einen Alltagsrechner ist das nur mit Kompromissen geeignet.',
-      en: 'On Macs with M-series chips, the Asahi Linux project makes Linux run. Depending on model and generation, pieces are still missing — more on newer chips than on M1 and M2. As a daily driver this only works with compromises.',
+      de: 'Auf Macs mit M1 und M2 bringt das Asahi-Linux-Projekt Linux inzwischen ordentlich zum Laufen, seit Herbst 2026 auch auf M3 – dort aber vorerst ohne 3D-Grafikbeschleunigung. M4 und M5 werden nicht unterstützt, und eine Lösung ist nicht absehbar. Die einzige offiziell unterstützte Distribution dafür ist Fedora Asahi Remix; gewöhnliche ARM-Abbilder starten auf diesen Geräten nicht.',
+      en: 'On Macs with M1 and M2, the Asahi Linux project now makes Linux run well, and since autumn 2026 on M3 too — though for now without 3D graphics acceleration there. M4 and M5 are not supported, and no solution is in sight. The only officially supported distribution for this is Fedora Asahi Remix; ordinary ARM images do not boot on these devices.',
     },
     advice: {
       de: [
-        'Aktuellen Stand direkt bei Asahi Linux prüfen; die Unterstützung unterscheidet sich stark je Modell.',
-        'Klassische x86-Distributionen laufen auf diesen Geräten nicht.',
-        'Für produktive Arbeit ist macOS mit Linux in einer virtuellen Maschine oft der pragmatischere Weg.',
+        'Fedora Asahi Remix wird aus macOS heraus installiert; macOS bleibt daneben erhalten und lässt sich beim Start wählen.',
+        'Vor der Installation in der Geräteliste von Asahi Linux nachsehen, was auf dem eigenen Modell funktioniert – etwa externe Bildschirme, Thunderbolt oder Touch ID.',
+        'Auf M4 und M5 bleibt nur Linux in einer virtuellen Maschine (UTM, Parallels, VMware Fusion).',
       ],
       en: [
-        'Check the current state directly with Asahi Linux; support differs strongly per model.',
-        'Classic x86 distributions do not run on these devices.',
-        'For productive work, macOS with Linux in a virtual machine is often the more pragmatic path.',
+        'Fedora Asahi Remix is installed from within macOS; macOS stays alongside it and can be picked at start-up.',
+        'Before installing, check Asahi Linux’s device list for what works on your model — external displays, Thunderbolt or Touch ID, for example.',
+        'On M4 and M5 the only option is Linux in a virtual machine (UTM, Parallels, VMware Fusion).',
       ],
     },
-    links: [{ label: 'Asahi Linux', url: 'https://asahilinux.org' }],
+    links: [
+      { label: 'Asahi Linux', url: 'https://asahilinux.org' },
+      { label: 'Fedora Asahi Remix', url: 'https://asahilinux.org/fedora/' },
+    ],
+  },
+  {
+    id: 'dual-boot',
+    severity: 'warning',
+    title: { de: 'Windows behalten: drei Dinge vorher klären', en: 'Keeping Windows: three things to settle first' },
+    message: {
+      de: 'Windows 11 verschlüsselt die Systemplatte auf vielen Geräten von selbst mit BitLocker. Muss für Linux Secure Boot abgeschaltet oder die Startreihenfolge geändert werden, verlangt Windows danach den 48-stelligen Wiederherstellungsschlüssel – wer ihn nicht hat, kommt an seine Windows-Daten nicht mehr heran.',
+      en: 'Windows 11 encrypts the system drive with BitLocker on its own on many devices. If Secure Boot has to be switched off or the boot order changed for Linux, Windows then demands the 48-digit recovery key — without it, your Windows data is out of reach.',
+    },
+    advice: {
+      de: [
+        'Den BitLocker-Wiederherstellungsschlüssel vorher sichern – er steht im Microsoft-Konto unter aka.ms/myrecoverykey.',
+        'Eine Distribution mit vollständiger Secure-Boot-Unterstützung wählen; dann muss im UEFI nichts umgestellt werden.',
+        'Den Platz für Linux in Windows freigeben (Datenträgerverwaltung → Volume verkleinern). Ein verschlüsseltes Laufwerk kann der Linux-Installer nicht selbst verkleinern.',
+        'In Windows den Schnellstart abschalten, damit gemeinsam genutzte Laufwerke nicht gesperrt bleiben.',
+      ],
+      en: [
+        'Save the BitLocker recovery key beforehand — it is in your Microsoft account at aka.ms/myrecoverykey.',
+        'Pick a distribution with full Secure Boot support; then nothing has to change in the UEFI.',
+        'Free up the space for Linux from within Windows (Disk Management → Shrink Volume). The Linux installer cannot shrink an encrypted drive itself.',
+        'Turn off Fast Startup in Windows so that shared drives do not stay locked.',
+      ],
+    },
   },
   {
     id: 'backup',
@@ -414,18 +444,20 @@ export const flags: Flag[] = [
     severity: 'warning',
     title: { de: 'VR unter Linux ist möglich, aber Bastelarbeit', en: 'VR on Linux is possible, but it is a project' },
     message: {
-      de: 'Valve Index und einige SteamVR-Geräte funktionieren. Meta-Quest-Headsets im Link-Betrieb und Windows-Mixed-Reality-Geräte funktionieren nicht oder nur mit erheblichem Aufwand.',
-      en: 'The Valve Index and some SteamVR devices work. Meta Quest headsets over Link and Windows Mixed Reality devices do not work, or only with considerable effort.',
+      de: 'Valve Index und einige SteamVR-Geräte funktionieren. Valves neues Headset Steam Frame (seit September 2026) läuft selbst mit SteamOS; das Streaming von einem Linux-PC funktioniert in vielen Fällen, offiziell unterstützt ist es aber nur unter Windows. Meta-Quest-Headsets laufen kabellos über WiVRn oder ALVR, nicht über Meta Link; Windows-Mixed-Reality-Geräte praktisch gar nicht.',
+      en: 'The Valve Index and some SteamVR devices work. Valve’s new Steam Frame headset (since September 2026) runs SteamOS itself; streaming from a Linux PC works in many cases, but is only officially supported on Windows. Meta Quest headsets run wirelessly via WiVRn or ALVR, not via Meta Link; Windows Mixed Reality devices practically not at all.',
     },
     advice: {
       de: [
         'Vor dem Kauf oder Umstieg die konkrete Headset-Unterstützung prüfen.',
-        'Eine aktuelle Distribution mit neuem Kernel und Mesa hilft; ältere LTS-Ausgaben sind hier hinderlich.',
+        'Eine aktuelle Distribution mit neuem Kernel und Mesa hilft; der Funkadapter des Steam Frame braucht mindestens Kernel 7.2.',
+        'Für Quest-Headsets: WiVRn oder ALVR statt Meta Link.',
         'Monado ist die offene Alternative zu SteamVR und deckt einige Geräte ab.',
       ],
       en: [
         'Check support for your specific headset before buying or switching.',
-        'A current distribution with a recent kernel and Mesa helps; older LTS releases get in the way here.',
+        'A current distribution with a recent kernel and Mesa helps; the Steam Frame’s wireless adapter needs at least kernel 7.2.',
+        'For Quest headsets: WiVRn or ALVR instead of Meta Link.',
         'Monado is the open alternative to SteamVR and covers some devices.',
       ],
     },
@@ -477,17 +509,17 @@ export const flags: Flag[] = [
     severity: 'warning',
     title: { de: 'X11 hat ein Ablaufdatum', en: 'X11 has an expiry date' },
     message: {
-      de: 'GNOME 50 hat die X11-Sitzung im Frühjahr 2026 entfernt. KDE Plasma folgt mit Version 6.8 im Oktober 2026. Xfce, MATE, Cinnamon und die klassischen Fenstermanager laufen weiter auf X11, aber die Entwicklung geht klar in eine Richtung.',
-      en: 'GNOME 50 removed the X11 session in spring 2026. KDE Plasma follows with 6.8 in October 2026. Xfce, MATE, Cinnamon and the classic window managers still run on X11, but the direction of travel is clear.',
+      de: 'GNOME 50 hat die X11-Sitzung im Frühjahr 2026 entfernt, KDE Plasma 6.8 im Oktober 2026. Xfce, MATE, Cinnamon und die klassischen Fenstermanager laufen weiter auf X11, und LTS-Distributionen mit älterem GNOME oder Plasma – Debian 13, Ubuntu 24.04, Kubuntu 26.04 – behalten sie für ihre Lebensdauer. Die Richtung ist trotzdem klar.',
+      en: 'GNOME 50 removed the X11 session in spring 2026, KDE Plasma 6.8 in October 2026. Xfce, MATE, Cinnamon and the classic window managers still run on X11, and LTS distributions with older GNOME or Plasma — Debian 13, Ubuntu 24.04, Kubuntu 26.04 — keep it for their lifetime. The direction of travel is still clear.',
     },
     advice: {
       de: [
-        'Wenn X11 nur wegen eines einzelnen Werkzeugs nötig ist: prüfen, ob es inzwischen eine Wayland-Variante gibt.',
+        'Wenn X11 nur wegen eines einzelnen Werkzeugs nötig ist: prüfen, ob es inzwischen eine Wayland-Variante gibt. Einzelne X11-Programme laufen über XWayland auch in Wayland-Sitzungen.',
         'Für dauerhaften X11-Betrieb sind Xfce, MATE und Cinnamon die verlässlichsten Wege.',
         'Bei einer LTS-Distribution hat man einige Jahre Zeit, den Wechsel zu planen.',
       ],
       en: [
-        'If X11 is only needed for one tool, check whether a Wayland version now exists.',
+        'If X11 is only needed for one tool, check whether a Wayland version now exists. Individual X11 programs also run inside Wayland sessions through XWayland.',
         'For long-term X11 use, Xfce, MATE and Cinnamon are the most dependable routes.',
         'An LTS distribution buys you a few years to plan the transition.',
       ],

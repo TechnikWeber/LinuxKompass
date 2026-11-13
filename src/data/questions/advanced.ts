@@ -12,8 +12,14 @@ export const advancedQuestions: Question[] = [
     options: [
       { id: 'laptop', label: { de: 'Notebook', en: 'Laptop' }, hint: { de: 'Akkulaufzeit, Standby und WLAN sind hier entscheidend.', en: 'Battery life, suspend and Wi-Fi matter most here.' }, effect: { ratings: { hardwareSupport: 2 }, boostTags: { notebook: 4 } } },
       { id: 'desktop', label: { de: 'Desktop-PC', en: 'Desktop PC' }, effect: { ratings: { customizability: 1 } } },
-      { id: 'handheld', label: { de: 'Handheld oder Wohnzimmer-Gerät', en: 'Handheld or living-room device' }, effect: { boostTags: { handheld: 10, gaming: 6 }, boostDistros: { bazzite: 12, steamos: 10 } } },
-      { id: 'sbc', label: { de: 'Einplatinenrechner (Raspberry Pi o. ä.)', en: 'Single-board computer (Raspberry Pi or similar)' }, effect: { require: ['raspberry-pi'], boostDistros: { 'raspberry-pi-os': 12 } } },
+      { id: 'handheld', label: { de: 'Handheld, Steam Machine oder Wohnzimmer-PC', en: 'Handheld, Steam Machine or living-room PC' }, effect: { boostTags: { handheld: 10, gaming: 6 }, boostDistros: { bazzite: 12, steamos: 10 } } },
+      // Raspberry Pi OS ist für den Pi, was NixOS für „deklarativ" ist: Die
+      // Antwort beschreibt diese eine Distribution. Mit einem kleineren
+      // Zuschlag landete sie hinter Debian und Ubuntu, die auf dem Pi zwar
+      // laufen, aber weder Imager noch Hardware-Abstimmung mitbringen. Und ein
+      // Pi ist schwächer als jeder PC – ohne Gewicht auf Sparsamkeit lag sogar
+      // Fedora KDE vorn.
+      { id: 'sbc', label: { de: 'Einplatinenrechner (Raspberry Pi o. ä.)', en: 'Single-board computer (Raspberry Pi or similar)' }, effect: { require: ['raspberry-pi'], ratings: { lightweight: 2 }, boostDistros: { 'raspberry-pi-os': 20 } } },
       { id: 'vm', label: { de: 'Virtuelle Maschine zum Ausprobieren', en: 'A virtual machine for testing' }, effect: { ratings: { hardwareSupport: -1 }, avoid: ['nvidia-easy'] } },
     ],
   },

@@ -29,6 +29,7 @@ export type DesktopReason =
   | 'accessibility'
   | 'hdr-multimonitor'
   | 'x11-needed'
+  | 'x11-fallback'
   | 'tiling';
 
 export interface DesktopConcern {
@@ -50,8 +51,14 @@ interface DesktopProfile {
   weights: Partial<Record<Attr, number>>;
   affinity: Map<string, number>;
   reasons: Map<string, DesktopReason[]>;
-  /** Eine X11-Sitzung ist zwingend (alte NVIDIA-Karte, ausdrückliche Angabe). */
+  /** Eine X11-Sitzung ist zwingend (ausdrückliche Angabe im Profimodus). */
   requiresX11: boolean;
+  /**
+   * Eine X11-Sitzung wäre als Rückfallebene gut (ältere NVIDIA-Karte). Seit
+   * dem 580er-Treiber laufen diese Karten auch unter Wayland, deshalb ist das
+   * kein Ausschluss mehr, sondern eine Vorliebe.
+   */
+  prefersX11: boolean;
   /** Einsteigerfreundlichkeit war ausdrücklich Thema. */
   needsBeginnerFriendly: boolean;
   answered: number;
@@ -78,6 +85,7 @@ export function buildDesktopProfile(mode: Mode, answers: Answers): DesktopProfil
     affinity: new Map(),
     reasons: new Map(),
     requiresX11: false,
+    prefersX11: false,
     needsBeginnerFriendly: false,
     answered: 0,
   };
@@ -157,8 +165,16 @@ export function buildDesktopProfile(mode: Mode, answers: Answers): DesktopProfil
   }
 
   // --- Grafikkarte und Sitzungsart ---
-  if (has('gpu', 'nvidia-old') || has('x11-requirement', 'required')) {
+  if (has('x11-requirement', 'required')) {
     profile.requiresX11 = true;
+  } else if (has('gpu', 'nvidia-old')) {
+    profile.prefersX11 = true;
+    for (const de of desktops) {
+      // Plasma zählt nur halb: Die X11-Sitzung gibt es dort nur noch in
+      // älteren Versionen auf LTS-Distributionen.
+      if (de.x11Session === 'available') boost(profile, de.id, 8);
+      else if (de.x11Session === 'ending') boost(profile, de.id, 4);
+    }
   }
   if (has('x11-requirement', 'wayland')) {
     for (const id of ['gnome', 'plasma', 'cosmic', 'budgie', 'sway', 'hyprland']) boost(profile, id, 8);
@@ -192,6 +208,7 @@ export function scoreDesktops(mode: Mode, answers: Answers): { results: DesktopR
     // Begründungen, die sich erst am einzelnen Desktop entscheiden.
     const derived: DesktopReason[] = [];
     if (profile.requiresX11 && de.x11Session !== 'none') derived.push('x11-needed');
+    if (profile.prefersX11 && de.x11Session === 'available') derived.push('x11-fallback');
     if (profile.needsBeginnerFriendly && de.beginnerFriendly >= 8) derived.push('beginner');
 
     const concerns: DesktopResult['concerns'] = [];

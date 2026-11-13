@@ -69,6 +69,29 @@ export const requirementList: Requirement[] = [
     (d) => d.nvidia !== 'unsupported',
   ),
   req(
+    'nvidia-legacy-any',
+    ['unterstützt ältere NVIDIA-Karten (GTX 900/10) noch mit dem proprietären Treiber', 'still supports older NVIDIA cards (GTX 900/10) with the proprietary driver'],
+    ['unterstützt ältere NVIDIA-Karten (GTX 900/10) nicht mehr mit dem proprietären Treiber', 'no longer supports older NVIDIA cards (GTX 900/10) with the proprietary driver'],
+    ['Treiber für ältere NVIDIA-Karten', 'Driver for older NVIDIA cards'],
+    (d) => (d.nvidiaLegacy ?? d.nvidia) !== 'unsupported',
+  ),
+  req(
+    'nvidia-legacy-easy',
+    ['richtet den Treiber für ältere NVIDIA-Karten ohne Terminal ein', 'sets up the driver for older NVIDIA cards without a terminal'],
+    ['richtet den Treiber für ältere NVIDIA-Karten nicht ohne Terminal ein', 'does not set up the driver for older NVIDIA cards without a terminal'],
+    ['Treiber für ältere NVIDIA-Karten ohne Terminal', 'Driver for older NVIDIA cards without a terminal'],
+    (d) => ['preinstalled', 'installer-option', 'gui-tool'].includes(d.nvidiaLegacy ?? d.nvidia),
+  ),
+  req(
+    'apple-silicon',
+    ['läuft auf Macs mit Apple-Prozessor', 'runs on Macs with Apple silicon'],
+    ['läuft nicht auf Macs mit Apple-Prozessor', 'does not run on Macs with Apple silicon'],
+    ['Läuft auf Apple-Silicon-Macs', 'Runs on Apple silicon Macs'],
+    // Ein ARM-Abbild allein genügt nicht: Ohne die Treiber des Asahi-Projekts
+    // startet auf diesen Geräten keine gewöhnliche ARM-Distribution.
+    (d) => d.tags.includes('apple-silicon'),
+  ),
+  req(
     'ram-2gb',
     ['läuft mit 2 GB Arbeitsspeicher', 'runs with 2 GB of RAM'],
     ['läuft nicht mit 2 GB Arbeitsspeicher', 'does not run with 2 GB of RAM'],

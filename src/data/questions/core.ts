@@ -76,7 +76,10 @@ export const coreQuestions: Question[] = [
       {
         id: 'windows10',
         label: { de: 'Windows 10', en: 'Windows 10' },
-        hint: { de: 'Der Sicherheitssupport für Privatleute endet endgültig am 13. Oktober 2026.', en: 'Consumer security support ends for good on 13 October 2026.' },
+        hint: {
+          de: 'Microsoft hat die kostenlosen Sicherheitsupdates für Privatleute (ESU) bis 12. Oktober 2027 verlängert – danach ist endgültig Schluss.',
+          en: 'Microsoft extended the free consumer security updates (ESU) to 12 October 2027 — after that they end for good.',
+        },
         effect: { ratings: { beginnerFriendly: 2, hardwareSupport: 1 }, boostTags: { 'windows-optik': 6, umsteiger: 6 }, boostAudiences: { switcher: 5 } },
       },
       { id: 'windows11', label: { de: 'Windows 11', en: 'Windows 11' }, effect: { ratings: { beginnerFriendly: 2 }, boostTags: { 'windows-optik': 4, plasma: 3 }, boostAudiences: { switcher: 4 } } },
@@ -84,6 +87,47 @@ export const coreQuestions: Question[] = [
       { id: 'linux', label: { de: 'Ich nutze schon Linux', en: 'I already use Linux' }, effect: { ratings: { customizability: 1 } } },
       { id: 'chromeos', label: { de: 'ChromeOS oder Tablet', en: 'ChromeOS or a tablet' }, effect: { ratings: { beginnerFriendly: 2, lightweight: 1 }, prefer: ['low-maintenance'] } },
       { id: 'nothing', label: { de: 'Ich fange bei null an', en: 'I am starting from scratch' }, effect: { ratings: { beginnerFriendly: 2, documentation: 1 } }, neutral: true },
+    ],
+  },
+
+  // Nur für Windows-Umsteiger: Wer Windows behalten will, läuft in eine Falle,
+  // die keine andere Frage abdeckt. Windows 11 verschlüsselt die Systemplatte
+  // auf vielen Geräten von selbst, und wer für Linux Secure Boot abschaltet,
+  // steht danach vor der Abfrage des BitLocker-Wiederherstellungsschlüssels.
+  {
+    id: 'keep-windows',
+    section: 'habits',
+    modes: ['beginner', 'advanced', 'expert'],
+    type: 'single',
+    weight: 2,
+    showIf: { questionId: 'coming-from', anyOf: ['windows10', 'windows11'] },
+    title: { de: 'Soll Windows auf dem Rechner bleiben?', en: 'Should Windows stay on the computer?' },
+    description: {
+      de: 'Beim Start zwischen Windows und Linux zu wählen ist beliebt – hat aber ein paar Tücken, die sich vorher klären lassen.',
+      en: 'Choosing between Windows and Linux at start-up is popular — but it has a few catches worth settling beforehand.',
+    },
+    help: {
+      de: 'Windows 11 verschlüsselt die Systemplatte auf vielen Geräten automatisch mit BitLocker. Muss für Linux Secure Boot abgeschaltet werden, fragt Windows danach nach dem 48-stelligen Wiederherstellungsschlüssel. Distributionen mit voller Secure-Boot-Unterstützung umgehen das, weil im UEFI nichts umgestellt werden muss.',
+      en: 'Windows 11 automatically encrypts the system drive with BitLocker on many devices. If Linux requires Secure Boot to be switched off, Windows will then ask for the 48-digit recovery key. Distributions with full Secure Boot support avoid this because nothing has to change in the UEFI.',
+    },
+    options: [
+      {
+        id: 'dual-boot',
+        label: { de: 'Ja, ich will beim Start zwischen Windows und Linux wählen', en: 'Yes, I want to choose between Windows and Linux at start-up' },
+        hint: { de: 'Auch, wenn Linux auf eine eigene Festplatte im selben Rechner kommt.', en: 'Also if Linux goes onto a separate drive in the same machine.' },
+        effect: { prefer: ['secure-boot'], flags: ['dual-boot'] },
+      },
+      {
+        id: 'vm',
+        label: { de: 'Windows nur noch in einer virtuellen Maschine', en: 'Windows only in a virtual machine' },
+        hint: { de: 'Für ein, zwei Programme oft der bequemere Weg als ständiges Neustarten.', en: 'For one or two programs this is often more convenient than constant rebooting.' },
+        effect: {},
+      },
+      {
+        id: 'replace',
+        label: { de: 'Nein, Linux ersetzt Windows ganz', en: 'No, Linux replaces Windows entirely' },
+        effect: {},
+      },
     ],
   },
 
@@ -123,7 +167,10 @@ export const coreQuestions: Question[] = [
       { id: 'ram-8', label: { de: '8 GB', en: '8 GB' }, effect: { ratings: { lightweight: 1 }, require: ['ram-8gb'] } },
       { id: 'ram-16', label: { de: '16 GB', en: '16 GB' }, effect: {} },
       { id: 'ram-32', label: { de: '32 GB oder mehr', en: '32 GB or more' }, effect: { ratings: { lightweight: -1 } } },
-      { id: 'unknown', label: { de: 'Weiß ich nicht', en: 'I do not know' }, effect: { require: ['ram-4gb'] }, neutral: true },
+      // Weich statt hart: Nichtwissen ist keine Eigenschaft des Rechners. Die
+      // meisten Geräte haben heute 8 GB oder mehr, sparsame Systeme rücken
+      // trotzdem nach vorn.
+      { id: 'unknown', label: { de: 'Weiß ich nicht', en: 'I do not know' }, effect: { prefer: ['ram-4gb'] }, neutral: true },
     ],
   },
 
@@ -137,8 +184,8 @@ export const coreQuestions: Question[] = [
     title: { de: 'Welche Grafikkarte steckt im Rechner?', en: 'What graphics card is in the machine?' },
     description: { de: 'Die Grafikkarte entscheidet mehr über eine gute Erfahrung als fast alles andere.', en: 'Graphics decides more about a good experience than almost anything else.' },
     help: {
-      de: 'Intel- und AMD-Grafik funktioniert unter Linux ohne Zusatztreiber, weil die Treiber Teil des Systems sind. NVIDIA braucht einen zusätzlichen, herstellereigenen Treiber. Bei NVIDIA-Karten vor der GTX-16-Serie ist zudem die Wayland-Unterstützung schwach – dort ist eine Distribution mit X11-Sitzung sinnvoll.',
-      en: 'Intel and AMD graphics work on Linux without extra drivers because the drivers are part of the system. NVIDIA needs an additional proprietary driver. On NVIDIA cards older than the GTX 16 series, Wayland support is weak — a distribution with an X11 session is advisable there.',
+      de: 'Intel- und AMD-Grafik funktioniert unter Linux ohne Zusatztreiber, weil die Treiber Teil des Systems sind. NVIDIA braucht einen zusätzlichen, herstellereigenen Treiber. Für Karten vor der GTX-16-Serie gibt es seit Treiber 590 nur noch den Legacy-Zweig 580 mit Sicherheitsupdates bis 2028 – und nicht jede Distribution bietet ihn noch an.',
+      en: 'Intel and AMD graphics work on Linux without extra drivers because the drivers are part of the system. NVIDIA needs an additional proprietary driver. Since driver 590, cards older than the GTX 16 series only get the legacy 580 branch, with security updates until 2028 — and not every distribution still offers it.',
     },
     options: [
       { id: 'intel', label: { de: 'Intel (im Prozessor integriert)', en: 'Intel (integrated in the CPU)' }, effect: { ratings: { hardwareSupport: 1 } } },
@@ -151,10 +198,22 @@ export const coreQuestions: Question[] = [
       {
         id: 'nvidia-old',
         label: { de: 'NVIDIA, älter (GTX 10xx oder davor)', en: 'NVIDIA, older (GTX 10xx or earlier)' },
-        hint: { de: 'Ältere NVIDIA-Karten arbeiten unter Wayland noch nicht zuverlässig.', en: 'Older NVIDIA cards do not yet work reliably under Wayland.' },
-        effect: { require: ['nvidia-any', 'x11-session'], prefer: ['nvidia-easy'], flags: ['nvidia-legacy'] },
+        hint: {
+          de: 'Für GTX 900 und 10xx gibt es nur noch einen Legacy-Treiber, den nicht jede Distribution anbietet. GTX 700 und älter laufen nur noch mit dem freien Treiber.',
+          en: 'GTX 900 and 10xx cards only get a legacy driver now, and not every distribution offers it. GTX 700 and older only run on the free driver.',
+        },
+        // Seit Treiber 555 (explizite Synchronisierung) laufen auch diese Karten
+        // unter Wayland ordentlich, deshalb ist X11 kein Muss mehr – als
+        // Rückfallebene aber weiterhin erwünscht. Hart ist nur, dass die
+        // Distribution den Treiberzweig 580 überhaupt noch anbietet.
+        effect: { require: ['nvidia-legacy-any'], prefer: ['nvidia-legacy-easy', 'x11-session'], flags: ['nvidia-legacy'] },
       },
-      { id: 'apple', label: { de: 'Apple Silicon (M1–M4)', en: 'Apple Silicon (M1–M4)' }, effect: { require: ['arch-arm'], flags: ['apple-silicon'] } },
+      {
+        id: 'apple',
+        label: { de: 'Apple Silicon (M1–M5)', en: 'Apple Silicon (M1–M5)' },
+        hint: { de: 'Linux läuft hier nur auf M1 und M2 rund, auf M3 mit Einschränkungen, auf M4 und M5 gar nicht.', en: 'Linux only runs well on M1 and M2, on M3 with limitations, and not at all on M4 and M5.' },
+        effect: { require: ['apple-silicon'], flags: ['apple-silicon'] },
+      },
       { id: 'unknown', label: { de: 'Weiß ich nicht', en: 'I do not know' }, effect: { prefer: ['nvidia-easy'] }, neutral: true },
     ],
   },

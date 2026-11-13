@@ -74,6 +74,20 @@ describe('Datenbestand', () => {
     }
   });
 
+  it('gibt den Legacy-NVIDIA-Weg nur an, wenn er vom normalen abweicht', () => {
+    for (const d of distros) {
+      if (d.nvidiaLegacy) expect(d.nvidiaLegacy, d.id).not.toBe(d.nvidia);
+    }
+  });
+
+  it('nennt kein Erscheinungs- oder Prüfdatum nach dem jüngsten Prüfdatum', () => {
+    // Ein Versionsdatum nach der letzten Prüfung wäre geraten, nicht geprüft.
+    const newest = distros.map((d) => d.checkedAt).sort().at(-1)!;
+    for (const d of distros) {
+      expect(d.currentVersionDate.localeCompare(newest), `${d.id}: ${d.currentVersionDate}`).toBeLessThanOrEqual(0);
+    }
+  });
+
   it('nennt basedOn nur mit existierender ID', () => {
     const ids = new Set(distros.map((d) => d.id));
     for (const d of distros) {
@@ -182,12 +196,45 @@ describe('Bewertung', () => {
     }
   });
 
-  it('setzt bei alter NVIDIA-Karte eine X11-Sitzung voraus', () => {
-    const { results } = scoreAll('beginner', pick('gpu', 'nvidia-old'));
-    for (const r of results.filter((x) => x.eligible)) {
-      expect(r.distro.x11SessionAvailable, r.distro.id).toBe(true);
-      expect(r.distro.nvidia, r.distro.id).not.toBe('unsupported');
+  it('verlangt bei alter NVIDIA-Karte den Legacy-Treiber und bevorzugt X11 nur', () => {
+    // Seit Treiber 590 bekommen GTX 900/10 nur noch den Zweig 580. Wer ihn
+    // nicht mehr anbietet, fällt heraus. X11 ist seit dem 580er-Treiber mit
+    // expliziter Synchronisierung kein Muss mehr, sondern Rückfallebene.
+    const { results, profile } = scoreAll('beginner', pick('gpu', 'nvidia-old'));
+    const eligible = results.filter((x) => x.eligible);
+    for (const r of eligible) {
+      expect(r.distro.nvidiaLegacy ?? r.distro.nvidia, r.distro.id).not.toBe('unsupported');
     }
+    const ids = eligible.map((r) => r.distro.id);
+    for (const dropped of ['nobara', 'bluefin', 'aurora']) expect(ids, dropped).not.toContain(dropped);
+    // Bazzite pflegt eigene Abbilder für diese Karten und bleibt deshalb drin,
+    // obwohl Plasma 6.8 keine X11-Sitzung mehr hat.
+    expect(ids).toContain('bazzite');
+    expect(profile.preferred.has('x11-session')).toBe(true);
+  });
+
+  it('empfiehlt auf Apple-Silicon-Macs nur, was dort wirklich startet', () => {
+    // Ein ARM-Abbild genügt nicht – ohne die Asahi-Treiber startet auf einem
+    // M-Mac weder Ubuntu noch Debian noch Raspberry Pi OS.
+    const { results } = scoreAll('beginner', pick('gpu', 'apple'));
+    const eligible = results.filter((x) => x.eligible).map((r) => r.distro.id);
+    expect(eligible).toEqual(['fedora-asahi-remix']);
+  });
+
+  it('schließt bei unbekanntem Arbeitsspeicher nichts aus', () => {
+    // „Weiß ich nicht" ist keine Eigenschaft des Rechners und darf deshalb
+    // keine harte Grenze setzen – sparsame Systeme rücken nur nach vorn.
+    const { results } = scoreAll('beginner', pick('ram', 'unknown'));
+    expect(results.every((r) => r.eligible)).toBe(true);
+  });
+
+  it('empfiehlt auf dem Raspberry Pi das Raspberry Pi OS', () => {
+    const answers: Answers = { 'device-type': ['sbc'], purpose: ['learning'], terminal: ['copy-paste'] };
+    const { results } = scoreAll('advanced', answers);
+    const eligible = results.filter((x) => x.eligible);
+    expect(eligible[0]?.distro.id).toBe('raspberry-pi-os');
+    for (const r of eligible) expect(r.distro.runsOnRaspberryPi, r.distro.id).toBe(true);
+    expect(eligible.map((r) => r.distro.id)).not.toContain('proxmox-ve');
   });
 
   it('lockert Anforderungen, statt eine leere Ergebnisliste zu liefern', () => {
@@ -309,12 +356,22 @@ describe('Desktop-Empfehlung', () => {
     expect(['pantheon', 'gnome', 'budgie']).toContain(results[0].desktop.id);
   });
 
-  it('schließt bei alter NVIDIA-Karte Wayland-only-Oberflächen aus', () => {
-    const { results } = scoreDesktops('beginner', { gpu: ['nvidia-old'], look: ['clean'] });
+  it('schließt bei ausdrücklich verlangter X11-Sitzung Wayland-only-Oberflächen aus', () => {
+    const { results } = scoreDesktops('expert', { 'x11-requirement': ['required'], look: ['clean'] });
     for (const r of results.filter((x) => x.eligible)) {
       expect(r.desktop.x11Session, r.desktop.id).not.toBe('none');
     }
     expect(results.find((r) => r.desktop.id === 'gnome')?.eligible).toBe(false);
+  });
+
+  it('bevorzugt bei alter NVIDIA-Karte Oberflächen mit X11-Ausweichweg, ohne andere auszuschließen', () => {
+    const plain = scoreDesktops('beginner', { look: ['clean'] }).results;
+    const legacy = scoreDesktops('beginner', { gpu: ['nvidia-old'], look: ['clean'] }).results;
+    expect(legacy.find((r) => r.desktop.id === 'gnome')?.eligible).toBe(true);
+    const rank = (list: typeof plain, id: string) => list.findIndex((r) => r.desktop.id === id);
+    // Eine Oberfläche mit X11-Sitzung rückt nach vorn, eine reine Wayland-Oberfläche zurück.
+    expect(rank(legacy, 'pantheon')).toBeLessThanOrEqual(rank(plain, 'pantheon'));
+    expect(rank(legacy, 'cosmic')).toBeGreaterThanOrEqual(rank(plain, 'cosmic'));
   });
 
   it('setzt die ausdrückliche Wahl durch', () => {
@@ -371,8 +428,13 @@ describe('Desktop-Datenbestand', () => {
 });
 
 describe('Desktop-Begründungen', () => {
-  it('nennt die X11-Sitzung, wenn die Grafikkarte sie braucht', () => {
+  it('nennt die X11-Sitzung als Ausweichweg, wenn die Grafikkarte älter ist', () => {
     const { results } = scoreDesktops('beginner', { gpu: ['nvidia-old'], look: ['windows-like'] });
+    expect(results[0].reasons).toContain('x11-fallback');
+  });
+
+  it('nennt die X11-Sitzung als Grund, wenn sie verlangt wird', () => {
+    const { results } = scoreDesktops('expert', { 'x11-requirement': ['required'], look: ['windows-like'] });
     expect(results[0].reasons).toContain('x11-needed');
   });
 
@@ -516,6 +578,20 @@ describe('Nachfragen zu Hindernissen', () => {
   it('behält bei Adobe die Warnung, wenn nur eigene Projekte übertragbar wären', () => {
     const profile = buildProfile('beginner', { blockers: ['adobe'], 'adobe-alternative': ['partly'] });
     expect(profile.flags.has('adobe')).toBe(true);
+  });
+
+  it('fragt nur Windows-Umsteiger, ob Windows bleiben soll', () => {
+    expect(visibleQuestions('beginner', { 'coming-from': ['macos'] }).some((q) => q.id === 'keep-windows')).toBe(false);
+    expect(visibleQuestions('beginner', { 'coming-from': ['windows11'] }).some((q) => q.id === 'keep-windows')).toBe(true);
+  });
+
+  it('warnt beim Dual-Boot vor BitLocker und bevorzugt volles Secure Boot', () => {
+    const profile = buildProfile('beginner', { 'coming-from': ['windows11'], 'keep-windows': ['dual-boot'] });
+    expect(profile.flags.has('dual-boot')).toBe(true);
+    expect(profile.preferred.has('secure-boot')).toBe(true);
+    // Wer Windows ersetzt, bekommt den Hinweis nicht.
+    const replaced = buildProfile('beginner', { 'coming-from': ['windows11'], 'keep-windows': ['replace'] });
+    expect(replaced.flags.has('dual-boot')).toBe(false);
   });
 
   it('kennt zu jedem gesetzten und aufgehobenen Hinweis einen Text', () => {

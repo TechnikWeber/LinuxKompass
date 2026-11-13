@@ -262,14 +262,18 @@ export const desktopReasonLabels: Record<string, L10n> = {
   accessibility: { de: 'er die beste Unterstützung für Bildschirmleser mitbringt', en: 'it has the best screen-reader support' },
   'hdr-multimonitor': { de: 'er HDR und gemischte Bildschirmauflösungen am besten beherrscht', en: 'it handles HDR and mixed display resolutions best' },
   'x11-needed': { de: 'er weiterhin eine X11-Sitzung anbietet', en: 'it still offers an X11 session' },
+  'x11-fallback': {
+    de: 'er für deine ältere NVIDIA-Karte eine X11-Sitzung als Ausweichweg bietet',
+    en: 'it offers an X11 session as a fallback for your older NVIDIA card',
+  },
   tiling: { de: 'er Fenster automatisch anordnet', en: 'it arranges windows automatically' },
 };
 
 /** Einschränkungen, die zur Empfehlung dazugehören. */
 export const desktopConcernLabels: Record<string, L10n> = {
   'x11-ending': {
-    de: 'Die X11-Sitzung entfällt mit Plasma 6.8 im Oktober 2026.',
-    en: 'The X11 session disappears with Plasma 6.8 in October 2026.',
+    de: 'Seit Plasma 6.8 (Oktober 2026) gibt es keine X11-Sitzung mehr – nur LTS-Distributionen mit älterem Plasma wie Kubuntu 26.04 bieten sie noch.',
+    en: 'Since Plasma 6.8 (October 2026) there is no X11 session any more — only LTS distributions with an older Plasma, such as Kubuntu 26.04, still offer it.',
   },
   'no-x11': {
     de: 'Bietet keine X11-Sitzung mehr – deine Grafikkarte braucht aber eine.',

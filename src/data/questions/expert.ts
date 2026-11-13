@@ -139,10 +139,10 @@ export const expertQuestions: Question[] = [
     type: 'single',
     weight: 2,
     title: { de: 'Brauchst du zwingend eine X11-Sitzung?', en: 'Do you strictly need an X11 session?' },
-    description: { de: 'GNOME 50 hat X11 entfernt, Plasma folgt mit 6.8 im Oktober 2026.', en: 'GNOME 50 removed X11; Plasma follows with 6.8 in October 2026.' },
+    description: { de: 'GNOME 50 und KDE Plasma 6.8 (Oktober 2026) haben die X11-Sitzung entfernt.', en: 'GNOME 50 and KDE Plasma 6.8 (October 2026) have removed the X11 session.' },
     help: {
-      de: 'Gründe für X11 sind heute vor allem: alte NVIDIA-Treiber, bestimmte Fernwartungs- und Präsentationswerkzeuge, einzelne Bildschirmleser-Setups, globale Tastenkürzel für manche Aufnahmesoftware und ältere proprietäre Fachanwendungen.',
-      en: 'Reasons for X11 today are mainly: old NVIDIA drivers, certain remote-support and presentation tools, some screen-reader setups, global hotkeys for some recording software, and older proprietary line-of-business applications.',
+      de: 'Gründe für X11 sind heute vor allem: bestimmte Fernwartungs- und Präsentationswerkzeuge, einzelne Bildschirmleser-Setups, globale Tastenkürzel für manche Aufnahmesoftware, ältere proprietäre Fachanwendungen und sehr alte NVIDIA-Karten mit dem freien Treiber. Einzelne X11-Programme laufen auch unter Wayland weiter – über XWayland.',
+      en: 'Reasons for X11 today are mainly: certain remote-support and presentation tools, some screen-reader setups, global hotkeys for some recording software, older proprietary line-of-business applications and very old NVIDIA cards on the free driver. Individual X11 programs keep running under Wayland through XWayland.',
     },
     options: [
       { id: 'required', label: { de: 'Ja, X11 muss verfügbar sein', en: 'Yes, X11 must be available' }, effect: { require: ['x11-session'], flags: ['x11-sunset'] } },
