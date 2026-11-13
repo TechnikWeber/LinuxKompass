@@ -38,9 +38,12 @@ then explains every recommendation instead of just printing a number.
   concrete account of what GIMP, Darktable, LibreOffice or FreeCAD do well — and
   what does not carry over (VBA macros, PSD smart objects, native CAD files). No
   follow-up for anti-cheat games or line-of-business software: there is no
-  honest alternative to suggest there.
-- **55 researched distributions**, each with ~45 attributes: release model, init
-  system, libc, package manager, Secure Boot, NVIDIA handling, Wayland/X11
+  honest alternative to suggest there. Windows switchers are also asked whether
+  Windows stays on the machine — dual boot brings a BitLocker warning and favours
+  distributions with full Secure Boot support.
+- **67 researched distributions**, each with ~45 attributes: release model, init
+  system, libc, package manager, Secure Boot, NVIDIA handling (including the
+  legacy driver for GTX 900/10 cards), Wayland/X11
   status, snapshot support, minimum RAM, architectures, governance, telemetry
   policy, German-language support, maintenance load and more. Every entry cites
   its sources and carries a check date.
@@ -63,9 +66,10 @@ then explains every recommendation instead of just printing a number.
   "Cinnamon or Plasma" at the same time is a perfectly normal thing to do. A
   filter hides rows where the entries agree.
 - **What will not work.** Adobe Creative Cloud, kernel-level anti-cheat, CAD,
-  German tax software, old NVIDIA cards on Wayland, accessibility, free-software
-  purity: an 18-entry catalogue of things that decide a switch regardless of
-  distribution — each with the alternatives that actually exist.
+  German tax software, older NVIDIA cards, Apple silicon, dual boot with
+  BitLocker, accessibility, free-software purity: a 19-entry catalogue of things
+  that decide a switch regardless of distribution — each with the alternatives
+  that actually exist.
 - **Shareable results.** Answers are encoded in the URL, so a result link
   reproduces the exact recommendation.
 - **Try before installing.** Links to [DistroSea](https://distrosea.com/), where
@@ -79,8 +83,10 @@ Every answer acts in three ways:
 
 1. It **weights rating dimensions** — 16 of them, from `stability` to
    `germanSupport` to `upstreamPurity`.
-2. It can set a **hard requirement**, expressed as one of 39 named predicates
-   over a distribution (`secure-boot`, `ram-2gb`, `no-systemd`, `x11-session`, …).
+2. It can set a **hard requirement**, expressed as one of 43 named predicates
+   over a distribution (`secure-boot`, `ram-2gb`, `no-systemd`, `apple-silicon`, …).
+   Only facts become hard requirements: "I do not know how much RAM I have" is a
+   soft preference, not an exclusion.
 3. It can **favour specific distributions** when an answer points at one
    unambiguously — "the system should follow from a configuration file" is a
    description of NixOS, not a preference.
@@ -101,8 +107,8 @@ pinned by tests.
 All distribution data lives in [`src/data/distros/`](src/data/distros/), grouped
 by family, and is fully typed against
 [`src/data/types.ts`](src/data/types.ts). Every entry carries `checkedAt` and a
-`sources` list. The data was verified in September 2026 against official release
-announcements, release notes and project pages.
+`sources` list. The data was last verified in November 2026 against official
+release announcements, release notes and project pages.
 
 Version numbers and support windows go stale quickly. If you find something that
 is no longer correct, an issue or a pull request is the fastest way to fix it.
@@ -112,7 +118,7 @@ is no longer correct, an issue or a pull request is the fastest way to fix it.
 ```bash
 npm install
 npm run dev        # local dev server
-npm run test:run   # 29 data-integrity and scoring tests
+npm run test:run   # 65 data-integrity and scoring tests
 npm run typecheck
 npm run build      # production build into dist/
 ```
