@@ -120,6 +120,15 @@ export const requirementList: Requirement[] = [
     (d) => d.supports32Bit,
   ),
   req(
+    'x86',
+    ['läuft auf gewöhnlichen PCs mit Intel- oder AMD-Prozessor', 'runs on ordinary PCs with Intel or AMD processors'],
+    ['läuft nicht auf gewöhnlichen PCs mit Intel- oder AMD-Prozessor', 'does not run on ordinary PCs with Intel or AMD processors'],
+    ['Läuft auf PCs (x86-64)', 'Runs on PCs (x86-64)'],
+    // Reine ARM-Systeme wie Raspberry Pi OS oder Fedora Asahi Remix standen
+    // sonst auch für Windows-PCs zur Wahl, weil keine Frage den Prozessor abdeckt.
+    (d) => d.architectures.some((a) => a === 'x86_64' || a === 'x86_64-v3' || a === 'i686'),
+  ),
+  req(
     'arch-arm',
     ['läuft auf ARM-Prozessoren', 'runs on ARM processors'],
     ['läuft nicht auf ARM-Prozessoren', 'does not run on ARM processors'],

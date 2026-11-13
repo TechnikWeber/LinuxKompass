@@ -221,6 +221,16 @@ describe('Bewertung', () => {
     expect(eligible).toEqual(['fedora-asahi-remix']);
   });
 
+  it('empfiehlt auf einem gewöhnlichen PC kein reines ARM-System', () => {
+    // Raspberry Pi OS stand sonst im Zwischenstand eines Windows-PCs auf Platz 3.
+    for (const gpu of ['intel', 'amd', 'nvidia-new', 'nvidia-old']) {
+      const eligible = scoreAll('beginner', { purpose: ['everyday'], gpu: [gpu] })
+        .results.filter((r) => r.eligible).map((r) => r.distro.id);
+      expect(eligible, gpu).not.toContain('raspberry-pi-os');
+      expect(eligible, gpu).not.toContain('fedora-asahi-remix');
+    }
+  });
+
   it('schließt bei unbekanntem Arbeitsspeicher nichts aus', () => {
     // „Weiß ich nicht" ist keine Eigenschaft des Rechners und darf deshalb
     // keine harte Grenze setzen – sparsame Systeme rücken nur nach vorn.

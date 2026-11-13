@@ -83,7 +83,7 @@ Every answer acts in three ways:
 
 1. It **weights rating dimensions** — 16 of them, from `stability` to
    `germanSupport` to `upstreamPurity`.
-2. It can set a **hard requirement**, expressed as one of 43 named predicates
+2. It can set a **hard requirement**, expressed as one of 44 named predicates
    over a distribution (`secure-boot`, `ram-2gb`, `no-systemd`, `apple-silicon`, …).
    Only facts become hard requirements: "I do not know how much RAM I have" is a
    soft preference, not an exclusion.
@@ -118,7 +118,7 @@ is no longer correct, an issue or a pull request is the fastest way to fix it.
 ```bash
 npm install
 npm run dev        # local dev server
-npm run test:run   # 65 data-integrity and scoring tests
+npm run test:run   # 66 data-integrity and scoring tests
 npm run typecheck
 npm run build      # production build into dist/
 ```

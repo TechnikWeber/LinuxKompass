@@ -188,12 +188,14 @@ export const coreQuestions: Question[] = [
       en: 'Intel and AMD graphics work on Linux without extra drivers because the drivers are part of the system. NVIDIA needs an additional proprietary driver. Since driver 590, cards older than the GTX 16 series only get the legacy 580 branch, with security updates until 2028 — and not every distribution still offers it.',
     },
     options: [
-      { id: 'intel', label: { de: 'Intel (im Prozessor integriert)', en: 'Intel (integrated in the CPU)' }, effect: { ratings: { hardwareSupport: 1 } } },
-      { id: 'amd', label: { de: 'AMD', en: 'AMD' }, hint: { de: 'Unter Linux die unkomplizierteste Wahl.', en: 'The most trouble-free choice on Linux.' }, effect: { ratings: { hardwareSupport: 1, gaming: 1 } } },
+      // Intel-, AMD- und NVIDIA-Grafik heißt: ein gewöhnlicher PC. Ohne diese
+      // Anforderung standen reine ARM-Systeme auch für Windows-Rechner zur Wahl.
+      { id: 'intel', label: { de: 'Intel (im Prozessor integriert)', en: 'Intel (integrated in the CPU)' }, effect: { ratings: { hardwareSupport: 1 }, require: ['x86'] } },
+      { id: 'amd', label: { de: 'AMD', en: 'AMD' }, hint: { de: 'Unter Linux die unkomplizierteste Wahl.', en: 'The most trouble-free choice on Linux.' }, effect: { ratings: { hardwareSupport: 1, gaming: 1 }, require: ['x86'] } },
       {
         id: 'nvidia-new',
         label: { de: 'NVIDIA, neuer (GTX 16xx, RTX 20xx oder neuer)', en: 'NVIDIA, newer (GTX 16xx, RTX 20xx or newer)' },
-        effect: { require: ['nvidia-any'], prefer: ['nvidia-easy'], boostTags: { 'nvidia-iso': 6, nvidia: 5 }, flags: ['nvidia'] },
+        effect: { require: ['x86', 'nvidia-any'], prefer: ['nvidia-easy'], boostTags: { 'nvidia-iso': 6, nvidia: 5 }, flags: ['nvidia'] },
       },
       {
         id: 'nvidia-old',
@@ -206,7 +208,7 @@ export const coreQuestions: Question[] = [
         // unter Wayland ordentlich, deshalb ist X11 kein Muss mehr – als
         // Rückfallebene aber weiterhin erwünscht. Hart ist nur, dass die
         // Distribution den Treiberzweig 580 überhaupt noch anbietet.
-        effect: { require: ['nvidia-legacy-any'], prefer: ['nvidia-legacy-easy', 'x11-session'], flags: ['nvidia-legacy'] },
+        effect: { require: ['x86', 'nvidia-legacy-any'], prefer: ['nvidia-legacy-easy', 'x11-session'], flags: ['nvidia-legacy'] },
       },
       {
         id: 'apple',
@@ -214,7 +216,7 @@ export const coreQuestions: Question[] = [
         hint: { de: 'Linux läuft hier nur auf M1 und M2 rund, auf M3 mit Einschränkungen, auf M4 und M5 gar nicht.', en: 'Linux only runs well on M1 and M2, on M3 with limitations, and not at all on M4 and M5.' },
         effect: { require: ['apple-silicon'], flags: ['apple-silicon'] },
       },
-      { id: 'unknown', label: { de: 'Weiß ich nicht', en: 'I do not know' }, effect: { prefer: ['nvidia-easy'] }, neutral: true },
+      { id: 'unknown', label: { de: 'Weiß ich nicht', en: 'I do not know' }, effect: { prefer: ['nvidia-easy', 'x86'] }, neutral: true },
     ],
   },
 
